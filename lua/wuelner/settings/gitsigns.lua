@@ -18,20 +18,20 @@ M.config = function()
       end
       local wo_diff = vim.wo.diff
 
-      map('n', ']h', function()
-        if wo_diff then return ']h' end
-        vim.schedule(function() loaded_gitsigns.next_hunk() end)
-        return '<Ignore>'
-      end, {expr=true})
-
       map('n', '[h', function()
         if wo_diff then return '[h' end
         vim.schedule(function() loaded_gitsigns.prev_hunk() end)
         return '<Ignore>'
-      end, {expr=true})
+      end, { expr = true })
 
-      map({'n', 'v'}, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
-      map({'n', 'v'}, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
+      map('n', ']h', function()
+        if wo_diff then return ']h' end
+        vim.schedule(function() loaded_gitsigns.next_hunk() end)
+        return '<Ignore>'
+      end, { expr = true })
+
+      map({ 'n', 'v' }, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
+      map({ 'n', 'v' }, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
       map('n', '<leader>hu', loaded_gitsigns.undo_stage_hunk)
       map('n', '<leader>hp', loaded_gitsigns.preview_hunk)
     end

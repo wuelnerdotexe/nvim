@@ -46,16 +46,16 @@ M.config = function()
           fallback()
         end
       end, { 'i', 's' }),
-      ['<C-n>'] = cmp_mapping(function()
+      ['<C-p>'] = cmp_mapping(function()
         if cmp.visible() then
-          cmp.select_next_item()
+          cmp.select_prev_item()
         else
           cmp.complete()
         end
       end, { 'i', 's' }),
-      ['<C-p>'] = cmp_mapping(function()
+      ['<C-n>'] = cmp_mapping(function()
         if cmp.visible() then
-          cmp.select_prev_item()
+          cmp.select_next_item()
         else
           cmp.complete()
         end

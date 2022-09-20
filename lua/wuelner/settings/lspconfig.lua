@@ -65,12 +65,6 @@ M.config = function()
       )
 
       keymap_set(
-        'n', 'gd',
-        lsp_buf.definition,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
-
-      keymap_set(
         'n', '<leader>sr',
         lsp_buf.rename,
         { noremap = true, silent = true, buffer = bufnr }
@@ -97,6 +91,12 @@ M.config = function()
       keymap_set(
         'n', ']d',
         vim_diagnostic.goto_next,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      keymap_set(
+        'n', 'gd',
+        lsp_buf.definition,
         { noremap = true, silent = true, buffer = bufnr }
       )
     elseif client_name == 'cssls' or client_name == 'html'
