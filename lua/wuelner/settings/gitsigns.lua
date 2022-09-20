@@ -10,34 +10,30 @@ M.config = function()
       changedelete = { hl = 'GitSignsChange', text = '▋' }
     },
     on_attach = function(bufnr)
-      local loadedgitsigns = package.loaded.gitsigns
-      local wo = vim.wo
-      local function map(mode, l, r, opts)
+      local loaded_gitsigns = package.loaded.gitsigns
+      local map = function(mode, l, r, opts)
         opts = opts or {}
         opts.buffer = bufnr
         vim.keymap.set(mode, l, r, opts)
       end
+      local wo_diff = vim.wo.diff
 
-      map('n', ']c', function()
-        if wo.diff then return ']c' end
-        vim.schedule(function() loadedgitsigns.next_hunk() end)
+      map('n', ']h', function()
+        if wo_diff then return ']h' end
+        vim.schedule(function() loaded_gitsigns.next_hunk() end)
         return '<Ignore>'
       end, {expr=true})
 
-      map('n', '[c', function()
-        if wo.diff then return '[c' end
-        vim.schedule(function() loadedgitsigns.prev_hunk() end)
+      map('n', '[h', function()
+        if wo_diff then return '[h' end
+        vim.schedule(function() loaded_gitsigns.prev_hunk() end)
         return '<Ignore>'
       end, {expr=true})
 
-      map({'n', 'v'}, '<leader>hs', ':loadedgitsigns stage_hunk<CR>')
-      map({'n', 'v'}, '<leader>hr', ':loadedgitsigns reset_hunk<CR>')
-      map('n', '<leader>hu', loadedgitsigns.undo_stage_hunk)
-      map('n', '<leader>hp', loadedgitsigns.preview_hunk)
-      map('n', '<leader>hb', function()
-        loadedgitsigns.blame_line{ full = true }
-      end)
-      map('n', '<leader>td', loadedgitsigns.toggle_deleted)
+      map({'n', 'v'}, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
+      map({'n', 'v'}, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
+      map('n', '<leader>hu', loaded_gitsigns.undo_stage_hunk)
+      map('n', '<leader>hp', loaded_gitsigns.preview_hunk)
     end
   })
 end

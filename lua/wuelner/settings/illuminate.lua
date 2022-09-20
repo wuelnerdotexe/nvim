@@ -4,14 +4,15 @@ M.config = function()
   require('illuminate').configure({
     filetypes_denylist = {
       'checkhealth',
-      'dashboard',
       'fern',
       'fugitive',
       'fugitiveblame',
-      'help',
+      'fzf',
       'lspinfo',
       'mason',
+      'nerdterm',
       'packer',
+      'qf',
       'null-ls-info'
     }
   })

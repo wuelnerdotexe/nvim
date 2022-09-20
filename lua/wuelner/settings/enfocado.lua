@@ -1,10 +1,11 @@
 local M = {}
 
 M.setup = function()
-  local g = vim.g
-  g.enfocado_style = 'neon'
+  local vim_g = vim.g
 
-  g.enfocado_plugins = {
+  vim_g.enfocado_style = 'neon'
+
+  vim_g.enfocado_plugins = {
     'bufferline',
     'cmp',
     'dashboard',
@@ -22,16 +23,16 @@ M.setup = function()
 end
 
 M.config = function()
-  local api = vim.api
+  local create_autocmd = vim.api.nvim_create_autocmd
 
-  api.nvim_create_autocmd('VimEnter', {
+  create_autocmd('VimEnter', {
     pattern = '*', nested = true, command = 'colorscheme enfocado'
   })
 
-  api.nvim_create_autocmd('ColorScheme', {
+  create_autocmd('ColorScheme', {
     pattern = 'enfocado',
     nested = true,
-    command = 'hi! link Whitespace DiagnosticError'
+    command = 'highlight! link Whitespace DiagnosticError'
   })
 end
 

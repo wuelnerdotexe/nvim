@@ -1,7 +1,8 @@
-if packer_plugins['human.vim'].loaded then
-  local opt = vim.opt
+if packer_plugins['human.vim'] and packer_plugins['human.vim'].loaded
+then
+  local vim_opt = vim.opt
 
-  opt.spell = false
-  opt.wrap = false
+  vim_opt.spell = false
+  vim_opt.wrap = false
 end
 

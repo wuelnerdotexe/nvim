@@ -2,42 +2,69 @@ local M = {}
 
 M.config = function()
   local null_ls = require('null-ls')
+  local null_ls_builtins = null_ls.builtins
 
   null_ls.setup({
+    update_in_insert = true,
     on_attach = function(client, bufnr)
-      local api = vim.api
-      local diagnostic = vim.diagnostic
-      local lspbuf = vim.lsp.buf
-      local keymap = vim.keymap
-      local bufopts = { noremap = true, silent = true, buffer = bufnr }
+      local vim_diagnostic = vim.diagnostic
+      local keymap_set = vim.keymap.set
+      local lsp_buf = vim.lsp.buf
 
-      keymap.set('n', '<space>e', diagnostic.open_float, bufopts)
-      keymap.set('n', '[d', diagnostic.goto_prev, bufopts)
-      keymap.set('n', ']d', diagnostic.goto_next, bufopts)
-      keymap.set('n', '<space>q', diagnostic.setloclist, bufopts)
-      keymap.set('n', '<space>ca', lspbuf.code_action, bufopts)
+      keymap_set(
+        'n', '<leader>dp',
+        vim_diagnostic.open_float,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
 
-      local augroup = api.nvim_create_augroup('LspFormatting', {})
+      keymap_set(
+        'n', '<leader>ca',
+        lsp_buf.code_action,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
 
-      if client.supports_method('textDocument/formatting') then
-        api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        api.nvim_create_autocmd('BufWritePre', {
+      keymap_set(
+        'n', '<leader>dl',
+        vim_diagnostic.setloclist,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      keymap_set(
+        'n', '[d',
+        vim_diagnostic.goto_prev,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      keymap_set(
+        'n', ']d',
+        vim_diagnostic.goto_next,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      local vim_api = vim.api
+      local augroup = vim_api.nvim_create_augroup('LspFormatting', {})
+
+      if client.supports_method('textDocument/formatting')
+      then
+        vim_api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim_api.nvim_create_autocmd('BufWritePre', {
           group = augroup,
           buffer = bufnr,
           callback = function()
-            if vim.version().minor > 7 then
-              lspbuf.format({ bufnr = bufnr })
+            if vim.version().minor < 8
+            then
+              lsp_buf.formatting_sync()
             else
-              lspbuf.formatting_sync()
+              lsp_buf.format({ bufnr = bufnr })
             end
           end
         })
       end
     end,
     sources = {
-      null_ls.builtins.diagnostics.eslint_d,
-      null_ls.builtins.code_actions.eslint_d,
-      null_ls.builtins.formatting.prettierd.with({
+      null_ls_builtins.diagnostics.eslint_d,
+      null_ls_builtins.code_actions.eslint_d,
+      null_ls_builtins.formatting.prettierd.with({
         condition = function(utils)
           return utils.root_has_file({
             '.prettierrc',
@@ -53,8 +80,7 @@ M.config = function()
           })
         end
       })
-    },
-    update_in_insert = false
+    }
   })
 end
 

@@ -3,13 +3,16 @@ local M = {}
 M.setup = function()
   local exclude_filetypes = {
     'checkhealth',
-    'dashboard',
     'fern',
     'fugitive',
     'fugitiveblame',
+    'fzf',
+    'list',
     'lspinfo',
     'mason',
-    'packer'
+    'nerdterm',
+    'packer',
+    'qf'
   }
 
   for _, filetype in pairs(exclude_filetypes) do

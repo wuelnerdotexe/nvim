@@ -1,29 +1,32 @@
 local M = {}
 
 M.config = function()
-  local luasnip = require('luasnip')
   local cmp = require('cmp')
   local lspkind = require('lspkind')
+  local luasnip = require('luasnip')
 
   local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local vim_api = vim.api
+    local line, col = unpack(vim_api.nvim_win_get_cursor(0))
 
-    return col ~= 0 and vim.api.nvim_buf_get_lines(
+    return col ~= 0 and vim_api.nvim_buf_get_lines(
       0, line - 1, line, true)[1]:sub(col, col
       ):match('%s') == nil
   end
 
-  cmp.setup({
+  local cmp_mapping = cmp.mapping
+  local cmp_setup = cmp.setup
+
+  cmp_setup({
     snippet = { expand = function(args)
       luasnip.lsp_expand(args.body)
     end },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-3),
-      ['<C-f>'] = cmp.mapping.scroll_docs(3),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ['<Tab>'] = cmp.mapping(function(fallback)
+    mapping = cmp_mapping.preset.insert({
+      ['<C-b>'] = cmp_mapping.scroll_docs(-3),
+      ['<C-f>'] = cmp_mapping.scroll_docs(3),
+      ['<C-e>'] = cmp_mapping.abort(),
+      ['<CR>'] = cmp_mapping.confirm({ select = false }),
+      ['<Tab>'] = cmp_mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
@@ -34,7 +37,7 @@ M.config = function()
           fallback()
         end
       end, { 'i', 's' }),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
+      ['<S-Tab>'] = cmp_mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
@@ -42,17 +45,32 @@ M.config = function()
         else
           fallback()
         end
+      end, { 'i', 's' }),
+      ['<C-n>'] = cmp_mapping(function()
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          cmp.complete()
+        end
+      end, { 'i', 's' }),
+      ['<C-p>'] = cmp_mapping(function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          cmp.complete()
+        end
       end, { 'i', 's' })
     }),
     experimental = {
       ghost_text = true
     },
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
       { name = 'treesitter' },
+      { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'cmp_tabnine' }
     }, { { name = 'buffer' } }),
+    keyword_length = 1,
     formatting = {
       fields = { 'abbr', 'kind' },
       format = lspkind.cmp_format({
@@ -71,20 +89,20 @@ M.config = function()
           return vim_item
         end
       })
-    },
-    keyword_length = 1
+    }
   })
 
-  cmp.setup.filetype({
+  cmp_setup.filetype({
     'checkhealth',
-    'dashboard',
     'fern',
     'fugitive',
     'fugitiveblame',
+    'fzf',
     'lspinfo',
-    'man',
     'mason',
+    'nerdterm',
     'packer',
+    'qf',
     'null-ls-info'
   }, { enabled = false })
 end

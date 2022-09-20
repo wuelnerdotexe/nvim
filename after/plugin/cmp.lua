@@ -1,7 +1,8 @@
-if packer_plugins['nvim-cmp'].loaded then
-  local opt = vim.opt
+if packer_plugins['nvim-cmp'] and packer_plugins['nvim-cmp'].loaded
+then
+  local vim_opt = vim.opt
 
-  opt.omnifunc = ''
-  opt.complete = ''
+  vim_opt.omnifunc = nil
+  vim_opt.complete = nil
 end
 
