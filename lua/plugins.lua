@@ -134,8 +134,9 @@ return require('packer').startup(function(use)
     setup = 'require("wuelner.settings.sleuth").setup()'
   }
   use {
-    'tpope/vim-commentary',
-    keys = { { 'v', 'gc' }, { 'n', 'gcc' } }
+    'numToStr/Comment.nvim',
+    keys = { { 'v', 'gc' }, { 'n', 'gcc' }, { 'n', 'gcb' } },
+    config = 'require("wuelner.settings.comment").config()'
   }
   use {
     'NvChad/nvim-colorizer.lua',

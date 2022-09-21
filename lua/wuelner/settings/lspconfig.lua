@@ -53,14 +53,14 @@ M.config = function()
     if client_name == 'tsserver'
     then
       keymap_set(
-        'n', '<leader>dp',
-        vim_diagnostic.open_float,
+        'n', 'K',
+        lsp_buf.hover,
         { noremap = true, silent = true, buffer = bufnr }
       )
 
       keymap_set(
-        'n', '<leader>ca',
-        lsp_buf.code_action,
+        'n', 'gd',
+        lsp_buf.definition,
         { noremap = true, silent = true, buffer = bufnr }
       )
 
@@ -77,12 +77,6 @@ M.config = function()
       )
 
       keymap_set(
-        'n', 'K',
-        lsp_buf.hover,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
-
-      keymap_set(
         'n', '[d',
         vim_diagnostic.goto_prev,
         { noremap = true, silent = true, buffer = bufnr }
@@ -95,15 +89,21 @@ M.config = function()
       )
 
       keymap_set(
-        'n', 'gd',
-        lsp_buf.definition,
+        'n', '<leader>dp',
+        vim_diagnostic.open_float,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      keymap_set(
+        'n', '<leader>ca',
+        lsp_buf.code_action,
         { noremap = true, silent = true, buffer = bufnr }
       )
     elseif client_name == 'cssls' or client_name == 'html'
     then
       keymap_set(
-        'n', '<leader>dp',
-        vim_diagnostic.open_float,
+        'n', 'K',
+        lsp_buf.hover,
         { noremap = true, silent = true, buffer = bufnr }
       )
 
@@ -114,12 +114,6 @@ M.config = function()
       )
 
       keymap_set(
-        'n', 'K',
-        lsp_buf.hover,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
-
-      keymap_set(
         'n', '[d',
         vim_diagnostic.goto_prev,
         { noremap = true, silent = true, buffer = bufnr }
@@ -128,6 +122,12 @@ M.config = function()
       keymap_set(
         'n', ']d',
         vim_diagnostic.goto_next,
+        { noremap = true, silent = true, buffer = bufnr }
+      )
+
+      keymap_set(
+        'n', '<leader>dp',
+        vim_diagnostic.open_float,
         { noremap = true, silent = true, buffer = bufnr }
       )
     end

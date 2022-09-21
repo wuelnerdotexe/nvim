@@ -12,8 +12,8 @@ M.config = function()
 
   components.active[1][1] = {
     provider = '▊',
-    hl = { name = 'FelineIndicator', fg = 'accent' },
-    priority = 2
+    hl = { name = 'FelineIndicator', fg = 'accent_0' },
+    priority = 3
   }
 
   components.active[1][2] = {
@@ -29,7 +29,7 @@ M.config = function()
         fg = vi_mode.get_mode_color()
       }
     end,
-    priority = 1
+    priority = 2
   }
 
   components.active[1][3] = {
@@ -38,14 +38,14 @@ M.config = function()
     end,
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelineCWD', fg = 'accent' },
+    hl = { name = 'FelineCWD', fg = 'accent_0' },
     priority = 1
   }
 
   components.active[1][4] = {
     provider = 'git_branch',
     left_sep = ' ',
-    hl = { name = 'FelineBranch', fg = 'accent' },
+    hl = { name = 'FelineBranch', fg = 'accent_0' },
     priority = -2,
     truncate_hide = true
   }
@@ -109,13 +109,13 @@ M.config = function()
     provider = 'file_encoding',
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelineFileencoding', fg = 'accent_2' }
+    hl = { name = 'FelineFileencoding', fg = 'accent_1' }
   }
 
   components.active[2][2] = {
     provider = 'file_type',
     right_sep = ' ',
-    hl = { name = 'FelineFiletype', fg = 'accent_2' },
+    hl = { name = 'FelineFiletype', fg = 'accent_1' },
     priority = -3,
     truncate_hide = true
   }
@@ -123,7 +123,7 @@ M.config = function()
   components.active[2][3] = {
     provider = function() return string.upper(vim_fn.SleuthIndicator()) end,
     right_sep = ' ',
-    hl = { name = 'FelineSleuth', fg = 'accent_2' },
+    hl = { name = 'FelineSleuth', fg = 'accent_1' },
     priority = -3,
     truncate_hide = true
   }
@@ -131,7 +131,7 @@ M.config = function()
   components.active[2][4] = {
     provider = 'file_format',
     right_sep = ' ',
-    hl = { name = 'FelineFileformat', fg = 'accent_2' }
+    hl = { name = 'FelineFileformat', fg = 'accent_1' }
   }
 
   components.inactive[1][1] = {
@@ -161,8 +161,8 @@ M.config = function()
   require('feline').setup({
     components = components,
     theme = {
-      accent = enfocado.br_accent_1[1],
-      accent_2 = enfocado.accent_2[1],
+      accent_0 = enfocado.br_accent_0[1],
+      accent_1 = enfocado.br_accent_1[1],
       dimmed = enfocado.dim_0[1],
       ignored = enfocado.bg_1[1],
       added = enfocado.green[1],
@@ -174,7 +174,7 @@ M.config = function()
       hints = enfocado.br_blue[1]
     },
     vi_mode_colors = {
-      ['NORMAL'] = 'accent',
+      ['NORMAL'] = 'accent_0',
       ['OP'] = 'changed',
       ['INSERT'] = 'added',
       ['VISUAL'] = 'hints',

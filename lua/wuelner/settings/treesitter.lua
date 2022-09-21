@@ -8,10 +8,7 @@ M.config = function()
     highlight = { enable = true, additional_vim_regex_highlighting = false },
     indent = { enable = true },
     rainbow = { enable = true, extended_mode = false, max_file_lines = nil },
-    context_commentstring = {
-      enable = true,
-      commentary_integration = { Commentary = 'g/', CommentaryLine = false }
-    },
+    context_commentstring = { enable = true, enable_autocmd = false },
     autotag = { enable = true },
     matchup = { enable = true }
   })

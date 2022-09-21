@@ -8,7 +8,6 @@ M.setup = function()
   vim_g.enfocado_plugins = {
     'bufferline',
     'cmp',
-    'dashboard',
     'fern',
     'fzf',
     'glyph-palette',

@@ -30,10 +30,10 @@ M.config = function()
         return '<Ignore>'
       end, { expr = true })
 
-      map({ 'n', 'v' }, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
-      map({ 'n', 'v' }, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
-      map('n', '<leader>hu', loaded_gitsigns.undo_stage_hunk)
       map('n', '<leader>hp', loaded_gitsigns.preview_hunk)
+      map({ 'n', 'v' }, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
+      map({ 'n', 'v' }, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
+      map('n', '<leader>hu', loaded_gitsigns.undo_stage_hunk)
     end
   })
 end
