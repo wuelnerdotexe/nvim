@@ -1,6 +1,14 @@
 local vim_fn = vim.fn
 local vim_opt = vim.opt
 
+if vim_fn.executable('rg') == 1
+then
+  vim_opt.grepprg = 'rg -i -. -g="' ..
+    '!.git,!.svn,!.hg,!CSV,!.DS_Store,!Thumbs.db' ..
+    '!node_modules,!bower_components,!*.code-search' ..
+  '" --vimgrep'
+end
+
 if vim_fn.has('termguicolors') and vim_opt.termguicolors == true
 then
   vim_opt.pumblend = 10
@@ -28,7 +36,7 @@ vim.diagnostic.config({
 
 local keymap_set = vim.keymap.set
 
-keymap_set('n', 'db', '<Cmd>bwipe<CR>', { silent = true })
-keymap_set('n', 'ct', '<Cmd>tabclose<CR>', { silent = true })
+keymap_set('n', '1w', '<Cmd>only<CR>', { silent = true })
 keymap_set('n', '1t', '<Cmd>tabonly<CR>', { silent = true })
+
 

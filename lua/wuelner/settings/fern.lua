@@ -5,7 +5,7 @@ M.setup = function()
 
   vim_g['fern#default_hidden'] = 1
   vim_g['fern#default_exclude'] = [[^\%(]] ..
-  [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]] ..
+    [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]] ..
   [[)$]]
   vim_g['fern#drawer_width'] = 33
   vim_g['fern#renderer'] = 'nerdfont'
@@ -44,7 +44,7 @@ M.config = function()
           return vim_fn['fern#smart#drawer'](
             '<Plug>(fern-action-open:rightest)',
             '<Plug>(fern-action-open:vsplit)',
-            '<Cmd>echo "open:side disabled"<CR>'
+            '<Plug>(fern-action-open:vsplit)'
           )
         end, { buffer = true, expr = true })
 
@@ -79,13 +79,19 @@ M.config = function()
       )
 
       keymap_set(
-        'n', 'to',
+        'n', '<C-t>',
         '<Plug>(fern-action-open:tabedit)',
         { buffer = true, nowait = true }
       )
 
       keymap_set(
-        'n', 'so',
+        'n', '<C-x>',
+        '<Plug>(fern-action-open:split)',
+        { buffer = true, nowait = true }
+      )
+
+      keymap_set(
+        'n', '<C-v>',
         '<Plug>(fern-action-open:side)',
         { buffer = true, nowait = true }
       )

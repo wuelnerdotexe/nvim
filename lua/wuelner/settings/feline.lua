@@ -13,7 +13,7 @@ M.config = function()
   components.active[1][1] = {
     provider = '▊',
     hl = { name = 'FelineIndicator', fg = 'accent_0' },
-    priority = 3
+    priority = 4
   }
 
   components.active[1][2] = {
@@ -29,28 +29,39 @@ M.config = function()
         fg = vi_mode.get_mode_color()
       }
     end,
-    priority = 2
+    priority = 3
   }
 
   components.active[1][3] = {
+    provider = '☰ %P/%L',
+    right_sep = ' ',
+    hl = function()
+      return {
+        name = vi_mode.get_mode_highlight_name(),
+        fg = vi_mode.get_mode_color()
+      }
+    end,
+    priority = 3
+  }
+
+  components.active[1][4] = {
     provider = function()
       return ' ' .. vim_fn.fnamemodify(vim_fn.getcwd(), ':t')
     end,
     left_sep = ' ',
     right_sep = ' ',
     hl = { name = 'FelineCWD', fg = 'accent_0' },
-    priority = 1
+    priority = 2
   }
 
-  components.active[1][4] = {
+  components.active[1][5] = {
     provider = 'git_branch',
-    left_sep = ' ',
     hl = { name = 'FelineBranch', fg = 'accent_0' },
     priority = -2,
     truncate_hide = true
   }
 
-  components.active[1][5] = {
+  components.active[1][6] = {
     provider = 'git_diff_added',
     icon = ' + ',
     hl = { name = 'FelineAdded', fg = 'added' },
@@ -58,7 +69,7 @@ M.config = function()
     truncate_hide = true
   }
 
-  components.active[1][6] = {
+  components.active[1][7] = {
     provider = 'git_diff_removed',
     icon = ' - ',
     hl = { name = 'FelineRemoved', fg = 'removed' },
@@ -66,7 +77,7 @@ M.config = function()
     truncate_hide = true
   }
 
-  components.active[1][7] = {
+  components.active[1][8] = {
     provider = 'git_diff_changed',
     icon = ' ~ ',
     right_sep = ' ',
@@ -75,7 +86,7 @@ M.config = function()
     truncate_hide = true
   }
 
-  components.active[1][8] = {
+  components.active[1][9] = {
     provider = 'diagnostic_errors',
     hl = { name = 'FelineErrors', fg = 'errors', style = 'bold' },
     left_sep = ' ',
@@ -83,21 +94,21 @@ M.config = function()
     truncate_hide = true
   }
 
-  components.active[1][9] = {
+  components.active[1][10] = {
     provider = 'diagnostic_warnings',
     hl = { name = 'FelineWarns', fg = 'warns', style = 'bold' },
     priority = -1,
     truncate_hide = true
   }
 
-  components.active[1][10] = {
+  components.active[1][11] = {
     provider = 'diagnostic_info',
     hl = { name = 'FelineInfo', fg = 'info', style = 'bold' },
     priority = -1,
     truncate_hide = true
   }
 
-  components.active[1][11] = {
+  components.active[1][12] = {
     provider = 'diagnostic_hints',
     right_sep = ' ',
     hl = { name = 'FelineHints', fg = 'hints', style = 'bold' },

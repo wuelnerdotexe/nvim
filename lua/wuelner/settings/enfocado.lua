@@ -10,6 +10,7 @@ M.setup = function()
     'cmp',
     'fern',
     'fzf',
+    'gitsigns',
     'glyph-palette',
     'illuminate',
     'indent-blankline',

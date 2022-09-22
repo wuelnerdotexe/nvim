@@ -21,8 +21,6 @@ M.config = function()
 
   keymap_set('n', 'mB', '<Cmd>BufferLineMovePrev<CR>', { silent = true })
   keymap_set('n', 'mb', '<Cmd>BufferLineMoveNext<CR>', { silent = true })
-  keymap_set('n', 'gpb', '<Cmd>BufferLinePick<CR>', { silent = true })
-  keymap_set('n', 'cpb', '<Cmd>BufferLinePickClose<CR>', { silent = true })
 end
 
 return M

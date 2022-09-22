@@ -2,9 +2,9 @@ local M = {}
 
 M.config = function()
   require('Comment').setup({
-    toggler = { line = 'gcc', block = 'gcb' },
-    opleader = nil,
-    mappings = { basic = true, extra = false },
+    toggler = { line = 'gcc', block = '<Nop>' },
+    opleader = { line = 'gc', block = '<Nop>' },
+    mappings = { basic = true, extra = true },
     pre_hook = function(ctx)
       if vim.bo.filetype == 'typescriptreact' then
         local U = require('Comment.utils')

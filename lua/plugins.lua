@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
     config = 'require("wuelner.settings.human").config()'
   }
 
-  -- Workflow.
+  -- Development.
   use {
     'wuelnerdotexe/nerdterm',
     keys = { { 'n', '<leader>tt' } },
@@ -135,7 +135,7 @@ return require('packer').startup(function(use)
   }
   use {
     'numToStr/Comment.nvim',
-    keys = { { 'v', 'gc' }, { 'n', 'gcc' }, { 'n', 'gcb' } },
+    keys = { { 'n', 'gc' }, { 'v', 'gc' } },
     config = 'require("wuelner.settings.comment").config()'
   }
   use {
