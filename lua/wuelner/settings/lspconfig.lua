@@ -3,6 +3,27 @@ local M = {}
 M.config = function()
   require('mason-lspconfig').setup({ automatic_installation = true })
 
+  local signs = { Error = '●', Warn = '●', Info = '●', Hint = '●' }
+
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
+  local vim_diagnostic = vim.diagnostic
+
+  vim_diagnostic.config({
+    virtual_text = { prefix = '▎' },
+    float = {
+      header = false,
+      source = 'always',
+      border = 'single'
+    },
+    update_in_insert = true,
+    severity_sort = true
+  })
+
   local vim_lsp = vim.lsp
   local capabilities = require('cmp_nvim_lsp').update_capabilities(
     vim_lsp.protocol.make_client_capabilities()
@@ -46,7 +67,6 @@ M.config = function()
     end
 
     local client_name = client.name
-    local vim_diagnostic = vim.diagnostic
     local keymap_set = vim.keymap.set
     local lsp_buf = vim.lsp.buf
 

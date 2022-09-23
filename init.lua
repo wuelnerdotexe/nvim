@@ -48,5 +48,5 @@ for _, provider in pairs(disable_providers) do
   vim_g['loaded_' .. provider .. '_provider'] = 0
 end
 
-require('plugins')
+require('wuelner.plugins')
 

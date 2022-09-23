@@ -6,7 +6,8 @@ M.config = function()
     opleader = { line = 'gc', block = '<Nop>' },
     mappings = { basic = true, extra = true },
     pre_hook = function(ctx)
-      if vim.bo.filetype == 'typescriptreact' then
+      if vim.bo.filetype == 'javascriptreact' or vim.bo.filetype == 'typescriptreact'
+      then
         local U = require('Comment.utils')
         local commentstring_utils = require('ts_context_commentstring.utils')
         local type = ctx.ctype == U.ctype.linewise and '__default' or '__multiline'

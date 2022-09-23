@@ -10,7 +10,7 @@ local ensure_packer = function()
       install_path
     })
 
-    vim.cmd [[packadd packer.nvim]]
+    vim.cmd.packadd('packer.nvim')
 
     return true
   end
@@ -109,7 +109,11 @@ return require('packer').startup(function(use)
         'JoosepAlviste/nvim-ts-context-commentstring',
         after = 'nvim-treesitter'
       },
-      { 'windwp/nvim-ts-autotag', event = 'InsertEnter' }
+      {
+        'windwp/nvim-ts-autotag',
+        after = 'nvim-treesitter',
+        event = 'InsertEnter'
+      }
     },
     config = 'require("wuelner.settings.treesitter").config()'
   }
@@ -148,22 +152,35 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     requires = {
       { 'onsails/lspkind.nvim', module = 'lspkind' },
-      { 'hrsh7th/cmp-buffer', event = 'InsertEnter' },
-      { 'ray-x/cmp-treesitter', event = 'InsertEnter' },
       { 'hrsh7th/cmp-nvim-lsp', module = 'cmp_nvim_lsp' },
-      { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
       {
         'L3MON4D3/LuaSnip',
         module = 'luasnip',
         requires = 'rafamadriz/friendly-snippets',
         config = 'require("luasnip.loaders.from_vscode").lazy_load()'
       },
-      { 'tzachar/cmp-tabnine', run = './install.sh', event = 'InsertEnter' }
+      {
+        'saadparwaiz1/cmp_luasnip',
+        after = 'nvim-cmp',
+        event = 'InsertEnter'
+      },
+      {
+        'tzachar/cmp-tabnine',
+        run = './install.sh',
+        after = 'nvim-cmp',
+        event = 'InsertEnter'
+      },
+      {
+        'hrsh7th/cmp-buffer',
+        after = 'nvim-cmp',
+        event = 'InsertEnter'
+      },
     },
     config = 'require("wuelner.settings.cmp").config()'
   }
   use {
     'windwp/nvim-autopairs',
+    after = 'nvim-cmp',
     event = 'InsertEnter',
     config = 'require("wuelner.settings.autopairs").config()'
   }
@@ -184,18 +201,20 @@ return require('packer').startup(function(use)
   use {
     'wuelnerdotexe/vim-enfocado',
     branch = 'development',
-    setup = 'require("wuelner.settings.enfocado").setup()',
-    config = 'require("wuelner.settings.enfocado").config()'
+    after = 'human.vim',
+    setup = 'require("wuelner.settings.enfocado").setup()'
   }
 
   -- Statusline.
   use {
     'feline-nvim/feline.nvim',
+    after = { 'human.vim', 'vim-enfocado' },
     config = 'require("wuelner.settings.feline").config()'
   }
   use {
     'akinsho/bufferline.nvim',
     tag = 'v2.*',
+    after = 'human.vim',
     config = 'require("wuelner.settings.bufferline").config()'
   }
 

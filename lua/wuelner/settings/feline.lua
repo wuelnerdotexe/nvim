@@ -1,6 +1,11 @@
 local M = {}
 
 M.config = function()
+  local vim_opt = vim.opt
+
+  vim_opt.ruler = false
+  vim_opt.laststatus = 2
+
   local components = { active = {}, inactive = {} }
   local vim_fn = vim.fn
   local enfocado = vim_fn['enfocado#getColorScheme']()

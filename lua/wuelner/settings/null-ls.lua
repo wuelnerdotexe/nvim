@@ -5,7 +5,7 @@ M.config = function()
   local null_ls_builtins = null_ls.builtins
 
   null_ls.setup({
-    update_in_insert = true,
+    diagnostic_config = { severity_sort = true },
     on_attach = function(client, bufnr)
       local vim_diagnostic = vim.diagnostic
       local keymap_set = vim.keymap.set
@@ -80,7 +80,8 @@ M.config = function()
           })
         end
       })
-    }
+    },
+    update_in_insert = true
   })
 end
 

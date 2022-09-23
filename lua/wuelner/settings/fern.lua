@@ -10,22 +10,6 @@ M.setup = function()
   vim_g['fern#drawer_width'] = 33
   vim_g['fern#renderer'] = 'nerdfont'
   vim_g['fern#disable_default_mappings'] = 1
-end
-
-M.config = function()
-  local keymap_set = vim.keymap.set
-
-  keymap_set(
-    'n', '<leader>ft',
-    '<Cmd>Fern . -drawer -right -toggle<CR>',
-    { silent = true }
-  )
-
-  keymap_set(
-    'n', '<leader>fr',
-    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
-    { silent = true }
-  )
 
   local vim_fn = vim.fn
 
@@ -39,6 +23,8 @@ M.config = function()
       opt_local.number = false
       opt_local.relativenumber = false
 
+      local keymap_set = vim.keymap.set
+
       keymap_set('n', '<Plug>(fern-action-open:side)',
         function()
           return vim_fn['fern#smart#drawer'](
@@ -49,13 +35,13 @@ M.config = function()
         end, { buffer = true, expr = true })
 
       keymap_set(
-        'n', '<',
+        'n', '[',
         '<Plug>(fern-action-leave)',
         { buffer = true, nowait = true }
       )
 
       keymap_set(
-        'n', '>',
+        'n', ']',
         '<Plug>(fern-action-enter)',
         { buffer = true, nowait = true }
       )
@@ -139,12 +125,34 @@ M.config = function()
       )
 
       keymap_set(
+        'n', 'q',
+        '<Cmd>quit<CR>',
+        { buffer = true, nowait = true }
+      )
+
+      keymap_set(
         'n', '<F5>',
         '<Plug>(fern-action-reload)',
         { buffer = true, nowait = true }
       )
     end
   })
+end
+
+M.config = function()
+  local keymap_set = vim.keymap.set
+
+  keymap_set(
+    'n', '<leader>ft',
+    '<Cmd>Fern . -drawer -right -toggle<CR>',
+    { silent = true }
+  )
+
+  keymap_set(
+    'n', '<leader>fr',
+    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
+    { silent = true }
+  )
 end
 
 return M

@@ -1,6 +1,8 @@
 local M = {}
 
 M.config = function()
+  vim.opt.complete = nil
+
   local cmp = require('cmp')
   local lspkind = require('lspkind')
   local luasnip = require('luasnip')
@@ -65,7 +67,6 @@ M.config = function()
       ghost_text = true
     },
     sources = cmp.config.sources({
-      { name = 'treesitter' },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'cmp_tabnine' }

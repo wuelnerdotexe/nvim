@@ -1,6 +1,6 @@
 # My Neovim Setup
 
-My personal but distributable Neovim setup written in Lua.
+My personal but distributable Neovim setup powered by [Enfocado](https://wuelnerdotexe.github.io/enfocado) and [human.vim](https://github.com/wuelnerdotexe/human.vim) written in Lua.
 
 ## Requirements
 
@@ -29,7 +29,7 @@ If all goes well, when you enter Neovim for the first time, the plugins and lang
 And then restart Neovim to complete the EsLint and Prettier installation process with the following Neovim command:
 
 ```vim
-:MasonInstall eslint_d prettierd
+MasonInstall eslint_d prettierd
 ```
 
 Note that the installed packages are not the official ones from EsLint and Prettier, they are the only packages configured to work with this config, because when making many comparisons, they are undoubtedly the ones that offer a better experience in Neovim, and no, they do NOT WILL CAUSE CONFLICTS with your project settings. Here you can understand more about [eslint_d](https://github.com/mantoni/eslint_d.js/) and [prettierd](https://github.com/fsouza/prettierd).
@@ -56,8 +56,8 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 | VI Mode |    Keymap    | Action                |
 | :-----: | :----------: | --------------------- |
-| Normal  |     `<`      | Leave directory       |
-| Normal  |     `>`      | Enter directory       |
+| Normal  |     `[`      | Leave directory       |
+| Normal  |     `]`      | Enter directory       |
 | Normal  |  `w` + `d`   | Set working directory |
 | Normal  |   `ENTER`    | Expand or open node   |
 | Normal  | `BACKSPACE`  | Collapse node         |
@@ -170,3 +170,4 @@ In order for the **[Enfocado](https://wuelnerdotexe.github.io/enfocado)'s Human 
 [GPL-3.0 &copy; Wuelner Martínez.](https://github.com/wuelnerdotexe/nvim/blob/main/LICENSE)
 
 <p align="center">With 💖 from <strong>LATAM</strong> to the world!</p>
+
