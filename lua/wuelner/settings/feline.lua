@@ -18,7 +18,7 @@ M.config = function()
   components.active[1][1] = {
     provider = '▊',
     hl = { name = 'FelineIndicator', fg = 'accent_0' },
-    priority = 4
+    priority = 1
   }
 
   components.active[1][2] = {
@@ -34,7 +34,7 @@ M.config = function()
         fg = vi_mode.get_mode_color()
       }
     end,
-    priority = 3
+    truncate_hide = true
   }
 
   components.active[1][3] = {
@@ -46,7 +46,8 @@ M.config = function()
         fg = vi_mode.get_mode_color()
       }
     end,
-    priority = 3
+    priority = -2,
+    truncate_hide = true
   }
 
   components.active[1][4] = {
@@ -56,13 +57,14 @@ M.config = function()
     left_sep = ' ',
     right_sep = ' ',
     hl = { name = 'FelineCWD', fg = 'accent_0' },
-    priority = 2
+    priority = -7,
+    truncate_hide = true
   }
 
   components.active[1][5] = {
     provider = 'git_branch',
     hl = { name = 'FelineBranch', fg = 'accent_0' },
-    priority = -2,
+    priority = -6,
     truncate_hide = true
   }
 
@@ -70,7 +72,7 @@ M.config = function()
     provider = 'git_diff_added',
     icon = ' + ',
     hl = { name = 'FelineAdded', fg = 'added' },
-    priority = -2,
+    priority = -8,
     truncate_hide = true
   }
 
@@ -78,7 +80,7 @@ M.config = function()
     provider = 'git_diff_removed',
     icon = ' - ',
     hl = { name = 'FelineRemoved', fg = 'removed' },
-    priority = -2,
+    priority = -8,
     truncate_hide = true
   }
 
@@ -87,7 +89,7 @@ M.config = function()
     icon = ' ~ ',
     right_sep = ' ',
     hl = { name = 'FelineChanged', fg = 'changed' },
-    priority = -2,
+    priority = -8,
     truncate_hide = true
   }
 
@@ -95,21 +97,21 @@ M.config = function()
     provider = 'diagnostic_errors',
     hl = { name = 'FelineErrors', fg = 'errors', style = 'bold' },
     left_sep = ' ',
-    priority = -1,
+    priority = -5,
     truncate_hide = true
   }
 
   components.active[1][10] = {
     provider = 'diagnostic_warnings',
     hl = { name = 'FelineWarns', fg = 'warns', style = 'bold' },
-    priority = -1,
+    priority = -5,
     truncate_hide = true
   }
 
   components.active[1][11] = {
     provider = 'diagnostic_info',
     hl = { name = 'FelineInfo', fg = 'info', style = 'bold' },
-    priority = -1,
+    priority = -5,
     truncate_hide = true
   }
 
@@ -117,7 +119,7 @@ M.config = function()
     provider = 'diagnostic_hints',
     right_sep = ' ',
     hl = { name = 'FelineHints', fg = 'hints', style = 'bold' },
-    priority = -1,
+    priority = -5,
     truncate_hide = true
   }
 
@@ -125,14 +127,16 @@ M.config = function()
     provider = 'file_encoding',
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelineFileencoding', fg = 'accent_1' }
+    hl = { name = 'FelineFileencoding', fg = 'accent_1' },
+    priority = -1,
+    truncate_hide = true
   }
 
   components.active[2][2] = {
     provider = 'file_type',
     right_sep = ' ',
     hl = { name = 'FelineFiletype', fg = 'accent_1' },
-    priority = -3,
+    priority = -4,
     truncate_hide = true
   }
 
@@ -147,7 +151,9 @@ M.config = function()
   components.active[2][4] = {
     provider = 'file_format',
     right_sep = ' ',
-    hl = { name = 'FelineFileformat', fg = 'accent_1' }
+    hl = { name = 'FelineFileformat', fg = 'accent_1' },
+    priority = -1,
+    truncate_hide = true
   }
 
   components.inactive[1][1] = {
@@ -163,7 +169,8 @@ M.config = function()
     },
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelinePositionInactive', fg = 'dimmed' }
+    hl = { name = 'FelinePositionInactive', fg = 'dimmed' },
+    truncate_hide = true
   }
 
   components.inactive[1][3] = {
@@ -171,7 +178,8 @@ M.config = function()
     icon = '',
     left_sep = ' ',
     hl = { name = 'FelineFilenameInactive', fg = 'dimmed' },
-    priority = -1
+    priority = -1,
+    truncate_hide = true
   }
 
   require('feline').setup({

@@ -112,14 +112,14 @@ return require('packer').startup(function(use)
 
   -- Indent.
   use {
-    'lukas-reineke/indent-blankline.nvim',
+    'tpope/vim-sleuth',
     after = 'nvim-treesitter',
-    config = 'require("wuelner.settings.indent-blankline").config()'
+    setup = 'require("wuelner.settings.sleuth").setup()'
   }
   use {
-    'tpope/vim-sleuth',
-    after = 'indent-blankline.nvim',
-    setup = 'require("wuelner.settings.sleuth").setup()'
+    'lukas-reineke/indent-blankline.nvim',
+    after = 'vim-sleuth',
+    config = 'require("wuelner.settings.indent-blankline").config()'
   }
 
   -- Autocomplete.
