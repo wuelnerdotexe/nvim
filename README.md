@@ -72,6 +72,7 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |     `m`      | Move node             |
 | Normal  |     `c`      | Copy node             |
 | Normal  |     `d`      | Delete node           |
+| Normal  |     `q`      | Exit                  |
 | Normal  |    `<F5>`    | Refresh explorer      |
 
 ### Windows

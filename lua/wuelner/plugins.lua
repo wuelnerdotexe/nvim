@@ -75,33 +75,14 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use {
     'lewis6991/gitsigns.nvim',
+    after = 'human.vim',
     config = 'require("wuelner.settings.gitsigns").config()'
   }
 
-  -- LSP.
-  use {
-    'williamboman/mason.nvim',
-    requires = {
-      'williamboman/mason-lspconfig.nvim',
-      module = 'mason-lspconfig'
-    },
-    config = 'require("mason").setup()'
-  }
-  use {
-    'neovim/nvim-lspconfig',
-    after = 'mason.nvim',
-    config = 'require("wuelner.settings.lspconfig").config()'
-  }
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    after = 'mason.nvim',
-    requires = { 'nvim-lua/plenary.nvim', module = 'plenary' },
-    config = 'require("wuelner.settings.null-ls").config()'
-  }
-
-  -- Syntax.
+  -- Tree-sitter.
   use {
     'nvim-treesitter/nvim-treesitter',
+    after = 'human.vim',
     run = ':TSUpdate',
     requires = {
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
@@ -123,10 +104,13 @@ return require('packer').startup(function(use)
     setup = 'require("wuelner.settings.matchup").setup()'
   }
   use {
-    'RRethy/vim-illuminate',
+    'numToStr/Comment.nvim',
     after = 'nvim-treesitter',
-    config = 'require("wuelner.settings.illuminate").config()'
+    keys = { { 'n', 'gc' }, { 'v', 'gc' } },
+    config = 'require("wuelner.settings.comment").config()'
   }
+
+  -- Indent.
   use {
     'lukas-reineke/indent-blankline.nvim',
     after = 'nvim-treesitter',
@@ -137,32 +121,27 @@ return require('packer').startup(function(use)
     after = 'indent-blankline.nvim',
     setup = 'require("wuelner.settings.sleuth").setup()'
   }
-  use {
-    'numToStr/Comment.nvim',
-    keys = { { 'n', 'gc' }, { 'v', 'gc' } },
-    config = 'require("wuelner.settings.comment").config()'
-  }
-  use {
-    'NvChad/nvim-colorizer.lua',
-    config = 'require("wuelner.settings.colorizer").config()'
-  }
 
   -- Autocomplete.
   use {
     'hrsh7th/nvim-cmp',
+    after = 'vim-sleuth',
     requires = {
       { 'onsails/lspkind.nvim', module = 'lspkind' },
       { 'hrsh7th/cmp-nvim-lsp', module = 'cmp_nvim_lsp' },
       {
         'L3MON4D3/LuaSnip',
-        module = 'luasnip',
-        requires = 'rafamadriz/friendly-snippets',
-        config = 'require("luasnip.loaders.from_vscode").lazy_load()'
-      },
-      {
-        'saadparwaiz1/cmp_luasnip',
         after = 'nvim-cmp',
-        event = 'InsertEnter'
+        module = 'luasnip',
+        requires = {
+          'rafamadriz/friendly-snippets',
+          {
+            'saadparwaiz1/cmp_luasnip',
+            after = 'LuaSnip',
+            event = 'InsertEnter'
+          }
+        },
+        config = 'require("luasnip.loaders.from_vscode").lazy_load()'
       },
       {
         'tzachar/cmp-tabnine',
@@ -185,13 +164,49 @@ return require('packer').startup(function(use)
     config = 'require("wuelner.settings.autopairs").config()'
   }
 
+  -- LSP.
+  use {
+    'williamboman/mason.nvim',
+    requires = {
+      'williamboman/mason-lspconfig.nvim',
+      module = 'mason-lspconfig'
+    },
+    config = 'require("mason").setup()'
+  }
+  use {
+    'neovim/nvim-lspconfig',
+    after = { 'nvim-treesitter', 'nvim-cmp', 'mason.nvim' },
+    config = 'require("wuelner.settings.lspconfig").config()'
+  }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    after = 'nvim-lspconfig',
+    requires = { 'nvim-lua/plenary.nvim', module = 'plenary' },
+    config = 'require("wuelner.settings.null-ls").config()'
+  }
+  use {
+    'RRethy/vim-illuminate',
+    after = 'nvim-lspconfig',
+    config = 'require("wuelner.settings.illuminate").config()'
+  }
+  use {
+    'NvChad/nvim-colorizer.lua',
+    after = 'nvim-lspconfig',
+    config = 'require("wuelner.settings.colorizer").config()'
+  }
+
   -- Typing.
   use {
     'mattn/emmet-vim',
+    after = 'vim-sleuth',
     cmd = 'EmmetInstall',
     setup = 'require("wuelner.settings.emmet").setup()'
   }
-  use { 'matze/vim-move', keys = { '<A-h>', '<A-j>', '<A-k>', '<A-l>' } }
+  use {
+    'matze/vim-move',
+    after = 'vim-sleuth',
+    keys = { '<A-h>', '<A-j>', '<A-k>', '<A-l>' }
+  }
   use {
     'mg979/vim-visual-multi',
     keys = { { 'n', '<C-n>' }, { 'n', '<C-Down>' }, { 'n', '<C-Up>' } }
@@ -208,7 +223,7 @@ return require('packer').startup(function(use)
   -- Statusline.
   use {
     'feline-nvim/feline.nvim',
-    after = { 'human.vim', 'vim-enfocado' },
+    after = 'vim-enfocado',
     config = 'require("wuelner.settings.feline").config()'
   }
   use {
@@ -229,6 +244,7 @@ return require('packer').startup(function(use)
   }
   use {
     'antoinemadec/FixCursorHold.nvim',
+    after = 'human.vim',
     event = 'VimEnter',
     setup = 'vim.g.cursorhold_updatetime = 250'
   }
