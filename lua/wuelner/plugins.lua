@@ -105,7 +105,7 @@ return require('packer').startup(function(use)
   }
   use {
     'numToStr/Comment.nvim',
-    after = 'nvim-treesitter',
+    after = 'nvim-ts-context-commentstring',
     keys = { { 'n', 'gc' }, { 'v', 'gc' } },
     config = 'require("wuelner.settings.comment").config()'
   }
@@ -175,7 +175,7 @@ return require('packer').startup(function(use)
   }
   use {
     'neovim/nvim-lspconfig',
-    after = { 'nvim-treesitter', 'nvim-cmp', 'mason.nvim' },
+    after = { 'mason.nvim', 'nvim-cmp' },
     config = 'require("wuelner.settings.lspconfig").config()'
   }
   use {
@@ -235,16 +235,17 @@ return require('packer').startup(function(use)
 
   -- Improvements.
   use {
-    "kwkarlwang/bufresize.nvim",
-    config = 'require("wuelner.settings.bufresize").config()'
-  }
-  use {
     "luukvbaal/stabilize.nvim",
+    after = 'human.vim',
     config = 'require("wuelner.settings.stabilize").config()'
   }
   use {
+    "kwkarlwang/bufresize.nvim",
+    after = 'stabilize.nvim',
+    config = 'require("wuelner.settings.bufresize").config()'
+  }
+  use {
     'antoinemadec/FixCursorHold.nvim',
-    after = 'human.vim',
     event = 'VimEnter',
     setup = 'vim.g.cursorhold_updatetime = 250'
   }

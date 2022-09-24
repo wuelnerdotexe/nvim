@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
+- Optimized plugin startup sequence.
 - Unnecessary loading of more plugins and providers is optimized.
 
 ## [1.1.1] - 2022-09-22
