@@ -1,51 +1,39 @@
 require('impatient')
 
-local vim_g = vim.g
-
-vim_g.do_filetype_lua = 1
-
-local disable_plugins = {
+local builtin_loads = {
   '2html_plugin',
-  'bugreport',
-  'compiler',
-  'ftplugin',
-  'getscript',
-  'getscriptPlugin',
+  'cfilter',
   'gzip',
-  'logipat',
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
+  'man',
   'matchit',
   'matchparen',
-  'optwin',
-  'rrhelper',
-  'rplugin',
+  'msgpack_autoload',
+  'netrw',
+  'netrwFileHandlers',
+  'netrwPlugin',
+  'netrwSettings',
+  'node_provider',
+  'perl_provider',
+  'pythonx_provider',
+  'python3_provider',
+  'remote_plugins',
+  'ruby_provider',
+  'shada_autoload',
+  'shada_plugin',
   'spellfile_plugin',
-  'syntax',
-  'synmenu',
+  'sql_completion',
+  'syntax_completion',
   'tar',
   'tarPlugin',
-  'tutor',
+  'tutor_mode_plugin',
   'vimball',
   'vimballPlugin',
   'zip',
   'zipPlugin'
 }
 
-for _, plugin in pairs(disable_plugins) do
-  vim_g['loaded_' .. plugin] = 1
-end
-
-local disable_providers = {
-  'ruby',
-  'node',
-  'perl',
-}
-
-for _, provider in pairs(disable_providers) do
-  vim_g['loaded_' .. provider .. '_provider'] = 0
+for _, plugin in pairs(builtin_loads) do
+  vim.g['loaded_' .. plugin] = 1
 end
 
 require('wuelner.plugins')

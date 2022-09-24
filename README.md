@@ -79,10 +79,10 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 | VI Mode |         Keymap         | Action                                   |
 | :-----: | :--------------------: | ---------------------------------------- |
-| Normal  |      `CTRL` + `h`      | Resize the window on the left            |
-| Normal  |      `CTRL` + `j`      | Resize the window on the down            |
-| Normal  |      `CTRL` + `k`      | Resize the window on the up              |
-| Normal  |      `CTRL` + `l`      | Resize the window on the right           |
+| Normal  |     `SHIFT` + `h`      | Resize the window on the left            |
+| Normal  |     `SHIFT` + `j`      | Resize the window on the down            |
+| Normal  |     `SHIFT` + `k`      | Resize the window on the up              |
+| Normal  |     `SHIFT` + `l`      | Resize the window on the right           |
 | Normal  | `<leader>` + `m` + `t` | Toggle maximizer window                  |
 | Normal  |       `1` + `w`        | Close all windows except the current one |
 
@@ -171,4 +171,3 @@ In order for the **[Enfocado](https://wuelnerdotexe.github.io/enfocado)'s Human 
 [GPL-3.0 &copy; Wuelner Martínez.](https://github.com/wuelnerdotexe/nvim/blob/main/LICENSE)
 
 <p align="center">With 💖 from <strong>LATAM</strong> to the world!</p>
-
