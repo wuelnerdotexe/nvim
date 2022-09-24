@@ -1,5 +1,13 @@
 require('impatient')
 
+if vim.version().minor < 8
+then
+  local vim_g = vim.g
+
+  vim_g.do_filetype_lua = 1
+  vim_g.did_load_filetypes = 0
+end
+
 local builtin_loads = {
   '2html_plugin',
   'cfilter',

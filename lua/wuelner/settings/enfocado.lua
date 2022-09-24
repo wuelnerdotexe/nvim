@@ -27,7 +27,7 @@ M.config = function()
     pattern = 'enfocado',
     nested = true,
     callback = function()
-      vim.cmd.highlight { 'link Whitespace DiagnosticError', bang = true }
+      vim.cmd('highlight! link Whitespace DiagnosticError')
 
       local vim_opt = vim.opt
 

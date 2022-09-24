@@ -14,7 +14,7 @@ M.config = function()
       bufresize.block_register()
       command(cmd)
       bufresize.resize_open()
-      vim.cmd.execute('"normal! i"')
+      vim.cmd('execute "normal! i"')
     end
   end
 

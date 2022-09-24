@@ -10,7 +10,7 @@ local ensure_packer = function()
       install_path
     })
 
-    vim.cmd.packadd('packer.nvim')
+    vim.cmd('packadd packer.nvim')
 
     return true
   end
