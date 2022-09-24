@@ -236,6 +236,11 @@ return require('packer').startup(function(use)
 
   -- Improvements.
   use {
+    'declancm/cinnamon.nvim',
+    after = 'human.vim',
+    config = 'require("wuelner.settings.cinnamon").config()'
+  }
+  use {
     "luukvbaal/stabilize.nvim",
     after = 'human.vim',
     config = 'require("wuelner.settings.stabilize").config()'
