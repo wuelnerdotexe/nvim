@@ -5,7 +5,8 @@ M.config = function()
     local bufresize = require('bufresize')
     local command = vim.api.nvim_command
 
-    if vim.bo.filetype == 'nerdterm' then
+    if vim.bo.filetype == 'nerdterm'
+    then
       bufresize.block_register()
       command(cmd)
       bufresize.resize_close()

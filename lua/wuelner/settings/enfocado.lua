@@ -20,10 +20,23 @@ M.setup = function()
     'treesitter',
     'visual-multi'
   }
+end
 
+M.config = function()
   vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = 'enfocado',
-    command = 'highlight! link Whitespace DiagnosticError'
+    nested = true,
+    callback = function()
+      vim.cmd.highlight { 'link Whitespace DiagnosticError', bang = true }
+
+      local vim_opt = vim.opt
+
+      if vim.fn.has('termguicolors') and vim_opt.termguicolors == true
+      then
+        vim_opt.winblend = 10
+        vim_opt.pumblend = 10
+      end
+    end
   })
 end
 

@@ -13,9 +13,11 @@ M.config = function()
         local type = ctx.ctype == U.ctype.linewise and '__default' or '__multiline'
         local location = nil
 
-        if ctx.ctype == U.ctype.blockwise then
+        if ctx.ctype == U.ctype.blockwise
+        then
           location = commentstring_utils.get_cursor_location()
-        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V
+        then
           location = commentstring_utils.get_visual_start_location()
         end
 

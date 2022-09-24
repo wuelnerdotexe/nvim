@@ -217,7 +217,8 @@ return require('packer').startup(function(use)
     'wuelnerdotexe/vim-enfocado',
     branch = 'development',
     after = 'human.vim',
-    setup = 'require("wuelner.settings.enfocado").setup()'
+    setup = 'require("wuelner.settings.enfocado").setup()',
+    config = 'require("wuelner.settings.enfocado").config()'
   }
 
   -- Statusline.
@@ -250,7 +251,8 @@ return require('packer').startup(function(use)
     setup = 'vim.g.cursorhold_updatetime = 250'
   }
 
-  if packer_bootstrap then
+  if packer_bootstrap
+  then
     require('packer').sync()
   end
 end)

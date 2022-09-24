@@ -193,7 +193,7 @@ M.config = function()
       removed = enfocado.red[1],
       changed = enfocado.yellow[1],
       errors = enfocado.br_red[1],
-      warnings = enfocado.br_orange[1],
+      warns = enfocado.br_orange[1],
       info = enfocado.br_yellow[1],
       hints = enfocado.br_blue[1]
     },

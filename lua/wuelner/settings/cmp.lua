@@ -29,34 +29,41 @@ M.config = function()
       ['<C-e>'] = cmp_mapping.abort(),
       ['<CR>'] = cmp_mapping.confirm({ select = false }),
       ['<S-Tab>'] = cmp_mapping(function(fallback)
-        if cmp.visible() then
+        if cmp.visible()
+        then
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
+        elseif luasnip.jumpable(-1)
+        then
           luasnip.jump(-1)
         else
           fallback()
         end
       end, { 'i', 's' }),
       ['<Tab>'] = cmp_mapping(function(fallback)
-        if cmp.visible() then
+        if cmp.visible()
+        then
           cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
+        elseif luasnip.expand_or_jumpable()
+        then
           luasnip.expand_or_jump()
-        elseif has_words_before() then
+        elseif has_words_before()
+        then
           cmp.complete()
         else
           fallback()
         end
       end, { 'i', 's' }),
       ['<C-p>'] = cmp_mapping(function()
-        if cmp.visible() then
+        if cmp.visible()
+        then
           cmp.select_prev_item()
         else
           cmp.complete()
         end
       end, { 'i', 's' }),
       ['<C-n>'] = cmp_mapping(function()
-        if cmp.visible() then
+        if cmp.visible()
+        then
           cmp.select_next_item()
         else
           cmp.complete()
@@ -83,7 +90,8 @@ M.config = function()
             vim_item.kind
           )
 
-          if entry.source.name == 'cmp_tabnine' then
+          if entry.source.name == 'cmp_tabnine'
+          then
             vim_item.kind = string.format('%s %s', '', 'Tabnine')
           end
 

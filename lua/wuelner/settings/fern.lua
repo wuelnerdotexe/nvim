@@ -10,6 +10,22 @@ M.setup = function()
   vim_g['fern#drawer_width'] = 33
   vim_g['fern#renderer'] = 'nerdfont'
   vim_g['fern#disable_default_mappings'] = 1
+end
+
+M.config = function()
+  local keymap_set = vim.keymap.set
+
+  keymap_set(
+    'n', '<leader>ft',
+    '<Cmd>Fern . -drawer -right -toggle<CR>',
+    { silent = true }
+  )
+
+  keymap_set(
+    'n', '<leader>fr',
+    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
+    { silent = true }
+  )
 
   local vim_fn = vim.fn
 
@@ -137,22 +153,6 @@ M.setup = function()
       )
     end
   })
-end
-
-M.config = function()
-  local keymap_set = vim.keymap.set
-
-  keymap_set(
-    'n', '<leader>ft',
-    '<Cmd>Fern . -drawer -right -toggle<CR>',
-    { silent = true }
-  )
-
-  keymap_set(
-    'n', '<leader>fr',
-    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
-    { silent = true }
-  )
 end
 
 return M
