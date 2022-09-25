@@ -30,6 +30,11 @@ return require('packer').startup(function(use)
     setup = 'require("wuelner.settings.human").setup()',
     config = 'require("wuelner.settings.human").config()'
   }
+  use {
+    'antoinemadec/FixCursorHold.nvim',
+    after = 'human.vim',
+    setup = 'vim.g.cursorhold_updatetime = 250'
+  }
 
   -- Development.
   use {
@@ -39,6 +44,7 @@ return require('packer').startup(function(use)
   }
   use {
     'iamcco/markdown-preview.nvim',
+    after = 'FixCursorHold.nvim',
     run = 'cd app && npm install',
     ft = 'markdown'
   }
@@ -47,11 +53,13 @@ return require('packer').startup(function(use)
   use {
     'junegunn/fzf',
     run = function() vim_fn['fzf#install']() end,
+    after = 'FixCursorHold.nvim',
     cmd = 'FZF',
     setup = 'require("wuelner.settings.fzf").setup()'
   }
   use {
     'lambdalisue/fern.vim',
+    after = 'FixCursorHold.nvim',
     requires = {
       { 'lambdalisue/fern-hijack.vim', after = 'fern.vim' },
       { 'lambdalisue/fern-git-status.vim', after = 'fern.vim' },
@@ -72,17 +80,20 @@ return require('packer').startup(function(use)
   }
 
   -- Git.
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    after = 'FixCursorHold.nvim'
+  }
   use {
     'lewis6991/gitsigns.nvim',
-    after = 'human.vim',
+    after = 'FixCursorHold.nvim',
     config = 'require("wuelner.settings.gitsigns").config()'
   }
 
   -- Tree-sitter.
   use {
     'nvim-treesitter/nvim-treesitter',
-    after = 'human.vim',
+    after = 'FixCursorHold.nvim',
     run = ':TSUpdate',
     requires = {
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
@@ -209,6 +220,7 @@ return require('packer').startup(function(use)
   }
   use {
     'mg979/vim-visual-multi',
+    after = 'FixCursorHold.nvim',
     keys = { { 'n', '<C-n>' }, { 'n', '<C-Down>' }, { 'n', '<C-Up>' } }
   }
 
@@ -224,13 +236,13 @@ return require('packer').startup(function(use)
   -- Statusline.
   use {
     'feline-nvim/feline.nvim',
-    after = 'vim-enfocado',
+    after = { 'FixCursorHold.nvim', 'vim-enfocado' },
     config = 'require("wuelner.settings.feline").config()'
   }
   use {
     'akinsho/bufferline.nvim',
     tag = 'v2.*',
-    after = 'human.vim',
+    after = 'FixCursorHold.nvim',
     config = 'require("wuelner.settings.bufferline").config()'
   }
 
@@ -249,11 +261,6 @@ return require('packer').startup(function(use)
     "kwkarlwang/bufresize.nvim",
     after = 'stabilize.nvim',
     config = 'require("wuelner.settings.bufresize").config()'
-  }
-  use {
-    'antoinemadec/FixCursorHold.nvim',
-    event = 'VimEnter',
-    setup = 'vim.g.cursorhold_updatetime = 250'
   }
 
   if packer_bootstrap
