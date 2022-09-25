@@ -40,8 +40,8 @@ local builtin_loads = {
   'zipPlugin'
 }
 
-for _, plugin in pairs(builtin_loads) do
-  vim.g['loaded_' .. plugin] = 1
+for _, load in pairs(builtin_loads) do
+  vim.g['loaded_' .. load] = 1
 end
 
 require('wuelner.plugins')

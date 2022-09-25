@@ -11,7 +11,7 @@ M.config = function()
   vim_opt.number = true
   if vim.fn.executable('rg') == 1
   then
-    vim.opt.grepprg = 'rg -i -. -g="' ..
+    vim_opt.grepprg = 'rg -i -. -g="' ..
     '!.git,!.svn,!.hg,!CSV,!.DS_Store,!Thumbs.db' ..
     '!node_modules,!bower_components,!*.code-search' ..
     '" --vimgrep'

@@ -38,7 +38,7 @@ M.config = function()
   }
 
   components.active[1][3] = {
-    provider = '☰ %P/%L',
+    provider = '%P/%L',
     right_sep = ' ',
     hl = function()
       return {

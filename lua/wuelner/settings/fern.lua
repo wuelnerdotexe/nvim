@@ -17,13 +17,13 @@ M.config = function()
 
   keymap_set(
     'n', '<leader>ft',
-    '<Cmd>Fern . -drawer -right -toggle<CR>',
+    '<Cmd>Fern . -drawer -width=33 -right -toggle<CR>',
     { silent = true }
   )
 
   keymap_set(
     'n', '<leader>fr',
-    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
+    '<Cmd>Fern . -reveal=% -drawer -width=33 -right -toggle<CR>',
     { silent = true }
   )
 
@@ -51,19 +51,19 @@ M.config = function()
         end, { buffer = true, expr = true })
 
       keymap_set(
-        'n', '[',
+        'n', '<',
         '<Plug>(fern-action-leave)',
         { buffer = true, nowait = true }
       )
 
       keymap_set(
-        'n', ']',
+        'n', '>',
         '<Plug>(fern-action-enter)',
         { buffer = true, nowait = true }
       )
 
       keymap_set(
-        'n', 'wd',
+        'n', 'w',
         '<Plug>(fern-action-cd:root)',
         { buffer = true, nowait = true }
       )
@@ -95,12 +95,6 @@ M.config = function()
       keymap_set(
         'n', '<C-v>',
         '<Plug>(fern-action-open:side)',
-        { buffer = true, nowait = true }
-      )
-
-      keymap_set(
-        'n', 'V',
-        '<Plug>(fern-action-mark:toggle)',
         { buffer = true, nowait = true }
       )
 

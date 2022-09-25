@@ -1,15 +1,13 @@
 local M = {}
 
 M.setup = function()
-  local vim_env = vim.env
-  local vim_fn = vim.fn
 
-  if vim_fn.executable('fd') == 1
+  if vim.fn.executable('fd') == 1
   then
-    vim_env.FZF_DEFAULT_COMMAND = 'fd -I -H ' ..
-      '-E ".git" -E ".svn" -E ".hg" -E "CSV" -E ".DS_Store" -E "Thumbs.db" ' ..
-      '-E "node_modules" -E "bower_components" -E "*.code-search" ' ..
-    '-t f'
+    vim.env.FZF_DEFAULT_COMMAND = 'fd -I -H -E "{' ..
+      '.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,' ..
+      'node_modules,bower_components,*.code-search' ..
+    '}" -t f'
   end
 
   vim.keymap.set('n', '<leader>ff', '<Cmd>FZF<CR>', { silent = true })

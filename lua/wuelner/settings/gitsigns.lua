@@ -3,11 +3,11 @@ local M = {}
 M.config = function()
   require('gitsigns').setup({
     signs = {
-      add = { hl = 'GitSignsAdd', text = '▋' },
-      change = { hl = 'GitSignsChange', text = '▋' },
+      add = { hl = 'GitSignsAdd', text = '┃' },
+      change = { hl = 'GitSignsChange', text = '┃' },
       delete = { hl = 'GitSignsDelete', text = '▁' },
       topdelete = { hl = 'GitSignsDelete', text = '▔' },
-      changedelete = { hl = 'GitSignsChange', text = '▋' }
+      changedelete = { hl = 'GitSignsChange', text = '┃' }
     },
     on_attach = function(bufnr)
       local loaded_gitsigns = package.loaded.gitsigns

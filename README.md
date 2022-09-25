@@ -56,16 +56,14 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 | VI Mode |    Keymap    | Action                |
 | :-----: | :----------: | --------------------- |
-| Normal  |     `[`      | Leave directory       |
-| Normal  |     `]`      | Enter directory       |
+| Normal  |     `>`      | Leave directory       |
+| Normal  |     `<`      | Enter directory       |
 | Normal  |  `w` + `d`   | Set working directory |
 | Normal  |   `ENTER`    | Expand or open node   |
 | Normal  | `BACKSPACE`  | Collapse node         |
 | Normal  | `CTRL` + `t` | Open in a new tab     |
 | Normal  | `CTRL` + `x` | Open in a new split   |
 | Normal  | `CTRL` + `v` | Open to the side      |
-| Normal  |     `V`      | Toggle mark           |
-| Normal  |   `ESCAPE`   | Clear marks           |
 | Normal  |     `n`      | New path              |
 | Normal  |  `n` + `f`   | New file              |
 | Normal  |  `n` + `d`   | New directory         |
