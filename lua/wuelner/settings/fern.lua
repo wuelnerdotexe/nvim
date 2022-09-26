@@ -17,21 +17,21 @@ M.config = function()
 
   keymap_set(
     'n', '<leader>ft',
-    '<Cmd>Fern . -drawer -width=33 -right -toggle<CR>',
+    '<Cmd>Fern . -drawer -right -toggle<CR>',
     { silent = true }
   )
 
   keymap_set(
     'n', '<leader>fr',
-    '<Cmd>Fern . -reveal=% -drawer -width=33 -right -toggle<CR>',
+    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
     { silent = true }
   )
-
-  local vim_fn = vim.fn
 
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'fern',
     callback = function()
+      local vim_fn = vim.fn
+
       vim_fn['glyph_palette#apply']()
 
       local opt_local = vim.opt_local
@@ -40,6 +40,15 @@ M.config = function()
       opt_local.relativenumber = false
 
       local keymap_set = vim.keymap.set
+
+      keymap_set('n', '<Plug>(fern-action-open-or-expand-or-collapse)',
+        function()
+          return vim_fn['fern#smart#leaf'](
+            '<Plug>(fern-action-open)',
+            '<Plug>(fern-action-expand)',
+            '<Plug>(fern-action-collapse)'
+          )
+        end, { buffer = true, expr = true })
 
       keymap_set('n', '<Plug>(fern-action-open:side)',
         function()
@@ -65,6 +74,12 @@ M.config = function()
       keymap_set(
         'n', 'w',
         '<Plug>(fern-action-cd:root)',
+        { buffer = true, nowait = true }
+      )
+
+      keymap_set(
+        'n', '<2-LeftMouse>',
+        '<Plug>(fern-action-open-or-expand-or-collapse)',
         { buffer = true, nowait = true }
       )
 

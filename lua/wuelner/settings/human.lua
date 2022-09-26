@@ -20,11 +20,11 @@ M.config = function()
   local keymap_set = vim.keymap.set
 
   keymap_set('n', '1w', '<Cmd>only<CR>', { silent = true })
-  keymap_set('n', '<S-h>', '<Plug>(ResizerLeft)')
-  keymap_set('n', '<S-j>', '<Plug>(ResizerDown)')
-  keymap_set('n', '<S-k>', '<Plug>(ResizerUp)')
-  keymap_set('n', '<S-l>', '<Plug>(ResizerRight)')
-  keymap_set('n', '<leader>mt', '<Plug>(MaximizerToggle)')
+  keymap_set('n', '<A-Left>', '<Plug>(ResizerLeft)')
+  keymap_set('n', '<A-Down>', '<Plug>(ResizerDown)')
+  keymap_set('n', '<A-Up>', '<Plug>(ResizerUp)')
+  keymap_set('n', '<A-Right>', '<Plug>(ResizerRight)')
+  keymap_set('n', 'mt', '<Plug>(MaximizerToggle)')
   keymap_set('n', '1b', '<Plug>(BufOnly)')
   keymap_set('n', '1t', '<Cmd>tabonly<CR>', { silent = true })
 end

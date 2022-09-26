@@ -75,14 +75,14 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### Windows
 
-| VI Mode |         Keymap         | Action                                   |
-| :-----: | :--------------------: | ---------------------------------------- |
-| Normal  |     `SHIFT` + `h`      | Resize the window on the left            |
-| Normal  |     `SHIFT` + `j`      | Resize the window on the down            |
-| Normal  |     `SHIFT` + `k`      | Resize the window on the up              |
-| Normal  |     `SHIFT` + `l`      | Resize the window on the right           |
-| Normal  | `<leader>` + `m` + `t` | Toggle maximizer window                  |
-| Normal  |       `1` + `w`        | Close all windows except the current one |
+| VI Mode |     Keymap      | Action                                   |
+| :-----: | :-------------: | ---------------------------------------- |
+| Normal  | `Alt` + `Left`  | Resize the window on the left            |
+| Normal  | `Alt` + `Down`  | Resize the window on the down            |
+| Normal  |  `Alt` + `Up`   | Resize the window on the up              |
+| Normal  | `Alt` + `Right` | Resize the window on the right           |
+| Normal  |    `m` + `t`    | Toggle maximizer window                  |
+| Normal  |    `1` + `w`    | Close all windows except the current one |
 
 ### Buffers
 
