@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
   use {
     'antoinemadec/FixCursorHold.nvim',
     after = 'human.vim',
-    setup = 'vim.g.cursorhold_updatetime = 250'
+    setup = 'vim.g.cursorhold_updatetime = 40'
   }
 
   -- Development.
@@ -54,8 +54,9 @@ return require('packer').startup(function(use)
     'junegunn/fzf',
     run = function() vim_fn['fzf#install']() end,
     after = 'FixCursorHold.nvim',
-    cmd = 'FZF',
-    setup = 'require("wuelner.settings.fzf").setup()'
+    keys = { { 'n', '<leader>ff' } },
+    setup = 'require("wuelner.settings.fzf").setup()',
+    config = 'require("wuelner.settings.fzf").config()'
   }
   use {
     'lambdalisue/fern.vim',
@@ -158,13 +159,10 @@ return require('packer').startup(function(use)
         'tzachar/cmp-tabnine',
         run = './install.sh',
         after = 'nvim-cmp',
-        event = 'InsertEnter'
+        event = 'InsertEnter',
+        config = 'require("wuelner.settings.tabnine").config()'
       },
-      {
-        'hrsh7th/cmp-buffer',
-        after = 'nvim-cmp',
-        event = 'InsertEnter'
-      },
+      { 'hrsh7th/cmp-buffer', module = 'cmp_buffer' },
     },
     config = 'require("wuelner.settings.cmp").config()'
   }
@@ -211,7 +209,8 @@ return require('packer').startup(function(use)
     'mattn/emmet-vim',
     after = 'vim-sleuth',
     cmd = 'EmmetInstall',
-    setup = 'require("wuelner.settings.emmet").setup()'
+    setup = 'require("wuelner.settings.emmet").setup()',
+    config = 'require("wuelner.settings.emmet").config()'
   }
   use {
     'matze/vim-move',

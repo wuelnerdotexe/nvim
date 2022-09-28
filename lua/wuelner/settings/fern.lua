@@ -3,6 +3,7 @@ local M = {}
 M.setup = function()
   local vim_g = vim.g
 
+  vim_g['fern#drawer_hover_popup_delay'] = 40
   vim_g['fern#default_hidden'] = 1
   vim_g['fern#default_exclude'] = [[^\%(]] ..
     [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]] ..
@@ -17,13 +18,13 @@ M.config = function()
 
   keymap_set(
     'n', '<leader>ft',
-    '<Cmd>Fern . -drawer -right -toggle<CR>',
+    '<Cmd>Fern . -drawer -width=33 -toggle<CR>',
     { silent = true }
   )
 
   keymap_set(
     'n', '<leader>fr',
-    '<Cmd>Fern . -reveal=% -drawer -right -toggle<CR>',
+    '<Cmd>Fern . -reveal=% -drawer -width=33 -toggle<CR>',
     { silent = true }
   )
 

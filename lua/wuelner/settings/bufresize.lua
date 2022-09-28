@@ -4,21 +4,24 @@ M.config = function()
   require('bufresize').setup({
     register = {
       keys = {
-        { 'n', '<Plug>(ResizerLeft)', '<Cmd>ResizerLeft<CR>', {
+        { 'n', '<A-Left>', '<Plug>(ResizerLeft)', {
           noremap = true, silent = true
         } },
-        { 'n', '<Plug>(ResizerDown)', '<Cmd>ResizerDown<CR>', {
+        { 'n', '<A-Down>', '<Plug>(ResizerDown)', {
           noremap = true, silent = true
         } },
-        { 'n', '<Plug>(ResizerUp)', '<Cmd>ResizerUp<CR>', {
+        { 'n', '<A-Up>', '<Plug>(ResizerUp)', {
           noremap = true, silent = true
         } },
-        { 'n', '<Plug>(ResizerRight)', '<Cmd>ResizerRight<CR>', {
+        { 'n', '<A-Right>', '<Plug>(ResizerRight)', {
           noremap = true, silent = true
         } },
         { '', '<LeftRelease>', '<LeftRelease>', {
           noremap = true, silent = true
         } },
+        { 'i', '<LeftRelease>', '<LeftRelease><C-o>', {
+          noremap = true, silent = true
+        } }
       },
       trigger_events = { 'BufWinEnter', 'WinEnter' },
     },

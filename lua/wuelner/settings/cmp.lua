@@ -6,6 +6,7 @@ M.config = function()
   local cmp = require('cmp')
   local lspkind = require('lspkind')
   local luasnip = require('luasnip')
+  local cmp_buffer = require('cmp_buffer')
 
   local has_words_before = function()
     local vim_api = vim.api
@@ -20,9 +21,7 @@ M.config = function()
   local cmp_setup = cmp.setup
 
   cmp_setup({
-    snippet = { expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end },
+    performance = { debounce = 80, throttle = 40 },
     mapping = cmp_mapping.preset.insert({
       ['<C-b>'] = cmp_mapping.scroll_docs(-3),
       ['<C-f>'] = cmp_mapping.scroll_docs(3),
@@ -70,15 +69,8 @@ M.config = function()
         end
       end, { 'i', 's' })
     }),
-    experimental = {
-      ghost_text = true
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'cmp_tabnine' }
-    }, { { name = 'buffer' } }),
-    keyword_length = 1,
+    snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+    completion = { completeopt = 'menuone,noselect', keyword_length = 1 },
     formatting = {
       fields = { 'abbr', 'kind' },
       format = lspkind.cmp_format({
@@ -98,7 +90,34 @@ M.config = function()
           return vim_item
         end
       })
-    }
+    },
+    sorting = {
+      comparators = {
+        function(...) return cmp_buffer:compare_locality(...) end
+      }
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+      { name = 'cmp_tabnine' }
+    }, { { name = 'buffer', option = {
+        keyword_length = 1,
+        indexing_interval = 40,
+        get_bufnrs = function()
+          local vim_api = vim.api
+          local buf = vim_api.nvim_get_current_buf()
+          local byte_size = vim_api.nvim_buf_get_offset(
+            buf, vim_api.nvim_buf_line_count(buf)
+          )
+
+          if byte_size > 1024 * 1024 then
+            return {}
+          end
+
+          return { buf }
+        end
+      } } }),
+    experimental = { ghost_text = true }
   })
 
   cmp_setup.filetype({
