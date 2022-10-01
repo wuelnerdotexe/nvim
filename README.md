@@ -50,6 +50,7 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 |       Normal        | `<leader>` + `f` + `t` | Toggle file explorer                 |
 |       Normal        | `<leader>` + `f` + `r` | Reveal current file in file explorer |
 |       Normal        | `<leader>` + `f` + `f` | Find files in the current directory  |
+|       Normal        | `<leader>` + `t` + `o` | Open the terminal in a new buffer    |
 | Normal and Terminal | `<leader>` + `t` + `t` | Toggle bottom terminal               |
 
 ### File Explorer
@@ -75,14 +76,14 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### Windows
 
-| VI Mode |     Keymap      | Action                                   |
-| :-----: | :-------------: | ---------------------------------------- |
-| Normal  | `Alt` + `Left`  | Resize the window on the left            |
-| Normal  | `Alt` + `Down`  | Resize the window on the down            |
-| Normal  |  `Alt` + `Up`   | Resize the window on the up              |
-| Normal  | `Alt` + `Right` | Resize the window on the right           |
-| Normal  |    `m` + `t`    | Toggle maximizer window                  |
-| Normal  |    `1` + `w`    | Close all windows except the current one |
+| VI Mode |       Keymap       | Action                                   |
+| :-----: | :----------------: | ---------------------------------------- |
+| Normal  |   `Alt` + `Left`   | Resize the window on the left            |
+| Normal  |   `Alt` + `Down`   | Resize the window on the down            |
+| Normal  |    `Alt` + `Up`    | Resize the window on the up              |
+| Normal  |  `Alt` + `Right`   | Resize the window on the right           |
+| Normal  | `CTRL` + `w` + `m` | Toggle maximizer window                  |
+| Normal  |     `1` + `w`      | Close all windows except the current one |
 
 ### Buffers
 
