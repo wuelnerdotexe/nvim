@@ -110,7 +110,8 @@ M.config = function()
             buf, vim_api.nvim_buf_line_count(buf)
           )
 
-          if byte_size > 1024 * 1024 then
+          if byte_size > 1024 * 1024
+          then
             return {}
           end
 

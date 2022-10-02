@@ -215,12 +215,24 @@ return require('packer').startup(function(use)
   use {
     'matze/vim-move',
     after = 'vim-sleuth',
-    keys = { '<A-h>', '<A-j>', '<A-k>', '<A-l>' }
+    keys = { '<A-Left>', '<A-Down>', '<A-Up>', '<A-Right>' },
+    setup = 'require("wuelner.settings.move").setup()',
+    config = 'require("wuelner.settings.move").config()'
   }
   use {
     'mg979/vim-visual-multi',
     after = 'FixCursorHold.nvim',
-    keys = { { 'n', '<C-n>' }, { 'n', '<C-Down>' }, { 'n', '<C-Up>' } }
+    keys = {
+      [[\\]], '<C-n>',
+      { 'n', '<S-Left>' },
+      { 'n', '<C-Down>' },
+      { 'n', '<C-Up>' },
+      { 'n', '<S-Right>' },
+      { 'n', '<C-LeftMouse>' },
+      { 'n', '<C-RightMouse>' },
+      { 'n', '<M-C-RightMouse>' }
+    },
+    setup = 'require("wuelner.settings.visual-multi").setup()'
   }
 
   -- Theme.
@@ -252,19 +264,27 @@ return require('packer').startup(function(use)
     config = 'require("wuelner.settings.cinnamon").config()'
   }
   use {
-    "luukvbaal/stabilize.nvim",
+    'luukvbaal/stabilize.nvim',
     after = 'human.vim',
     config = 'require("wuelner.settings.stabilize").config()'
   }
   use {
-    "kwkarlwang/bufresize.nvim",
+    'kwkarlwang/bufresize.nvim',
     after = 'stabilize.nvim',
     config = 'require("wuelner.settings.bufresize").config()'
   }
+  use({
+    'aserowy/tmux.nvim',
+    after = 'human.vim',
+    keys = {
+      {'n', '<C-h>' }, {'n', '<C-j>' }, {'n', '<C-k>' }, {'n', '<C-l>' },
+      {'n', '<A-h>' }, {'n', '<A-j>' }, {'n', '<A-k>' }, {'n', '<A-l>' }
+    },
+    config = 'require("wuelner.settings.tmux").config()'
+  })
 
   if packer_bootstrap
   then
     require('packer').sync()
   end
 end)
-

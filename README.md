@@ -55,33 +55,38 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### File Explorer
 
-| VI Mode |    Keymap    | Action                |
-| :-----: | :----------: | --------------------- |
-| Normal  |     `>`      | Leave directory       |
-| Normal  |     `<`      | Enter directory       |
-| Normal  |  `w` + `d`   | Set working directory |
-| Normal  |   `ENTER`    | Expand or open node   |
-| Normal  | `BACKSPACE`  | Collapse node         |
-| Normal  | `CTRL` + `t` | Open in a new tab     |
-| Normal  | `CTRL` + `x` | Open in a new split   |
-| Normal  | `CTRL` + `v` | Open to the side      |
-| Normal  |     `n`      | New path              |
-| Normal  |  `n` + `f`   | New file              |
-| Normal  |  `n` + `d`   | New directory         |
-| Normal  |     `m`      | Move node             |
-| Normal  |     `c`      | Copy node             |
-| Normal  |     `d`      | Delete node           |
-| Normal  |     `q`      | Exit                  |
-| Normal  |    `<F5>`    | Refresh explorer      |
+| VI Mode |         Keymap          | Action                       |
+| :-----: | :---------------------: | ---------------------------- |
+| Normal  |           `>`           | Leave directory              |
+| Normal  |           `<`           | Enter directory              |
+| Normal  |        `w` + `d`        | Set working directory        |
+| Normal  |         `ENTER`         | Expand or open node          |
+| Normal  |       `BACKSPACE`       | Collapse node                |
+| Normal  | Double left mouse click | Expand/Collapse or open node |
+| Normal  |      `CTRL` + `t`       | Open in a new tab            |
+| Normal  |      `CTRL` + `x`       | Open in a new split          |
+| Normal  |      `CTRL` + `v`       | Open to the side             |
+| Normal  |           `n`           | New path                     |
+| Normal  |        `n` + `f`        | New file                     |
+| Normal  |        `n` + `d`        | New directory                |
+| Normal  |           `m`           | Move node                    |
+| Normal  |           `c`           | Copy node                    |
+| Normal  |           `d`           | Delete node                  |
+| Normal  |           `q`           | Exit                         |
+| Normal  |         `<F5>`          | Refresh explorer             |
 
 ### Windows
 
 | VI Mode |       Keymap       | Action                                   |
 | :-----: | :----------------: | ---------------------------------------- |
-| Normal  |   `Alt` + `Left`   | Resize the window on the left            |
-| Normal  |   `Alt` + `Down`   | Resize the window on the down            |
-| Normal  |    `Alt` + `Up`    | Resize the window on the up              |
-| Normal  |  `Alt` + `Right`   | Resize the window on the right           |
+| Normal  |    `CTRL` + `h`    | Move to the left window                  |
+| Normal  |    `CTRL` + `j`    | Move to the down window                  |
+| Normal  |    `CTRL` + `k`    | Move to the up window                    |
+| Normal  |    `CTRL` + `l`    | Move to the right window                 |
+| Normal  |    `Alt` + `h`     | Resize the window on the left            |
+| Normal  |    `Alt` + `j`     | Resize the window on the down            |
+| Normal  |    `Alt` + `k`     | Resize the window on the up              |
+| Normal  |    `Alt` + `l`     | Resize the window on the right           |
 | Normal  | `CTRL` + `w` + `m` | Toggle maximizer window                  |
 | Normal  |     `1` + `w`      | Close all windows except the current one |
 
@@ -126,7 +131,16 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  | `g` + `c`+ `c` | Comment the current line  |
 | Visual  |   `g` + `c`    | Comment current selection |
 
-### Gitsigns
+### Moving Text
+
+| VI Mode |     Keymap      | Action          |
+| :-----: | :-------------: | --------------- |
+| Normal  | `Alt` + `Left`  | Move char left  |
+| Normal  | `Alt` + `Down`  | Move line down  |
+| Normal  |  `Alt` + `Up`   | Move line up    |
+| Normal  | `Alt` + `Right` | Move char right |
+
+### Git Signs
 
 |      VI Mode      |         Keymap         | Action                      |
 | :---------------: | :--------------------: | --------------------------- |
