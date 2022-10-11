@@ -1,2 +1,1 @@
-require('wuelner.plugins')
-
+require("wuelner.plugins")

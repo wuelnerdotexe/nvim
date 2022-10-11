@@ -1,11 +1,10 @@
 local M = {}
 
 M.BufresizeToggle = function(command, filetype)
-  local bufresize = require('bufresize')
+  local bufresize = require("bufresize")
   local nvim_command = vim.api.nvim_command
 
-  if vim.bo.filetype == filetype
-  then
+  if vim.bo.filetype == filetype then
     bufresize.block_register()
     nvim_command(command)
     bufresize.resize_close()
@@ -18,11 +17,10 @@ M.BufresizeToggle = function(command, filetype)
 end
 
 M.AerialBreadcrumbs = function()
-  local symbols = require('aerial').get_location(true)
+  local symbols = require("aerial").get_location(true)
   local depth = nil or #symbols
 
-  if depth > 0
-  then
+  if depth > 0 then
     symbols = { unpack(symbols, 1, depth) }
   else
     symbols = { unpack(symbols, #symbols + 1 + depth) }
@@ -36,8 +34,7 @@ M.AerialBreadcrumbs = function()
 
   local table_concat = table.concat
 
-  return table_concat(parts, ' > ') == '' and '' or table_concat(parts, ' > ')
+  return table_concat(parts, " > ") == "" and "" or table_concat(parts, " > ")
 end
 
 return M
-

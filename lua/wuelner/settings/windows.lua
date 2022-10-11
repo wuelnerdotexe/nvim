@@ -7,48 +7,42 @@ M.config = function()
   vim_opt.winminwidth = 6
   vim_opt.equalalways = false
 
-  require('windows').setup({
+  require("windows").setup({
     autowidth = { enable = false, winwidth = 3, filetype = {} },
     ignore = {
-      buftype = { 'loclist', 'prompt', 'quickfix', 'terminal' },
+      buftype = { "loclist", "prompt", "quickfix", "terminal" },
       filetype = {
-        'aerial',
-        'checkhealth',
-        'fern',
-        'fugitive',
-        'fugitiveblame',
-        'lspinfo',
-        'mason',
-        'nerdterm',
-        'null-ls-info',
-        'packer',
-        'qf',
-        'TelescopePrompt'
-      }
+        "aerial",
+        "checkhealth",
+        "fern",
+        "fugitive",
+        "fugitiveblame",
+        "lspinfo",
+        "mason",
+        "nerdterm",
+        "null-ls-info",
+        "packer",
+        "qf",
+        "TelescopePrompt",
+      },
     },
-    animation = {
-      enable = true,
-      duration = 300,
-      fps = 24,
-      easing = 'in_out_sine'
-    }
+    animation = { fps = 24 },
   })
 
   local keymap_set = vim.keymap.set
 
-  keymap_set('n', '<C-w>m', '<Cmd>WindowsMaximize<CR>', {
-    silent = true
+  keymap_set("n", "<C-w>m", "<Cmd>WindowsMaximize<CR>", {
+    silent = true,
   })
-  keymap_set('n', '<C-w>_', '<Cmd>WindowsMaximizeVertically<CR>', {
-    silent = true
+  keymap_set("n", "<C-w>_", "<Cmd>WindowsMaximizeVertically<CR>", {
+    silent = true,
   })
-  keymap_set('n', '<C-w>|', '<Cmd>WindowsMaximizeHorizontally<CR>', {
-    silent = true
+  keymap_set("n", "<C-w>|", "<Cmd>WindowsMaximizeHorizontally<CR>", {
+    silent = true,
   })
-  keymap_set('n', '<C-w>=', '<Cmd>WindowsEqualize<CR>', {
-    silent = true
+  keymap_set("n", "<C-w>=", "<Cmd>WindowsEqualize<CR>", {
+    silent = true,
   })
 end
 
 return M
-
