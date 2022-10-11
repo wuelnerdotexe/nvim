@@ -10,7 +10,7 @@ M.config = function()
       changedelete = { hl = 'GitSignsChange', text = '┃' }
     },
     current_line_blame_opts = { delay = 40 },
-    update_debounce = 80,
+    update_debounce = 300,
     on_attach = function(bufnr)
       local loaded_gitsigns = package.loaded.gitsigns
       local map = function(mode, l, r, opts)
@@ -25,11 +25,13 @@ M.config = function()
         vim.schedule(function() loaded_gitsigns.prev_hunk() end)
         return '<Ignore>'
       end, { expr = true })
+
       map('n', ']h', function()
         if wo_diff then return ']h' end
         vim.schedule(function() loaded_gitsigns.next_hunk() end)
         return '<Ignore>'
       end, { expr = true })
+
       map('n', '<leader>hp', loaded_gitsigns.preview_hunk)
       map({ 'n', 'v' }, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
       map({ 'n', 'v' }, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')

@@ -20,7 +20,7 @@ M.config = function()
     resize = {
       keys = {},
       trigger_events = { 'VimResized' },
-      increment = 3,
+      increment = false,
     },
   })
 end

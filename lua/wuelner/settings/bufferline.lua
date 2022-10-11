@@ -7,11 +7,17 @@ M.config = function()
       indicator = { icon = '▊', style = 'icon' },
       offsets = {
         {
-          filetype = 'fern',
-          text = 'FILE EXPLORER',
+          filetype = 'aerial',
+          text = 'DOCUMENT SYMBOLS',
           highlight = 'Title',
           separator = false
-        }
+        },
+        {
+          filetype = 'fern',
+          text = 'FILE TREE',
+          highlight = 'Title',
+          separator = false
+        },
       },
       separator_style = 'thick'
     }
@@ -21,12 +27,23 @@ M.config = function()
 
   keymap_set('n', 'mB', '<Cmd>BufferLineMovePrev<CR>', { silent = true })
   keymap_set('n', 'gB', '<Cmd>BufferLineCyclePrev<CR>', { silent = true })
-  keymap_set('n', '<S-PageUp>', '<Cmd>BufferLineCyclePrev<CR>', { silent = true })
-  keymap_set('i', '<S-PageUp>', '<Cmd>BufferLineCyclePrev<CR>', { silent = true })
+  keymap_set('n', '<S-PageUp>', '<Cmd>BufferLineCyclePrev<CR>', {
+    silent = true
+  })
+
+  keymap_set('i', '<S-PageUp>', '<Cmd>BufferLineCyclePrev<CR>', {
+    silent = true
+  })
+
   keymap_set('n', 'mb', '<Cmd>BufferLineMoveNext<CR>', { silent = true })
   keymap_set('n', 'gb', '<Cmd>BufferLineCycleNext<CR>', { silent = true })
-  keymap_set('n', '<S-PageDown>', '<Cmd>BufferLineCycleNext<CR>', { silent = true })
-  keymap_set('i', '<S-PageDown>', '<Cmd>BufferLineCycleNext<CR>', { silent = true })
+  keymap_set('n', '<S-PageDown>', '<Cmd>BufferLineCycleNext<CR>', {
+    silent = true
+  })
+
+  keymap_set('i', '<S-PageDown>', '<Cmd>BufferLineCycleNext<CR>', {
+    silent = true
+  })
 end
 
 return M

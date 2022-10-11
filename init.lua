@@ -1,13 +1,5 @@
 require('impatient')
 
-if vim.version().minor < 8
-then
-  local vim_g = vim.g
-
-  vim_g.do_filetype_lua = 1
-  vim_g.did_load_filetypes = 0
-end
-
 local builtin_loads = {
   '2html_plugin',
   'cfilter',
@@ -44,5 +36,5 @@ for _, load in pairs(builtin_loads) do
   vim.g['loaded_' .. load] = 1
 end
 
-require('wuelner.plugins')
+require('wuelner')
 

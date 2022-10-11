@@ -9,19 +9,81 @@ M.config = function()
   local components = { active = {}, inactive = {} }
   local vim_fn = vim.fn
   local enfocado = vim_fn['enfocado#getColorScheme']()
-  local vi_mode = require('feline.providers.vi_mode')
 
+  local enfocado_hl = function(name, fg, style)
+    local vi_mode = require('feline.providers.vi_mode')
+
+    if vi_mode.get_mode_color() == 'bg_1'
+    then
+      return {
+        name = name,
+        fg = vi_mode.get_mode_color(),
+        style = style
+      }
+    end
+
+    return { name = name, fg = fg, style = style }
+  end
+
+  table.insert(components.active, {})
   table.insert(components.active, {})
   table.insert(components.active, {})
   table.insert(components.inactive, {})
 
   components.active[1][1] = {
-    provider = '▊',
-    hl = { name = 'FelineIndicator', fg = 'accent_0' },
-    priority = 1
+    provider = 'diagnostic_errors',
+    hl = function()
+      return enfocado_hl('FelineErrors', 'br_red', 'bold')
+    end,
+    priority = -6,
+    truncate_hide = true
   }
 
   components.active[1][2] = {
+    provider = 'diagnostic_warnings',
+    hl = function()
+      return enfocado_hl('FelineWarns', 'br_orange', 'bold')
+    end,
+    priority = -6,
+    truncate_hide = true
+  }
+
+  components.active[1][3] = {
+    provider = 'diagnostic_info',
+    hl = function()
+      return enfocado_hl('FelineInfo', 'br_yellow', 'bold')
+    end,
+    priority = -6,
+    truncate_hide = true
+  }
+
+  components.active[1][4] = {
+    provider = 'diagnostic_hints',
+    hl = function()
+      return enfocado_hl('FelineHints', 'br_blue', 'bold')
+    end,
+    priority = -6,
+    truncate_hide = true
+  }
+
+  components.active[1][5] = {
+    enabled = function()
+      return require('feline.providers.lsp').diagnostics_exist()
+    end,
+    provider = ' ',
+    hl = { name = 'FelineDiagnosticsSeparator', fg = 'bg_1' },
+    priority = -5
+  }
+
+  components.active[1][6] = {
+    provider = '▊',
+    hl = function()
+      return enfocado_hl('FelineIndicator', 'accent_1', 'NONE')
+    end,
+    priority = 1
+  }
+
+  components.active[1][7] = {
     provider = {
       name = 'position',
       opts = { padding = { line = 2, col = 2 } }
@@ -29,136 +91,115 @@ M.config = function()
     left_sep = ' ',
     right_sep = ' ',
     hl = function()
-      return {
-        name = vi_mode.get_mode_highlight_name(),
-        fg = vi_mode.get_mode_color()
-      }
+      return enfocado_hl('FelinePosition', 'fg_0', 'NONE')
     end,
     truncate_hide = true
   }
 
-  components.active[1][3] = {
+  components.active[1][8] = {
     provider = '%P/%L',
     right_sep = ' ',
     hl = function()
-      return {
-        name = vi_mode.get_mode_highlight_name(),
-        fg = vi_mode.get_mode_color()
-      }
+      return enfocado_hl('FelineLines', 'fg_0', 'NONE')
     end,
     priority = -2,
     truncate_hide = true
   }
 
-  components.active[1][4] = {
+  components.active[1][9] = {
     provider = function()
       return ' ' .. vim_fn.fnamemodify(vim_fn.getcwd(), ':t')
     end,
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelineCWD', fg = 'accent_0' },
-    priority = -7,
-    truncate_hide = true
-  }
-
-  components.active[1][5] = {
-    provider = 'git_branch',
-    hl = { name = 'FelineBranch', fg = 'accent_0' },
-    priority = -6,
-    truncate_hide = true
-  }
-
-  components.active[1][6] = {
-    provider = 'git_diff_added',
-    icon = ' + ',
-    hl = { name = 'FelineAdded', fg = 'added' },
+    hl = function()
+      return enfocado_hl('FelineCWD', 'br_blue', 'bold')
+    end,
     priority = -8,
-    truncate_hide = true
-  }
-
-  components.active[1][7] = {
-    provider = 'git_diff_removed',
-    icon = ' - ',
-    hl = { name = 'FelineRemoved', fg = 'removed' },
-    priority = -8,
-    truncate_hide = true
-  }
-
-  components.active[1][8] = {
-    provider = 'git_diff_changed',
-    icon = ' ~ ',
-    right_sep = ' ',
-    hl = { name = 'FelineChanged', fg = 'changed' },
-    priority = -8,
-    truncate_hide = true
-  }
-
-  components.active[1][9] = {
-    provider = 'diagnostic_errors',
-    hl = { name = 'FelineErrors', fg = 'errors', style = 'bold' },
-    left_sep = ' ',
-    priority = -5,
-    truncate_hide = true
-  }
-
-  components.active[1][10] = {
-    provider = 'diagnostic_warnings',
-    hl = { name = 'FelineWarns', fg = 'warns', style = 'bold' },
-    priority = -5,
-    truncate_hide = true
-  }
-
-  components.active[1][11] = {
-    provider = 'diagnostic_info',
-    hl = { name = 'FelineInfo', fg = 'info', style = 'bold' },
-    priority = -5,
-    truncate_hide = true
-  }
-
-  components.active[1][12] = {
-    provider = 'diagnostic_hints',
-    right_sep = ' ',
-    hl = { name = 'FelineHints', fg = 'hints', style = 'bold' },
-    priority = -5,
     truncate_hide = true
   }
 
   components.active[2][1] = {
-    provider = 'file_encoding',
-    left_sep = ' ',
-    right_sep = ' ',
-    hl = { name = 'FelineFileencoding', fg = 'accent_1' },
-    priority = -1,
+    provider = 'git_branch',
+    hl = function()
+      return enfocado_hl('FelineBranch', 'br_orange', 'NONE')
+    end,
+    priority = -7,
     truncate_hide = true
   }
 
   components.active[2][2] = {
-    provider = 'file_type',
-    right_sep = ' ',
-    hl = { name = 'FelineFiletype', fg = 'accent_1' },
-    priority = -4,
+    provider = 'git_diff_added',
+    hl = function()
+      return enfocado_hl('FelineAdded', 'green', 'NONE')
+    end,
+    priority = -9,
     truncate_hide = true
   }
 
   components.active[2][3] = {
-    provider = function() return string.upper(vim_fn.SleuthIndicator()) end,
-    right_sep = ' ',
-    hl = { name = 'FelineSleuth', fg = 'accent_1' },
-    priority = -3,
+    provider = 'git_diff_removed',
+    hl = function()
+      return enfocado_hl('FelineRemoved', 'red', 'NONE')
+    end,
+    priority = -9,
     truncate_hide = true
   }
 
   components.active[2][4] = {
+    provider = 'git_diff_changed',
+    right_sep = ' ',
+    hl = function()
+      return enfocado_hl('FelineChanged', 'yellow', 'NONE')
+    end,
+    priority = -9,
+    truncate_hide = true
+  }
+
+  components.active[3][1] = {
+    provider = 'file_type',
+    left_sep = ' ',
+    right_sep = ' ',
+    hl = function()
+      return enfocado_hl('FelineFiletype', 'fg_0', 'NONE')
+    end,
+    priority = -4,
+    truncate_hide = true
+  }
+
+  components.active[3][2] = {
+    provider = 'file_encoding',
+    right_sep = ' ',
+    hl = function()
+      return enfocado_hl('FelineEncoding', 'fg_0', 'NONE')
+    end,
+    priority = -1,
+    truncate_hide = true
+  }
+
+  components.active[3][3] = {
+    provider = function() return string.upper(vim_fn.SleuthIndicator()) end,
+    right_sep = ' ',
+    hl = function()
+      return enfocado_hl('FelineSleuth', 'fg_0', 'NONE')
+    end,
+    priority = -3,
+    truncate_hide = true
+  }
+
+  components.active[3][4] = {
     provider = 'file_format',
     right_sep = ' ',
-    hl = { name = 'FelineFileformat', fg = 'accent_1' },
+    hl = function()
+      return enfocado_hl('FelineFormat', 'fg_0', 'NONE')
+    end,
     priority = -1,
     truncate_hide = true
   }
 
   components.inactive[1][1] = {
     provider = '▊',
-    hl = { name = 'FelineIndicatorInactive', fg = 'ignored' },
+    hl = { name = 'FelineIndicatorInactive', fg = 'bg_1' },
     priority = 1
   }
 
@@ -169,7 +210,7 @@ M.config = function()
     },
     left_sep = ' ',
     right_sep = ' ',
-    hl = { name = 'FelinePositionInactive', fg = 'dimmed' },
+    hl = { name = 'FelinePositionInactive', fg = 'dim_0' },
     truncate_hide = true
   }
 
@@ -177,43 +218,34 @@ M.config = function()
     provider = 'file_info',
     icon = '',
     left_sep = ' ',
-    hl = { name = 'FelineFilenameInactive', fg = 'dimmed' },
+    hl = { name = 'FelineFilenameInactive', fg = 'dim_0' },
     priority = -1,
     truncate_hide = true
   }
 
-  require('feline').setup({
-    components = components,
+  local feline = require('feline')
+
+  feline.setup({
     theme = {
-      accent_0 = enfocado.br_accent_0[1],
-      accent_1 = enfocado.br_accent_1[1],
-      dimmed = enfocado.dim_0[1],
-      ignored = enfocado.bg_1[1],
-      added = enfocado.green[1],
-      removed = enfocado.red[1],
-      changed = enfocado.yellow[1],
-      errors = enfocado.br_red[1],
-      warns = enfocado.br_orange[1],
-      info = enfocado.br_yellow[1],
-      hints = enfocado.br_blue[1]
+      bg_1 = enfocado.bg_1[1],
+      dim_0 = enfocado.dim_0[1],
+      fg_0 = enfocado.fg_0[1],
+      red = enfocado.red[1],
+      green = enfocado.green[1],
+      yellow = enfocado.yellow[1],
+      br_red = enfocado.br_red[1],
+      br_yellow = enfocado.br_yellow[1],
+      br_blue = enfocado.br_blue[1],
+      br_orange = enfocado.br_orange[1],
+      accent_1 = enfocado.accent_1[1]
     },
     vi_mode_colors = {
-      ['NORMAL'] = 'accent_0',
-      ['OP'] = 'changed',
-      ['INSERT'] = 'added',
-      ['VISUAL'] = 'hints',
-      ['LINES'] = 'hints',
-      ['BLOCK'] = 'hints',
-      ['REPLACE'] = 'changed',
-      ['V-REPLACE'] = 'changed',
-      ['ENTER'] = 'added',
-      ['MORE'] = 'info',
-      ['SELECT'] = 'hints',
-      ['COMMAND'] = 'dimmed',
-      ['SHELL'] = 'dimmed',
-      ['TERM'] = 'dimmed',
-      ['NONE'] = 'dimmed'
+      ['COMMAND'] = 'bg_1',
+      ['NONE'] = 'bg_1',
+      ['SHELL'] = 'bg_1',
+      ['TERM'] = 'bg_1'
     },
+    components = components,
     force_inactive = {
       filetypes = {},
       buftypes = {
@@ -226,7 +258,35 @@ M.config = function()
         '^terminal$'
       }
     },
-    disable = { filetypes = { '^fern$' }, buftypes = {} }
+    disable = { filetypes = { '^aerial$', '^fern$' }, buftypes = {} }
+  })
+
+  local AerialBreadcrumbs = require('wuelner.utils').AerialBreadcrumbs
+
+  feline.winbar.setup({
+    components = {
+      active = {{{
+        provider = function() return AerialBreadcrumbs() end,
+        left_sep = ' ',
+        hl = { name = 'FelineWinbar', fg = 'fg_0' }
+      }}},
+      inactive = {{{
+        provider = function() return AerialBreadcrumbs() end,
+        left_sep = ' ',
+        hl = { name = 'FelineInactiveWinbar', fg = 'dim_0' }
+      }}}
+    },
+    disable = {
+      buftypes = {
+        '^help$',
+        '^loclist$',
+        '^nofile$',
+        '^nowrite$',
+        '^prompt$',
+        '^quickfix$',
+        '^terminal$'
+      }
+    }
   })
 end
 

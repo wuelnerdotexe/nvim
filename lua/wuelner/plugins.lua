@@ -20,47 +20,44 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+
+packer.init({ display = { prompt_border = 'single' }, autoremove = true })
+
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
 
   -- Options.
   use {
     'wuelnerdotexe/human.vim',
-    setup = 'require("wuelner.settings.human").setup()',
-    config = 'require("wuelner.settings.human").config()'
-  }
-  use {
-    'antoinemadec/FixCursorHold.nvim',
-    after = 'human.vim',
-    setup = 'vim.g.cursorhold_updatetime = 40'
+    setup = function() require('wuelner.settings.human').setup() end,
+    config = function() require('wuelner.settings.human').config() end
   }
 
   -- Development.
   use {
-    'wuelnerdotexe/nerdterm',
-    keys = { { 'n', '<leader>tt' } },
-    config = 'require("wuelner.settings.nerdterm").config()'
-  }
-  use {
     'iamcco/markdown-preview.nvim',
-    after = 'FixCursorHold.nvim',
     run = 'cd app && npm install',
+    after = 'human.vim',
     ft = 'markdown'
   }
 
-  -- File managers.
+  -- Git.
   use {
-    'junegunn/fzf',
-    run = function() vim_fn['fzf#install']() end,
-    after = 'FixCursorHold.nvim',
-    keys = { { 'n', '<leader>ff' } },
-    setup = 'require("wuelner.settings.fzf").setup()',
-    config = 'require("wuelner.settings.fzf").config()'
+    'tpope/vim-fugitive',
+    after = 'human.vim'
   }
   use {
+    'lewis6991/gitsigns.nvim',
+    after = 'human.vim',
+    config = function() require('wuelner.settings.gitsigns').config() end
+  }
+
+  -- File browser.
+  use {
     'lambdalisue/fern.vim',
-    after = 'FixCursorHold.nvim',
+    after = 'human.vim',
     requires = {
       { 'lambdalisue/fern-hijack.vim', after = 'fern.vim' },
       { 'lambdalisue/fern-git-status.vim', after = 'fern.vim' },
@@ -76,25 +73,14 @@ return require('packer').startup(function(use)
         }
       }
     },
-    setup = 'require("wuelner.settings.fern").setup()',
-    config = 'require("wuelner.settings.fern").config()'
-  }
-
-  -- Git.
-  use {
-    'tpope/vim-fugitive',
-    after = 'FixCursorHold.nvim'
-  }
-  use {
-    'lewis6991/gitsigns.nvim',
-    after = 'FixCursorHold.nvim',
-    config = 'require("wuelner.settings.gitsigns").config()'
+    setup = function() require('wuelner.settings.fern').setup() end,
+    config = function() require('wuelner.settings.fern').config() end
   }
 
   -- Tree-sitter.
   use {
     'nvim-treesitter/nvim-treesitter',
-    after = 'FixCursorHold.nvim',
+    after = 'human.vim',
     run = ':TSUpdate',
     requires = {
       { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' },
@@ -108,30 +94,32 @@ return require('packer').startup(function(use)
         event = 'InsertEnter'
       }
     },
-    config = 'require("wuelner.settings.treesitter").config()'
+    config = function() require('wuelner.settings.treesitter').config() end
   }
   use {
     'andymass/vim-matchup',
     after = 'nvim-treesitter',
-    setup = 'require("wuelner.settings.matchup").setup()'
+    setup = function() require('wuelner.settings.matchup').setup() end
   }
   use {
     'numToStr/Comment.nvim',
     after = 'nvim-ts-context-commentstring',
     keys = { { 'n', 'gc' }, { 'v', 'gc' } },
-    config = 'require("wuelner.settings.comment").config()'
+    config = function() require('wuelner.settings.comment').config() end
   }
 
   -- Indent.
   use {
     'tpope/vim-sleuth',
     after = 'nvim-treesitter',
-    setup = 'require("wuelner.settings.sleuth").setup()'
+    setup = function() require('wuelner.settings.sleuth').setup() end
   }
   use {
     'lukas-reineke/indent-blankline.nvim',
     after = 'vim-sleuth',
-    config = 'require("wuelner.settings.indent-blankline").config()'
+    config = function()
+      require('wuelner.settings.indent-blankline').config()
+    end
   }
 
   -- Autocomplete.
@@ -153,24 +141,26 @@ return require('packer').startup(function(use)
             event = 'InsertEnter'
           }
         },
-        config = 'require("luasnip.loaders.from_vscode").lazy_load()'
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+        end
       },
       {
         'tzachar/cmp-tabnine',
         run = './install.sh',
         after = 'nvim-cmp',
         event = 'InsertEnter',
-        config = 'require("wuelner.settings.tabnine").config()'
+        config = function() require('wuelner.settings.tabnine').config() end
       },
       { 'hrsh7th/cmp-buffer', module = 'cmp_buffer' },
     },
-    config = 'require("wuelner.settings.cmp").config()'
+    config = function() require('wuelner.settings.cmp').config() end
   }
   use {
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     event = 'InsertEnter',
-    config = 'require("wuelner.settings.autopairs").config()'
+    config = function() require('wuelner.settings.autopairs').config() end
   }
 
   -- LSP.
@@ -180,28 +170,35 @@ return require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
       module = 'mason-lspconfig'
     },
-    config = 'require("mason").setup()'
+    config = function() require('mason').setup() end
   }
   use {
     'neovim/nvim-lspconfig',
     after = { 'mason.nvim', 'nvim-cmp' },
-    config = 'require("wuelner.settings.lspconfig").config()'
+    requires = {
+      {
+        'stevearc/aerial.nvim',
+        after = 'nvim-lspconfig',
+        config = function() require('wuelner.settings.aerial').config() end
+      }
+    },
+    config = function() require('wuelner.settings.lspconfig').config() end
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
     after = 'nvim-lspconfig',
     requires = { 'nvim-lua/plenary.nvim', module = 'plenary' },
-    config = 'require("wuelner.settings.null-ls").config()'
+    config = function() require('wuelner.settings.null-ls').config() end
   }
   use {
     'RRethy/vim-illuminate',
     after = 'nvim-lspconfig',
-    config = 'require("wuelner.settings.illuminate").config()'
+    config = function() require('wuelner.settings.illuminate').config() end
   }
   use {
     'NvChad/nvim-colorizer.lua',
     after = 'nvim-lspconfig',
-    config = 'require("wuelner.settings.colorizer").config()'
+    config = function() require('wuelner.settings.colorizer').config() end
   }
 
   -- Typing.
@@ -209,82 +206,128 @@ return require('packer').startup(function(use)
     'mattn/emmet-vim',
     after = 'vim-sleuth',
     cmd = 'EmmetInstall',
-    setup = 'require("wuelner.settings.emmet").setup()',
-    config = 'require("wuelner.settings.emmet").config()'
+    setup = function() require('wuelner.settings.emmet').setup() end,
+    config = function() require('wuelner.settings.emmet').config() end
   }
   use {
     'matze/vim-move',
     after = 'vim-sleuth',
     keys = { '<A-Left>', '<A-Down>', '<A-Up>', '<A-Right>' },
-    setup = 'require("wuelner.settings.move").setup()',
-    config = 'require("wuelner.settings.move").config()'
+    setup = function() require('wuelner.settings.move').setup() end,
+    config = function() require('wuelner.settings.move').config() end
   }
   use {
     'mg979/vim-visual-multi',
-    after = 'FixCursorHold.nvim',
+    after = 'human.vim',
     keys = {
-      [[\\]], '<C-n>',
-      { 'n', '<S-Left>' },
-      { 'n', '<C-Down>' },
+      { 'n', '<C-n>' },
+      { 'x', '<C-n>' },
       { 'n', '<C-Up>' },
+      { 'n', '<C-Down>' },
+      { 'n', '<S-Left>' },
       { 'n', '<S-Right>' },
       { 'n', '<C-LeftMouse>' },
       { 'n', '<C-RightMouse>' },
-      { 'n', '<M-C-RightMouse>' }
+      { 'n', '<M-C-RightMouse>' },
+      { 'n', '<Bslash><Bslash>' },
+      { 'x', '<Bslash><Bslash>' }
     },
-    setup = 'require("wuelner.settings.visual-multi").setup()'
+    setup = function() require('wuelner.settings.visual-multi').setup() end
   }
 
   -- Theme.
   use {
-    'wuelnerdotexe/vim-enfocado',
-    branch = 'development',
+    'wuelnerdotexe/vim-enfocado', branch = 'development',
     after = 'human.vim',
-    setup = 'require("wuelner.settings.enfocado").setup()',
-    config = 'require("wuelner.settings.enfocado").config()'
+    setup = function() require('wuelner.settings.enfocado').setup() end,
+    config = function() require('wuelner.settings.enfocado').config() end
   }
 
   -- Statusline.
   use {
     'feline-nvim/feline.nvim',
-    after = { 'FixCursorHold.nvim', 'vim-enfocado' },
-    config = 'require("wuelner.settings.feline").config()'
+    after = { 'human.vim', 'aerial.nvim', 'vim-enfocado' },
+    config = function() require('wuelner.settings.feline').config() end
   }
   use {
-    'akinsho/bufferline.nvim',
-    tag = 'v2.*',
-    after = 'FixCursorHold.nvim',
-    config = 'require("wuelner.settings.bufferline").config()'
+    'akinsho/bufferline.nvim', tag = 'v2.*',
+    after = 'human.vim',
+    config = function() require('wuelner.settings.bufferline').config() end
   }
 
   -- Improvements.
   use {
-    'declancm/cinnamon.nvim',
+    'wuelnerdotexe/cinnamon.nvim',
     after = 'human.vim',
-    config = 'require("wuelner.settings.cinnamon").config()'
+    config = function() require('wuelner.settings.cinnamon').config() end
+  }
+  use {
+    'anuvyklack/windows.nvim',
+    after = 'human.vim',
+    requires = {
+      'anuvyklack/middleclass',
+      'anuvyklack/animation.nvim'
+    },
+    config = function() require('wuelner.settings.windows').config() end
   }
   use {
     'luukvbaal/stabilize.nvim',
-    after = 'human.vim',
-    config = 'require("wuelner.settings.stabilize").config()'
+    after = 'windows.vim',
+    disable = vim.version().minor >= 9 and true or false,
+    config = function()
+      require('stabilize').setup({
+        ignore = { buftype = nil, filetype = nil }
+      })
+    end
   }
   use {
     'kwkarlwang/bufresize.nvim',
-    after = 'stabilize.nvim',
-    config = 'require("wuelner.settings.bufresize").config()'
+    after = 'windows.nvim',
+    config = function() require('wuelner.settings.bufresize').config() end
   }
-  use({
+  use {
     'aserowy/tmux.nvim',
     after = 'human.vim',
     keys = {
-      {'n', '<C-h>' }, {'n', '<C-j>' }, {'n', '<C-k>' }, {'n', '<C-l>' },
-      {'n', '<A-h>' }, {'n', '<A-j>' }, {'n', '<A-k>' }, {'n', '<A-l>' }
+      { 'n', '<C-h>' }, { 'n', '<C-j>' }, { 'n', '<C-k>' }, { 'n', '<C-l>' },
+      { 'n', '<A-h>' }, { 'n', '<A-j>' }, { 'n', '<A-k>' }, { 'n', '<A-l>' }
     },
-    config = 'require("wuelner.settings.tmux").config()'
-  })
+    config = function() require('wuelner.settings.tmux').config() end
+  }
+  use {
+    'wuelnerdotexe/nerdterm',
+    after = 'bufresize.nvim',
+    cmd = 'NERDTermToggle',
+    keys = { { 'n', '<leader>tt' } },
+    config = function() require('wuelner.settings.nerdterm').config() end
+  }
 
-  if packer_bootstrap
-  then
-    require('packer').sync()
-  end
+  -- Telescope.
+  use {
+    'FeiyouG/command_center.nvim',
+    keys = {
+      { 'n', '<C-Bslash>' },
+      { 'n', '<leader>ff' },
+      { 'n', '<leader>hf' },
+      { 'n', '<leader>mf' },
+      { 'n', '<leader>of' },
+      { 'n', '<leader>wf' }
+    },
+    requires = {
+      'nvim-telescope/telescope.nvim', tag = '0.1.x',
+      after = 'command_center.nvim',
+      requires = {
+        { 'nvim-lua/plenary.nvim', module = 'plenary' },
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          run = 'make',
+	  module = 'telescope._extensions.fzf'
+        }
+      },
+      config = function() require('wuelner.settings.telescope').config() end
+    },
+    config = function() require('wuelner.settings.command-center').config() end
+  }
+
+  if packer_bootstrap then packer.sync() end
 end)

@@ -21,10 +21,10 @@ M.config = function()
   local cmp_setup = cmp.setup
 
   cmp_setup({
-    performance = { debounce = 80, throttle = 40 },
+    performance = { debounce = 300, throttle = 40 },
     mapping = cmp_mapping.preset.insert({
-      ['<C-b>'] = cmp_mapping.scroll_docs(-3),
-      ['<C-f>'] = cmp_mapping.scroll_docs(3),
+      ['<C-b>'] = cmp_mapping.scroll_docs(-1),
+      ['<C-f>'] = cmp_mapping.scroll_docs(1),
       ['<C-e>'] = cmp_mapping.abort(),
       ['<CR>'] = cmp_mapping.confirm({ select = false }),
       ['<S-Tab>'] = cmp_mapping(function(fallback)
@@ -78,7 +78,7 @@ M.config = function()
         before = function(entry, vim_item)
           vim_item.kind = string.format(
             '%s %s',
-            lspkind.presets.codicons[vim_item.kind],
+            lspkind.presets.default[vim_item.kind],
             vim_item.kind
           )
 
@@ -91,11 +91,9 @@ M.config = function()
         end
       })
     },
-    sorting = {
-      comparators = {
-        function(...) return cmp_buffer:compare_locality(...) end
-      }
-    },
+    sorting = { comparators = { function(...)
+      return cmp_buffer:compare_locality(...)
+    end } },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
@@ -110,29 +108,31 @@ M.config = function()
             buf, vim_api.nvim_buf_line_count(buf)
           )
 
-          if byte_size > 1024 * 1024
-          then
-            return {}
-          end
+          if byte_size > 1024 * 1024 then return {} end
 
           return { buf }
         end
       } } }),
-    experimental = { ghost_text = true }
+    experimental = { ghost_text = true },
+    window = { completion = { scrolloff = 3 }, documentation = {
+      border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+      winhighlight = 'FloatBorder:FloatBorder'
+    } }
   })
 
   cmp_setup.filetype({
+    'aerial',
     'checkhealth',
     'fern',
     'fugitive',
     'fugitiveblame',
-    'fzf',
     'lspinfo',
     'mason',
     'nerdterm',
+    'null-ls-info',
     'packer',
     'qf',
-    'null-ls-info'
+    'TelescopePrompt'
   }, { enabled = false })
 end
 

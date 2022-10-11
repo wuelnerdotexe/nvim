@@ -6,25 +6,30 @@ M.config = function()
     opleader = { line = 'gc', block = '<Nop>' },
     mappings = { basic = true, extra = true },
     pre_hook = function(ctx)
-      if vim.bo.filetype == 'javascriptreact' or vim.bo.filetype == 'typescriptreact'
+      local bo_filetype = vim.bo.filetype
+
+      if bo_filetype == 'javascriptreact' or bo_filetype == 'typescriptreact'
       then
         local U = require('Comment.utils')
         local commentstring_utils = require('ts_context_commentstring.utils')
-        local type = ctx.ctype == U.ctype.linewise and '__default' or '__multiline'
+        local ctx_ctype = ctx.ctype
+        local u_ctype = U.ctype
+        local type = ctx_ctype == u_ctype.linewise and '__default' or '__multiline'
         local location = nil
+        local ctx_cmotion = ctx.cmotion
+        local u_cmotion = U.cmotion
 
-        if ctx.ctype == U.ctype.blockwise
+        if ctx_ctype == u_ctype.blockwise
         then
           location = commentstring_utils.get_cursor_location()
-        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V
+        elseif ctx_cmotion == u_cmotion.v or ctx_cmotion == u_cmotion.V
         then
           location = commentstring_utils.get_visual_start_location()
         end
 
-        return require('ts_context_commentstring.internal').calculate_commentstring({
-          key = type,
-          location = location
-        })
+        return require(
+          'ts_context_commentstring.internal'
+        ).calculate_commentstring({ key = type, location = location })
       end
     end,
     post_hook = nil

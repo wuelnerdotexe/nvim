@@ -4,11 +4,11 @@ My personal but distributable Neovim setup powered by [Enfocado](https://wuelner
 
 ## Requirements
 
-- [Neovim](https://neovim.io/) >= v0.7.0 - obviously.
-- Use [Nerd Fonts](https://www.nerdfonts.com/) - to show icons.
+- [Nerd Fonts](https://www.nerdfonts.com/) - to show icons.
+- [Neovim](https://neovim.io/) >= v0.8.0 - obviously.
 - [NPM](https://www.npmjs.com/package/npm) - to install language servers.
-- [ripgrep](https://github.com/BurntSushi/ripgrep) - optional to search patterns.
-- [fd-find](https://github.com/sharkdp/fd) - optional to find files.
+- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - optional to search patterns.
+- [fd](https://github.com/sharkdp/fd) - optional to find files.
 
 ## Installation
 
@@ -45,26 +45,33 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### General
 
-|       VI Mode       |         Keymap         | Action                               |
-| :-----------------: | :--------------------: | ------------------------------------ |
-|       Normal        | `<leader>` + `f` + `t` | Toggle file explorer                 |
-|       Normal        | `<leader>` + `f` + `r` | Reveal current file in file explorer |
-|       Normal        | `<leader>` + `f` + `f` | Find files in the current directory  |
-|       Normal        | `<leader>` + `t` + `o` | Open the terminal in a new buffer    |
-| Normal and Terminal | `<leader>` + `t` + `t` | Toggle bottom terminal               |
+|       VI Mode       |         Keymap         | Action                              |
+| :-----------------: | :--------------------: | ----------------------------------- |
+|       Normal        | `<leader>` + `f` + `t` | Toggle file tree                    |
+|       Normal        | `<leader>` + `f` + `r` | Reveal current file in the tree     |
+|       Normal        | `<leader>` + `f` + `f` | Find files in the current directory |
+|       Normal        | `<leader>` + `o` + `f` | Find recently opened files          |
+|       Normal        | `<leader>` + `m` + `f` | Find Vim files marks                |
+|       Normal        | `<leader>` + `w` + `f` | Find words in the current directory |
+|       Normal        | `<leader>` + `h` + `f` | Find Vim help tags                  |
+|       Normal        | `<leader>` + `s` + `t` | Toggle document symbols             |
+|       Normal        | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
+| Normal and Terminal | `<leader>` + `t` + `t` | Toggle bottom terminal              |
 
-### File Explorer
+### File Tree
 
 | VI Mode |         Keymap          | Action                       |
 | :-----: | :---------------------: | ---------------------------- |
 | Normal  |           `>`           | Leave directory              |
 | Normal  |           `<`           | Enter directory              |
-| Normal  |        `w` + `d`        | Set working directory        |
+| Normal  |           `h`           | Collapse node                |
+| Normal  |           `l`           | Expand node                  |
+| Normal  |           `o`           | Expand/Collapse or open node |
+| Normal  | Double left mouse click | Expand/Collapse or open node |
 | Normal  |         `ENTER`         | Expand or open node          |
 | Normal  |       `BACKSPACE`       | Collapse node                |
-| Normal  | Double left mouse click | Expand/Collapse or open node |
 | Normal  |      `CTRL` + `t`       | Open in a new tab            |
-| Normal  |      `CTRL` + `x`       | Open in a new split          |
+| Normal  |      `CTRL` + `s`       | Open in a new split          |
 | Normal  |      `CTRL` + `v`       | Open to the side             |
 | Normal  |           `n`           | New path                     |
 | Normal  |        `n` + `f`        | New file                     |
@@ -73,7 +80,7 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |           `c`           | Copy node                    |
 | Normal  |           `d`           | Delete node                  |
 | Normal  |           `q`           | Exit                         |
-| Normal  |         `<F5>`          | Refresh explorer             |
+| Normal  |         `<F5>`          | Refresh file tree            |
 
 ### Windows
 
@@ -88,7 +95,7 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |    `Alt` + `k`     | Resize the window on the up              |
 | Normal  |    `Alt` + `l`     | Resize the window on the right           |
 | Normal  | `CTRL` + `w` + `m` | Toggle maximizer window                  |
-| Normal  |     `1` + `w`      | Close all windows except the current one |
+| Normal  | `CTRL` + `w` + `o` | Close all windows except the current one |
 
 ### Buffers
 

@@ -5,41 +5,32 @@ M.config = function()
   local null_ls_builtins = null_ls.builtins
 
   null_ls.setup({
-    diagnostic_config = { severity_sort = true },
+    update_in_insert = true,
+    debounce = 300,
     on_attach = function(client, bufnr)
       local vim_diagnostic = vim.diagnostic
       local keymap_set = vim.keymap.set
       local lsp_buf = vim.lsp.buf
 
-      keymap_set(
-        'n', '<leader>dl',
-        vim_diagnostic.setloclist,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
+      keymap_set('n', '<leader>dl', vim_diagnostic.setloclist, {
+        noremap = true, silent = true, buffer = bufnr
+      })
 
-      keymap_set(
-        'n', '[d',
-        vim_diagnostic.goto_prev,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
+      keymap_set('n', '[d', vim_diagnostic.goto_prev, {
+        noremap = true, silent = true, buffer = bufnr
+      })
 
-      keymap_set(
-        'n', ']d',
-        vim_diagnostic.goto_next,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
+      keymap_set('n', ']d', vim_diagnostic.goto_next, {
+        noremap = true, silent = true, buffer = bufnr
+      })
 
-      keymap_set(
-        'n', '<leader>dp',
-        vim_diagnostic.open_float,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
+      keymap_set('n', '<leader>dp', vim_diagnostic.open_float, {
+        noremap = true, silent = true, buffer = bufnr
+      })
 
-      keymap_set(
-        'n', '<leader>ca',
-        lsp_buf.code_action,
-        { noremap = true, silent = true, buffer = bufnr }
-      )
+      keymap_set('n', '<leader>ca', lsp_buf.code_action, {
+        noremap = true, silent = true, buffer = bufnr
+      })
 
       local vim_api = vim.api
       local augroup = vim_api.nvim_create_augroup('LspFormatting', {})
@@ -50,14 +41,7 @@ M.config = function()
         vim_api.nvim_create_autocmd('BufWritePre', {
           group = augroup,
           buffer = bufnr,
-          callback = function()
-            if vim.version().minor < 8
-            then
-              lsp_buf.formatting_sync()
-            else
-              lsp_buf.format({ bufnr = bufnr })
-            end
-          end
+          callback = function() lsp_buf.format({ bufnr = bufnr }) end
         })
       end
     end,
@@ -80,8 +64,7 @@ M.config = function()
           })
         end
       })
-    },
-    update_in_insert = true
+    }
   })
 end
 

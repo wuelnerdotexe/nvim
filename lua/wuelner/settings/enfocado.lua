@@ -6,10 +6,10 @@ M.setup = function()
   vim_g.enfocado_style = 'neon'
 
   vim_g.enfocado_plugins = {
+    'aerial',
     'bufferline',
     'cmp',
     'fern',
-    'fzf',
     'gitsigns',
     'glyph-palette',
     'illuminate',
@@ -17,6 +17,7 @@ M.setup = function()
     'lsp',
     'matchup',
     'packer',
+    'telescope',
     'treesitter',
     'visual-multi'
   }
