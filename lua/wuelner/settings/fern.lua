@@ -21,14 +21,14 @@ M.config = function()
   keymap_set(
     "n",
     "<leader>ft",
-    "<Cmd>Fern . -drawer -width=33 -toggle<CR>",
+    "<Cmd>Fern . -drawer -width=26 -toggle<CR>",
     { silent = true }
   )
 
   keymap_set(
     "n",
     "<leader>fr",
-    "<Cmd>Fern . -reveal=% -drawer -width=33 -toggle<CR>",
+    "<Cmd>Fern . -reveal=% -drawer -width=26 -toggle<CR>",
     { silent = true }
   )
 
