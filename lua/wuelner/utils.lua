@@ -19,11 +19,12 @@ end
 M.AerialBreadcrumbs = function()
   local symbols = require("aerial").get_location(true)
   local depth = nil or #symbols
+  local table_unpack = table.unpack
 
   if depth > 0 then
-    symbols = { unpack(symbols, 1, depth) }
+    symbols = { table_unpack(symbols, 1, depth) }
   else
-    symbols = { unpack(symbols, #symbols + 1 + depth) }
+    symbols = { table_unpack(symbols, #symbols + 1 + depth) }
   end
 
   local parts = {}

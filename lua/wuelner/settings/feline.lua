@@ -212,7 +212,12 @@ M.config = function()
   }
 
   components.inactive[1][3] = {
-    provider = "file_info",
+    provider = {
+      name = "file_info",
+      opts = {
+        file_readonly_icon = " ",
+      },
+    },
     icon = "",
     left_sep = " ",
     hl = { name = "FelineFilenameInactive", fg = "dim_0" },

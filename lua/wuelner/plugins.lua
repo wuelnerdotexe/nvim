@@ -405,7 +405,7 @@ return packer.startup(function(use)
       end,
     },
     config = function()
-      require("wuelner.settings.command-center").config()
+      require("wuelner.settings.command_center").config()
     end,
   })
 

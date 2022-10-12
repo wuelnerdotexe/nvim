@@ -10,7 +10,7 @@ M.config = function()
 
   local has_words_before = function()
     local vim_api = vim.api
-    local line, col = unpack(vim_api.nvim_win_get_cursor(0))
+    local line, col = table.unpack(vim_api.nvim_win_get_cursor(0))
 
     return col ~= 0
       and vim_api

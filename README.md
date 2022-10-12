@@ -45,20 +45,21 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### General
 
-|       VI Mode       |         Keymap         | Action                              |
-| :-----------------: | :--------------------: | ----------------------------------- |
-|       Normal        | `<leader>` + `f` + `t` | Toggle file tree                    |
-|       Normal        | `<leader>` + `f` + `r` | Reveal current file in the tree     |
-|       Normal        | `<leader>` + `f` + `f` | Find files in the current directory |
-|       Normal        | `<leader>` + `o` + `f` | Find recently opened files          |
-|       Normal        | `<leader>` + `m` + `f` | Find Vim files marks                |
-|       Normal        | `<leader>` + `w` + `f` | Find words in the current directory |
-|       Normal        | `<leader>` + `h` + `f` | Find Vim help tags                  |
-|       Normal        | `<leader>` + `s` + `t` | Toggle document symbols             |
-|       Normal        | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
-| Normal and Terminal | `<leader>` + `t` + `t` | Toggle bottom terminal              |
+| VI Mode |         Keymap         | Action                                  |
+| :-----: | :--------------------: | --------------------------------------- |
+| Normal  |  `CTRL` + `<leader>`   | Open the command palette                |
+| Normal  | `<leader>` + `f` + `t` | Toggle file tree browser                |
+| Normal  | `<leader>` + `f` + `r` | Reveal current file in the tree browser |
+| Normal  | `<leader>` + `f` + `f` | Find files in the current directory     |
+| Normal  | `<leader>` + `o` + `f` | Find recently opened files              |
+| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                    |
+| Normal  | `<leader>` + `w` + `f` | Find words in the current directory     |
+| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                      |
+| Normal  | `<leader>` + `s` + `t` | Toggle document symbols                 |
+| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer       |
+| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal                  |
 
-### File Tree
+### File Tree Browser
 
 | VI Mode |         Keymap          | Action                       |
 | :-----: | :---------------------: | ---------------------------- |
@@ -80,7 +81,14 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |           `c`           | Copy node                    |
 | Normal  |           `d`           | Delete node                  |
 | Normal  |           `q`           | Exit                         |
-| Normal  |         `<F5>`          | Refresh file tree            |
+| Normal  |         `<F5>`          | Refresh file tree browser    |
+
+### Document Symbols
+
+| VI Mode |  Keymap   | Action                    |
+| :-----: | :-------: | ------------------------- |
+| Normal  | `[` + `s` | Go to the previous symbol |
+| Normal  | `]` + `s` | Go to the next symbol     |
 
 ### Windows
 

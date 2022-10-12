@@ -76,4 +76,3 @@ The following dev dependencies are added to ensure code quality and consistency:
 - Initial release
 
 <p align="center">With 💖 from <strong>LATAM</strong> to the world!</p>
-
