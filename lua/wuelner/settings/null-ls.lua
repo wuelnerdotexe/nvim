@@ -13,34 +13,16 @@ M.config = function()
       local lsp_buf = vim.lsp.buf
 
       keymap_set("n", "<leader>dl", vim_diagnostic.setloclist, {
-        noremap = true,
-        silent = true,
         buffer = bufnr,
       })
 
-      keymap_set("n", "[d", vim_diagnostic.goto_prev, {
-        noremap = true,
-        silent = true,
-        buffer = bufnr,
-      })
-
-      keymap_set("n", "]d", vim_diagnostic.goto_next, {
-        noremap = true,
-        silent = true,
-        buffer = bufnr,
-      })
-
+      keymap_set("n", "[d", vim_diagnostic.goto_prev, { buffer = bufnr })
+      keymap_set("n", "]d", vim_diagnostic.goto_next, { buffer = bufnr })
       keymap_set("n", "<leader>dp", vim_diagnostic.open_float, {
-        noremap = true,
-        silent = true,
         buffer = bufnr,
       })
 
-      keymap_set("n", "<leader>ca", lsp_buf.code_action, {
-        noremap = true,
-        silent = true,
-        buffer = bufnr,
-      })
+      keymap_set("n", "<leader>ca", lsp_buf.code_action, { buffer = bufnr })
 
       local vim_api = vim.api
       local augroup = vim_api.nvim_create_augroup("LspFormatting", {})

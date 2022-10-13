@@ -18,15 +18,11 @@ M.config = function()
     on_attach = function(bufnr)
       local keymap_set = vim.keymap.set
 
+      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
+      keymap_set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
+      keymap_set("n", "[[", "<Cmd>AerialPrevUp<CR>", { buffer = bufnr })
+      keymap_set("n", "]]", "<Cmd>AerialNextUp<CR>", { buffer = bufnr })
       keymap_set("n", "<leader>st", "<Cmd>AerialToggle!<CR>", {
-        buffer = bufnr,
-      })
-
-      keymap_set("n", "[s", "<Cmd>AerialPrev<CR>", {
-        buffer = bufnr,
-      })
-
-      keymap_set("n", "]s", "<Cmd>AerialNext<CR>", {
         buffer = bufnr,
       })
     end,

@@ -85,10 +85,12 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### Document Symbols
 
-| VI Mode |  Keymap   | Action                    |
-| :-----: | :-------: | ------------------------- |
-| Normal  | `[` + `s` | Go to the previous symbol |
-| Normal  | `]` + `s` | Go to the next symbol     |
+| VI Mode |  Keymap   | Action                                |
+| :-----: | :-------: | ------------------------------------- |
+| Normal  |    `{`    | Go to the previous symbol             |
+| Normal  |    `}`    | Go to the next symbol                 |
+| Normal  | `[` + `[` | Go to the up symbol, moving backwards |
+| Normal  | `]` + `]` | Go to the up symbol, moving forwards  |
 
 ### Windows
 
