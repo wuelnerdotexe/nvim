@@ -33,7 +33,6 @@ M.config = function()
     extensions = {
       command_center = {
         components = {
-          command_center.component.CATEGORY,
           command_center.component.DESC,
           command_center.component.KEYS,
         },

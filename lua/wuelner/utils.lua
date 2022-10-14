@@ -35,7 +35,8 @@ M.AerialBreadcrumbs = function()
 
   local table_concat = table.concat
 
-  return table_concat(parts, " > ") == "" and "" or table_concat(parts, " > ")
+  return table_concat(parts, " > ") == "" and "..."
+    or table_concat(parts, " > ")
 end
 
 return M

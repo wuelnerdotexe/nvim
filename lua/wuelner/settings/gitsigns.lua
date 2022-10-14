@@ -29,7 +29,6 @@ M.config = function()
         end)
         return "<Ignore>"
       end, { expr = true })
-
       map("n", "]h", function()
         if wo_diff then
           return "]h"
@@ -39,7 +38,6 @@ M.config = function()
         end)
         return "<Ignore>"
       end, { expr = true })
-
       map("n", "<leader>hp", loaded_gitsigns.preview_hunk)
       map({ "n", "v" }, "<leader>hr", "<Cmd>Gitsigns reset_hunk<CR>")
       map({ "n", "v" }, "<leader>hs", "<Cmd>Gitsigns stage_hunk<CR>")

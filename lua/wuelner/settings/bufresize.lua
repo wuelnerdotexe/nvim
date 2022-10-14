@@ -4,28 +4,12 @@ M.config = function()
   require("bufresize").setup({
     register = {
       keys = {
-        { "n", "<A-h>", "<A-h>", { noremap = true, silent = true } },
-        { "n", "<A-j>", "<A-j>", { noremap = true, silent = true } },
-        { "n", "<A-k>", "<A-k>", { noremap = true, silent = true } },
-        { "n", "<A-l>", "<A-l>", { noremap = true, silent = true } },
-        {
-          "",
-          "<LeftRelease>",
-          "<LeftRelease>",
-          {
-            noremap = true,
-            silent = true,
-          },
-        },
-        {
-          "i",
-          "<LeftRelease>",
-          "<LeftRelease><C-o>",
-          {
-            noremap = true,
-            silent = true,
-          },
-        },
+        { "n", "<A-h>", "<A-h>", {} },
+        { "n", "<A-j>", "<A-j>", {} },
+        { "n", "<A-k>", "<A-k>", {} },
+        { "n", "<A-l>", "<A-l>", {} },
+        { "", "<LeftRelease>", "<LeftRelease>", {} },
+        { "i", "<LeftRelease>", "<LeftRelease><C-o>", {} },
       },
       trigger_events = { "BufWinEnter", "WinEnter" },
     },

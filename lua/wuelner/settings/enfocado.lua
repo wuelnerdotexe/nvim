@@ -4,7 +4,6 @@ M.setup = function()
   local vim_g = vim.g
 
   vim_g.enfocado_style = "nature"
-
   vim_g.enfocado_plugins = {
     "aerial",
     "bufferline",

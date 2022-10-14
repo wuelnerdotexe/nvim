@@ -75,20 +75,17 @@ M.config = function()
       keymap_set("n", "<leader>dl", vim_diagnostic.setloclist, {
         buffer = bufnr,
       })
-
       keymap_set("n", "[d", vim_diagnostic.goto_prev, { buffer = bufnr })
       keymap_set("n", "]d", vim_diagnostic.goto_next, { buffer = bufnr })
       keymap_set("n", "<leader>dp", vim_diagnostic.open_float, {
         buffer = bufnr,
       })
-
       keymap_set("n", "<leader>ca", lsp_buf.code_action, { buffer = bufnr })
     elseif client_name == "cssls" or client_name == "html" then
       keymap_set("n", "K", lsp_buf.hover, { buffer = bufnr })
       keymap_set("n", "<leader>dl", vim_diagnostic.setloclist, {
         buffer = bufnr,
       })
-
       keymap_set("n", "[d", vim_diagnostic.goto_prev, { buffer = bufnr })
       keymap_set("n", "]d", vim_diagnostic.goto_next, { buffer = bufnr })
       keymap_set("n", "<leader>dp", vim_diagnostic.open_float, {

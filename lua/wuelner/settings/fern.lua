@@ -24,7 +24,6 @@ M.config = function()
     "<Cmd>Fern . -drawer -width=26 -toggle<CR>",
     { silent = true }
   )
-
   keymap_set(
     "n",
     "<leader>fr",
@@ -51,70 +50,80 @@ M.config = function()
         "<Plug>(fern-action-leave)"
           .. "<Plug>(fern-wait)"
           .. "<Plug>(fern-action-cd:root)",
-        { buffer = true }
+        { nowait = true, buffer = true }
       )
-
       keymap_set(
         "n",
         ">",
         "<Plug>(fern-action-enter)"
           .. "<Plug>(fern-wait)"
           .. "<Plug>(fern-action-cd:root)",
-        { buffer = true }
+        { nowait = true, buffer = true }
       )
-
-      keymap_set("n", "h", "<Plug>(fern-action-collapse)", { buffer = true })
-      keymap_set("n", "l", "<Plug>(fern-action-expand)", { buffer = true })
-
+      keymap_set("n", "h", "<Plug>(fern-action-collapse)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "l", "<Plug>(fern-action-expand)", {
+        nowait = true, buffer = true
+      })
       keymap_set("n", "o", function()
         return vim_fn["fern#smart#leaf"](
           "<Plug>(fern-action-open)",
           "<Plug>(fern-action-expand)",
           "<Plug>(fern-action-collapse)"
         )
-      end, { buffer = true, expr = true })
-
+      end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "<2-LeftMouse>", function()
         return vim_fn["fern#smart#leaf"](
           "<Plug>(fern-action-open)",
           "<Plug>(fern-action-expand)",
           "<Plug>(fern-action-collapse)"
         )
-      end, { buffer = true, expr = true })
-
+      end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "<CR>", "<Plug>(fern-action-open-or-expand)", {
-        buffer = true,
+        nowait = true, buffer = true,
       })
-
       keymap_set("n", "<BS>", "<Plug>(fern-action-collapse)", {
-        buffer = true,
+        nowait = true, buffer = true,
       })
-
       keymap_set("n", "<C-t>", "<Plug>(fern-action-open:tabedit)", {
-        buffer = true,
+        nowait = true, buffer = true,
       })
-
       keymap_set("n", "<C-s>", "<Plug>(fern-action-open:split)", {
-        buffer = true,
+        nowait = true, buffer = true,
       })
-
       keymap_set("n", "<C-v>", function()
         return vim_fn["fern#smart#drawer"](
           "<Plug>(fern-action-open:rightest)",
           "<Plug>(fern-action-open:vsplit)",
           "<Plug>(fern-action-open:vsplit)"
         )
-      end, { buffer = true, expr = true })
-
+      end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "n", "<Plug>(fern-action-new-path)", { buffer = true })
-      keymap_set("n", "nf", "<Plug>(fern-action-new-file)", { buffer = true })
-      keymap_set("n", "nd", "<Plug>(fern-action-new-dir)", { buffer = true })
-      keymap_set("n", "m", "<Plug>(fern-action-move)", { buffer = true })
-      keymap_set("n", "c", "<Plug>(fern-action-copy)", { buffer = true })
-      keymap_set("n", "d", "<Plug>(fern-action-remove)", { buffer = true })
-      keymap_set("n", "q", "<Cmd>quit<CR>", { buffer = true })
-      keymap_set("n", "<F5>", "<Plug>(fern-action-reload)", { buffer = true })
-      keymap_set("n", "g?", "<Plug>(fern-action-help)", { buffer = true })
+      keymap_set("n", "nf", "<Plug>(fern-action-new-file)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "nd", "<Plug>(fern-action-new-dir)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "m", "<Plug>(fern-action-move)", {
+        nowait= true, buffer = true
+      })
+      keymap_set("n", "c", "<Plug>(fern-action-copy)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "d", "<Plug>(fern-action-remove)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "q", "<Cmd>quit<CR>", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "<F5>", "<Plug>(fern-action-reload)", {
+        nowait = true, buffer = true
+      })
+      keymap_set("n", "g?", "<Plug>(fern-action-help)", {
+        nowait = true, buffer = true
+      })
     end,
   })
 end

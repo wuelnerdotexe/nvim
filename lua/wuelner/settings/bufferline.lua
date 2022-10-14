@@ -8,13 +8,13 @@ M.config = function()
       offsets = {
         {
           filetype = "aerial",
-          text = "DOCUMENT SYMBOLS",
+          text = "OUTLINE",
           highlight = "Title",
           separator = false,
         },
         {
           filetype = "fern",
-          text = "FILE TREE BROWSER",
+          text = "FOLDERS",
           highlight = "Title",
           separator = false,
         },
@@ -30,17 +30,14 @@ M.config = function()
   keymap_set("n", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>", {
     silent = true,
   })
-
   keymap_set("i", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>", {
     silent = true,
   })
-
   keymap_set("n", "mb", "<Cmd>BufferLineMoveNext<CR>", { silent = true })
   keymap_set("n", "gb", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
   keymap_set("n", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>", {
     silent = true,
   })
-
   keymap_set("i", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>", {
     silent = true,
   })

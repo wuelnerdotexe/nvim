@@ -334,16 +334,6 @@ return packer.startup(function(use)
     end,
   })
   use({
-    "luukvbaal/stabilize.nvim",
-    after = "windows.vim",
-    disable = vim.version().minor >= 9 and true or false,
-    config = function()
-      require("stabilize").setup({
-        ignore = { buftype = nil, filetype = nil },
-      })
-    end,
-  })
-  use({
     "kwkarlwang/bufresize.nvim",
     after = "windows.nvim",
     config = function()
