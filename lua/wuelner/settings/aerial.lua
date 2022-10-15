@@ -1,12 +1,17 @@
 local M = {}
 
 M.config = function()
+  local o_columns = vim.o.columns
+  local layout_width = math.floor((o_columns / (
+    o_columns >= 160 and 3 or 2
+  )) / 2)
+
   require("aerial").setup({
     backends = { "lsp", "treesitter", "markdown" },
     layout = {
-      max_width = 26,
-      width = 26,
-      min_width = 26,
+      max_width = layout_width,
+      width = layout_width,
+      min_width = layout_width,
       default_direction = "right",
       placement = "edge",
     },

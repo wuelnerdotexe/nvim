@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
   local vim_g = vim.g
+  local o_columns = vim.o.columns
 
   vim_g["fern_git_status#disable_ignored"] = 1
   vim_g["fern_git_status#disable_untracked"] = 1
@@ -10,7 +11,9 @@ M.setup = function()
   vim_g["fern#default_exclude"] = [[^\%(]]
     .. [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]]
     .. [[)$]]
-  vim_g["fern#drawer_width"] = 26
+  vim_g["fern#drawer_width"] = math.floor((o_columns / (
+    o_columns >= 160 and 3 or 2
+  )) / 2)
   vim_g["fern#renderer"] = "nerdfont"
   vim_g["fern#disable_default_mappings"] = 1
 end
@@ -21,13 +24,13 @@ M.config = function()
   keymap_set(
     "n",
     "<leader>ft",
-    "<Cmd>Fern . -drawer -width=26 -toggle<CR>",
+    "<Cmd>Fern . -drawer -toggle<CR>",
     { silent = true }
   )
   keymap_set(
     "n",
     "<leader>fr",
-    "<Cmd>Fern . -reveal=% -drawer -width=26 -toggle<CR>",
+    "<Cmd>Fern . -reveal=% -drawer -toggle<CR>",
     { silent = true }
   )
 

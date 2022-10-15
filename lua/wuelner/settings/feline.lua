@@ -81,7 +81,7 @@ M.config = function()
   components.active[1][7] = {
     provider = {
       name = "position",
-      opts = { padding = { line = 2, col = 2 } },
+      opts = { padding = { line = 3, col = 2 } },
     },
     left_sep = " ",
     right_sep = " ",
