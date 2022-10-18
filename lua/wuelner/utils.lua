@@ -1,6 +1,6 @@
 local M = {}
 
-M.BufresizeToggle = function(command, filetype)
+M.bufresize_toggle = function(command, filetype)
   local bufresize = require("bufresize")
   local nvim_command = vim.api.nvim_command
 
@@ -12,11 +12,10 @@ M.BufresizeToggle = function(command, filetype)
     bufresize.block_register()
     nvim_command(command)
     bufresize.resize_open()
-    vim.cmd('execute "normal! i"')
   end
 end
 
-M.AerialBreadcrumbs = function()
+M.aerial_breadcrumbs = function()
   local symbols = require("aerial").get_location(true)
   local depth = nil or #symbols
   local table_unpack = table.unpack

@@ -8,6 +8,7 @@ M.setup = function()
     "aerial",
     "bufferline",
     "cmp",
+    "dapui",
     "fern",
     "gitsigns",
     "glyph-palette",

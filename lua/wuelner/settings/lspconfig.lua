@@ -3,23 +3,13 @@ local M = {}
 M.config = function()
   require("mason-lspconfig").setup({ automatic_installation = true })
 
-  local signs = { Error = "●", Warn = "●", Info = "●", Hint = "●" }
-
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
-
   local vim_diagnostic = vim.diagnostic
 
   vim_diagnostic.config({
+    signs = false,
     virtual_text = { prefix = "▎" },
     float = {
-      header = {
-        "Diagnostics",
-        "Title",
-      },
+      header = { "Diagnostics", "Title" },
       source = "always",
       border = "single",
     },
@@ -28,7 +18,7 @@ M.config = function()
   })
 
   local vim_lsp = vim.lsp
-  local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  local capabilities = require("cmp_nvim_lsp").default_capabilities(
     vim_lsp.protocol.make_client_capabilities()
   )
 
@@ -93,8 +83,6 @@ M.config = function()
       })
     end
   end
-
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   lspconfig["jsonls"].setup({
     on_attach = on_attach,

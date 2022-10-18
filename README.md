@@ -25,6 +25,8 @@ DISCLAIMER: If you have a previous Neovim config, make sure to make a backup bef
 
 ### Post installation
 
+#### Language servers
+
 If all goes well, when you enter Neovim for the first time, the plugins and language servers will be installed automatically, you will only have to respond to the confirmation messages.
 And then restart Neovim to complete the EsLint and Prettier installation process with the following Neovim command:
 
@@ -34,6 +36,16 @@ MasonInstall eslint_d prettierd
 
 Note that the installed packages are not the official ones from EsLint and Prettier, they are the only packages configured to work with this config, because when making many comparisons, they are undoubtedly the ones that offer a better experience in Neovim, and no, they do NOT WILL CAUSE CONFLICTS with your project settings. Here you can understand more about [eslint_d](https://github.com/mantoni/eslint_d.js/) and [prettierd](https://github.com/fsouza/prettierd).
 So this setup is not ready to work with the official packages, so don't try to install them and expect them to work.
+
+#### Debug adapters
+
+Also, debug adapters must be installed for the adapter protocol configuration to work. To install them you just have to execute the following Vim command:
+
+```vim
+MasonInstall chrome-debug-adapter firefox-debug-adapter
+```
+
+IMPORTANT: This setup only provides configurations for debugging front-end projects created with the `javascript`, `javascriptreact`, `typescript`, and `typescriptreact` frameworks with the Chrome and Firefox debuggers.
 
 ## Keymaps
 
@@ -45,21 +57,21 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### General
 
-| VI Mode |         Keymap         | Action                                  |
-| :-----: | :--------------------: | --------------------------------------- |
-| Normal  |  `CTRL` + `<leader>`   | Open the command palette                |
-| Normal  | `<leader>` + `f` + `t` | Toggle file tree browser                |
-| Normal  | `<leader>` + `f` + `r` | Reveal current file in the tree browser |
-| Normal  | `<leader>` + `f` + `f` | Find files in the current directory     |
-| Normal  | `<leader>` + `o` + `f` | Find recently opened files              |
-| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                    |
-| Normal  | `<leader>` + `w` + `f` | Find words in the current directory     |
-| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                      |
-| Normal  | `<leader>` + `s` + `t` | Toggle document symbols                 |
-| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer       |
-| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal                  |
+| VI Mode |         Keymap         | Action                                     |
+| :-----: | :--------------------: | ------------------------------------------ |
+| Normal  |  `CTRL` + `<leader>`   | Open the command palette                   |
+| Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer                |
+| Normal  | `<leader>` + `f` + `r` | Reveal current file in the folder explorer |
+| Normal  | `<leader>` + `f` + `f` | Find files in the current directory        |
+| Normal  | `<leader>` + `o` + `f` | Find recently opened files                 |
+| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                       |
+| Normal  | `<leader>` + `w` + `f` | Find words in the current directory        |
+| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                         |
+| Normal  | `<leader>` + `s` + `t` | Toggle document symbols                    |
+| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new tab             |
+| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal                     |
 
-### File Tree Browser
+### Folders explorer
 
 | VI Mode |         Keymap          | Action                       |
 | :-----: | :---------------------: | ---------------------------- |
@@ -81,7 +93,7 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |           `c`           | Copy node                    |
 | Normal  |           `d`           | Delete node                  |
 | Normal  |           `q`           | Exit                         |
-| Normal  |         `<F5>`          | Refresh file tree browser    |
+| Normal  |         `<F5>`          | Refresh the folders explorer |
 
 ### Document Symbols
 
@@ -106,6 +118,9 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |    `Alt` + `l`     | Resize the window on the right           |
 | Normal  | `CTRL` + `w` + `m` | Toggle maximizer window                  |
 | Normal  | `CTRL` + `w` + `o` | Close all windows except the current one |
+| Normal  | `CTRL` + `w` + `t` | Open the current file in a new tab       |
+| Normal  | `CTRL` + `w` + `s` | Split horizontally the current file      |
+| Normal  | `CTRL` + `w` + `v` | Split vertically the current file        |
 
 ### Buffers
 
@@ -180,6 +195,18 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |       `]` + `d`        | Go to next diagnostic             |
 | Normal  | `<leader>` + `d` + `p` | Preview of the current diagnostic |
 | Normal  | `<leader>` + `c` + `a` | Show current code actions         |
+
+### Debugging
+
+| VI Mode |      Keymap       | Action                                  |
+| :-----: | :---------------: | --------------------------------------- |
+| Normal  |      `<F9>`       | Toggle breakpoint on the current line   |
+| Normal  |      `<F5>`       | Run and debug                           |
+| Normal  | `SHIFT` + `<F5>`  | Terminate the current debugging session |
+| Normal  |      `<F6>`       | Debug pause                             |
+| Normal  |      `<F10>`      | Debug step over                         |
+| Normal  |      `<F11>`      | Debug step into                         |
+| Normal  | `SHIFT` + `<F11>` | Debug step out                          |
 
 NOTE: Only custom keymaps unique to this configuration are documented here. There are many more keymaps available by default in each installed plugin, in addition to the hundreds that come with Vim by default.
 

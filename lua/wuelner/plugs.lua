@@ -28,8 +28,15 @@ local packer = require("packer")
 packer.init({ display = { prompt_border = "single" }, autoremove = true })
 
 return packer.startup(function(use)
+  -- Dependencies.
   use("wbthomason/packer.nvim")
   use("lewis6991/impatient.nvim")
+  use({
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  })
 
   -- Options.
   use({
@@ -43,6 +50,15 @@ return packer.startup(function(use)
   })
 
   -- Development.
+  use({
+    "mfussenegger/nvim-dap",
+    after = "mason.nvim",
+    keys = { { "n", "<F9>" }, { "n", "<F5>" } },
+    requires = { 'rcarriga/nvim-dap-ui', after = "nvim-dap" },
+    config = function()
+      require("wuelner.settings.dap").config()
+    end,
+  })
   use({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
@@ -104,7 +120,6 @@ return packer.startup(function(use)
       {
         "windwp/nvim-ts-autotag",
         after = "nvim-treesitter",
-        event = "InsertEnter",
       },
     },
     config = function()
@@ -176,6 +191,7 @@ return packer.startup(function(use)
         end,
       },
       { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
+      { "rcarriga/cmp-dap", module = "cmp_dap" },
     },
     config = function()
       require("wuelner.settings.cmp").config()
@@ -192,19 +208,19 @@ return packer.startup(function(use)
 
   -- LSP.
   use({
-    "williamboman/mason.nvim",
-    requires = {
-      "williamboman/mason-lspconfig.nvim",
-      module = "mason-lspconfig",
-    },
-    config = function()
-      require("mason").setup()
-    end,
-  })
-  use({
     "neovim/nvim-lspconfig",
     after = { "mason.nvim", "nvim-cmp" },
     requires = {
+      {
+        "williamboman/mason-lspconfig.nvim",
+        module = "mason-lspconfig",
+      },
+      {
+        "kosayoda/nvim-lightbulb",
+        config = function()
+          require("wuelner.settings.lightbulb").config()
+        end,
+      },
       {
         "stevearc/aerial.nvim",
         after = "nvim-lspconfig",

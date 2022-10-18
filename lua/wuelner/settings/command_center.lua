@@ -53,15 +53,15 @@ M.config = function()
       category = "GENERAL",
     },
     {
-      desc = "Open the terminal in a new buffer",
-      cmd = "<Cmd>terminal<CR>",
+      desc = "Open the terminal in a new tab",
+      cmd = "<Cmd>tabnew | terminal<CR>",
       keys = { "n", "<leader>to" },
       category = "GENERAL",
     },
     {
       desc = "Toggle bottom terminal",
       cmd = function()
-        require("wuelner.utils").BufresizeToggle("NERDTermToggle", "nerdterm")
+        require("wuelner.utils").bufresize_toggle("NERDTermToggle", "nerdterm")
       end,
       keys = { "n", "<leader>tt" },
       category = "GENERAL",

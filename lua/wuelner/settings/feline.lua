@@ -27,6 +27,7 @@ M.config = function()
 
   components.active[1][1] = {
     provider = "diagnostic_errors",
+    icon = "  ",
     hl = function()
       return highlighter("FelineErrors", "br_red", "bold")
     end,
@@ -36,6 +37,7 @@ M.config = function()
 
   components.active[1][2] = {
     provider = "diagnostic_warnings",
+    icon = "  ",
     hl = function()
       return highlighter("FelineWarns", "br_orange", "bold")
     end,
@@ -45,6 +47,7 @@ M.config = function()
 
   components.active[1][3] = {
     provider = "diagnostic_info",
+    icon = "  ",
     hl = function()
       return highlighter("FelineInfo", "br_yellow", "bold")
     end,
@@ -54,6 +57,7 @@ M.config = function()
 
   components.active[1][4] = {
     provider = "diagnostic_hints",
+    icon = "  ",
     hl = function()
       return highlighter("FelineHints", "br_blue", "bold")
     end,
@@ -116,6 +120,7 @@ M.config = function()
 
   components.active[2][1] = {
     provider = "git_branch",
+    icon = " ",
     hl = function()
       return highlighter("FelineBranch", "br_orange", "NONE")
     end,
@@ -125,6 +130,7 @@ M.config = function()
 
   components.active[2][2] = {
     provider = "git_diff_added",
+    icon = "  ",
     hl = function()
       return highlighter("FelineAdded", "green", "NONE")
     end,
@@ -134,6 +140,7 @@ M.config = function()
 
   components.active[2][3] = {
     provider = "git_diff_removed",
+    icon = "  ",
     hl = function()
       return highlighter("FelineRemoved", "red", "NONE")
     end,
@@ -143,6 +150,7 @@ M.config = function()
 
   components.active[2][4] = {
     provider = "git_diff_changed",
+    icon = "  ",
     right_sep = " ",
     hl = function()
       return highlighter("FelineChanged", "yellow", "NONE")
@@ -264,7 +272,7 @@ M.config = function()
     disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = {} },
   })
 
-  local AerialBreadcrumbs = require("wuelner.utils").AerialBreadcrumbs
+  local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs
 
   feline.winbar.setup({
     components = {
@@ -272,7 +280,7 @@ M.config = function()
         {
           {
             provider = function()
-              return AerialBreadcrumbs()
+              return aerial_breadcrumbs()
             end,
             left_sep = " ",
             hl = { name = "FelineWinbar", fg = "fg_0" },
@@ -283,7 +291,7 @@ M.config = function()
         {
           {
             provider = function()
-              return AerialBreadcrumbs()
+              return aerial_breadcrumbs()
             end,
             left_sep = " ",
             hl = { name = "FelineInactiveWinbar", fg = "dim_0" },

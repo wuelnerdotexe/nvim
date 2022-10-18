@@ -5,6 +5,13 @@ M.config = function()
     delay = 40,
     filetypes_denylist = {
       "aerial",
+      "dap-repl",
+      "dapui_breakpoints",
+      "dapui_console",
+      "dapui_hover",
+      "dapui_scopes",
+      "dapui_stacks",
+      "dapui_watches",
       "checkhealth",
       "fern",
       "fugitive",

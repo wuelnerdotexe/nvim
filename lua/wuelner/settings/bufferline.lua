@@ -8,13 +8,13 @@ M.config = function()
       offsets = {
         {
           filetype = "aerial",
-          text = "OUTLINE",
+          text = "OUTLINE EXPLORER",
           highlight = "Title",
           separator = false,
         },
         {
           filetype = "fern",
-          text = "FOLDERS",
+          text = "FOLDERS EXPLORER",
           highlight = "Title",
           separator = false,
         },

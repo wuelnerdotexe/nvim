@@ -22,8 +22,13 @@ M.config = function()
 
   local cmp_mapping = cmp.mapping
   local cmp_setup = cmp.setup
+  local vim_api = vim.api
 
   cmp_setup({
+    enabled = function()
+      return vim_api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+    end,
     performance = { debounce = 300, throttle = 40 },
     mapping = cmp_mapping.preset.insert({
       ["<C-b>"] = cmp_mapping.scroll_docs(-1),
@@ -78,7 +83,7 @@ M.config = function()
         before = function(entry, vim_item)
           vim_item.kind = string.format(
             "%s %s",
-            lspkind.presets.default[vim_item.kind],
+            lspkind.presets.codicons[vim_item.kind],
             vim_item.kind
           )
 
@@ -108,12 +113,11 @@ M.config = function()
           keyword_length = 1,
           indexing_interval = 40,
           get_bufnrs = function()
-            local vim_api = vim.api
             local buf = vim_api.nvim_get_current_buf()
             local byte_size =
               vim_api.nvim_buf_get_offset(buf, vim_api.nvim_buf_line_count(buf))
 
-            if byte_size > 1024 * 1024 then
+            if byte_size > 100 * 1024 then
               return {}
             end
 
@@ -132,9 +136,21 @@ M.config = function()
     },
   })
 
-  cmp_setup.filetype({
+  local setup_filetype = cmp_setup.filetype
+
+  setup_filetype({
+    "dap-repl",
+    "dapui_watches",
+    "dapui_hover"
+  }, { sources = { { name = "dap" } } })
+
+  setup_filetype({
     "aerial",
     "checkhealth",
+    "dapui_breakpoints",
+    "dapui_console",
+    "dapui_scopes",
+    "dapui_stacks",
     "fern",
     "fugitive",
     "fugitiveblame",
