@@ -2,9 +2,8 @@ local M = {}
 
 M.config = function()
   local o_columns = vim.o.columns
-  local layout_width = math.floor((o_columns / (
-    o_columns >= 160 and 3 or 2
-  )) / 2)
+  local layout_width =
+    math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
 
   require("aerial").setup({
     backends = { "lsp", "treesitter", "markdown" },
@@ -59,6 +58,7 @@ M.config = function()
       })
     end,
     show_guides = true,
+    guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
     float = { border = "single", relative = "editor" },
   })
 end

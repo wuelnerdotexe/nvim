@@ -9,7 +9,7 @@ M.config = function()
     command = "node",
     args = {
       get_package("chrome-debug-adapter"):get_install_path()
-        .. "/out/src/chromeDebug.js"
+        .. "/out/src/chromeDebug.js",
     },
   }
 
@@ -18,7 +18,7 @@ M.config = function()
     command = "node",
     args = {
       get_package("firefox-debug-adapter"):get_install_path()
-        .. "/dist/adapter.bundle.js"
+        .. "/dist/adapter.bundle.js",
     },
   }
 
@@ -32,18 +32,18 @@ M.config = function()
       {
         type = "chrome",
         request = "launch",
-        name = 'Launch Chrome against localhost',
-        url = 'http://localhost:5173',
-        webRoot = "${workspaceFolder}"
+        name = "Launch Chrome against localhost",
+        url = "http://localhost:5173",
+        webRoot = "${workspaceFolder}",
       },
       {
-        type = 'firefox',
-        request = 'launch',
+        type = "firefox",
+        request = "launch",
         reAttach = true,
-        name = 'Launch Firefox against localhost',
-        url = 'http://localhost:5173',
-        webRoot = '${workspaceFolder}',
-      }
+        name = "Launch Firefox against localhost",
+        url = "http://localhost:5173",
+        webRoot = "${workspaceFolder}",
+      },
     }
   end
 
@@ -97,13 +97,11 @@ M.config = function()
           "stacks",
           "breakpoints",
         },
-        size = math.floor((o_columns / (
-          o_columns >= 160 and 3 or 2
-        )) / 2),
+        size = math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2),
         position = "left",
       },
       {
-        elements = { "console",  "repl" },
+        elements = { "console", "repl" },
         size = 0.25,
         position = "bottom",
       },
@@ -130,9 +128,10 @@ M.config = function()
     dapui.open()
 
     local dap_terminate = function()
-      dap.terminate(); dapui_close(); repl_close()
+      dap.terminate()
+      dapui_close()
+      repl_close()
     end
-    local keymap_set = vim.keymap.set
 
     keymap_set("n", "<S-F5>", dap_terminate)
     keymap_set("n", "<F17>", dap_terminate)
@@ -159,11 +158,15 @@ M.config = function()
     keymap_del("n", "<F23>")
   end
 
-  listeners_before.event_terminated["dapui_config"] = function()
-    dapui_close(); repl_close(); keymaps_del()
-  end
   listeners_before.event_exited["dapui_config"] = function()
-    dapui_close(); repl_close(); keymaps_del()
+    dapui_close()
+    repl_close()
+    keymaps_del()
+  end
+  listeners_before.event_terminated["dapui_config"] = function()
+    dapui_close()
+    repl_close()
+    keymaps_del()
   end
 end
 

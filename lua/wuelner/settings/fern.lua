@@ -4,18 +4,17 @@ M.setup = function()
   local vim_g = vim.g
   local o_columns = vim.o.columns
 
-  vim_g["fern_git_status#disable_ignored"] = 1
-  vim_g["fern_git_status#disable_untracked"] = 1
-  vim_g["fern#drawer_hover_popup_delay"] = 40
+  vim_g["fern#disable_default_mappings"] = 1
   vim_g["fern#default_hidden"] = 1
   vim_g["fern#default_exclude"] = [[^\%(]]
     .. [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]]
     .. [[)$]]
-  vim_g["fern#drawer_width"] = math.floor((o_columns / (
-    o_columns >= 160 and 3 or 2
-  )) / 2)
+  vim_g["fern#drawer_width"] =
+    math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
+  vim_g["fern#drawer_hover_popup_delay"] = 40
+  vim_g["fern_git_status#disable_ignored"] = 1
+  vim_g["fern_git_status#disable_untracked"] = 1
   vim_g["fern#renderer"] = "nerdfont"
-  vim_g["fern#disable_default_mappings"] = 1
 end
 
 M.config = function()
@@ -64,10 +63,12 @@ M.config = function()
         { nowait = true, buffer = true }
       )
       keymap_set("n", "h", "<Plug>(fern-action-collapse)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "l", "<Plug>(fern-action-expand)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "o", function()
         return vim_fn["fern#smart#leaf"](
@@ -84,16 +85,20 @@ M.config = function()
         )
       end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "<CR>", "<Plug>(fern-action-open-or-expand)", {
-        nowait = true, buffer = true,
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "<BS>", "<Plug>(fern-action-collapse)", {
-        nowait = true, buffer = true,
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "<C-t>", "<Plug>(fern-action-open:tabedit)", {
-        nowait = true, buffer = true,
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "<C-s>", "<Plug>(fern-action-open:split)", {
-        nowait = true, buffer = true,
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "<C-v>", function()
         return vim_fn["fern#smart#drawer"](
@@ -104,28 +109,40 @@ M.config = function()
       end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "n", "<Plug>(fern-action-new-path)", { buffer = true })
       keymap_set("n", "nf", "<Plug>(fern-action-new-file)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "nd", "<Plug>(fern-action-new-dir)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "m", "<Plug>(fern-action-move)", {
-        nowait= true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "c", "<Plug>(fern-action-copy)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "d", "<Plug>(fern-action-remove)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "q", "<Cmd>quit<CR>", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "<F5>", "<Plug>(fern-action-reload)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
       })
       keymap_set("n", "g?", "<Plug>(fern-action-help)", {
-        nowait = true, buffer = true
+        nowait = true,
+        buffer = true,
+      })
+      keymap_set("n", "?", "<Plug>(fern-action-help)", {
+        nowait = true,
+        buffer = true,
       })
     end,
   })

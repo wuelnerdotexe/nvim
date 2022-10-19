@@ -141,7 +141,7 @@ M.config = function()
   setup_filetype({
     "dap-repl",
     "dapui_watches",
-    "dapui_hover"
+    "dapui_hover",
   }, { sources = { { name = "dap" } } })
 
   setup_filetype({

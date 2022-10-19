@@ -54,7 +54,7 @@ return packer.startup(function(use)
     "mfussenegger/nvim-dap",
     after = "mason.nvim",
     keys = { { "n", "<F9>" }, { "n", "<F5>" } },
-    requires = { 'rcarriga/nvim-dap-ui', after = "nvim-dap" },
+    requires = { "rcarriga/nvim-dap-ui", module = "dapui" },
     config = function()
       require("wuelner.settings.dap").config()
     end,
@@ -92,7 +92,7 @@ return packer.startup(function(use)
         requires = {
           {
             "lambdalisue/fern-renderer-nerdfont.vim",
-            after = { "fern.vim", "nerdfont.vim" },
+            after = "nerdfont.vim",
           },
           { "lambdalisue/glyph-palette.vim", after = "nerdfont.vim" },
         },
@@ -211,23 +211,8 @@ return packer.startup(function(use)
     "neovim/nvim-lspconfig",
     after = { "mason.nvim", "nvim-cmp" },
     requires = {
-      {
-        "williamboman/mason-lspconfig.nvim",
-        module = "mason-lspconfig",
-      },
-      {
-        "kosayoda/nvim-lightbulb",
-        config = function()
-          require("wuelner.settings.lightbulb").config()
-        end,
-      },
-      {
-        "stevearc/aerial.nvim",
-        after = "nvim-lspconfig",
-        config = function()
-          require("wuelner.settings.aerial").config()
-        end,
-      },
+      "williamboman/mason-lspconfig.nvim",
+      module = "mason-lspconfig",
     },
     config = function()
       require("wuelner.settings.lspconfig").config()
@@ -242,10 +227,24 @@ return packer.startup(function(use)
     end,
   })
   use({
+    "kosayoda/nvim-lightbulb",
+    after = { "nvim-lspconfig", "null-ls.nvim" },
+    config = function()
+      require("wuelner.settings.lightbulb").config()
+    end,
+  })
+  use({
     "RRethy/vim-illuminate",
     after = "nvim-lspconfig",
     config = function()
       require("wuelner.settings.illuminate").config()
+    end,
+  })
+  use({
+    "stevearc/aerial.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("wuelner.settings.aerial").config()
     end,
   })
   use({
@@ -263,9 +262,6 @@ return packer.startup(function(use)
     cmd = "EmmetInstall",
     setup = function()
       require("wuelner.settings.emmet").setup()
-    end,
-    config = function()
-      require("wuelner.settings.emmet").config()
     end,
   })
   use({
@@ -324,7 +320,7 @@ return packer.startup(function(use)
   use({
     "akinsho/bufferline.nvim",
     tag = "v2.*",
-    after = "human.vim",
+    after = { "human.vim", "fern.vim", "aerial.nvim" },
     config = function()
       require("wuelner.settings.bufferline").config()
     end,
@@ -342,8 +338,8 @@ return packer.startup(function(use)
     "anuvyklack/windows.nvim",
     after = "human.vim",
     requires = {
-      "anuvyklack/middleclass",
-      "anuvyklack/animation.nvim",
+      { "anuvyklack/middleclass", module = "middleclass" },
+      { "anuvyklack/animation.nvim", module = "animation" },
     },
     config = function()
       require("wuelner.settings.windows").config()
@@ -385,7 +381,8 @@ return packer.startup(function(use)
 
   -- Telescope.
   use({
-    "FeiyouG/command_center.nvim",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.x",
     keys = {
       { "n", "<C-Bslash>" },
       { "n", "<leader>ff" },
@@ -395,23 +392,22 @@ return packer.startup(function(use)
       { "n", "<leader>wf" },
     },
     requires = {
-      "nvim-telescope/telescope.nvim",
-      tag = "0.1.x",
-      after = "command_center.nvim",
-      requires = {
-        { "nvim-lua/plenary.nvim", module = "plenary" },
-        {
-          "nvim-telescope/telescope-fzf-native.nvim",
-          run = "make",
-          module = "telescope._extensions.fzf",
-        },
+      { "nvim-lua/plenary.nvim", module = "plenary" },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
+        module = "telescope._extensions.fzf",
       },
-      config = function()
-        require("wuelner.settings.telescope").config()
-      end,
+      {
+        "FeiyouG/command_center.nvim",
+        module = "command_center",
+        config = function()
+          require("wuelner.settings.command_center").config()
+        end,
+      },
     },
     config = function()
-      require("wuelner.settings.command_center").config()
+      require("wuelner.settings.telescope").config()
     end,
   })
 
