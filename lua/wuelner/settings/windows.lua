@@ -22,8 +22,6 @@ M.config = function()
         "dapui_stacks",
         "dapui_watches",
         "fern",
-        "fugitive",
-        "fugitiveblame",
         "lspinfo",
         "mason",
         "nerdterm",

@@ -52,7 +52,6 @@ return packer.startup(function(use)
   -- Development.
   use({
     "mfussenegger/nvim-dap",
-    after = "mason.nvim",
     keys = { { "n", "<F9>" }, { "n", "<F5>" } },
     requires = { "rcarriga/nvim-dap-ui", module = "dapui" },
     config = function()
@@ -62,15 +61,10 @@ return packer.startup(function(use)
   use({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
-    after = "human.vim",
     ft = "markdown",
   })
 
   -- Git.
-  use({
-    "tpope/vim-fugitive",
-    after = "human.vim",
-  })
   use({
     "lewis6991/gitsigns.nvim",
     after = "human.vim",
@@ -135,7 +129,6 @@ return packer.startup(function(use)
   })
   use({
     "numToStr/Comment.nvim",
-    after = "nvim-ts-context-commentstring",
     keys = { { "n", "gc" }, { "v", "gc" } },
     config = function()
       require("wuelner.settings.comment").config()
@@ -167,15 +160,9 @@ return packer.startup(function(use)
       { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
       {
         "L3MON4D3/LuaSnip",
-        after = "nvim-cmp",
-        module = "luasnip",
         requires = {
-          "rafamadriz/friendly-snippets",
-          {
-            "saadparwaiz1/cmp_luasnip",
-            after = "LuaSnip",
-            event = "InsertEnter",
-          },
+          { "rafamadriz/friendly-snippets", module = "luasnip" },
+          { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
         },
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
@@ -184,7 +171,6 @@ return packer.startup(function(use)
       {
         "tzachar/cmp-tabnine",
         run = "./install.sh",
-        after = "nvim-cmp",
         event = "InsertEnter",
         config = function()
           require("wuelner.settings.tabnine").config()
@@ -199,7 +185,6 @@ return packer.startup(function(use)
   })
   use({
     "windwp/nvim-autopairs",
-    after = "nvim-cmp",
     event = "InsertEnter",
     config = function()
       require("wuelner.settings.autopairs").config()
@@ -266,7 +251,6 @@ return packer.startup(function(use)
   })
   use({
     "matze/vim-move",
-    after = "vim-sleuth",
     keys = { "<A-Left>", "<A-Down>", "<A-Up>", "<A-Right>" },
     setup = function()
       require("wuelner.settings.move").setup()
@@ -277,7 +261,6 @@ return packer.startup(function(use)
   })
   use({
     "mg979/vim-visual-multi",
-    after = "human.vim",
     keys = {
       { "n", "<C-n>" },
       { "x", "<C-n>" },
@@ -321,6 +304,12 @@ return packer.startup(function(use)
     "akinsho/bufferline.nvim",
     tag = "v2.*",
     after = { "human.vim", "fern.vim", "aerial.nvim" },
+    requires = {
+      "tiagovla/scope.nvim",
+      config = function()
+        require("scope").setup()
+      end,
+    },
     config = function()
       require("wuelner.settings.bufferline").config()
     end,
@@ -354,7 +343,6 @@ return packer.startup(function(use)
   })
   use({
     "aserowy/tmux.nvim",
-    after = "human.vim",
     keys = {
       { "n", "<C-h>" },
       { "n", "<C-j>" },
@@ -371,7 +359,6 @@ return packer.startup(function(use)
   })
   use({
     "wuelnerdotexe/nerdterm",
-    after = "bufresize.nvim",
     cmd = "NERDTermToggle",
     keys = { { "n", "<leader>tt" } },
     config = function()

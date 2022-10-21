@@ -22,13 +22,7 @@ M.config = function()
     rainbow = { enable = true, extended_mode = false, max_file_lines = nil },
     context_commentstring = { enable = true, enable_autocmd = false },
     autotag = { enable = true },
-    matchup = { enable = true },
   })
-
-  local vim_opt = vim.opt
-
-  vim_opt.foldmethod = "expr"
-  vim_opt.foldexpr = "nvim_treesitter#foldexpr()"
 end
 
 return M

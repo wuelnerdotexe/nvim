@@ -38,7 +38,7 @@ M.config = function()
       "quickfix",
       "terminal",
     },
-    filetype_exclude = { "fugitive", "fugitiveblame", "list" },
+    filetype_exclude = { "list" },
   })
 end
 

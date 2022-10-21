@@ -54,7 +54,7 @@ M.config = function()
     },
     {
       desc = "Open the terminal in a new tab",
-      cmd = "<Cmd>tabnew | terminal<CR>",
+      cmd = "<Cmd>tabnew +terminal<CR>",
       keys = { "n", "<leader>to" },
       category = "GENERAL",
     },

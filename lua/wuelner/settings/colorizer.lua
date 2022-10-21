@@ -11,7 +11,7 @@ M.config = function()
       sass = { enable = true, parsers = { css } },
     },
     buftypes = { "*", "!nofile", "!prompt" },
-    filetypes = { "*", "!fugitive", "!fugitiveblame", "!TelescopePrompt" },
+    filetypes = { "*", "!TelescopePrompt" },
   })
 end
 

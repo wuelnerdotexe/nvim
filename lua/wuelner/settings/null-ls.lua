@@ -32,6 +32,7 @@ M.config = function()
           buffer = bufnr,
           callback = function()
             lsp_buf.format({ bufnr = bufnr })
+            require("luasnip").session.current_nodes[bufnr] = nil
           end,
         })
       end

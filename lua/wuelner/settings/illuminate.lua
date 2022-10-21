@@ -14,8 +14,6 @@ M.config = function()
       "dapui_watches",
       "checkhealth",
       "fern",
-      "fugitive",
-      "fugitiveblame",
       "lspinfo",
       "mason",
       "nerdterm",

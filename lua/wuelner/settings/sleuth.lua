@@ -11,8 +11,6 @@ M.setup = function()
     "dapui_stacks",
     "dapui_watches",
     "fern",
-    "fugitive",
-    "fugitiveblame",
     "list",
     "lspinfo",
     "mason",
