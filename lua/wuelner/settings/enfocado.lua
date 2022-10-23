@@ -3,7 +3,7 @@ local M = {}
 M.setup = function()
   local vim_g = vim.g
 
-  vim_g.enfocado_style = "nature"
+  vim_g.enfocado_style = "neon"
   vim_g.enfocado_plugins = {
     "aerial",
     "bufferline",
@@ -24,6 +24,8 @@ M.setup = function()
 end
 
 M.config = function()
+  local vim = vim
+
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "enfocado",
     nested = true,

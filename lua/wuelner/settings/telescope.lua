@@ -49,6 +49,8 @@ M.config = function()
   telescope.load_extension("fzf")
   telescope.load_extension("command_center")
 
+  local vim = vim
+
   vim.api.nvim_create_autocmd("User", {
     pattern = "TelescopePreviewerLoaded",
     command = "setlocal wrap",

@@ -1,6 +1,7 @@
 local M = {}
 
 M.config = function()
+  local vim = vim
   local vim_opt = vim.opt
 
   vim_opt.winwidth = 6
@@ -24,7 +25,6 @@ M.config = function()
         "fern",
         "lspinfo",
         "mason",
-        "nerdterm",
         "null-ls-info",
         "packer",
         "qf",

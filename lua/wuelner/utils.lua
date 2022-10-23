@@ -1,30 +1,13 @@
 local M = {}
 
-M.bufresize_toggle = function(command, filetype)
-  local bufresize = require("bufresize")
-  local nvim_command = vim.api.nvim_command
-
-  if vim.bo.filetype == filetype then
-    bufresize.block_register()
-    nvim_command(command)
-    bufresize.resize_close()
-  else
-    bufresize.block_register()
-    nvim_command(command)
-    bufresize.resize_open()
-  end
-end
-
 M.aerial_breadcrumbs = function()
   local symbols = require("aerial").get_location(true)
   local depth = nil or #symbols
+  local table = table
   local table_unpack = table.unpack
 
-  if depth > 0 then
-    symbols = { table_unpack(symbols, 1, depth) }
-  else
-    symbols = { table_unpack(symbols, #symbols + 1 + depth) }
-  end
+  symbols = depth > 0 and { table_unpack(symbols, 1, depth) }
+    or { table_unpack(symbols, #symbols + 1 + depth) }
 
   local parts = {}
 

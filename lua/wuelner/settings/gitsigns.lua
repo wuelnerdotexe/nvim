@@ -12,6 +12,8 @@ M.config = function()
     current_line_blame_opts = { delay = 40 },
     update_debounce = 300,
     on_attach = function(bufnr)
+      local vim = vim
+      local vim_schedule = vim.schedule
       local loaded_gitsigns = package.loaded.gitsigns
       local map = function(mode, l, r, opts)
         opts = opts or {}
@@ -24,7 +26,7 @@ M.config = function()
         if wo_diff then
           return "[h"
         end
-        vim.schedule(function()
+        vim_schedule(function()
           loaded_gitsigns.prev_hunk()
         end)
         return "<Ignore>"
@@ -33,7 +35,7 @@ M.config = function()
         if wo_diff then
           return "]h"
         end
-        vim.schedule(function()
+        vim_schedule(function()
           loaded_gitsigns.next_hunk()
         end)
         return "<Ignore>"

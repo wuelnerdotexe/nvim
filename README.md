@@ -130,8 +130,8 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Insert  |  `SHIFT` + `PAGE UP`  | Go to previous buffer                    |
 | Normal  |       `g` + `b`       | Go to next buffer                        |
 | Insert  | `SHIFT` + `PAGE DOWN` | Go to next buffer                        |
-| Normal  |       `m` + `B`       | Move buffer left                         |
-| Normal  |       `m` + `b`       | Move buffer right                        |
+| Normal  |   `SHIFT` + `Home`    | Move buffer left                         |
+| Normal  |    `SHIFT` + `End`    | Move buffer right                        |
 | Normal  |       `1` + `b`       | Close all buffers except the current one |
 
 ### Tabs

@@ -8,6 +8,7 @@ M.config = function()
     update_in_insert = true,
     debounce = 300,
     on_attach = function(client, bufnr)
+      local vim = vim
       local vim_diagnostic = vim.diagnostic
       local keymap_set = vim.keymap.set
       local lsp_buf = vim.lsp.buf

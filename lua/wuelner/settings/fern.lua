@@ -1,25 +1,26 @@
 local M = {}
 
 M.setup = function()
+  local vim = vim
   local vim_g = vim.g
   local o_columns = vim.o.columns
 
   vim_g["fern#disable_default_mappings"] = 1
   vim_g["fern#default_hidden"] = 1
-  vim_g["fern#default_exclude"] = [[^\%(]]
-    .. [[\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\]]
-    .. [[)$]]
+  vim_g["fern#default_exclude"] =
+    [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]]
   vim_g["fern#drawer_width"] =
     math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
-  vim_g["fern#drawer_hover_popup_delay"] = 40
+  vim_g["fern#disable_drawer_hover_popup"] = 1
   vim_g["fern_git_status#disable_ignored"] = 1
   vim_g["fern_git_status#disable_untracked"] = 1
   vim_g["fern#renderer"] = "nerdfont"
-  vim_g["fern#renderer#nerdfont#root_symbol"] = ""
+  vim_g["fern#renderer#nerdfont#root_symbol"] = ""
   vim_g["fern#renderer#nerdfont#indent_markers"] = 1
 end
 
 M.config = function()
+  local vim = vim
   local keymap_set = vim.keymap.set
 
   keymap_set(

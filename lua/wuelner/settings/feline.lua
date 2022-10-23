@@ -1,6 +1,7 @@
 local M = {}
 
 M.config = function()
+  local vim = vim
   local vim_opt = vim.opt
 
   vim_opt.ruler = false
@@ -20,12 +21,16 @@ M.config = function()
     return { name = name, fg = vi_mode.get_mode_color(), style = style }
   end
 
-  table.insert(components.active, {})
-  table.insert(components.active, {})
-  table.insert(components.active, {})
-  table.insert(components.inactive, {})
+  local table_insert = table.insert
+  local components_active = components.active
+  local components_inactive = components.inactive
 
-  components.active[1][1] = {
+  table_insert(components_active, {})
+  table_insert(components_active, {})
+  table_insert(components_active, {})
+  table_insert(components_inactive, {})
+
+  components_active[1][1] = {
     provider = "diagnostic_errors",
     icon = "  ",
     hl = function()
@@ -35,7 +40,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][2] = {
+  components_active[1][2] = {
     provider = "diagnostic_warnings",
     icon = "  ",
     hl = function()
@@ -45,7 +50,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][3] = {
+  components_active[1][3] = {
     provider = "diagnostic_info",
     icon = "  ",
     hl = function()
@@ -55,7 +60,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][4] = {
+  components_active[1][4] = {
     provider = "diagnostic_hints",
     icon = "  ",
     hl = function()
@@ -65,7 +70,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][5] = {
+  components_active[1][5] = {
     enabled = function()
       return require("feline.providers.lsp").diagnostics_exist()
     end,
@@ -74,7 +79,7 @@ M.config = function()
     priority = -5,
   }
 
-  components.active[1][6] = {
+  components_active[1][6] = {
     provider = "▊",
     hl = function()
       return highlighter("FelineIndicator", "accent_1", "NONE")
@@ -82,7 +87,7 @@ M.config = function()
     priority = 1,
   }
 
-  components.active[1][7] = {
+  components_active[1][7] = {
     provider = {
       name = "position",
       opts = { padding = { line = 3, col = 2 } },
@@ -95,7 +100,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][8] = {
+  components_active[1][8] = {
     provider = "%P/%L",
     right_sep = " ",
     hl = function()
@@ -105,7 +110,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[1][9] = {
+  components_active[1][9] = {
     provider = function()
       return " " .. vim_fn.fnamemodify(vim_fn.getcwd(), ":t")
     end,
@@ -118,7 +123,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[2][1] = {
+  components_active[2][1] = {
     provider = "git_branch",
     icon = " ",
     hl = function()
@@ -128,7 +133,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[2][2] = {
+  components_active[2][2] = {
     provider = "git_diff_added",
     icon = "  ",
     hl = function()
@@ -138,7 +143,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[2][3] = {
+  components_active[2][3] = {
     provider = "git_diff_removed",
     icon = "  ",
     hl = function()
@@ -148,7 +153,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[2][4] = {
+  components_active[2][4] = {
     provider = "git_diff_changed",
     icon = "  ",
     right_sep = " ",
@@ -159,7 +164,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[3][1] = {
+  components_active[3][1] = {
     provider = "file_type",
     left_sep = " ",
     right_sep = " ",
@@ -170,7 +175,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[3][2] = {
+  components_active[3][2] = {
     provider = "file_encoding",
     right_sep = " ",
     hl = function()
@@ -180,7 +185,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[3][3] = {
+  components_active[3][3] = {
     provider = function()
       return string.upper(vim_fn.SleuthIndicator())
     end,
@@ -192,7 +197,7 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.active[3][4] = {
+  components_active[3][4] = {
     provider = "file_format",
     right_sep = " ",
     hl = function()
@@ -202,24 +207,26 @@ M.config = function()
     truncate_hide = true,
   }
 
-  components.inactive[1][1] = {
+  components_inactive[1][1] = {
     provider = "▊",
     hl = { name = "FelineIndicatorInactive", fg = "bg_1" },
     priority = 1,
   }
 
-  components.inactive[1][2] = {
+  components_inactive[1][2] = {
     provider = {
       name = "position",
       opts = { padding = { line = 2, col = 2 } },
     },
     left_sep = " ",
     right_sep = " ",
-    hl = { name = "FelinePositionInactive", fg = "dim_0" },
+    hl = function()
+      return highlighter("FelinePositionInactive", "dim_0", "NONE")
+    end,
     truncate_hide = true,
   }
 
-  components.inactive[1][3] = {
+  components_inactive[1][3] = {
     provider = {
       name = "file_info",
       opts = {
@@ -228,7 +235,9 @@ M.config = function()
     },
     icon = "",
     left_sep = " ",
-    hl = { name = "FelineFilenameInactive", fg = "dim_0" },
+    hl = function()
+      return highlighter("FelineFilenameInactive", "dim_0", "NONE")
+    end,
     priority = -1,
     truncate_hide = true,
   }
@@ -283,6 +292,7 @@ M.config = function()
               return aerial_breadcrumbs()
             end,
             left_sep = " ",
+            right_sep = " ",
             hl = { name = "FelineWinbar", fg = "fg_0" },
           },
         },
@@ -294,6 +304,7 @@ M.config = function()
               return aerial_breadcrumbs()
             end,
             left_sep = " ",
+            right_sep = " ",
             hl = { name = "FelineInactiveWinbar", fg = "dim_0" },
           },
         },

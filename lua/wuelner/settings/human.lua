@@ -17,7 +17,11 @@ M.setup = function()
 end
 
 M.config = function()
-  vim.opt.spell = false
+  local vim = vim
+  local vim_opt = vim.opt
+
+  vim_opt.spell = false
+  vim_opt.foldenable = false
 
   local keymap_set = vim.keymap.set
 

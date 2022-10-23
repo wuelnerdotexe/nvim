@@ -1,6 +1,7 @@
 local M = {}
 
 M.config = function()
+  local vim = vim
   local o_columns = vim.o.columns
   local layout_width =
     math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)

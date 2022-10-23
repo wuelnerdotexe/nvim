@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
   require("mason-lspconfig").setup({ automatic_installation = true })
 
+  local vim = vim
   local vim_diagnostic = vim.diagnostic
 
   vim_diagnostic.config({

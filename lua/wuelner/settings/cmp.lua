@@ -1,15 +1,15 @@
 local M = {}
 
 M.config = function()
+  local vim = vim
   vim.opt.complete = nil
 
   local cmp = require("cmp")
   local lspkind = require("lspkind")
   local luasnip = require("luasnip")
   local cmp_buffer = require("cmp_buffer")
-
+  local vim_api = vim.api
   local has_words_before = function()
-    local vim_api = vim.api
     local line, col = table.unpack(vim_api.nvim_win_get_cursor(0))
 
     return col ~= 0
@@ -19,10 +19,12 @@ M.config = function()
           :match("%s")
         == nil
   end
-
-  local cmp_mapping = cmp.mapping
   local cmp_setup = cmp.setup
-  local vim_api = vim.api
+  local cmp_mapping = cmp.mapping
+  local cmp_visible = cmp.visible
+  local cmp_complete = cmp.complete
+  local select_next_item = cmp.select_next_item
+  local select_prev_item = cmp.select_prev_item
 
   cmp_setup({
     enabled = function()
@@ -36,8 +38,8 @@ M.config = function()
       ["<C-e>"] = cmp_mapping.abort(),
       ["<CR>"] = cmp_mapping.confirm({ select = false }),
       ["<S-Tab>"] = cmp_mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
+        if cmp_visible() then
+          select_prev_item()
         elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
@@ -45,28 +47,28 @@ M.config = function()
         end
       end, { "i", "s" }),
       ["<Tab>"] = cmp_mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
+        if cmp_visible() then
+          select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
           luasnip.expand_or_jump()
         elseif has_words_before() then
-          cmp.complete()
+          cmp_complete()
         else
           fallback()
         end
       end, { "i", "s" }),
       ["<C-p>"] = cmp_mapping(function()
-        if cmp.visible() then
-          cmp.select_prev_item()
+        if cmp_visible() then
+          select_prev_item()
         else
-          cmp.complete()
+          cmp_complete()
         end
       end, { "i", "s" }),
       ["<C-n>"] = cmp_mapping(function()
-        if cmp.visible() then
-          cmp.select_next_item()
+        if cmp_visible() then
+          select_next_item()
         else
-          cmp.complete()
+          cmp_complete()
         end
       end, { "i", "s" }),
     }),

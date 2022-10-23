@@ -1,6 +1,7 @@
 local M = {}
 
 M.setup = function()
+  local vim = vim
   local vim_g = vim.g
 
   vim_g.user_emmet_install_global = 0

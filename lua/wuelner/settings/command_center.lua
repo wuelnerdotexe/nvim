@@ -60,9 +60,7 @@ M.config = function()
     },
     {
       desc = "Toggle bottom terminal",
-      cmd = function()
-        require("wuelner.utils").bufresize_toggle("NERDTermToggle", "nerdterm")
-      end,
+      cmd = "<Cmd>NERDTermToggle<CR>",
       keys = { "n", "<leader>tt" },
       category = "GENERAL",
     },

@@ -1,3 +1,4 @@
+local vim = vim
 local vim_fn = vim.fn
 local ensure_packer = function()
   local install_path = vim_fn.stdpath("data")
@@ -332,13 +333,6 @@ return packer.startup(function(use)
     },
     config = function()
       require("wuelner.settings.windows").config()
-    end,
-  })
-  use({
-    "kwkarlwang/bufresize.nvim",
-    after = "windows.nvim",
-    config = function()
-      require("wuelner.settings.bufresize").config()
     end,
   })
   use({
