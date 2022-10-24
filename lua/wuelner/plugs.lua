@@ -303,7 +303,6 @@ return packer.startup(function(use)
   })
   use({
     "akinsho/bufferline.nvim",
-    tag = "v2.*",
     after = { "human.vim", "fern.vim", "aerial.nvim" },
     requires = {
       "tiagovla/scope.nvim",
@@ -363,7 +362,6 @@ return packer.startup(function(use)
   -- Telescope.
   use({
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.x",
     keys = {
       { "n", "<C-Bslash>" },
       { "n", "<leader>ff" },
