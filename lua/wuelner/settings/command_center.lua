@@ -1,9 +1,7 @@
 local M = {}
 
 M.config = function()
-  local command_center = require("command_center")
-
-  command_center.add({
+  require("command_center").add({
     {
       desc = "Toggle file tree",
       cmd = "<Cmd>Fern . -drawer -toggle<CR>",
@@ -48,7 +46,7 @@ M.config = function()
     },
     {
       desc = "Toggle document symbols",
-      cmd = "<Cmd>AerialToggle!<CR>",
+      cmd = "<Cmd>AerialToggle<CR>",
       keys = { "n", "<leader>st" },
       category = "GENERAL",
     },
@@ -64,7 +62,7 @@ M.config = function()
       keys = { "n", "<leader>tt" },
       category = "GENERAL",
     },
-  }, { mode = command_center.mode.ADD })
+  }, { mode = require("command_center").mode.ADD })
 
   vim.keymap.set("n", "<C-Bslash>", "<CMD>Telescope command_center<CR>", {
     silent = true,

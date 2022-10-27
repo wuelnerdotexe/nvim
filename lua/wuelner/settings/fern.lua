@@ -1,26 +1,23 @@
 local M = {}
 
 M.setup = function()
-  local vim = vim
-  local vim_g = vim.g
   local o_columns = vim.o.columns
 
-  vim_g["fern#disable_default_mappings"] = 1
-  vim_g["fern#default_hidden"] = 1
-  vim_g["fern#default_exclude"] =
+  vim.g["fern#disable_default_mappings"] = 1
+  vim.g["fern#default_hidden"] = 1
+  vim.g["fern#default_exclude"] =
     [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]]
-  vim_g["fern#drawer_width"] =
+  vim.g["fern#drawer_width"] =
     math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
-  vim_g["fern#disable_drawer_hover_popup"] = 1
-  vim_g["fern_git_status#disable_ignored"] = 1
-  vim_g["fern_git_status#disable_untracked"] = 1
-  vim_g["fern#renderer"] = "nerdfont"
-  vim_g["fern#renderer#nerdfont#root_symbol"] = ""
-  vim_g["fern#renderer#nerdfont#indent_markers"] = 1
+  vim.g["fern#disable_drawer_hover_popup"] = 1
+  vim.g["fern_git_status#disable_ignored"] = 1
+  vim.g["fern_git_status#disable_untracked"] = 1
+  vim.g["fern#renderer"] = "nerdfont"
+  vim.g["fern#renderer#nerdfont#root_symbol"] = ""
+  vim.g["fern#renderer#nerdfont#indent_markers"] = 1
 end
 
 M.config = function()
-  local vim = vim
   local keymap_set = vim.keymap.set
 
   keymap_set(
@@ -39,15 +36,11 @@ M.config = function()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
     callback = function()
-      local vim_fn = vim.fn
+      vim.fn["glyph_palette#apply"]()
 
-      vim_fn["glyph_palette#apply"]()
-
-      local opt_local = vim.opt_local
-
-      opt_local.signcolumn = "no"
-      opt_local.number = false
-      opt_local.relativenumber = false
+      vim.opt_local.signcolumn = "no"
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
 
       keymap_set(
         "n",
@@ -74,14 +67,14 @@ M.config = function()
         buffer = true,
       })
       keymap_set("n", "o", function()
-        return vim_fn["fern#smart#leaf"](
+        return vim.fn["fern#smart#leaf"](
           "<Plug>(fern-action-open)",
           "<Plug>(fern-action-expand)",
           "<Plug>(fern-action-collapse)"
         )
       end, { nowait = true, buffer = true, expr = true })
       keymap_set("n", "<2-LeftMouse>", function()
-        return vim_fn["fern#smart#leaf"](
+        return vim.fn["fern#smart#leaf"](
           "<Plug>(fern-action-open)",
           "<Plug>(fern-action-expand)",
           "<Plug>(fern-action-collapse)"
@@ -104,7 +97,7 @@ M.config = function()
         buffer = true,
       })
       keymap_set("n", "<C-v>", function()
-        return vim_fn["fern#smart#drawer"](
+        return vim.fn["fern#smart#drawer"](
           "<Plug>(fern-action-open:rightest)",
           "<Plug>(fern-action-open:vsplit)",
           "<Plug>(fern-action-open:vsplit)"

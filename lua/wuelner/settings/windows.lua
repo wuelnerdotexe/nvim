@@ -1,12 +1,9 @@
 local M = {}
 
 M.config = function()
-  local vim = vim
-  local vim_opt = vim.opt
-
-  vim_opt.winwidth = 6
-  vim_opt.winminwidth = 6
-  vim_opt.equalalways = false
+  vim.opt.winwidth = 6
+  vim.opt.winminwidth = 6
+  vim.opt.equalalways = false
 
   require("windows").setup({
     autowidth = { enable = false, winwidth = 3, filetype = {} },

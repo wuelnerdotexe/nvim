@@ -11,20 +11,22 @@ M.config = function()
       if
         bo_filetype == "javascriptreact" or bo_filetype == "typescriptreact"
       then
-        local U = require("Comment.utils")
-        local commentstring_utils = require("ts_context_commentstring.utils")
         local ctx_ctype = ctx.ctype
-        local u_ctype = U.ctype
-        local type = ctx_ctype == u_ctype.linewise and "__default"
+        local type = ctx_ctype == require("Comment.utils").ctype.linewise
+            and "__default"
           or "__multiline"
         local location = nil
         local ctx_cmotion = ctx.cmotion
-        local u_cmotion = U.cmotion
 
-        if ctx_ctype == u_ctype.blockwise then
-          location = commentstring_utils.get_cursor_location()
-        elseif ctx_cmotion == u_cmotion.v or ctx_cmotion == u_cmotion.V then
-          location = commentstring_utils.get_visual_start_location()
+        if ctx_ctype == require("Comment.utils").ctype.blockwise then
+          location =
+            require("ts_context_commentstring.utils").get_cursor_location()
+        elseif
+          ctx_cmotion == require("Comment.utils").cmotion.v
+          or ctx_cmotion == require("Comment.utils").cmotion.V
+        then
+          location =
+            require("ts_context_commentstring.utils").get_visual_start_location()
         end
 
         return require("ts_context_commentstring.internal").calculate_commentstring({

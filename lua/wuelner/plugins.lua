@@ -1,11 +1,9 @@
-local vim = vim
-local vim_fn = vim.fn
-local ensure_packer = function()
-  local install_path = vim_fn.stdpath("data")
+local packer_bootstrap = function()
+  local install_path = vim.fn.stdpath("data")
     .. "/site/pack/packer/start/packer.nvim"
 
-  if vim_fn.empty(vim_fn.glob(install_path)) > 0 then
-    vim_fn.system({
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({
       "git",
       "clone",
       "--depth",
@@ -22,13 +20,12 @@ local ensure_packer = function()
   return false
 end
 
-local packer_bootstrap = ensure_packer()
+require("packer").init({
+  display = { prompt_border = "single" },
+  autoremove = true,
+})
 
-local packer = require("packer")
-
-packer.init({ display = { prompt_border = "single" }, autoremove = true })
-
-return packer.startup(function(use)
+return require("packer").startup(function(use)
   -- Dependencies.
   use("wbthomason/packer.nvim")
   use("lewis6991/impatient.nvim")
@@ -197,8 +194,14 @@ return packer.startup(function(use)
     "neovim/nvim-lspconfig",
     after = { "mason.nvim", "nvim-cmp" },
     requires = {
-      "williamboman/mason-lspconfig.nvim",
-      module = "mason-lspconfig",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        module = "mason-lspconfig",
+      },
+      {
+        "b0o/schemastore.nvim",
+        module = "schemastore",
+      },
     },
     config = function()
       require("wuelner.settings.lspconfig").config()
@@ -390,7 +393,7 @@ return packer.startup(function(use)
     end,
   })
 
-  if packer_bootstrap then
-    packer.sync()
+  if packer_bootstrap() then
+    require("packer").sync()
   end
 end)

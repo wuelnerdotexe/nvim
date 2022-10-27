@@ -8,11 +8,10 @@ M.config = function()
     highlight = {
       enable = true,
       disable = function(lang, buf)
-        local vim = vim
         local ok, stats =
           pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 
-        if ok and stats and stats.size > 100 * 1024 then
+        if ok and stats and stats.size > 102400 then
           return true
         end
       end,

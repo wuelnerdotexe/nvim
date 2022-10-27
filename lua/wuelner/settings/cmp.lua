@@ -1,34 +1,28 @@
 local M = {}
 
 M.config = function()
-  local vim = vim
   vim.opt.complete = nil
 
-  local cmp = require("cmp")
-  local lspkind = require("lspkind")
-  local luasnip = require("luasnip")
-  local cmp_buffer = require("cmp_buffer")
-  local vim_api = vim.api
   local has_words_before = function()
-    local line, col = table.unpack(vim_api.nvim_win_get_cursor(0))
+    local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 
     return col ~= 0
-      and vim_api
+      and vim.api
           .nvim_buf_get_lines(0, line - 1, line, true)[1]
           :sub(col, col)
           :match("%s")
         == nil
   end
-  local cmp_setup = cmp.setup
-  local cmp_mapping = cmp.mapping
-  local cmp_visible = cmp.visible
-  local cmp_complete = cmp.complete
-  local select_next_item = cmp.select_next_item
-  local select_prev_item = cmp.select_prev_item
+  local cmp_setup = require("cmp").setup
+  local cmp_mapping = require("cmp").mapping
+  local cmp_visible = require("cmp").visible
+  local cmp_complete = require("cmp").complete
+  local select_next_item = require("cmp").select_next_item
+  local select_prev_item = require("cmp").select_prev_item
 
   cmp_setup({
     enabled = function()
-      return vim_api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
         or require("cmp_dap").is_dap_buffer()
     end,
     performance = { debounce = 300, throttle = 40 },
@@ -40,8 +34,8 @@ M.config = function()
       ["<S-Tab>"] = cmp_mapping(function(fallback)
         if cmp_visible() then
           select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
+        elseif require("luasnip").jumpable(-1) then
+          require("luasnip").jump(-1)
         else
           fallback()
         end
@@ -49,8 +43,8 @@ M.config = function()
       ["<Tab>"] = cmp_mapping(function(fallback)
         if cmp_visible() then
           select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
-          luasnip.expand_or_jump()
+        elseif require("luasnip").expand_or_locally_jumpable() then
+          require("luasnip").expand_or_jump()
         elseif has_words_before() then
           cmp_complete()
         else
@@ -74,18 +68,18 @@ M.config = function()
     }),
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body)
+        require("luasnip").lsp_expand(args.body)
       end,
     },
     completion = { completeopt = "menuone,noselect", keyword_length = 1 },
     formatting = {
       fields = { "abbr", "kind" },
-      format = lspkind.cmp_format({
+      format = require("lspkind").cmp_format({
         mode = "symbol_text",
         before = function(entry, vim_item)
           vim_item.kind = string.format(
             "%s %s",
-            lspkind.presets.codicons[vim_item.kind],
+            require("lspkind").presets.codicons[vim_item.kind],
             vim_item.kind
           )
 
@@ -100,11 +94,11 @@ M.config = function()
     sorting = {
       comparators = {
         function(...)
-          return cmp_buffer:compare_locality(...)
+          return require("cmp_buffer"):compare_locality(...)
         end,
       },
     },
-    sources = cmp.config.sources({
+    sources = require("cmp").config.sources({
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
@@ -115,11 +109,11 @@ M.config = function()
           keyword_length = 1,
           indexing_interval = 40,
           get_bufnrs = function()
-            local buf = vim_api.nvim_get_current_buf()
+            local buf = vim.api.nvim_get_current_buf()
             local byte_size =
-              vim_api.nvim_buf_get_offset(buf, vim_api.nvim_buf_line_count(buf))
+              vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
 
-            if byte_size > 100 * 1024 then
+            if byte_size > 102400 then
               return {}
             end
 

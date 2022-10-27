@@ -1,10 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local vim_g = vim.g
-
-  vim_g.bufonly_exclude_buftypes = { "terminal" }
-  vim_g.bufonly_exclude_filetypes = {
+  vim.g.bufonly_exclude_buftypes = { "terminal" }
+  vim.g.bufonly_exclude_filetypes = {
     "aerial",
     "dap-repl",
     "dapui_breakpoints",
@@ -17,11 +15,8 @@ M.setup = function()
 end
 
 M.config = function()
-  local vim = vim
-  local vim_opt = vim.opt
-
-  vim_opt.spell = false
-  vim_opt.foldenable = false
+  vim.opt.spell = false
+  vim.opt.foldenable = false
 
   local keymap_set = vim.keymap.set
 

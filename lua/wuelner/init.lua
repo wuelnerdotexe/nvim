@@ -1,2 +1,2 @@
-require("wuelner.loads")
-require("wuelner.plugs")
+require("wuelner.builtins")
+require("wuelner.plugins")

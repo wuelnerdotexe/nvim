@@ -1,8 +1,7 @@
 local M = {}
 
 M.config = function()
-  local dap = require("dap")
-  local dap_adapters = dap.adapters
+  local dap_adapters = require("dap").adapters
   local get_package = require("mason-registry").get_package
 
   dap_adapters.chrome = {
@@ -38,7 +37,7 @@ M.config = function()
     "typescript",
     "typescriptreact",
   }) do
-    dap.configurations[language] = {
+    require("dap").configurations[language] = {
       {
         type = "chrome",
         request = "launch",
@@ -66,7 +65,6 @@ M.config = function()
     }
   end
 
-  local vim = vim
   local sign_define = vim.fn.sign_define
 
   sign_define("DapBreakpoint", {
@@ -102,13 +100,12 @@ M.config = function()
 
   local keymap_set = vim.keymap.set
 
-  keymap_set("n", "<F5>", dap.continue)
-  keymap_set("n", "<F9>", dap.toggle_breakpoint)
+  keymap_set("n", "<F5>", require("dap").continue)
+  keymap_set("n", "<F9>", require("dap").toggle_breakpoint)
 
-  local dapui = require("dapui")
   local o_columns = vim.o.columns
 
-  dapui.setup({
+  require("dapui").setup({
     layouts = {
       {
         elements = {
@@ -140,32 +137,30 @@ M.config = function()
     },
   })
 
-  local dap_listeners = dap.listeners
-  local dapui_close = dapui.close
-  local repl_close = dap.repl.close
+  local dapui_close = require("dapui").close
+  local repl_close = require("dap").repl.close
 
-  dap_listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
+  require("dap").listeners.after.event_initialized["dapui_config"] = function()
+    require("dapui").open()
 
     local dap_terminate = function()
-      dap.terminate()
+      require("dap").terminate()
       dapui_close()
       repl_close()
     end
 
     keymap_set("n", "<S-F5>", dap_terminate)
     keymap_set("n", "<F17>", dap_terminate)
-    keymap_set("n", "<F6>", dap.pause)
-    keymap_set("n", "<F10>", dap.step_over)
-    keymap_set("n", "<F11>", dap.step_into)
+    keymap_set("n", "<F6>", require("dap").pause)
+    keymap_set("n", "<F10>", require("dap").step_over)
+    keymap_set("n", "<F11>", require("dap").step_into)
 
-    local step_out = dap.step_out
+    local step_out = require("dap").step_out
 
     keymap_set("n", "<S-F11>", step_out)
     keymap_set("n", "<F23>", step_out)
   end
 
-  local listeners_before = dap_listeners.before
   local keymaps_del = function()
     local keymap_del = vim.keymap.del
 
@@ -178,12 +173,12 @@ M.config = function()
     keymap_del("n", "<F23>")
   end
 
-  listeners_before.event_exited["dapui_config"] = function()
+  require("dap").listeners.before.event_exited["dapui_config"] = function()
     dapui_close()
     repl_close()
     keymaps_del()
   end
-  listeners_before.event_terminated["dapui_config"] = function()
+  require("dap").listeners.before.event_terminated["dapui_config"] = function()
     dapui_close()
     repl_close()
     keymaps_del()

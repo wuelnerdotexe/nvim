@@ -1,21 +1,20 @@
 local M = {}
 
 M.config = function()
-  local telescope = require("telescope")
-  local command_center = require("command_center")
-  local telescope_actions = require("telescope.actions")
+  local select_horizontal = require("telescope.actions").select_horizontal
+  local component_DESC = require("command_center").component.DESC
+  local component_KEYS = require("command_center").component.KEYS
 
-  telescope.setup({
+  require("telescope").setup({
     defaults = {
       mappings = {
         n = {
           ["<C-x>"] = false,
-          ["<C-s>"] = telescope_actions.select_horizontal,
+          ["<C-s>"] = select_horizontal,
         },
         i = {
-          ["<Esc>"] = telescope_actions.close,
           ["<C-x>"] = false,
-          ["<C-s>"] = telescope_actions.select_horizontal,
+          ["<C-s>"] = select_horizontal,
         },
       },
       file_ignore_patterns = {
@@ -33,23 +32,22 @@ M.config = function()
     extensions = {
       command_center = {
         components = {
-          command_center.component.DESC,
-          command_center.component.KEYS,
+          component_DESC,
+          component_KEYS,
         },
         sort_by = {
-          command_center.component.CATEGORY,
-          command_center.component.DESC,
-          command_center.component.KEYS,
+          component_DESC,
+          component_KEYS,
         },
         auto_replace_desc_with_cmd = false,
       },
     },
   })
 
-  telescope.load_extension("fzf")
-  telescope.load_extension("command_center")
+  local load_extension = require("telescope").load_extension
 
-  local vim = vim
+  load_extension("fzf")
+  load_extension("command_center")
 
   vim.api.nvim_create_autocmd("User", {
     pattern = "TelescopePreviewerLoaded",
@@ -57,13 +55,12 @@ M.config = function()
   })
 
   local keymap_set = vim.keymap.set
-  local telescope_builtin = require("telescope.builtin")
 
-  keymap_set("n", "<leader>ff", telescope_builtin.find_files)
-  keymap_set("n", "<leader>of", telescope_builtin.oldfiles)
-  keymap_set("n", "<leader>mf", telescope_builtin.marks)
-  keymap_set("n", "<leader>wf", telescope_builtin.live_grep)
-  keymap_set("n", "<leader>hf", telescope_builtin.help_tags)
+  keymap_set("n", "<leader>ff", require("telescope.builtin").find_files)
+  keymap_set("n", "<leader>of", require("telescope.builtin").oldfiles)
+  keymap_set("n", "<leader>mf", require("telescope.builtin").marks)
+  keymap_set("n", "<leader>wf", require("telescope.builtin").live_grep)
+  keymap_set("n", "<leader>hf", require("telescope.builtin").help_tags)
 end
 
 return M

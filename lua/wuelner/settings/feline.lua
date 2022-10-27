@@ -1,38 +1,30 @@
 local M = {}
 
 M.config = function()
-  local vim = vim
-  local vim_opt = vim.opt
-
-  vim_opt.ruler = false
-  vim_opt.laststatus = 2
+  vim.opt.ruler = false
+  vim.opt.laststatus = 2
 
   local components = { active = {}, inactive = {} }
-  local vim_fn = vim.fn
-  local enfocado_colors = vim_fn["enfocado#getColorScheme"]()
+  local components_active = components.active
+  local table_insert = table.insert
+
+  table_insert(components_active, {})
+  table_insert(components_active, {})
+  table_insert(components_active, {})
 
   local highlighter = function(name, fg, style)
-    local vi_mode = require("feline.providers.vi_mode")
+    local mode_color = require("feline.providers.vi_mode").get_mode_color
 
-    if vi_mode.get_mode_color() ~= "bg_2" then
+    if mode_color() ~= "bg_2" then
       return { name = name, fg = fg, style = style }
     end
 
-    return { name = name, fg = vi_mode.get_mode_color(), style = style }
+    return { name = name, fg = mode_color(), style = style }
   end
-
-  local table_insert = table.insert
-  local components_active = components.active
-  local components_inactive = components.inactive
-
-  table_insert(components_active, {})
-  table_insert(components_active, {})
-  table_insert(components_active, {})
-  table_insert(components_inactive, {})
 
   components_active[1][1] = {
     provider = "diagnostic_errors",
-    icon = "  ",
+    icon = " E:",
     hl = function()
       return highlighter("FelineErrors", "br_red", "bold")
     end,
@@ -42,7 +34,7 @@ M.config = function()
 
   components_active[1][2] = {
     provider = "diagnostic_warnings",
-    icon = "  ",
+    icon = " W:",
     hl = function()
       return highlighter("FelineWarns", "br_orange", "bold")
     end,
@@ -52,7 +44,7 @@ M.config = function()
 
   components_active[1][3] = {
     provider = "diagnostic_info",
-    icon = "  ",
+    icon = " I:",
     hl = function()
       return highlighter("FelineInfo", "br_yellow", "bold")
     end,
@@ -62,7 +54,7 @@ M.config = function()
 
   components_active[1][4] = {
     provider = "diagnostic_hints",
-    icon = "  ",
+    icon = " H:",
     hl = function()
       return highlighter("FelineHints", "br_blue", "bold")
     end,
@@ -112,7 +104,7 @@ M.config = function()
 
   components_active[1][9] = {
     provider = function()
-      return " " .. vim_fn.fnamemodify(vim_fn.getcwd(), ":t")
+      return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
     end,
     left_sep = " ",
     right_sep = " ",
@@ -187,7 +179,7 @@ M.config = function()
 
   components_active[3][3] = {
     provider = function()
-      return string.upper(vim_fn.SleuthIndicator())
+      return string.upper(vim.fn.SleuthIndicator())
     end,
     right_sep = " ",
     hl = function()
@@ -206,6 +198,10 @@ M.config = function()
     priority = -1,
     truncate_hide = true,
   }
+
+  local components_inactive = components.inactive
+
+  table_insert(components_inactive, {})
 
   components_inactive[1][1] = {
     provider = "▊",
@@ -242,9 +238,9 @@ M.config = function()
     truncate_hide = true,
   }
 
-  local feline = require("feline")
+  local enfocado_colors = vim.fn["enfocado#getColorScheme"]()
 
-  feline.setup({
+  require("feline").setup({
     theme = {
       bg_1 = enfocado_colors.bg_1[1],
       bg_2 = enfocado_colors.bg_2[1],
@@ -283,7 +279,7 @@ M.config = function()
 
   local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs
 
-  feline.winbar.setup({
+  require("feline").winbar.setup({
     components = {
       active = {
         {

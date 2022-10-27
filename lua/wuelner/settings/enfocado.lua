@@ -1,10 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local vim_g = vim.g
-
-  vim_g.enfocado_style = "neon"
-  vim_g.enfocado_plugins = {
+  vim.g.enfocado_style = "neon"
+  vim.g.enfocado_plugins = {
     "aerial",
     "bufferline",
     "cmp",
@@ -24,19 +22,15 @@ M.setup = function()
 end
 
 M.config = function()
-  local vim = vim
-
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "enfocado",
     nested = true,
     callback = function()
       vim.cmd("highlight! link Whitespace DiagnosticError")
 
-      local vim_opt = vim.opt
-
-      if vim.fn.has("termguicolors") and vim_opt.termguicolors == true then
-        vim_opt.winblend = 10
-        vim_opt.pumblend = 10
+      if vim.fn.has("termguicolors") and vim.opt.termguicolors == true then
+        vim.opt.winblend = 10
+        vim.opt.pumblend = 10
       end
     end,
   })

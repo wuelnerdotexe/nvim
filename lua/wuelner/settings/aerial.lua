@@ -1,13 +1,12 @@
 local M = {}
 
 M.config = function()
-  local vim = vim
   local o_columns = vim.o.columns
   local layout_width =
     math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
 
   require("aerial").setup({
-    backends = { "lsp", "treesitter", "markdown" },
+    backends = { "lsp", "treesitter", "markdown", "man" },
     layout = {
       max_width = layout_width,
       width = layout_width,
@@ -16,52 +15,27 @@ M.config = function()
       placement = "edge",
     },
     attach_mode = "global",
-    disable_max_size = 100 * 1024,
+    lazy_load = true,
+    disable_max_size = 102400,
     highlight_mode = "last",
     highlight_closest = false,
     highlight_on_jump = 125,
     icons = {
-      Text = "",
-      Method = "",
-      Function = "",
-      Constructor = "",
-      Field = "",
-      Variable = "",
       Class = "",
+      Constructor = "",
+      Enum = "",
+      Function = "",
       Interface = "",
       Module = "",
-      Property = "",
-      Unit = "",
-      Value = "",
-      Enum = "",
-      Keyword = "",
-      Snippet = "",
-      Color = "",
-      File = "",
-      Reference = "",
-      Folder = "",
-      EnumMember = "",
-      Constant = "",
+      Method = "",
       Struct = "",
-      Event = "",
-      Operator = "",
-      TypeParameter = "",
     },
-    on_attach = function(bufnr)
-      local keymap_set = vim.keymap.set
-
-      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
-      keymap_set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
-      keymap_set("n", "[[", "<Cmd>AerialPrevUp<CR>", { buffer = bufnr })
-      keymap_set("n", "]]", "<Cmd>AerialNextUp<CR>", { buffer = bufnr })
-      keymap_set("n", "<leader>st", "<Cmd>AerialToggle!<CR>", {
-        buffer = bufnr,
-      })
-    end,
     show_guides = true,
     guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
     float = { border = "single", relative = "editor" },
   })
+
+  vim.keymap.set("n", "<leader>st", require("aerial").toggle)
 end
 
 return M

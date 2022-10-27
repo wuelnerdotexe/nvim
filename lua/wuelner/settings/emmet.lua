@@ -1,11 +1,8 @@
 local M = {}
 
 M.setup = function()
-  local vim = vim
-  local vim_g = vim.g
-
-  vim_g.user_emmet_install_global = 0
-  vim_g.user_emmet_settings = {
+  vim.g.user_emmet_install_global = 0
+  vim.g.user_emmet_settings = {
     javascript = { extends = "jsx" },
     typescript = { extends = "tsx" },
   }
