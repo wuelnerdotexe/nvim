@@ -25,27 +25,27 @@ DISCLAIMER: If you have a previous Neovim config, make sure to make a backup bef
 
 ### Post installation
 
-#### Language servers
+#### Linters and Formatters
 
 If all goes well, when you enter Neovim for the first time, the plugins and language servers will be installed automatically, you will only have to respond to the confirmation messages.
-And then restart Neovim to complete the EsLint and Prettier installation process with the following Neovim command:
+And then restart Neovim to complete the installation process of JSON Lint, Markdown Lint and Prettier with the following Vim command:
 
 ```vim
-MasonInstall eslint_d prettierd
+MasonInstall jsonlint markdownlint prettierd
 ```
 
-Note that the installed packages are not the official ones from EsLint and Prettier, they are the only packages configured to work with this config, because when making many comparisons, they are undoubtedly the ones that offer a better experience in Neovim, and no, they do NOT WILL CAUSE CONFLICTS with your project settings. Here you can understand more about [eslint_d](https://github.com/mantoni/eslint_d.js/) and [prettierd](https://github.com/fsouza/prettierd).
-So this setup is not ready to work with the official packages, so don't try to install them and expect them to work.
+Note that the installed Prettier package is not the official one, this is the only package configured to work with this setup, because making many comparisons, it is undoubtedly the one that offers a better experience in Neovim, and no, IT WILL NOT CAUSE CONFLICTS with your project settings. Here you can learn more about [prettierd](https://github.com/fsouza/prettierd).
+So this setup is not ready to work with the official package, so don't try to install it and expect it to work.
 
-#### Debug adapters
+#### Debug adapter
 
-Also, debug adapters must be installed for the adapter protocol configuration to work. To install them you just have to execute the following Vim command:
+Also, the debug adapter must be installed for the adapter protocol configuration to work. To install them you just have to execute the following Vim command
 
 ```vim
-MasonInstall chrome-debug-adapter firefox-debug-adapter
+MasonInstall firefox-debug-adapter
 ```
 
-IMPORTANT: This setup only provides configurations for debugging front-end projects created with the `javascript`, `javascriptreact`, `typescript`, and `typescriptreact` frameworks with the Chrome and Firefox debuggers.
+IMPORTANT: This setup only provides settings for debugging front-end projects created with the `javascript`, `javascriptreact`, `typescript` and `typescriptreact` frameworks with the debugger for Firefox.
 
 ## Keymaps
 
@@ -94,15 +94,6 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 | Normal  |           `d`           | Delete node                  |
 | Normal  |           `q`           | Exit                         |
 | Normal  |         `<F5>`          | Refresh the folders explorer |
-
-### Document Symbols
-
-| VI Mode |  Keymap   | Action                                |
-| :-----: | :-------: | ------------------------------------- |
-| Normal  |    `{`    | Go to the previous symbol             |
-| Normal  |    `}`    | Go to the next symbol                 |
-| Normal  | `[` + `[` | Go to the up symbol, moving backwards |
-| Normal  | `]` + `]` | Go to the up symbol, moving forwards  |
 
 ### Windows
 

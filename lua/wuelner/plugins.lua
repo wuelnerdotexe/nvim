@@ -21,18 +21,30 @@ local packer_bootstrap = function()
 end
 
 require("packer").init({
-  display = { prompt_border = "single" },
+  max_jobs = 3,
+  display = {
+    prompt_border = "single",
+    open_fn = function()
+      return require("packer.util").float({ border = "single" })
+    end,
+  },
   autoremove = true,
 })
 
 return require("packer").startup(function(use)
-  -- Dependencies.
-  use("wbthomason/packer.nvim")
   use("lewis6991/impatient.nvim")
+  use("wbthomason/packer.nvim")
+
+  -- Dependencies.
+  use({ "nvim-lua/plenary.nvim", module = "plenary" })
   use({
     "williamboman/mason.nvim",
+    requires = {
+      "williamboman/mason-lspconfig.nvim",
+      module = "mason-lspconfig",
+    },
     config = function()
-      require("mason").setup()
+      require("wuelner.settings.mason").config()
     end,
   })
 
@@ -60,6 +72,9 @@ return require("packer").startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = "markdown",
+    setup = function()
+      require("wuelner.settings.markdown-preview").setup()
+    end,
   })
 
   -- Git.
@@ -71,22 +86,18 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- File browser.
+  -- Folders explorer.
   use({
     "lambdalisue/fern.vim",
     after = "human.vim",
     requires = {
-      { "lambdalisue/fern-hijack.vim", after = "fern.vim" },
-      { "lambdalisue/fern-git-status.vim", after = "fern.vim" },
+      { "lambdalisue/fern-hijack.vim" },
+      { "lambdalisue/fern-git-status.vim" },
       {
-        "lambdalisue/nerdfont.vim",
-        after = "fern.vim",
+        "lambdalisue/fern-renderer-nerdfont.vim",
         requires = {
-          {
-            "lambdalisue/fern-renderer-nerdfont.vim",
-            after = "nerdfont.vim",
-          },
-          { "lambdalisue/glyph-palette.vim", after = "nerdfont.vim" },
+          "lambdalisue/nerdfont.vim",
+          "lambdalisue/glyph-palette.vim",
         },
       },
     },
@@ -104,15 +115,12 @@ return require("packer").startup(function(use)
     after = "human.vim",
     run = ":TSUpdate",
     requires = {
-      { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
         after = "nvim-treesitter",
       },
-      {
-        "windwp/nvim-ts-autotag",
-        after = "nvim-treesitter",
-      },
+      { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
+      { "windwp/nvim-ts-autotag", after = "nvim-treesitter" },
     },
     config = function()
       require("wuelner.settings.treesitter").config()
@@ -155,27 +163,37 @@ return require("packer").startup(function(use)
     after = "vim-sleuth",
     requires = {
       { "onsails/lspkind.nvim", module = "lspkind" },
-      { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
+      { "rcarriga/cmp-dap", module = "cmp_dap" },
+      { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
       {
-        "L3MON4D3/LuaSnip",
+        "hrsh7th/cmp-nvim-lsp",
+        module = "cmp_nvim_lsp",
+        requires = "hrsh7th/cmp-nvim-lsp-signature-help",
+      },
+      {
+        "saadparwaiz1/cmp_luasnip",
+        event = "InsertEnter",
         requires = {
-          { "rafamadriz/friendly-snippets", module = "luasnip" },
-          { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+          "L3MON4D3/LuaSnip",
+          requires = {
+            "rafamadriz/friendly-snippets",
+            module = "luasnip.loaders.from_vscode",
+          },
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+          end,
         },
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
       },
       {
         "tzachar/cmp-tabnine",
         run = "./install.sh",
         event = "InsertEnter",
         config = function()
-          require("wuelner.settings.tabnine").config()
+          vim.schedule(function()
+            require("wuelner.settings.tabnine").config()
+          end)
         end,
       },
-      { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
-      { "rcarriga/cmp-dap", module = "cmp_dap" },
     },
     config = function()
       require("wuelner.settings.cmp").config()
@@ -191,35 +209,21 @@ return require("packer").startup(function(use)
 
   -- LSP.
   use({
-    "neovim/nvim-lspconfig",
-    after = { "mason.nvim", "nvim-cmp" },
-    requires = {
-      {
-        "williamboman/mason-lspconfig.nvim",
-        module = "mason-lspconfig",
-      },
-      {
-        "b0o/schemastore.nvim",
-        module = "schemastore",
-      },
-    },
-    config = function()
-      require("wuelner.settings.lspconfig").config()
-    end,
-  })
-  use({
     "jose-elias-alvarez/null-ls.nvim",
-    after = "nvim-lspconfig",
-    requires = { "nvim-lua/plenary.nvim", module = "plenary" },
+    after = "mason.nvim",
     config = function()
       require("wuelner.settings.null-ls").config()
     end,
   })
   use({
-    "kosayoda/nvim-lightbulb",
-    after = { "nvim-lspconfig", "null-ls.nvim" },
+    "neovim/nvim-lspconfig",
+    after = { "mason-lspconfig.nvim", "nvim-cmp" },
+    requires = {
+      { "b0o/schemastore.nvim", module = "schemastore" },
+      { "kosayoda/nvim-lightbulb", module = "nvim-lightbulb" },
+    },
     config = function()
-      require("wuelner.settings.lightbulb").config()
+      require("wuelner.settings.lspconfig").config()
     end,
   })
   use({
@@ -287,7 +291,6 @@ return require("packer").startup(function(use)
   use({
     "wuelnerdotexe/vim-enfocado",
     branch = "development",
-    after = "human.vim",
     setup = function()
       require("wuelner.settings.enfocado").setup()
     end,
@@ -307,12 +310,6 @@ return require("packer").startup(function(use)
   use({
     "akinsho/bufferline.nvim",
     after = { "human.vim", "fern.vim", "aerial.nvim" },
-    requires = {
-      "tiagovla/scope.nvim",
-      config = function()
-        require("scope").setup()
-      end,
-    },
     config = function()
       require("wuelner.settings.bufferline").config()
     end,
@@ -361,12 +358,17 @@ return require("packer").startup(function(use)
       require("wuelner.settings.nerdterm").config()
     end,
   })
+  use({
+    "tiagovla/scope.nvim",
+    config = function()
+      require("scope").setup()
+    end,
+  })
 
   -- Telescope.
   use({
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "n", "<C-Bslash>" },
       { "n", "<leader>ff" },
       { "n", "<leader>hf" },
       { "n", "<leader>mf" },
@@ -374,18 +376,10 @@ return require("packer").startup(function(use)
       { "n", "<leader>wf" },
     },
     requires = {
-      { "nvim-lua/plenary.nvim", module = "plenary" },
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "make",
         module = "telescope._extensions.fzf",
-      },
-      {
-        "FeiyouG/command_center.nvim",
-        module = "command_center",
-        config = function()
-          require("wuelner.settings.command_center").config()
-        end,
       },
     },
     config = function()

@@ -2,8 +2,6 @@ local M = {}
 
 M.config = function()
   local select_horizontal = require("telescope.actions").select_horizontal
-  local component_DESC = require("command_center").component.DESC
-  local component_KEYS = require("command_center").component.KEYS
 
   require("telescope").setup({
     defaults = {
@@ -29,25 +27,9 @@ M.config = function()
         "*.code-search",
       },
     },
-    extensions = {
-      command_center = {
-        components = {
-          component_DESC,
-          component_KEYS,
-        },
-        sort_by = {
-          component_DESC,
-          component_KEYS,
-        },
-        auto_replace_desc_with_cmd = false,
-      },
-    },
   })
 
-  local load_extension = require("telescope").load_extension
-
-  load_extension("fzf")
-  load_extension("command_center")
+  require("telescope").load_extension("fzf")
 
   vim.api.nvim_create_autocmd("User", {
     pattern = "TelescopePreviewerLoaded",

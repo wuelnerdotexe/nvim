@@ -20,18 +20,8 @@ end
 M.config = function()
   local keymap_set = vim.keymap.set
 
-  keymap_set(
-    "n",
-    "<leader>ft",
-    "<Cmd>Fern . -drawer -toggle<CR>",
-    { silent = true }
-  )
-  keymap_set(
-    "n",
-    "<leader>fr",
-    "<Cmd>Fern . -reveal=% -drawer -toggle<CR>",
-    { silent = true }
-  )
+  keymap_set("n", "<leader>ft", "<Cmd>Fern . -drawer -toggle<CR>")
+  keymap_set("n", "<leader>fr", "<Cmd>Fern . -reveal=% -drawer -toggle<CR>")
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
@@ -47,7 +37,8 @@ M.config = function()
         "<",
         "<Plug>(fern-action-leave)"
           .. "<Plug>(fern-wait)"
-          .. "<Plug>(fern-action-cd:root)",
+          .. "<Plug>(fern-action-cd:root)"
+          .. "<Cmd>lua vim.notify(vim.fn.getcwd())<CR>",
         { nowait = true, buffer = true }
       )
       keymap_set(
@@ -55,7 +46,8 @@ M.config = function()
         ">",
         "<Plug>(fern-action-enter)"
           .. "<Plug>(fern-wait)"
-          .. "<Plug>(fern-action-cd:root)",
+          .. "<Plug>(fern-action-cd:root)"
+          .. "<Cmd>lua vim.notify(vim.fn.getcwd())<CR>",
         { nowait = true, buffer = true }
       )
       keymap_set("n", "h", "<Plug>(fern-action-collapse)", {

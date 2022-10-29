@@ -1,33 +1,13 @@
 local M = {}
 
 M.config = function()
-  local dap_adapters = require("dap").adapters
-  local get_package = require("mason-registry").get_package
-
-  dap_adapters.chrome = {
+  require("dap").adapters.firefox = {
     type = "executable",
     command = "node",
     args = {
-      get_package("chrome-debug-adapter"):get_install_path()
-        .. "/out/src/chromeDebug.js",
-    },
-  }
-
-  dap_adapters.firefox = {
-    type = "executable",
-    command = "node",
-    args = {
-      get_package("firefox-debug-adapter"):get_install_path()
-        .. "/dist/adapter.bundle.js",
-    },
-  }
-
-  dap_adapters.node2 = {
-    type = "executable",
-    command = "node",
-    args = {
-      get_package("node-debug2-adapter"):get_install_path()
-        .. "/out/src/nodeDebug.js",
+      require("mason-registry")
+        .get_package("firefox-debug-adapter")
+        :get_install_path() .. "/dist/adapter.bundle.js",
     },
   }
 
@@ -39,27 +19,12 @@ M.config = function()
   }) do
     require("dap").configurations[language] = {
       {
-        type = "chrome",
-        request = "launch",
-        name = "Launch Chrome against localhost",
-        url = "http://localhost:5173",
-        webRoot = "${workspaceFolder}",
-        console = "integratedTerminal",
-      },
-      {
-        type = "firefox",
-        request = "launch",
-        reAttach = true,
         name = "Launch Firefox against localhost",
-        url = "http://localhost:5173",
+        request = "launch",
+        type = "firefox",
+        reAttach = true,
+        url = "http://localhost:8080",
         webRoot = "${workspaceFolder}",
-        console = "integratedTerminal",
-      },
-      {
-        type = "node2",
-        request = "attach",
-        name = "Launch Program against process",
-        processId = require("dap.utils").pick_process,
         console = "integratedTerminal",
       },
     }

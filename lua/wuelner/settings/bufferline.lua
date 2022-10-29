@@ -25,22 +25,14 @@ M.config = function()
 
   local keymap_set = vim.keymap.set
 
-  keymap_set("n", "<S-Home>", "<Cmd>BufferLineMovePrev<CR>", { silent = true })
-  keymap_set("n", "gB", "<Cmd>BufferLineCyclePrev<CR>", { silent = true })
-  keymap_set("n", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>", {
-    silent = true,
-  })
-  keymap_set("i", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>", {
-    silent = true,
-  })
-  keymap_set("n", "<S-End>", "<Cmd>BufferLineMoveNext<CR>", { silent = true })
-  keymap_set("n", "gb", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
-  keymap_set("n", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>", {
-    silent = true,
-  })
-  keymap_set("i", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>", {
-    silent = true,
-  })
+  keymap_set("n", "<S-Home>", "<Cmd>BufferLineMovePrev<CR>")
+  keymap_set("n", "gB", "<Cmd>BufferLineCyclePrev<CR>")
+  keymap_set("n", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>")
+  keymap_set("i", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>")
+  keymap_set("n", "<S-End>", "<Cmd>BufferLineMoveNext<CR>")
+  keymap_set("n", "gb", "<Cmd>BufferLineCycleNext<CR>")
+  keymap_set("n", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>")
+  keymap_set("i", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>")
 end
 
 return M
