@@ -358,12 +358,6 @@ return require("packer").startup(function(use)
       require("wuelner.settings.nerdterm").config()
     end,
   })
-  use({
-    "tiagovla/scope.nvim",
-    config = function()
-      require("scope").setup()
-    end,
-  })
 
   -- Telescope.
   use({
