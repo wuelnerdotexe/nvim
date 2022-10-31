@@ -29,6 +29,7 @@ vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 
 vim.diagnostic.config({
+  signs = { priority = 9 },
   virtual_text = { prefix = "▎" },
   float = {
     header = { "Diagnostics", "Title" },

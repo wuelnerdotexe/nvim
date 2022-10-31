@@ -22,6 +22,8 @@ M.config = function()
         "fern",
         "lspinfo",
         "mason",
+        "noice",
+        "notify",
         "null-ls-info",
         "packer",
         "qf",

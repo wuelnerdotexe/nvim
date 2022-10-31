@@ -100,7 +100,6 @@ M.config = function()
     },
     sources = require("cmp").config.sources({
       { name = "nvim_lsp" },
-      { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
     }, {
@@ -111,10 +110,11 @@ M.config = function()
           indexing_interval = 40,
           get_bufnrs = function()
             local buf = vim.api.nvim_get_current_buf()
-            local byte_size =
-              vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
 
-            if byte_size > 102400 then
+            if
+              vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+              > 102400
+            then
               return {}
             end
 
@@ -152,6 +152,8 @@ M.config = function()
     "lspinfo",
     "mason",
     "nerdterm",
+    "noice",
+    "notify",
     "null-ls-info",
     "packer",
     "qf",

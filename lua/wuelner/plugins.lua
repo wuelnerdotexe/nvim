@@ -91,8 +91,8 @@ return require("packer").startup(function(use)
     "lambdalisue/fern.vim",
     after = "human.vim",
     requires = {
-      { "lambdalisue/fern-hijack.vim" },
-      { "lambdalisue/fern-git-status.vim" },
+      "lambdalisue/fern-hijack.vim",
+      "lambdalisue/fern-git-status.vim",
       {
         "lambdalisue/fern-renderer-nerdfont.vim",
         requires = {
@@ -165,11 +165,7 @@ return require("packer").startup(function(use)
       { "onsails/lspkind.nvim", module = "lspkind" },
       { "rcarriga/cmp-dap", module = "cmp_dap" },
       { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        module = "cmp_nvim_lsp",
-        requires = "hrsh7th/cmp-nvim-lsp-signature-help",
-      },
+      { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
       {
         "saadparwaiz1/cmp_luasnip",
         event = "InsertEnter",
@@ -251,7 +247,6 @@ return require("packer").startup(function(use)
   -- Typing.
   use({
     "mattn/emmet-vim",
-    after = "vim-sleuth",
     cmd = "EmmetInstall",
     setup = function()
       require("wuelner.settings.emmet").setup()
@@ -290,7 +285,6 @@ return require("packer").startup(function(use)
   -- Theme.
   use({
     "wuelnerdotexe/vim-enfocado",
-    branch = "development",
     setup = function()
       require("wuelner.settings.enfocado").setup()
     end,
@@ -317,10 +311,20 @@ return require("packer").startup(function(use)
 
   -- Improvements.
   use({
-    "wuelnerdotexe/cinnamon.nvim",
-    after = "human.vim",
+    "folke/noice.nvim",
+    event = "VimEnter",
+    requires = {
+      { "MunifTanjim/nui.nvim", after = "human.vim" },
+      { "rcarriga/nvim-notify", after = "human.vim" },
+    },
     config = function()
-      require("wuelner.settings.cinnamon").config()
+      require("wuelner.settings.noice").config()
+    end,
+  })
+  use({
+    "gen740/SmoothCursor.nvim",
+    config = function()
+      require("wuelner.settings.smoothcursor").config()
     end,
   })
   use({
@@ -352,7 +356,6 @@ return require("packer").startup(function(use)
   })
   use({
     "wuelnerdotexe/nerdterm",
-    cmd = "NERDTermToggle",
     keys = { { "n", "<leader>tt" } },
     config = function()
       require("wuelner.settings.nerdterm").config()

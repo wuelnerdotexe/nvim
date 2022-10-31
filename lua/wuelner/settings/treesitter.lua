@@ -18,7 +18,7 @@ M.config = function()
       additional_vim_regex_highlighting = false,
     },
     indent = { enable = true },
-    rainbow = { enable = true, extended_mode = false, max_file_lines = nil },
+    rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
     context_commentstring = { enable = true, enable_autocmd = false },
     autotag = { enable = true },
   })

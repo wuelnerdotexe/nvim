@@ -59,7 +59,6 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 | VI Mode |         Keymap         | Action                                     |
 | :-----: | :--------------------: | ------------------------------------------ |
-| Normal  |  `CTRL` + `<leader>`   | Open the command palette                   |
 | Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer                |
 | Normal  | `<leader>` + `f` + `r` | Reveal current file in the folder explorer |
 | Normal  | `<leader>` + `f` + `f` | Find files in the current directory        |

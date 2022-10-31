@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2022-10-30
+
+### Added
+
+- Added [noice.nvim](https://github.com/folke/noice.nvim) and [SmoothCursor.nvim](https://github.com/gen740/SmoothCursor.nvim) to the setup for a smooth, fancy, and candy for a development experience (DX). Noice !!
+
 ## [1.7.0] - 2022-10-17
 
 ### Added

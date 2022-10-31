@@ -10,6 +10,7 @@ M.config = function()
       changedelete = { hl = "GitSignsChange", text = "┃" },
     },
     current_line_blame_opts = { delay = 40 },
+    sign_priority = 8,
     update_debounce = 300,
     on_attach = function(bufnr)
       local keymap_set = vim.keymap.set

@@ -17,6 +17,8 @@ M.config = function()
       "lspinfo",
       "mason",
       "nerdterm",
+      "noice",
+      "notify",
       "null-ls-info",
       "packer",
       "qf",
