@@ -35,10 +35,10 @@ M.config = function()
 
   local keymap_set = vim.keymap.set
 
-  keymap_set("n", "<C-w>m", "<Cmd>WindowsMaximize<CR>")
-  keymap_set("n", "<C-w>_", "<Cmd>WindowsMaximizeVertically<CR>")
-  keymap_set("n", "<C-w>|", "<Cmd>WindowsMaximizeHorizontally<CR>")
-  keymap_set("n", "<C-w>=", "<Cmd>WindowsEqualize<CR>")
+  keymap_set({ "n", "x" }, "<C-w>m", "<Cmd>WindowsMaximize<CR>")
+  keymap_set({ "n", "x" }, "<C-w>_", "<Cmd>WindowsMaximizeVertically<CR>")
+  keymap_set({ "n", "x" }, "<C-w>|", "<Cmd>WindowsMaximizeHorizontally<CR>")
+  keymap_set({ "n", "x" }, "<C-w>=", "<Cmd>WindowsEqualize<CR>")
 end
 
 return M

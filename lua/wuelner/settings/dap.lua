@@ -106,7 +106,14 @@ M.config = function()
   local repl_close = require("dap").repl.close
 
   require("dap").listeners.after.event_initialized["dapui_config"] = function()
-    require("dapui").open()
+    keymap_set("n", "<F11>", require("dap").step_into)
+    keymap_set("n", "<F10>", require("dap").step_over)
+    keymap_set("n", "<F6>", require("dap").pause)
+
+    local step_out = require("dap").step_out
+
+    keymap_set("n", "<S-F11>", step_out)
+    keymap_set("n", "<F23>", step_out)
 
     local dap_terminate = function()
       require("dap").terminate()
@@ -116,14 +123,8 @@ M.config = function()
 
     keymap_set("n", "<S-F5>", dap_terminate)
     keymap_set("n", "<F17>", dap_terminate)
-    keymap_set("n", "<F6>", require("dap").pause)
-    keymap_set("n", "<F10>", require("dap").step_over)
-    keymap_set("n", "<F11>", require("dap").step_into)
 
-    local step_out = require("dap").step_out
-
-    keymap_set("n", "<S-F11>", step_out)
-    keymap_set("n", "<F23>", step_out)
+    require("dapui").open()
   end
 
   local keymaps_del = function()

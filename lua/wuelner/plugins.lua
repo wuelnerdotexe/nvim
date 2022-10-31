@@ -323,13 +323,14 @@ return require("packer").startup(function(use)
   })
   use({
     "gen740/SmoothCursor.nvim",
+    after = "human.vim",
     config = function()
       require("wuelner.settings.smoothcursor").config()
     end,
   })
   use({
     "anuvyklack/windows.nvim",
-    after = "human.vim",
+    keys = { { "n", "<C-w>" }, { "x", "<C-w>" } },
     requires = {
       { "anuvyklack/middleclass", module = "middleclass" },
       { "anuvyklack/animation.nvim", module = "animation" },

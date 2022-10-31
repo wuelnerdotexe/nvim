@@ -52,12 +52,12 @@ M.lsp_on_attach = function(client, bufnr)
   end
 
   if supports_method("textDocument/publishDiagnostics") then
-    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, {
-      buffer = bufnr,
-    })
     keymap_set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr })
     keymap_set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
     keymap_set("n", "<leader>dp", vim.diagnostic.open_float, {
+      buffer = bufnr,
+    })
+    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, {
       buffer = bufnr,
     })
   end

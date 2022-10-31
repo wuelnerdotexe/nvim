@@ -58,7 +58,7 @@ M.config = function()
   })
 
   require("nvim-lightbulb").setup({
-    sign = { priority = 9 },
+    sign = { priority = 8 },
     autocmd = { enabled = true },
   })
 

@@ -13,7 +13,7 @@ M.setup = function()
   vim.g["fern_git_status#disable_ignored"] = 1
   vim.g["fern_git_status#disable_untracked"] = 1
   vim.g["fern#renderer"] = "nerdfont"
-  vim.g["fern#renderer#nerdfont#root_symbol"] = ""
+  vim.g["fern#renderer#nerdfont#root_symbol"] = ""
   vim.g["fern#renderer#nerdfont#indent_markers"] = 1
 end
 

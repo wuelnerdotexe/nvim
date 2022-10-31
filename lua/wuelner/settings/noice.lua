@@ -45,18 +45,14 @@ M.config = function()
     throttle = 40,
   })
 
-  require("notify").setup({
-    background_colour = "FloatShadow",
-    fps = 24,
-    render = "minimal",
-    timeout = 300
-  })
+  require("notify").setup({ fps = 24, render = "minimal", timeout = 300 })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",
     callback = function()
-      vim.opt.list = false
-      vim.opt.relativenumber = false
+      vim.opt_local.list = false
+      vim.opt_local.signcolumn = "no"
+      vim.opt_local.relativenumber = false
     end,
   })
 end
