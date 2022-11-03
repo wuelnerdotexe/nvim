@@ -10,8 +10,8 @@ M.config = function()
       tailwind = "both",
       sass = { enable = true, parsers = { css } },
     },
-    buftypes = { "*", "!nofile", "!prompt" },
-    filetypes = { "*", "!TelescopePrompt" },
+    filetypes = { "*" },
+    buftypes = { "*", "!nofile", "!prompt", "!terminal" },
   })
 end
 

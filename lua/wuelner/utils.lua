@@ -20,6 +20,8 @@ M.aerial_breadcrumbs = function()
     or table_concat(parts, " > ")
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 M.lsp_on_attach = function(client, bufnr)
   local supports_method = client.supports_method
 
@@ -29,7 +31,9 @@ M.lsp_on_attach = function(client, bufnr)
 
   if supports_method("textDocument/formatting") then
     if client.name == "null-ls" then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
         buffer = bufnr,
         callback = function()
           vim.lsp.buf.format({ bufnr = bufnr })
@@ -54,12 +58,8 @@ M.lsp_on_attach = function(client, bufnr)
   if supports_method("textDocument/publishDiagnostics") then
     keymap_set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr })
     keymap_set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
-    keymap_set("n", "<leader>dp", vim.diagnostic.open_float, {
-      buffer = bufnr,
-    })
-    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, {
-      buffer = bufnr,
-    })
+    keymap_set("n", "<leader>dp", vim.diagnostic.open_float, { buffer = bufnr })
+    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, { buffer = bufnr })
   end
 
   if supports_method("textDocument/definition") then

@@ -33,7 +33,7 @@ vim.diagnostic.config({
   virtual_text = { prefix = "▎" },
   float = {
     header = { "Diagnostics", "Title" },
-    border = "single",
+    border = "rounded",
   },
   update_in_insert = true,
   severity_sort = true,
@@ -43,17 +43,7 @@ local ref_floating_preview = vim.lsp.util.open_floating_preview
 
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts = opts or {}
-  opts.border = opts.border
-    or {
-      { "┌", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "┐", "FloatBorder" },
-      { "│", "FloatBorder" },
-      { "┘", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "└", "FloatBorder" },
-      { "│", "FloatBorder" },
-    }
+  opts.border = opts.border or "rounded"
 
   return ref_floating_preview(contents, syntax, opts, ...)
 end

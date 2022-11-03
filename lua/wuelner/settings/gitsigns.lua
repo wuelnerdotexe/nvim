@@ -12,6 +12,7 @@ M.config = function()
     current_line_blame_opts = { delay = 40 },
     sign_priority = 7,
     update_debounce = 300,
+    preview_config = { border = "rounded" },
     on_attach = function(bufnr)
       local keymap_set = vim.keymap.set
       local wo_diff = vim.wo.diff

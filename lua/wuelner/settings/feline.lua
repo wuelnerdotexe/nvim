@@ -15,7 +15,7 @@ M.config = function()
   local highlighter = function(name, fg, style)
     local mode_color = require("feline.providers.vi_mode").get_mode_color
 
-    if mode_color() ~= "bg_2" then
+    if mode_color() ~= "darkgray" then
       return { name = name, fg = fg, style = style }
     end
 
@@ -26,7 +26,7 @@ M.config = function()
     provider = "diagnostic_errors",
     icon = " E:",
     hl = function()
-      return highlighter("FelineErrors", "br_red", "bold")
+      return highlighter("FelineErrors", "red", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -36,7 +36,7 @@ M.config = function()
     provider = "diagnostic_warnings",
     icon = " W:",
     hl = function()
-      return highlighter("FelineWarns", "br_orange", "bold")
+      return highlighter("FelineWarns", "orange", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -46,7 +46,7 @@ M.config = function()
     provider = "diagnostic_info",
     icon = " I:",
     hl = function()
-      return highlighter("FelineInfo", "br_yellow", "bold")
+      return highlighter("FelineInfo", "yellow", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -56,7 +56,7 @@ M.config = function()
     provider = "diagnostic_hints",
     icon = " H:",
     hl = function()
-      return highlighter("FelineHints", "br_blue", "bold")
+      return highlighter("FelineHints", "skyblue", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -67,14 +67,14 @@ M.config = function()
       return require("feline.providers.lsp").diagnostics_exist()
     end,
     provider = " ",
-    hl = { name = "FelineDiagnosticsSeparator", fg = "bg_1" },
+    hl = { name = "FelineDiagnosticsSeparator", fg = "bg" },
     priority = -5,
   }
 
   components_active[1][6] = {
     provider = "▊",
     hl = function()
-      return highlighter("FelineIndicator", "accent_1", "NONE")
+      return highlighter("FelineIndicator", "cyan", "NONE")
     end,
     priority = 1,
   }
@@ -87,7 +87,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelinePosition", "fg_0", "NONE")
+      return highlighter("FelinePosition", "fg", "NONE")
     end,
     truncate_hide = true,
   }
@@ -96,7 +96,7 @@ M.config = function()
     provider = "%P/%L",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineLines", "fg_0", "NONE")
+      return highlighter("FelineLines", "fg", "NONE")
     end,
     priority = -2,
     truncate_hide = true,
@@ -109,7 +109,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineCWD", "br_blue", "bold")
+      return highlighter("FelineCWD", "skyblue", "bold")
     end,
     priority = -8,
     truncate_hide = true,
@@ -119,7 +119,7 @@ M.config = function()
     provider = "git_branch",
     icon = " ",
     hl = function()
-      return highlighter("FelineBranch", "br_orange", "NONE")
+      return highlighter("FelineBranch", "orange", "NONE")
     end,
     priority = -7,
     truncate_hide = true,
@@ -129,7 +129,7 @@ M.config = function()
     provider = "git_diff_added",
     icon = "  ",
     hl = function()
-      return highlighter("FelineAdded", "green", "NONE")
+      return highlighter("FelineAdded", "darkgreen", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -139,7 +139,7 @@ M.config = function()
     provider = "git_diff_removed",
     icon = "  ",
     hl = function()
-      return highlighter("FelineRemoved", "red", "NONE")
+      return highlighter("FelineRemoved", "darkred", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -150,7 +150,7 @@ M.config = function()
     icon = "  ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineChanged", "yellow", "NONE")
+      return highlighter("FelineChanged", "darkyellow", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -161,7 +161,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineFiletype", "fg_0", "NONE")
+      return highlighter("FelineFiletype", "fg", "NONE")
     end,
     priority = -4,
     truncate_hide = true,
@@ -171,7 +171,7 @@ M.config = function()
     provider = "file_encoding",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineEncoding", "fg_0", "NONE")
+      return highlighter("FelineEncoding", "fg", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -183,7 +183,7 @@ M.config = function()
     end,
     right_sep = " ",
     hl = function()
-      return highlighter("FelineSleuth", "fg_0", "NONE")
+      return highlighter("FelineSleuth", "fg", "NONE")
     end,
     priority = -3,
     truncate_hide = true,
@@ -193,7 +193,7 @@ M.config = function()
     provider = "file_format",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineFormat", "fg_0", "NONE")
+      return highlighter("FelineFormat", "fg", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -205,7 +205,7 @@ M.config = function()
 
   components_inactive[1][1] = {
     provider = "▊",
-    hl = { name = "FelineIndicatorInactive", fg = "bg_1" },
+    hl = { name = "FelineIndicatorInactive", fg = "bg" },
     priority = 1,
   }
 
@@ -217,7 +217,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelinePositionInactive", "dim_0", "NONE")
+      return highlighter("FelinePositionInactive", "gray", "NONE")
     end,
     truncate_hide = true,
   }
@@ -232,7 +232,7 @@ M.config = function()
     icon = "",
     left_sep = " ",
     hl = function()
-      return highlighter("FelineFilenameInactive", "dim_0", "NONE")
+      return highlighter("FelineFilenameInactive", "gray", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -242,24 +242,34 @@ M.config = function()
 
   require("feline").setup({
     theme = {
-      bg_1 = enfocado_colors.bg_1[1],
-      bg_2 = enfocado_colors.bg_2[1],
-      dim_0 = enfocado_colors.dim_0[1],
-      fg_0 = enfocado_colors.fg_0[1],
-      red = enfocado_colors.red[1],
-      green = enfocado_colors.green[1],
-      yellow = enfocado_colors.yellow[1],
-      br_red = enfocado_colors.br_red[1],
-      br_yellow = enfocado_colors.br_yellow[1],
-      br_blue = enfocado_colors.br_blue[1],
-      br_orange = enfocado_colors.br_orange[1],
-      accent_1 = enfocado_colors.accent_1[1],
+      bg = enfocado_colors.bg_0[1],
+      fg = enfocado_colors.fg_0[1],
+      black = enfocado_colors.bg_1[1],
+      darkred = enfocado_colors.red[1],
+      darkgreen = enfocado_colors.green[1],
+      darkyellow = enfocado_colors.yellow[1],
+      oceanblue = enfocado_colors.blue[1],
+      darkmagenta = enfocado_colors.magenta[1],
+      darkcyan = enfocado_colors.cyan[1],
+      darkorange = enfocado_colors.orange[1],
+      darkviolet = enfocado_colors.violet[1],
+      gray = enfocado_colors.dim_0[1],
+      darkgray = enfocado_colors.bg_2[1],
+      red = enfocado_colors.br_red[1],
+      green = enfocado_colors.br_green[1],
+      yellow = enfocado_colors.br_yellow[1],
+      skyblue = enfocado_colors.br_blue[1],
+      magenta = enfocado_colors.br_magenta[1],
+      cyan = enfocado_colors.br_cyan[1],
+      orange = enfocado_colors.br_orange[1],
+      violet = enfocado_colors.br_violet[1],
+      white = enfocado_colors.fg_1[1],
     },
     vi_mode_colors = {
-      ["COMMAND"] = "bg_2",
-      ["NONE"] = "bg_2",
-      ["SHELL"] = "bg_2",
-      ["TERM"] = "bg_2",
+      ["COMMAND"] = "darkgray",
+      ["NONE"] = "darkgray",
+      ["SHELL"] = "darkgray",
+      ["TERM"] = "darkgray",
     },
     components = components,
     force_inactive = {
@@ -289,7 +299,7 @@ M.config = function()
             end,
             left_sep = " ",
             right_sep = " ",
-            hl = { name = "FelineWinbar", fg = "fg_0" },
+            hl = { name = "FelineWinbar", fg = "fg" },
           },
         },
       },
@@ -301,7 +311,7 @@ M.config = function()
             end,
             left_sep = " ",
             right_sep = " ",
-            hl = { name = "FelineInactiveWinbar", fg = "dim_0" },
+            hl = { name = "FelineInactiveWinbar", fg = "gray" },
           },
         },
       },

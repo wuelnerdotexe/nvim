@@ -1,19 +1,29 @@
 local M = {}
 
 M.config = function()
+  local find_command = { "fd", "-I", "-H", "-t", "f" }
   local select_horizontal = require("telescope.actions").select_horizontal
 
   require("telescope").setup({
+    pickers = {
+      find_files = { find_command = find_command },
+      fd = { find_command = find_command },
+    },
     defaults = {
       mappings = {
-        n = {
-          ["<C-x>"] = false,
-          ["<C-s>"] = select_horizontal,
-        },
-        i = {
-          ["<C-x>"] = false,
-          ["<C-s>"] = select_horizontal,
-        },
+        n = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
+        i = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
+      },
+      vimgrep_arguments = {
+        "rg",
+        "--hidden",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--ignore-case",
+        "--trim",
       },
       file_ignore_patterns = {
         ".git",

@@ -127,7 +127,7 @@ M.config = function()
     window = {
       completion = { scrolloff = 3 },
       documentation = {
-        border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+        border = "rounded",
         winhighlight = "FloatBorder:FloatBorder",
       },
     },

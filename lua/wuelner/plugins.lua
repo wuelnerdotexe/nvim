@@ -23,9 +23,9 @@ end
 require("packer").init({
   max_jobs = 3,
   display = {
-    prompt_border = "single",
+    prompt_border = "rounded",
     open_fn = function()
-      return require("packer.util").float({ border = "single" })
+      return require("packer.util").float({ border = "rounded" })
     end,
   },
   autoremove = true,

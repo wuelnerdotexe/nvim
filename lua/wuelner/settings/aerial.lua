@@ -15,7 +15,6 @@ M.config = function()
       placement = "edge",
     },
     attach_mode = "global",
-    lazy_load = true,
     disable_max_size = 102400,
     highlight_mode = "last",
     highlight_closest = false,
@@ -30,9 +29,15 @@ M.config = function()
       Method = "",
       Struct = "",
     },
+    on_attach = function(bufnr)
+      local keymap_set = vim.keymap.set
+
+      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
+      keymap_set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
+    end,
     show_guides = true,
     guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-    float = { border = "single", relative = "editor" },
+    float = { border = "rounded", relative = "editor" },
   })
 
   vim.keymap.set("n", "<leader>st", require("aerial").toggle)

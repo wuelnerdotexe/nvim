@@ -11,12 +11,12 @@ M.setup = function()
     "dapui_stacks",
     "dapui_watches",
     "fern",
+    "notify",
   }
 end
 
 M.config = function()
   vim.opt.spell = false
-  vim.opt.foldenable = false
   vim.opt.wrap = false
 
   local keymap_set = vim.keymap.set

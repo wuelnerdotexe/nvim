@@ -4,7 +4,7 @@ M.config = function()
   require("mason").setup({
     max_concurrent_installers = 3,
     ui = {
-      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+      border = "rounded",
       icons = {
         package_installed = "✓",
         package_pending = "⟳",
