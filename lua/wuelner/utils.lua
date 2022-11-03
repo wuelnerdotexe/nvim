@@ -16,7 +16,7 @@ M.aerial_breadcrumbs = function()
 
   local table_concat = table.concat
 
-  return table_concat(parts, " > ") == "" and "..."
+  return table_concat(parts, " > ") == "" and ""
     or table_concat(parts, " > ")
 end
 

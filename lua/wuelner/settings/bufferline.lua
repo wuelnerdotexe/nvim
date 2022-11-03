@@ -3,8 +3,10 @@ local M = {}
 M.config = function()
   require("bufferline").setup({
     options = {
-      buffer_close_icon = "",
-      indicator = { icon = "▊", style = "icon" },
+      max_name_length = 14,
+      max_prefix_length = 14,
+      tab_size = 18,
+      indicator = { icon = "▎", style = "icon" },
       offsets = {
         {
           filetype = "aerial",
@@ -19,7 +21,10 @@ M.config = function()
           separator = false,
         },
       },
-      separator_style = "thick",
+      show_buffer_icons = false,
+      show_buffer_default_icon = false,
+      show_close_icon = false,
+      separator_style = { "▎", "▎" },
     },
   })
 

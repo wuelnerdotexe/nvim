@@ -12,21 +12,21 @@ M.config = function()
   table_insert(components_active, {})
   table_insert(components_active, {})
 
-  local highlighter = function(name, fg, style)
+  local highlighter = function(name, bg, fg, style)
     local mode_color = require("feline.providers.vi_mode").get_mode_color
 
     if mode_color() ~= "darkgray" then
-      return { name = name, fg = fg, style = style }
+      return { name = name, bg = bg, fg = fg, style = style }
     end
 
-    return { name = name, fg = mode_color(), style = style }
+    return { name = name, bg = bg, fg = mode_color(), style = style }
   end
 
   components_active[1][1] = {
     provider = "diagnostic_errors",
     icon = " E:",
     hl = function()
-      return highlighter("FelineErrors", "red", "bold")
+      return highlighter("FelineErrors", "base", "red", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -36,7 +36,7 @@ M.config = function()
     provider = "diagnostic_warnings",
     icon = " W:",
     hl = function()
-      return highlighter("FelineWarns", "orange", "bold")
+      return highlighter("FelineWarns", "base", "orange", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -46,7 +46,7 @@ M.config = function()
     provider = "diagnostic_info",
     icon = " I:",
     hl = function()
-      return highlighter("FelineInfo", "yellow", "bold")
+      return highlighter("FelineInfo", "base", "yellow", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -56,7 +56,7 @@ M.config = function()
     provider = "diagnostic_hints",
     icon = " H:",
     hl = function()
-      return highlighter("FelineHints", "skyblue", "bold")
+      return highlighter("FelineHints", "base", "skyblue", "bold")
     end,
     priority = -6,
     truncate_hide = true,
@@ -67,14 +67,14 @@ M.config = function()
       return require("feline.providers.lsp").diagnostics_exist()
     end,
     provider = " ",
-    hl = { name = "FelineDiagnosticsSeparator", fg = "bg" },
+    hl = { name = "FelineDiagnosticsSeparator", bg = "base", fg = "bg" },
     priority = -5,
   }
 
   components_active[1][6] = {
-    provider = "▊",
+    provider = "▎",
     hl = function()
-      return highlighter("FelineIndicator", "cyan", "NONE")
+      return highlighter("FelineIndicator", "bg", "cyan", "NONE")
     end,
     priority = 1,
   }
@@ -87,7 +87,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelinePosition", "fg", "NONE")
+      return highlighter("FelinePosition", "bg", "fg", "NONE")
     end,
     truncate_hide = true,
   }
@@ -96,7 +96,7 @@ M.config = function()
     provider = "%P/%L",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineLines", "fg", "NONE")
+      return highlighter("FelineLines", "bg", "fg", "NONE")
     end,
     priority = -2,
     truncate_hide = true,
@@ -109,7 +109,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineCWD", "skyblue", "bold")
+      return highlighter("FelineCWD", "bg", "skyblue", "bold")
     end,
     priority = -8,
     truncate_hide = true,
@@ -119,7 +119,7 @@ M.config = function()
     provider = "git_branch",
     icon = " ",
     hl = function()
-      return highlighter("FelineBranch", "orange", "NONE")
+      return highlighter("FelineBranch", "bg", "orange", "NONE")
     end,
     priority = -7,
     truncate_hide = true,
@@ -129,7 +129,7 @@ M.config = function()
     provider = "git_diff_added",
     icon = "  ",
     hl = function()
-      return highlighter("FelineAdded", "darkgreen", "NONE")
+      return highlighter("FelineAdded", "bg", "darkgreen", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -139,7 +139,7 @@ M.config = function()
     provider = "git_diff_removed",
     icon = "  ",
     hl = function()
-      return highlighter("FelineRemoved", "darkred", "NONE")
+      return highlighter("FelineRemoved", "bg", "darkred", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -150,7 +150,7 @@ M.config = function()
     icon = "  ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineChanged", "darkyellow", "NONE")
+      return highlighter("FelineChanged", "bg", "darkyellow", "NONE")
     end,
     priority = -9,
     truncate_hide = true,
@@ -161,7 +161,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineFiletype", "fg", "NONE")
+      return highlighter("FelineFiletype", "bg", "fg", "NONE")
     end,
     priority = -4,
     truncate_hide = true,
@@ -171,7 +171,7 @@ M.config = function()
     provider = "file_encoding",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineEncoding", "fg", "NONE")
+      return highlighter("FelineEncoding", "bg", "fg", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -183,7 +183,7 @@ M.config = function()
     end,
     right_sep = " ",
     hl = function()
-      return highlighter("FelineSleuth", "fg", "NONE")
+      return highlighter("FelineSleuth", "bg", "fg", "NONE")
     end,
     priority = -3,
     truncate_hide = true,
@@ -193,7 +193,7 @@ M.config = function()
     provider = "file_format",
     right_sep = " ",
     hl = function()
-      return highlighter("FelineFormat", "fg", "NONE")
+      return highlighter("FelineFormat", "bg", "fg", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -204,8 +204,8 @@ M.config = function()
   table_insert(components_inactive, {})
 
   components_inactive[1][1] = {
-    provider = "▊",
-    hl = { name = "FelineIndicatorInactive", fg = "bg" },
+    provider = "▎",
+    hl = { name = "FelineIndicatorInactive", bg = "bg", fg = "bg" },
     priority = 1,
   }
 
@@ -217,7 +217,7 @@ M.config = function()
     left_sep = " ",
     right_sep = " ",
     hl = function()
-      return highlighter("FelinePositionInactive", "gray", "NONE")
+      return highlighter("FelinePositionInactive", "bg", "gray", "NONE")
     end,
     truncate_hide = true,
   }
@@ -232,7 +232,7 @@ M.config = function()
     icon = "",
     left_sep = " ",
     hl = function()
-      return highlighter("FelineFilenameInactive", "gray", "NONE")
+      return highlighter("FelineFilenameInactive", "bg", "gray", "NONE")
     end,
     priority = -1,
     truncate_hide = true,
@@ -264,6 +264,7 @@ M.config = function()
       orange = enfocado_colors.br_orange[1],
       violet = enfocado_colors.br_violet[1],
       white = enfocado_colors.fg_1[1],
+      base = enfocado_colors.base[1],
     },
     vi_mode_colors = {
       ["COMMAND"] = "darkgray",
@@ -299,7 +300,7 @@ M.config = function()
             end,
             left_sep = " ",
             right_sep = " ",
-            hl = { name = "FelineWinbar", fg = "fg" },
+            hl = { name = "FelineWinbar", bg = "bg", fg = "fg" },
           },
         },
       },
@@ -311,7 +312,7 @@ M.config = function()
             end,
             left_sep = " ",
             right_sep = " ",
-            hl = { name = "FelineInactiveWinbar", fg = "gray" },
+            hl = { name = "FelineInactiveWinbar", bg = "bg", fg = "gray" },
           },
         },
       },

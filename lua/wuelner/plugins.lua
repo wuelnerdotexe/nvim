@@ -296,14 +296,14 @@ return require("packer").startup(function(use)
   -- Statusline.
   use({
     "feline-nvim/feline.nvim",
-    after = { "human.vim", "aerial.nvim", "vim-enfocado" },
+    after = { "vim-enfocado", "aerial.nvim" },
     config = function()
       require("wuelner.settings.feline").config()
     end,
   })
   use({
     "akinsho/bufferline.nvim",
-    after = { "human.vim", "fern.vim", "aerial.nvim" },
+    after = "human.vim",
     config = function()
       require("wuelner.settings.bufferline").config()
     end,
@@ -374,11 +374,9 @@ return require("packer").startup(function(use)
       { "n", "<leader>wf" },
     },
     requires = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make",
-        module = "telescope._extensions.fzf",
-      },
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
+      module = "telescope._extensions.fzf",
     },
     config = function()
       require("wuelner.settings.telescope").config()

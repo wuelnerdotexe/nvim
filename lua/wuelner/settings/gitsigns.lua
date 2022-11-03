@@ -3,11 +3,11 @@ local M = {}
 M.config = function()
   require("gitsigns").setup({
     signs = {
-      add = { hl = "GitSignsAdd", text = "┃" },
-      change = { hl = "GitSignsChange", text = "┃" },
-      delete = { hl = "GitSignsDelete", text = "▁" },
-      topdelete = { hl = "GitSignsDelete", text = "▔" },
-      changedelete = { hl = "GitSignsChange", text = "┃" },
+      add = { hl = "GitSignsAdd", text = "│" },
+      change = { hl = "GitSignsChange", text = "│" },
+      delete = { hl = "GitSignsDelete", text = "_" },
+      topdelete = { hl = "GitSignsDelete", text = "‾" },
+      changedelete = { hl = "GitSignsChange", text = "│" },
     },
     current_line_blame_opts = { delay = 40 },
     sign_priority = 7,
