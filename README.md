@@ -4,11 +4,11 @@ My personal but distributable Neovim setup powered by [Enfocado](https://wuelner
 
 ## Requirements
 
-- [Nerd Fonts](https://www.nerdfonts.com/) - to show icons.
-- [Neovim](https://neovim.io/) >= v0.8.0 - obviously.
-- [NPM](https://www.npmjs.com/package/npm) - to install language servers.
-- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - optional to search patterns.
-- [fd](https://github.com/sharkdp/fd) - optional to find files.
+- [Nerd Fonts](https://www.nerdfonts.com/) patched with [codicons.ttf](https://github.com/microsoft/vscode-codicons) - to show nice icons.
+- [Neovim](https://neovim.io/) >= v0.9.0 (nightly) - obviously.
+- [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters.
+- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [Telescope](https://github.com/nvim-telescope/telescope.nvim).
+- [fd](https://github.com/sharkdp/fd) - to find files with [Telescope](https://github.com/nvim-telescope/telescope.nvim).
 
 ## Installation
 
