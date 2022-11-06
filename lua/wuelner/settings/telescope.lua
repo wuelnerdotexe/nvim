@@ -1,14 +1,10 @@
 local M = {}
 
 M.config = function()
-  local find_command = { "fd", "-I", "-H", "-t", "f" }
   local select_horizontal = require("telescope.actions").select_horizontal
 
   require("telescope").setup({
-    pickers = {
-      find_files = { find_command = find_command },
-      fd = { find_command = find_command },
-    },
+    pickers = { fd = { find_command = { "fd", "-I", "-H", "-t", "f" } } },
     defaults = {
       mappings = {
         n = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
@@ -48,7 +44,7 @@ M.config = function()
 
   local keymap_set = vim.keymap.set
 
-  keymap_set("n", "<leader>ff", require("telescope.builtin").find_files)
+  keymap_set("n", "<leader>ff", require("telescope.builtin").fd)
   keymap_set("n", "<leader>of", require("telescope.builtin").oldfiles)
   keymap_set("n", "<leader>mf", require("telescope.builtin").marks)
   keymap_set("n", "<leader>wf", require("telescope.builtin").live_grep)

@@ -57,18 +57,17 @@ IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.
 
 ### General
 
-| VI Mode |         Keymap         | Action                                     |
-| :-----: | :--------------------: | ------------------------------------------ |
-| Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer                |
-| Normal  | `<leader>` + `f` + `r` | Reveal current file in the folder explorer |
-| Normal  | `<leader>` + `f` + `f` | Find files in the current directory        |
-| Normal  | `<leader>` + `o` + `f` | Find recently opened files                 |
-| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                       |
-| Normal  | `<leader>` + `w` + `f` | Find words in the current directory        |
-| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                         |
-| Normal  | `<leader>` + `s` + `t` | Toggle document symbols                    |
-| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new tab             |
-| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal                     |
+| VI Mode |         Keymap         | Action                              |
+| :-----: | :--------------------: | ----------------------------------- |
+| Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer         |
+| Normal  | `<leader>` + `f` + `f` | Find files in the current directory |
+| Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
+| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
+| Normal  | `<leader>` + `w` + `f` | Find words in the current directory |
+| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                  |
+| Normal  | `<leader>` + `s` + `t` | Toggle document symbols             |
+| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
+| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal              |
 
 ### Folders explorer
 

@@ -162,7 +162,6 @@ return require("packer").startup(function(use)
     "hrsh7th/nvim-cmp",
     after = "vim-sleuth",
     requires = {
-      { "onsails/lspkind.nvim", module = "lspkind" },
       { "rcarriga/cmp-dap", module = "cmp_dap" },
       { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
       { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },

@@ -20,15 +20,11 @@ end
 M.config = function()
   local keymap_set = vim.keymap.set
 
-  keymap_set("n", "<leader>ft", "<Cmd>Fern . -drawer -toggle<CR>")
-  keymap_set("n", "<leader>fr", "<Cmd>Fern . -reveal=% -drawer -toggle<CR>")
-
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
     callback = function()
       vim.fn["glyph_palette#apply"]()
 
-      vim.opt_local.signcolumn = "no"
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
 
@@ -80,7 +76,7 @@ M.config = function()
         nowait = true,
         buffer = true,
       })
-      keymap_set("n", "<C-t>", "<Plug>(fern-action-open:tabedit)", {
+      keymap_set("n", "<C-T>", "<Plug>(fern-action-open:tabedit)", {
         nowait = true,
         buffer = true,
       })
@@ -134,6 +130,8 @@ M.config = function()
       })
     end,
   })
+
+  keymap_set("n", "<leader>ft", "<Cmd>Fern . -reveal=% -drawer -toggle<CR>")
 end
 
 return M

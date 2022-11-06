@@ -24,7 +24,7 @@ M.config = function()
   keymap_set("n", "1b", "<Plug>(BufOnly)")
   keymap_set("n", "1t", "<Cmd>tabonly<CR>")
   keymap_set("n", "<C-w>t", "<Cmd>tabedit %<CR>")
-  keymap_set("n", "<leader>to", "<Cmd>tabnew +terminal<CR>")
+  keymap_set("n", "<leader>to", "<Cmd>terminal<CR>")
   keymap_set(
     "n",
     "<C-w><C-l>",

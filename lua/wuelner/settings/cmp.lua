@@ -13,6 +13,7 @@ M.config = function()
           :match("%s")
         == nil
   end
+
   local cmp_setup = require("cmp").setup
   local cmp_mapping = require("cmp").mapping
   local cmp_visible = require("cmp").visible
@@ -74,22 +75,45 @@ M.config = function()
     completion = { completeopt = "menuone,noselect", keyword_length = 1 },
     formatting = {
       fields = { "abbr", "kind" },
-      format = require("lspkind").cmp_format({
-        mode = "symbol_text",
-        before = function(entry, vim_item)
-          vim_item.kind = string.format(
-            "%s %s",
-            require("lspkind").presets.codicons[vim_item.kind],
-            vim_item.kind
-          )
+      format = function(entry, vim_item)
+        local string_format = string.format
+        local codicons = {
+          Text = "",
+          Method = "",
+          Function = "",
+          Constructor = "",
+          Field = "",
+          Variable = "",
+          Class = "",
+          Interface = "",
+          Module = "",
+          Property = "",
+          Unit = "",
+          Value = "",
+          Enum = "",
+          Keyword = "",
+          Snippet = "",
+          Color = "",
+          File = "",
+          Reference = "",
+          Folder = "",
+          EnumMember = "",
+          Constant = "",
+          Struct = "",
+          Event = "",
+          Operator = "",
+          TypeParameter = "",
+        }
 
-          if entry.source.name == "cmp_tabnine" then
-            vim_item.kind = string.format("%s %s", "", "Tabnine")
-          end
+        vim_item.kind =
+          string_format("%s %s", codicons[vim_item.kind], vim_item.kind)
 
-          return vim_item
-        end,
-      }),
+        if entry.source.name == "cmp_tabnine" then
+          vim_item.kind = string_format("%s %s", "", "Tabnine")
+        end
+
+        return vim_item
+      end,
     },
     sorting = {
       comparators = {
