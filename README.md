@@ -34,7 +34,7 @@ And then restart Neovim to complete the installation process of JSON Lint, Markd
 MasonInstall jsonlint markdownlint prettierd
 ```
 
-Note that the installed Prettier package is not the official one, this is the only package configured to work with this setup, because making many comparisons, it is undoubtedly the one that offers a better experience in Neovim, and no, IT WILL NOT CAUSE CONFLICTS with your project settings. Here you can learn more about [prettierd](https://github.com/fsouza/prettierd).
+Note that the installed Prettier package is not the official one, this is the only package configured to work with this setup, because making many comparisons, it is undoubtedly the one that offers a better experience in Neovim, and no, **IT WILL NOT CAUSE CONFLICTS** with your project settings. Here you can learn more about [prettierd](https://github.com/fsouza/prettierd).
 So this setup is not ready to work with the official package, so don't try to install it and expect it to work.
 
 #### Debug adapter
@@ -50,7 +50,7 @@ IMPORTANT: This setup only provides settings for debugging front-end projects cr
 ## Keymaps
 
 The keymaps created by this config are very well thought out to be intuitive, meaningful, and most of all, to stick to the essence of Vim without conflicting with it.
-Keymaps are normally assigned two letters, which signify an action, for example: `d` + `p` = [D]diagnostic [P]review. Keep in mind that the functionality will always come first and then the action.
+Keymaps are normally assigned two letters, which signify an action, for example: `d` + `p` = `d`iagnostic `p`review. Keep in mind that the functionality will always come first and then the action.
 This is the standard created and used by this configuration for unique consistency.
 
 IMPORTANT: The `\` backslash remains as the global `<leader>` leadermap.

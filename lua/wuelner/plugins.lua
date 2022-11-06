@@ -295,14 +295,14 @@ return require("packer").startup(function(use)
   -- Statusline.
   use({
     "feline-nvim/feline.nvim",
-    after = { "vim-enfocado", "aerial.nvim" },
+    event = "VimEnter",
     config = function()
       require("wuelner.settings.feline").config()
     end,
   })
   use({
     "akinsho/bufferline.nvim",
-    after = "human.vim",
+    event = "VimEnter",
     config = function()
       require("wuelner.settings.bufferline").config()
     end,
@@ -379,6 +379,14 @@ return require("packer").startup(function(use)
     },
     config = function()
       require("wuelner.settings.telescope").config()
+    end,
+  })
+
+  -- Presence.
+  use({
+    "andweeb/presence.nvim",
+    config = function()
+      require("wuelner.settings.presence").config()
     end,
   })
 
