@@ -1,4 +1,4 @@
-local packer_bootstrap = function()
+local ensure_packer = function()
   local install_path = vim.fn.stdpath("data")
     .. "/site/pack/packer/start/packer.nvim"
 
@@ -19,6 +19,8 @@ local packer_bootstrap = function()
 
   return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 require("packer").init({
   max_jobs = 3,
@@ -390,7 +392,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  if packer_bootstrap() then
+  if packer_bootstrap then
     require("packer").sync()
   end
 end)

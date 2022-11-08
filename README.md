@@ -1,14 +1,84 @@
 # My Neovim Setup
 
+![Screenshot](https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot.png)
+[![License Badge](https://img.shields.io/badge/License-GPL-3FC5B7.svg?style=for-the-badge)](https://github.com/wuelnerdotexe/nvim/blob/main/LICENSE)
+[![README Style Badge](https://img.shields.io/badge/README%20Style-Standard-3FC5B7.svg?style=for-the-badge)](https://github.com/RichardLitt/standard-readme)
+
 My personal but distributable Neovim setup powered by [Enfocado](https://wuelnerdotexe.github.io/enfocado) and [human.vim](https://github.com/wuelnerdotexe/human.vim) written in Lua.
+
+## Table of Contents
+
+- [Features](#features)
+- [Philosophy](#philosophy)
+- [Requirements](#requirements)
+- [Installation](#installation)
+  - [Post installation](#post-installation)
+    - [Linters and Formatters](#linters-and-formatters)
+    - [Debug adapter](#debug-adapter)
+- [Keymaps](#keymaps)
+  - [General](#general)
+  - [Folders explorer](#folders-explorer)
+  - [Windows](#windows)
+  - [Buffers](#buffers)
+  - [Tabs](#tabs)
+  - [Autocomplete](#autocomplete)
+  - [Commenting](#commenting)
+  - [Moving text](#moving-text)
+  - [Git signs](#git-signs)
+  - [Diagnostics](#diagnostics)
+  - [Debugging](#debugging)
+- [Recommendations](#recommendations)
+  - [Fonts](#fonts)
+- [Maintainer](#maintainer)
+- [License](#license)
+
+## Features
+
+The main features and plugins provided by this setup are as follows:
+
+- Updatetime, debounce, throttle times based on scientific research.
+- Lazy loading of plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
+- Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
+- Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
+- Powerful fuzzy finder with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
+- Advanced syntax recognition with [treesitter.nvim](https://github.com/nvim-treesitter/nvim-treesitter).
+- Neovim native language server protocol.
+- Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
+- [Friendly snippets](https://github.com/rafamadriz/friendly-snippets) with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
+- Autocomplete with Machine Learning by [Tabnine](https://www.tabnine.com/).
+- Emmet integration with [emmet-vim](https://github.com/mattn/emmet-vim).
+- git status of files with [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim).
+- Integrations with [EsLint](https://eslint.org/), [StyleLint](https://stylelint.io/), [JSONLint](https://github.com/zaach/jsonlint), [MarkdownLint](https://github.com/DavidAnson/markdownlint), and [Prettier](https://prettier.io/).
+- Code debugging with [nvim-dap](https://github.com/mfussenegger/nvim-dap).
+- Markdown previewer with [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim).
+- Useful and smart status bar with [feline.nvim](https://github.com/feline-nvim/feline.nvim).
+- Harmonic and consistent theme by [Enfocado](https://wuelnerdotexe.github.io/enfocado).
+- Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [noice.nvim](https://github.com/folke/noice.nvim), and [nvim-notify](https://github.com/rcarriga/nvim-notify).
+- Tmux integration with [tmux.nvim](https://github.com/aserowy/tmux.nvim).
+
+## Philosophy
+
+My Neovim setup, unlike many others, has and follows a well-defined philosophy, governed in hierarchical order of priority by:
+
+- Consistency,
+- Minimalism, and
+- Plugin synergy.
+
+You won't find any unnecessary plugins or redundant plugins here, and every little aspect is tweaked to keep everything consistent as a whole; for example:
+
+- Official and standard icons,
+- Rounded floating borders, and
+- With clean and optimized code.
+
+DISCLAIMER: From the above you will see that I make many commits perfecting aspects that seem insignificant, I apologize for it.
 
 ## Requirements
 
 - [Nerd Fonts](https://www.nerdfonts.com/) patched with [codicons.ttf](https://github.com/microsoft/vscode-codicons) - to show nice icons.
 - [Neovim](https://neovim.io/) >= v0.9.0 (nightly) - obviously.
 - [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters.
-- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [Telescope](https://github.com/nvim-telescope/telescope.nvim).
-- [fd](https://github.com/sharkdp/fd) - to find files with [Telescope](https://github.com/nvim-telescope/telescope.nvim).
+- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
+- [fd](https://github.com/sharkdp/fd) - to find files with [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim).
 
 ## Installation
 

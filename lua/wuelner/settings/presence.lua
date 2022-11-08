@@ -2,9 +2,9 @@ local M = {}
 
 M.config = function()
   require("presence"):setup({
-    neovim_image_text = "El editor de texto más cool del mundo mundial",
+    neovim_image_text = "El editor de código más cool del mundo mundial",
     debounce_timeout = 40,
-    blacklist = { "^dotfiles$", "^nvim$" },
+    blacklist = { "dotfiles", "nvim" },
     editing_text = "Escribiendo bugs en %s",
     file_explorer_text = "Siendo un ninja con %s",
     git_commit_text = "Comiteando bugs directo a producción",

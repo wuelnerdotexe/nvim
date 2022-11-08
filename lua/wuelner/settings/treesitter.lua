@@ -21,6 +21,7 @@ M.config = function()
     rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
     context_commentstring = { enable = true, enable_autocmd = false },
     autotag = { enable = true },
+    matchup = { enable = true, include_match_words = true },
   })
 
   vim.opt.foldmethod = "expr"

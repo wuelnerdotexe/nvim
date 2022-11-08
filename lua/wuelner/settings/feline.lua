@@ -74,7 +74,7 @@ M.config = function()
   components_active[1][6] = {
     provider = "▎",
     hl = function()
-      return highlighter("FelineIndicator", "bg", "cyan", "NONE")
+      return highlighter("FelineIndicator", "bg", "accent", "NONE")
     end,
     priority = 1,
   }
@@ -265,6 +265,7 @@ M.config = function()
       violet = enfocado_colors.br_violet[1],
       white = enfocado_colors.fg_1[1],
       base = enfocado_colors.base[1],
+      accent = enfocado_colors.br_accent_0[1],
     },
     vi_mode_colors = {
       ["COMMAND"] = "darkgray",
