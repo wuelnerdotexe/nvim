@@ -214,7 +214,7 @@ return require("packer").startup(function(use)
   })
   use({
     "neovim/nvim-lspconfig",
-    after = { "mason-lspconfig.nvim", "nvim-cmp" },
+    after = { "mason.nvim", "nvim-cmp" },
     requires = {
       { "b0o/schemastore.nvim", module = "schemastore" },
       { "kosayoda/nvim-lightbulb", module = "nvim-lightbulb" },
@@ -315,8 +315,8 @@ return require("packer").startup(function(use)
     "folke/noice.nvim",
     event = "VimEnter",
     requires = {
-      { "MunifTanjim/nui.nvim", after = "human.vim" },
-      { "rcarriga/nvim-notify", after = "human.vim" },
+      { "MunifTanjim/nui.nvim", module_pattern = "nui*" },
+      { "rcarriga/nvim-notify", module = "notify" },
     },
     config = function()
       require("wuelner.settings.noice").config()

@@ -13,7 +13,7 @@ My personal but distributable Neovim setup powered by [Enfocado](https://wuelner
 - [Requirements](#requirements)
 - [Installation](#installation)
   - [Post installation](#post-installation)
-    - [Linters and Formatters](#linters-and-formatters)
+    - [Linters and Formatter](#linters-and-formatter)
     - [Debug adapter](#debug-adapter)
 - [Keymaps](#keymaps)
   - [General](#general)
@@ -55,6 +55,7 @@ The main features and plugins provided by this setup are as follows:
 - Harmonic and consistent theme by [Enfocado](https://wuelnerdotexe.github.io/enfocado).
 - Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [noice.nvim](https://github.com/folke/noice.nvim), and [nvim-notify](https://github.com/rcarriga/nvim-notify).
 - Tmux integration with [tmux.nvim](https://github.com/aserowy/tmux.nvim).
+- Last but not least, announce your presence on Discord with funny messages (in Spanish) by [presence.nvim](https://github.com/andweeb/presence.nvim).
 
 ## Philosophy
 
@@ -95,7 +96,7 @@ DISCLAIMER: If you have a previous Neovim config, make sure to make a backup bef
 
 ### Post installation
 
-#### Linters and Formatters
+#### Linters and Formatter
 
 If all goes well, when you enter Neovim for the first time, the plugins and language servers will be installed automatically, you will only have to respond to the confirmation messages.
 And then restart Neovim to complete the installation process of JSON Lint, Markdown Lint and Prettier with the following Vim command:
