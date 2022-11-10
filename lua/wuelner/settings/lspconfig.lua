@@ -37,6 +37,11 @@ M.config = function()
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
+    settings = {
+      css = { validate = false },
+      less = { validate = false },
+      scss = { validate = false },
+    },
   })
 
   require("lspconfig").stylelint_lsp.setup({

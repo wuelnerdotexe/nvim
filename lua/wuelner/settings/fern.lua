@@ -10,6 +10,7 @@ M.setup = function()
   vim.g["fern#drawer_width"] =
     math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
   vim.g["fern#disable_drawer_hover_popup"] = 1
+  vim.g["fern#drawer_hover_popup_delay"] = 40
   vim.g["fern_git_status#disable_ignored"] = 1
   vim.g["fern_git_status#disable_untracked"] = 1
   vim.g["fern#renderer"] = "nerdfont"

@@ -33,7 +33,7 @@ M.config = function()
       },
     },
     lsp = {
-      progress = { throttle = 40 },
+      progress = { enabled = false, throttle = 40 },
       hover = { enabled = false },
       signature = { auto_open = { throttle = 40 } },
     },

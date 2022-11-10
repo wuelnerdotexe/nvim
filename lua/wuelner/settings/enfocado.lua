@@ -38,13 +38,13 @@ M.config = function()
 
       if vim.o.background == "dark" then
         vim_cmd([[
-          hi NormalSB ctermbg=16 guifg=234 guibg=#000000 guifg=#b9b9b9
-          hi OtherSB ctermbg=16 guifg=16 guibg=#000000 guifg=#000000
+          hi NormalSB ctermbg=16 ctermfg=234 guibg=#000000 guifg=#b9b9b9
+          hi WindowSB ctermbg=16 ctermfg=16 guibg=#000000 guifg=#000000
         ]])
       else
         vim_cmd([[
-          hi NormalSB ctermbg=255 guifg=238 guibg=#ebebeb guifg=#474747
-          hi OtherSB ctermbg=255 guifg=255 guibg=#ebebeb guifg=#ebebeb
+          hi NormalSB ctermbg=255 ctermfg=238 guibg=#ebebeb guifg=#474747
+          hi WindowSB ctermbg=255 ctermfg=255 guibg=#ebebeb guifg=#ebebeb
         ]])
       end
 
@@ -54,7 +54,7 @@ M.config = function()
         pattern = "fern,aerial,nerdterm,qf",
         callback = function()
           vim.opt_local.winhighlight = "Normal:NormalSB,NormalNC:NormalSB,"
-            .. "WinSeparator:OtherSB,Winbar:OtherSB,WinbarNC:OtherSB"
+            .. "WinSeparator:WindowSB,Winbar:WindowSB,WinbarNC:WindowSB"
         end,
       })
 

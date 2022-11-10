@@ -212,7 +212,7 @@ M.config = function()
   components_inactive[1][2] = {
     provider = {
       name = "position",
-      opts = { padding = { line = 2, col = 2 } },
+      opts = { padding = { line = 3, col = 2 } },
     },
     left_sep = " ",
     right_sep = " ",
@@ -264,8 +264,8 @@ M.config = function()
       orange = enfocado_colors.br_orange[1],
       violet = enfocado_colors.br_violet[1],
       white = enfocado_colors.fg_1[1],
-      base = enfocado_colors.base[1],
       accent = enfocado_colors.br_accent_0[1],
+      base = enfocado_colors.base[1],
     },
     vi_mode_colors = {
       ["COMMAND"] = "darkgray",

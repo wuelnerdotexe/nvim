@@ -20,7 +20,19 @@ M.aerial_breadcrumbs = function()
     or table_concat(parts, " > ")
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local augroup_format = vim.api.nvim_create_augroup("EditorFormat", {})
+local augroup_fixAll = vim.api.nvim_create_augroup("EslintFixAll", {})
+
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    bufnr = bufnr,
+    filter = function(client)
+      return client.name == "null-ls"
+    end,
+  })
+
+  require("luasnip").session.current_nodes[bufnr] = nil
+end
 
 M.lsp_on_attach = function(client, bufnr)
   local supports_method = client.supports_method
@@ -29,24 +41,36 @@ M.lsp_on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   end
 
+  local client_name = client.name
+  local clear_autocmds = vim.api.nvim_clear_autocmds
+  local create_autocmd = vim.api.nvim_create_autocmd
+
+  if client_name == "eslint" then
+    clear_autocmds({ group = augroup_fixAll, buffer = bufnr })
+
+    create_autocmd("BufWritePre", {
+      group = augroup_fixAll,
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end
+
   if supports_method("textDocument/formatting") then
-    if client.name == "null-ls" then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
+    if client_name == "null-ls" then
+      client.server_capabilities.documentFormattingProvider = true
+
+      clear_autocmds({ group = augroup_format, buffer = bufnr })
+
+      create_autocmd("BufWritePre", {
+        group = augroup_format,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr })
-          require("luasnip").session.current_nodes[bufnr] = nil
+          lsp_formatting(bufnr)
         end,
       })
     else
       client.server_capabilities.documentFormattingProvider = false
     end
-  end
-
-  if supports_method("textDocument/rangeFormatting") then
-    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   local keymap_set = vim.keymap.set
