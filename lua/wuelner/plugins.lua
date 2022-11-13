@@ -313,6 +313,10 @@ return require("packer").startup(function(use)
   -- Improvements.
   use({
     "folke/noice.nvim",
+    disable = vim.version().minor < 9,
+    cond = function()
+      return vim.fn.exists("g:neovide") ~= 1
+    end,
     event = "VimEnter",
     requires = {
       { "MunifTanjim/nui.nvim", module_pattern = "nui*" },

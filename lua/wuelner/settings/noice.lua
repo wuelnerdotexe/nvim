@@ -3,6 +3,8 @@ local M = {}
 M.config = function()
   vim.opt.shortmess:append("I")
   vim.opt.cmdheight = 0
+  vim.opt.showcmd = false
+  vim.opt.showmode = false
 
   require("noice").setup({
     popupmenu = {
