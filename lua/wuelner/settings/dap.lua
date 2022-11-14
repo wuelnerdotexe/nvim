@@ -75,32 +75,11 @@ M.config = function()
   require("dapui").setup({
     layouts = {
       {
-        elements = {
-          "scopes",
-          "watches",
-          "stacks",
-          "breakpoints",
-        },
+        elements = { "scopes", "watches", "stacks", "breakpoints" },
         size = math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2),
         position = "left",
       },
-      {
-        elements = { "console", "repl" },
-        size = 0.25,
-        position = "bottom",
-      },
-    },
-    controls = {
-      icons = {
-        pause = "",
-        play = "",
-        step_into = "",
-        step_over = "",
-        step_out = "",
-        step_back = "",
-        run_last = "",
-        terminate = "",
-      },
+      { elements = { "console", "repl" }, size = 0.25, position = "bottom" },
     },
   })
 

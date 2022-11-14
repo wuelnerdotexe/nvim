@@ -28,11 +28,7 @@ M.config = function()
   })
 
   require("mason-null-ls").setup({
-    ensure_installed = {
-      "jsonlint",
-      "markdownlint",
-      "prettierd",
-    },
+    ensure_installed = { "jsonlint", "markdownlint", "prettierd" },
   })
 end
 

@@ -20,6 +20,7 @@ M.config = function()
   local cmp_complete = require("cmp").complete
   local select_next_item = require("cmp").select_next_item
   local select_prev_item = require("cmp").select_prev_item
+  local keyword_length = 3
 
   cmp_setup({
     enabled = function()
@@ -72,7 +73,10 @@ M.config = function()
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    completion = { completeopt = "menuone,noselect", keyword_length = 1 },
+    completion = {
+      completeopt = "menuone,noselect",
+      keyword_length = keyword_length,
+    },
     formatting = {
       fields = { "abbr", "kind" },
       format = function(entry, vim_item)
@@ -123,21 +127,21 @@ M.config = function()
       },
     },
     sources = require("cmp").config.sources({
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "cmp_tabnine" },
+      { name = "nvim_lsp", keyword_length = keyword_length },
+      { name = "luasnip", keyword_length = keyword_length },
+      { name = "cmp_tabnine", keyword_length = keyword_length },
     }, {
       {
         name = "buffer",
         option = {
-          keyword_length = 1,
-          indexing_interval = 40,
+          keyword_length = keyword_length,
+          indexing_interval = 300,
           get_bufnrs = function()
             local buf = vim.api.nvim_get_current_buf()
 
             if
               vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-              > 102400
+              > 1048576
             then
               return {}
             end
