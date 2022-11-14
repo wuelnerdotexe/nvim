@@ -106,19 +106,32 @@ M.config = function()
   local repl_close = require("dap").repl.close
 
   require("dap").listeners.after.event_initialized["dapui_config"] = function()
-    keymap_set("n", "<F11>", require("dap").step_into)
-    keymap_set("n", "<F10>", require("dap").step_over)
     keymap_set("n", "<F6>", require("dap").pause)
+    keymap_set("n", "<F10>", require("dap").step_over)
+
+    local step_into = require("dap").step_into
+
+    keymap_set("n", "<F11>", step_into)
+
+    local step_into_targets = function()
+      step_into({ ask_for_targets = true })
+    end
+
+    keymap_set("n", "<C-F11>", step_into_targets)
+    keymap_set("n", "<F35>", step_into_targets)
 
     local step_out = require("dap").step_out
 
     keymap_set("n", "<S-F11>", step_out)
     keymap_set("n", "<F23>", step_out)
 
+    local run_last = require("dap").run_last
+
+    keymap_set("n", "<C-S-F5>", run_last)
+    keymap_set("n", "<F41>", run_last)
+
     local dap_terminate = function()
-      require("dap").terminate()
-      dapui_close()
-      repl_close()
+      require("dap").terminate(); dapui_close(); repl_close()
     end
 
     keymap_set("n", "<S-F5>", dap_terminate)
@@ -130,13 +143,17 @@ M.config = function()
   local keymaps_del = function()
     local keymap_del = vim.keymap.del
 
-    keymap_del("n", "<S-F5>")
-    keymap_del("n", "<F17>")
     keymap_del("n", "<F6>")
     keymap_del("n", "<F10>")
     keymap_del("n", "<F11>")
+    keymap_del("n", "<C-F11>")
+    keymap_del("n", "<F35>")
     keymap_del("n", "<S-F11>")
     keymap_del("n", "<F23>")
+    keymap_del("n", "<C-S-F5>")
+    keymap_del("n", "<F41>")
+    keymap_del("n", "<S-F5>")
+    keymap_del("n", "<F17>")
   end
 
   require("dap").listeners.before.event_exited["dapui_config"] = function()

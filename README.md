@@ -242,15 +242,17 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Debugging
 
-| VI Mode |      Keymap       | Action                                  |
-| :-----: | :---------------: | --------------------------------------- |
-| Normal  |      `<F9>`       | Toggle breakpoint on the current line   |
-| Normal  |      `<F5>`       | Run and debug                           |
-| Normal  | `SHIFT` + `<F5>`  | Terminate the current debugging session |
-| Normal  |      `<F6>`       | Debug pause                             |
-| Normal  |      `<F10>`      | Debug step over                         |
-| Normal  |      `<F11>`      | Debug step into                         |
-| Normal  | `SHIFT` + `<F11>` | Debug step out                          |
+| VI Mode |          Keymap           | Action                                  |
+| :-----: | :-----------------------: | --------------------------------------- |
+| Normal  |          `<F9>`           | Toggle breakpoint on the current line   |
+| Normal  |          `<F5>`           | Run and debug                           |
+| Normal  |     `SHIFT` + `<F5>`      | Terminate the current debugging session |
+| Normal  | `SHIFT` + `CTRL` + `<F5>` | Restart the current debugging session   |
+| Normal  |          `<F6>`           | Debug pause                             |
+| Normal  |          `<F10>`          | Debug step over                         |
+| Normal  |          `<F11>`          | Debug step into                         |
+| Normal  |     `CTRL` + `<F11>`      | Debug step into targets                 |
+| Normal  |     `SHIFT` + `<F11>`     | Debug step out                          |
 
 **NOTE:** Only custom keymaps unique to this configuration are documented here. There are many more keymaps available by default in each installed plugin, in addition to the hundreds that come with Vim by default.
 
