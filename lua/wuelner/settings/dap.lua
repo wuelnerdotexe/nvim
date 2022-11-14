@@ -30,6 +30,8 @@ M.config = function()
     }
   end
 
+  require("mason-nvim-dap").setup({ ensure_installed = { "firefox" } })
+
   local sign_define = vim.fn.sign_define
 
   sign_define("DapBreakpoint", {

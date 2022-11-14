@@ -4,7 +4,7 @@ My personal Neovim setup written in Lua.
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot.png">
-  Powered by <strong><a href="https://wuelnerdotexe.github.io/enfocado/">Enfocado Theme</a></strong>.
+  Powered by <strong><a href="https://wuelnerdotexe.github.io/enfocado/">Enfocado</a></strong>.
 </div>
 
 ## Table of Contents
@@ -13,9 +13,6 @@ My personal Neovim setup written in Lua.
 - [Philosophy](#philosophy)
 - [Requirements](#requirements)
 - [Installation](#installation)
-  - [Post installation](#post-installation)
-    - [Linters and formatter](#linters-and-formatter)
-    - [Debug adapter](#debug-adapter)
 - [Keymaps](#keymaps)
   - [General](#general)
   - [Folders explorer](#folders-explorer)
@@ -82,26 +79,6 @@ For example, to install on Linux/MacOS:
 
 ```bash
 git clone https://github.com/wuelnerdotexe/nvim ~/.config/nvim --depth 1
-```
-
-### Post installation
-
-#### Linters and formatter
-
-If all goes well, when you enter Neovim for the first time, the plugins and language servers will be installed automatically, you will only have to respond to the confirmation messages. And then restart Neovim to complete the installation process of JSON Lint, Markdown Lint and Prettier with the following Vim command:
-
-```vim
-MasonInstall jsonlint markdownlint prettierd
-```
-
-**NOTE:** The installed Prettier package is not the official one, this is the only package configured to work with this setup, because making many comparisons, it is undoubtedly the one that offers a better experience in Neovim, and no, **IT WILL NOT CAUSE CONFLICTS** with your project settings. Here you can learn more about [prettierd](https://github.com/fsouza/prettierd). So this setup is not ready to work with the official package, so don't try to install it and expect it to work.
-
-#### Debug adapter
-
-This setup provides settings for debugging front-end projects created with the `javascript`, `javascriptreact`, `typescript` and `typescriptreact` frameworks with the debugger for Firefox; so, the debug adapter must be installed for the adapter protocol configuration to work. To install them you just have to execute the following Vim command:
-
-```vim
-MasonInstall firefox-debug-adapter
 ```
 
 ## Keymaps

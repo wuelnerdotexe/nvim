@@ -42,8 +42,9 @@ return require("packer").startup(function(use)
   use({
     "williamboman/mason.nvim",
     requires = {
-      "williamboman/mason-lspconfig.nvim",
-      module = "mason-lspconfig",
+      { "jayp0521/mason-nvim-dap.nvim", module = "mason-nvim-dap" },
+      { "jayp0521/mason-null-ls.nvim", module = "mason-null-ls" },
+      { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
     },
     config = function()
       require("wuelner.settings.mason").config()
@@ -319,7 +320,7 @@ return require("packer").startup(function(use)
     end,
     event = "VimEnter",
     requires = {
-      { "MunifTanjim/nui.nvim", module_pattern = "nui*" },
+      { "MunifTanjim/nui.nvim", module_pattern = "nui.*" },
       { "rcarriga/nvim-notify", module = "notify" },
     },
     config = function()

@@ -52,10 +52,8 @@ M.config = function()
       create_autocmd("FileType", {
         group = augroup,
         pattern = "fern,aerial,nerdterm,qf",
-        callback = function()
-          vim.opt_local.winhighlight = "Normal:NormalSB,NormalNC:NormalSB,"
-            .. "WinSeparator:WindowSB,Winbar:WindowSB,WinbarNC:WindowSB"
-        end,
+        command = "setlocal winhighlight=Normal:NormalSB,NormalNC:NormalSB,"
+          .. "WinSeparator:WindowSB,Winbar:WindowSB,WinbarNC:WindowSB",
       })
 
       if vim.fn.has("termguicolors") and vim.o.termguicolors == true then

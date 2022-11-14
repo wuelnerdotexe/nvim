@@ -8,6 +8,18 @@ M.config = function()
   local on_attach = require("wuelner.utils").lsp_on_attach
   local flags = { debounce_text_changes = 300 }
 
+  require("mason-lspconfig").setup({
+    ensure_installed = {
+      "jsonls",
+      "tsserver",
+      "eslint",
+      "cssls",
+      "stylelint_lsp",
+      "html",
+      "tailwindcss",
+    },
+  })
+
   require("lspconfig").jsonls.setup({
     on_attach = on_attach,
     flags = flags,
