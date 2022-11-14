@@ -51,11 +51,7 @@ M.config = function()
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",
-    callback = function()
-      vim.opt_local.list = false
-      vim.opt_local.signcolumn = "no"
-      vim.opt_local.relativenumber = false
-    end,
+    command = "setlocal signcolumn=no nonumber norelativenumber nolist",
   })
 end
 
