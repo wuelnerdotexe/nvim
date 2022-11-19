@@ -2,7 +2,6 @@ local M = {}
 
 M.config = function()
   vim.opt.ruler = false
-  vim.opt.laststatus = 2
 
   local components = { active = {}, inactive = {} }
   local components_active = components.active

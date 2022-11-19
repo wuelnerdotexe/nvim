@@ -20,6 +20,7 @@ M.config = function()
   vim.opt.wrap = false
   vim.opt.relativenumber = false
   vim.opt.number = true
+  vim.opt.fillchars:append({ eob = " " })
 
   local keymap_set = vim.keymap.set
 
