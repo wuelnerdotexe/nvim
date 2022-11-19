@@ -39,6 +39,7 @@ M.config = function()
     capabilities = capabilities,
   })
 
+  vim.api.nvim_create_augroup("EslintFixAll", {})
   require("lspconfig").eslint.setup({
     on_attach = on_attach,
     flags = flags,

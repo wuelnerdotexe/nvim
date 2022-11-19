@@ -20,10 +20,7 @@ M.aerial_breadcrumbs = function()
     or table_concat(parts, " > ")
 end
 
-local augroup_format = vim.api.nvim_create_augroup("EditorFormat", {})
-local augroup_fixAll = vim.api.nvim_create_augroup("EslintFixAll", {})
-
-local lsp_formatting = function(bufnr)
+M.lsp_format = function(bufnr)
   vim.lsp.buf.format({
     bufnr = bufnr,
     filter = function(client)
@@ -41,28 +38,27 @@ M.lsp_on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   end
 
-  local client_name = client.name
   local clear_autocmds = vim.api.nvim_clear_autocmds
   local create_autocmd = vim.api.nvim_create_autocmd
 
-  if client_name == "eslint" then
-    clear_autocmds({ group = augroup_fixAll, buffer = bufnr })
+  if client.name == "eslint" then
+    clear_autocmds({ group = "EslintFixAll", buffer = bufnr })
     create_autocmd("BufWritePre", {
-      group = augroup_fixAll,
+      group = "EslintFixAll",
       buffer = bufnr,
       command = "EslintFixAll",
     })
   end
 
   if supports_method("textDocument/formatting") then
-    if client_name == "null-ls" then
+    if client.name == "null-ls" then
       client.server_capabilities.documentFormattingProvider = true
-      clear_autocmds({ group = augroup_format, buffer = bufnr })
+      clear_autocmds({ group = "lsp_format", buffer = bufnr })
       create_autocmd("BufWritePre", {
-        group = augroup_format,
+        group = "lsp_format",
         buffer = bufnr,
         callback = function()
-          lsp_formatting(bufnr)
+          require("wuelner.utils").lsp_format(bufnr)
         end,
       })
     else

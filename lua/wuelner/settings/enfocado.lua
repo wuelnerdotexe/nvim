@@ -26,7 +26,7 @@ end
 
 M.config = function()
   local create_autocmd = vim.api.nvim_create_autocmd
-  local augroup = vim.api.nvim_create_augroup("EnfocadoSB", {})
+  vim.api.nvim_create_augroup("EnfocadoSB", {})
 
   create_autocmd("ColorScheme", {
     pattern = "enfocado",
@@ -48,9 +48,9 @@ M.config = function()
         ]])
       end
 
-      vim.api.nvim_clear_autocmds({ group = augroup })
+      vim.api.nvim_clear_autocmds({ group = "EnfocadoSB" })
       create_autocmd("FileType", {
-        group = augroup,
+        group = "EnfocadoSB",
         pattern = "fern,aerial,nerdterm,qf",
         command = "setlocal winhighlight=Normal:NormalSB,NormalNC:NormalSB,"
           .. "WinSeparator:WindowSB,Winbar:WindowSB,WinbarNC:WindowSB",
