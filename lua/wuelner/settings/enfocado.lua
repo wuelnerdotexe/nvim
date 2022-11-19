@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  vim.g.enfocado_style = "neon"
+  vim.g.enfocado_style = "nature"
   vim.g.enfocado_plugins = {
     "aerial",
     "bufferline",

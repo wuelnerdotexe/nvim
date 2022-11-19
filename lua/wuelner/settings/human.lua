@@ -18,6 +18,8 @@ end
 M.config = function()
   vim.opt.spell = false
   vim.opt.wrap = false
+  vim.opt.relativenumber = false
+  vim.opt.number = true
 
   local keymap_set = vim.keymap.set
 
