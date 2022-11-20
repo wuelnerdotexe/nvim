@@ -229,17 +229,18 @@ M.config = function()
     vi_mode_colors = {
       ["BLOCK"] = "darkaccent",
       ["COMMAND"] = "accent",
+      ["CONFIRM"] = "yellow",
       ["ENTER"] = "accent",
       ["INSERT"] = "accent",
       ["LINES"] = "darkaccent",
       ["MORE"] = "yellow",
-      ["NONE"] = "cyan",
-      ["NORMAL"] = "cyan",
-      ["OP"] = "cyan",
+      ["NONE"] = "accent",
+      ["NORMAL"] = "accent",
+      ["OP"] = "accent",
       ["REPLACE"] = "darkaccent",
       ["SELECT"] = "darkaccent",
-      ["SHELL"] = "cyan",
-      ["TERM"] = "cyan",
+      ["SHELL"] = "accent",
+      ["TERM"] = "accent",
       ["VISUAL"] = "darkaccent",
       ["V-REPLACE"] = "darkaccent",
     },
@@ -248,7 +249,7 @@ M.config = function()
       filetypes = { "^nerdterm$" },
       buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" },
     },
-    disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = {} },
+    disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
   })
 
   local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs
