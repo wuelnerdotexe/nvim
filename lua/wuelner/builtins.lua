@@ -28,6 +28,15 @@ vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 
+local executable = vim.fn.executable
+
+if executable("fzf") == 1 and executable("fd") == 1 then
+  vim.env.FZF_DEFAULT_COMMAND = 'fd -I -H -E "{'
+    .. ".git,.svn,.hg,CSV,.DS_Store,Thumbs.db,"
+    .. "node_modules,bower_components,*.code-search"
+    .. '}" -t f'
+end
+
 vim.diagnostic.config({
   signs = { priority = 9 },
   virtual_text = { prefix = "▎" },

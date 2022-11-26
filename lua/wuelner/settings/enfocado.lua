@@ -8,6 +8,7 @@ M.setup = function()
     "cmp",
     "dapui",
     "fern",
+    "fzf",
     "gitsigns",
     "glyph-palette",
     "illuminate",
@@ -26,6 +27,7 @@ end
 
 M.config = function()
   local create_autocmd = vim.api.nvim_create_autocmd
+
   vim.api.nvim_create_augroup("EnfocadoSB", {})
 
   create_autocmd("ColorScheme", {

@@ -248,7 +248,10 @@ M.config = function()
       filetypes = { "^nerdterm$" },
       buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" },
     },
-    disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
+    disable = {
+      filetypes = { "^aerial$", "^fern$", "^fzf$" },
+      buftypes = { "^prompt$" },
+    },
   })
 
   local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs

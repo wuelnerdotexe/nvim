@@ -165,7 +165,6 @@ return require("packer").startup(function(use)
     "hrsh7th/nvim-cmp",
     after = "vim-sleuth",
     requires = {
-      { "rcarriga/cmp-dap", module = "cmp_dap" },
       { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
       { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
       {
@@ -182,6 +181,7 @@ return require("packer").startup(function(use)
           end,
         },
       },
+      { "hrsh7th/cmp-path", event = "InsertEnter" },
       {
         "tzachar/cmp-tabnine",
         run = "./install.sh",
@@ -192,6 +192,7 @@ return require("packer").startup(function(use)
           end)
         end,
       },
+      { "rcarriga/cmp-dap", module = "cmp_dap" },
     },
     config = function()
       require("wuelner.settings.cmp").config()

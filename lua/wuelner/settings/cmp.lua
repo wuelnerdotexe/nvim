@@ -122,32 +122,34 @@ M.config = function()
         end,
       },
     },
-    sources = require("cmp").config.sources(
-      { { name = "nvim_lsp" }, { name = "luasnip" }, { name = "cmp_tabnine" } },
+    sources = require("cmp").config.sources({
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "path", option = { trailing_slash = true } },
+      { name = "cmp_tabnine" },
+    }, {
       {
-        {
-          name = "buffer",
-          option = {
-            keyword_length = 3,
-            indexing_interval = 300,
-            get_bufnrs = function()
-              local buf = vim.api.nvim_get_current_buf()
+        name = "buffer",
+        option = {
+          keyword_length = 3,
+          indexing_interval = 300,
+          get_bufnrs = function()
+            local current_buf = vim.api.nvim_get_current_buf()
 
-              if
-                vim.api.nvim_buf_get_offset(
-                  buf,
-                  vim.api.nvim_buf_line_count(buf)
-                ) > 1048576
-              then
-                return {}
-              end
+            if
+              vim.api.nvim_buf_get_offset(
+                current_buf,
+                vim.api.nvim_buf_line_count(current_buf)
+              ) > 1048576
+            then
+              return {}
+            end
 
-              return { buf }
-            end,
-          },
+            return { current_buf }
+          end,
         },
-      }
-    ),
+      },
+    }),
     experimental = { ghost_text = true },
     window = {
       completion = { scrolloff = 3 },
@@ -174,6 +176,7 @@ M.config = function()
     "dapui_scopes",
     "dapui_stacks",
     "fern",
+    "fzf",
     "lspinfo",
     "mason",
     "nerdterm",

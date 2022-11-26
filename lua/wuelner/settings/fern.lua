@@ -35,7 +35,7 @@ M.config = function()
         "<Plug>(fern-action-leave)"
           .. "<Plug>(fern-wait)"
           .. "<Plug>(fern-action-cd:root)"
-          .. "<Cmd>echo getcwd()<CR>",
+          .. "<Cmd>echomsg getcwd()<CR>",
         { nowait = true, buffer = true }
       )
       keymap_set(
@@ -44,7 +44,7 @@ M.config = function()
         "<Plug>(fern-action-enter)"
           .. "<Plug>(fern-wait)"
           .. "<Plug>(fern-action-cd:root)"
-          .. "<Cmd>echo getcwd()<CR>",
+          .. "<Cmd>echomsg getcwd()<CR>",
         { nowait = true, buffer = true }
       )
       keymap_set("n", "h", "<Plug>(fern-action-collapse)", {
