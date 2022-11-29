@@ -8,7 +8,7 @@ M.config = function()
   require("windows").setup({
     autowidth = { enable = false, winwidth = 3, filetype = {} },
     ignore = {
-      buftype = { "loclist", "prompt", "quickfix", "terminal" },
+      buftype = { "loclist", "prompt", "quickfix" },
       filetype = {
         "aerial",
         "checkhealth",
@@ -22,6 +22,7 @@ M.config = function()
         "fern",
         "lspinfo",
         "mason",
+        "nerdterm",
         "noice",
         "notify",
         "null-ls-info",

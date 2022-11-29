@@ -34,21 +34,11 @@ M.config = function()
     pattern = "enfocado",
     nested = true,
     callback = function()
-      local vim_cmd = vim.cmd
+      local set_hl = vim.api.nvim_set_hl
 
-      vim_cmd("hi! link Whitespace DiagnosticError")
-
-      if vim.o.background == "dark" then
-        vim_cmd([[
-          hi def NormalSB ctermbg=16 ctermfg=250 guibg=#000000 guifg=#b9b9b9
-          hi def WinbarSB ctermbg=16 ctermfg=16 guibg=#000000 guifg=#000000
-        ]])
-      else
-        vim_cmd([[
-          hi def NormalSB ctermbg=255 ctermfg=238 guibg=#ebebeb guifg=#474747
-          hi def WinbarSB ctermbg=255 ctermfg=255 guibg=#ebebeb guifg=#ebebeb
-        ]])
-      end
+      set_hl(0, "Whitespace", { link = "DiagnosticError" })
+      set_hl(0, "NormalSB", { bg = "#000000", fg = "#b9b9b9" })
+      set_hl(0, "WinbarSB", { bg = "#000000", fg = "#000000" })
 
       vim.api.nvim_clear_autocmds({ group = "EnfocadoSB" })
       create_autocmd("FileType", {
