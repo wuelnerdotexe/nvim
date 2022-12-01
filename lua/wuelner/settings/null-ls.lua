@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
   vim.api.nvim_create_augroup("lsp_format", {})
   require("null-ls").setup({
+    border = "rounded",
     update_in_insert = vim.diagnostic.config().update_in_insert,
     debounce = 300,
     on_attach = require("wuelner.utils").lsp_on_attach,

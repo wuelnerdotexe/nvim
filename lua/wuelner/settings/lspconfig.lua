@@ -75,6 +75,8 @@ M.config = function()
     capabilities = capabilities,
   })
 
+  require("lspconfig.ui.windows").default_options.border = "rounded"
+
   require("nvim-lightbulb").setup({
     sign = { priority = 8 },
     autocmd = { enabled = true },
