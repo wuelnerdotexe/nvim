@@ -35,9 +35,20 @@ M.config = function()
     pattern = "enfocado",
     nested = true,
     callback = function()
+      vim.opt.fillchars:append({
+        horiz = " ",
+        horizup = " ",
+        horizdown = " ",
+        vert = " ",
+        vertleft = " ",
+        vertright = " ",
+        verthoriz = " ",
+      })
+
       local set_hl = vim.api.nvim_set_hl
 
       set_hl(0, "Whitespace", { link = "DiagnosticError" })
+      set_hl(0, "NormalNC", { bg = "#1e1e1e" })
       set_hl(0, "NormalSB", { bg = "#000000", fg = "#b9b9b9" })
       set_hl(0, "WinbarSB", { bg = "#000000", fg = "#000000" })
 

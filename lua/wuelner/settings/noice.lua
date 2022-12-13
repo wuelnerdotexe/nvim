@@ -6,6 +6,8 @@ M.config = function()
   vim.opt.showcmd = false
   vim.opt.showmode = false
 
+  local hover_opts = { border = { style = "rounded" }, position = { row = 2 } }
+
   require("noice").setup({
     popupmenu = {
       kind_icons = {
@@ -23,9 +25,7 @@ M.config = function()
         Keyword = "",
         Method = "",
         Module = "",
-        Operator = "",
         Property = "",
-        Reference = "",
         Snippet = "",
         Struct = "",
         Text = "",
@@ -36,8 +36,17 @@ M.config = function()
     },
     lsp = {
       progress = { enabled = false, throttle = 40 },
-      hover = { enabled = false },
-      signature = { auto_open = { throttle = 40 } },
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+      hover = { view = "hover", opts = hover_opts },
+      signature = {
+        view = "hover",
+        auto_open = { throttle = 40 },
+        opts = hover_opts,
+      },
     },
     presets = {
       command_palette = true,
@@ -45,9 +54,19 @@ M.config = function()
       lsp_doc_border = true,
     },
     throttle = 40,
+    views = {
+      split = { size = "25%" },
+      win_options = { wrap = false },
+      hover = hover_opts,
+    },
   })
 
-  require("notify").setup({ fps = 24, render = "minimal", timeout = 300 })
+  require("notify").setup({
+    background_colour = "NormalFloat",
+    fps = 24,
+    render = "minimal",
+    timeout = 300,
+  })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",
