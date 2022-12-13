@@ -56,6 +56,11 @@ return require("packer").startup(function(use)
       setup = "require('wuelner.settings.human').setup()",
       config = "require('wuelner.settings.human').config()",
     },
+    {
+      "sheerun/vim-polyglot",
+      setup = "require('wuelner.settings.polyglot').setup()",
+      config = "require('wuelner.settings.polyglot').config()",
+    },
 
     -- Development.
     {
@@ -100,7 +105,7 @@ return require("packer").startup(function(use)
     -- Tree-sitter.
     {
       "nvim-treesitter/nvim-treesitter",
-      after = "human.vim",
+      after = "vim-polyglot",
       run = ":TSUpdate",
       requires = {
         {

@@ -39,6 +39,7 @@ The main features and plugins provided by this setup are as follows:
 - ⚡ Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
 - 📂 Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
 - 🔭 Powerful fuzzy finder with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
+- 🔊 Integration with multiple languages by [vim-polyglot](https://github.com/sheerun/vim-polyglot)
 - 🌳 Advanced syntax recognition with [treesitter.nvim](https://github.com/nvim-treesitter/nvim-treesitter).
 - 💡 Neovim native language server protocol.
 - 🔗 Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
