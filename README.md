@@ -209,13 +209,16 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 | VI Mode |         Keymap         | Action                            |
 | :-----: | :--------------------: | --------------------------------- |
-| Normal  |          `K`           | Show hover documentation          |
-| Normal  |       `g` + `d`        | Go to definition                  |
-| Normal  | `<leader>` + `s` + `r` | Rename the current symbol         |
+| Normal  | `<leader>` + `d` + `p` | Preview of the current diagnostic |
 | Normal  | `<leader>` + `d` + `l` | Show list of diagnostics          |
 | Normal  |       `[` + `d`        | Go to previous diagnostic         |
 | Normal  |       `]` + `d`        | Go to next diagnostic             |
-| Normal  | `<leader>` + `d` + `p` | Preview of the current diagnostic |
+| Normal  |          `K`           | Show hover documentation          |
+| Insert  |      `CTRL` + `k`      | Show signature help               |
+| Normal  | `<leader>` + `s` + `r` | Rename the current symbol         |
+| Normal  | `<leader>` + `r` + `l` | Show list of references           |
+| Normal  |       `g` + `d`        | Go to definition                  |
+| Normal  |       `g` + `i`        | Go to implementation              |
 | Normal  | `<leader>` + `c` + `a` | Show current code actions         |
 
 ### Debugging

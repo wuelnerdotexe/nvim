@@ -52,12 +52,24 @@ M.lsp_on_attach = function(client, bufnr)
     keymap_set("n", "K", vim.lsp.buf.hover, keymap_opts)
   end
 
+  if supports_method("textDocument/signatureHelp") then
+    keymap_set("i", "<C-k>", vim.lsp.buf.signature_help, keymap_opts)
+  end
+
   if supports_method("textDocument/rename") then
     keymap_set("n", "<leader>sr", vim.lsp.buf.rename, keymap_opts)
   end
 
+  if supports_method("textDocument/references") then
+    keymap_set("n", "<leader>rl", vim.lsp.buf.references, keymap_opts)
+  end
+
   if supports_method("textDocument/definition") then
     keymap_set("n", "gd", vim.lsp.buf.definition, keymap_opts)
+  end
+
+  if supports_method("textDocument/implementation") then
+    keymap_set("n", "gi", vim.lsp.buf.implementation, keymap_opts)
   end
 
   if supports_method("textDocument/codeAction") then
