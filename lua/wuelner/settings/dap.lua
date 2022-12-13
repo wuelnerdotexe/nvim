@@ -1,6 +1,16 @@
 local M = {}
 
 M.config = function()
+  require("dap").adapters.node2 = {
+    type = "executable",
+    command = "node",
+    args = {
+      require("mason-registry")
+        .get_package("node-debug2-adapter")
+        :get_install_path() .. "/out/src/nodeDebug.js",
+    },
+  }
+
   require("dap").adapters.firefox = {
     type = "executable",
     command = "node",
@@ -19,6 +29,16 @@ M.config = function()
   }) do
     require("dap").configurations[language] = {
       {
+        name = "Launch Node against current file",
+        type = "node2",
+        request = "launch",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        console = "integratedTerminal",
+      },
+      {
         name = "Launch Firefox against localhost",
         request = "launch",
         type = "firefox",
@@ -30,7 +50,7 @@ M.config = function()
     }
   end
 
-  require("mason-nvim-dap").setup({ ensure_installed = { "firefox" } })
+  require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
 
   local sign_define = vim.fn.sign_define
 
