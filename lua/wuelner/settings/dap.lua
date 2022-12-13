@@ -70,13 +70,13 @@ M.config = function()
   keymap_set("n", "<F5>", require("dap").continue)
   keymap_set("n", "<F9>", require("dap").toggle_breakpoint)
 
-  local o_columns = vim.o.columns
+  local columns = vim.opt.columns:get()
 
   require("dapui").setup({
     layouts = {
       {
         elements = { "scopes", "watches", "stacks", "breakpoints" },
-        size = math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2),
+        size = math.floor((columns / (columns >= 160 and 3 or 2)) / 2),
         position = "left",
       },
       { elements = { "console", "repl" }, size = 0.25, position = "bottom" },

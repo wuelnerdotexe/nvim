@@ -1,14 +1,12 @@
 local M = {}
 
 M.config = function()
+  local fancy_opts = { cursor = nil, texthl = nil, linehl = nil }
+
   require("smoothcursor").setup({
     cursor = nil,
     texthl = nil,
-    fancy = {
-      enable = true,
-      head = { cursor = nil, texthl = nil, linehl = nil },
-      tail = { cursor = nil, texthl = nil },
-    },
+    fancy = { enable = true, head = fancy_opts, tail = fancy_opts },
     speed = 24,
     intervals = 40,
     priority = 11,

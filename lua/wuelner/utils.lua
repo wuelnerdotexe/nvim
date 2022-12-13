@@ -38,10 +38,37 @@ M.lsp_on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   end
 
+  local keymap_set = vim.keymap.set
+  local keymap_opts = { buffer = bufnr }
+
+  if supports_method("textDocument/publishDiagnostics") then
+    keymap_set("n", "<leader>dp", vim.diagnostic.open_float, keymap_opts)
+    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, keymap_opts)
+    keymap_set("n", "[d", vim.diagnostic.goto_prev, keymap_opts)
+    keymap_set("n", "]d", vim.diagnostic.goto_next, keymap_opts)
+  end
+
+  if supports_method("textDocument/hover") then
+    keymap_set("n", "K", vim.lsp.buf.hover, keymap_opts)
+  end
+
+  if supports_method("textDocument/rename") then
+    keymap_set("n", "<leader>sr", vim.lsp.buf.rename, keymap_opts)
+  end
+
+  if supports_method("textDocument/definition") then
+    keymap_set("n", "gd", vim.lsp.buf.definition, keymap_opts)
+  end
+
+  if supports_method("textDocument/codeAction") then
+    keymap_set("n", "<leader>ca", vim.lsp.buf.code_action, keymap_opts)
+  end
+
+  local client_name = client.name
   local clear_autocmds = vim.api.nvim_clear_autocmds
   local create_autocmd = vim.api.nvim_create_autocmd
 
-  if client.name == "eslint" then
+  if client_name == "eslint" then
     clear_autocmds({ group = "EslintFixAll", buffer = bufnr })
     create_autocmd("BufWritePre", {
       group = "EslintFixAll",
@@ -51,7 +78,7 @@ M.lsp_on_attach = function(client, bufnr)
   end
 
   if supports_method("textDocument/formatting") then
-    if client.name == "null-ls" then
+    if client_name == "null-ls" then
       client.server_capabilities.documentFormattingProvider = true
       clear_autocmds({ group = "lsp_format", buffer = bufnr })
       create_autocmd("BufWritePre", {
@@ -64,31 +91,6 @@ M.lsp_on_attach = function(client, bufnr)
     else
       client.server_capabilities.documentFormattingProvider = false
     end
-  end
-
-  local keymap_set = vim.keymap.set
-
-  if supports_method("textDocument/hover") then
-    keymap_set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-  end
-
-  if supports_method("textDocument/publishDiagnostics") then
-    keymap_set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr })
-    keymap_set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
-    keymap_set("n", "<leader>dp", vim.diagnostic.open_float, { buffer = bufnr })
-    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, { buffer = bufnr })
-  end
-
-  if supports_method("textDocument/definition") then
-    keymap_set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-  end
-
-  if supports_method("textDocument/rename") then
-    keymap_set("n", "<leader>sr", vim.lsp.buf.rename, { buffer = bufnr })
-  end
-
-  if supports_method("textDocument/codeAction") then
-    keymap_set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
   end
 end
 

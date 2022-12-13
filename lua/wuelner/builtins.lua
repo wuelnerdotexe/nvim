@@ -50,9 +50,9 @@ vim.diagnostic.config({
 
 local ref_floating_preview = vim.lsp.util.open_floating_preview
 
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   opts = opts or {}
-  opts.border = opts.border or "rounded"
+  opts.border = "rounded"
 
   return ref_floating_preview(contents, syntax, opts, ...)
 end

@@ -31,7 +31,7 @@ M.config = function()
   keymap_set(
     "n",
     "<C-w><C-l>",
-    ':nohlsearch<C-R>=has("diff")?"<Bar>diffupdate":""<CR><CR><C-l>',
+    ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>',
     { noremap = true, silent = true }
   )
 end

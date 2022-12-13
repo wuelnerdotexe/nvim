@@ -1,12 +1,11 @@
 local M = {}
 
 M.config = function()
-  local o_columns = vim.o.columns
-  local layout_width =
-    math.floor((o_columns / (o_columns >= 160 and 3 or 2)) / 2)
+  local columns = vim.opt.columns:get()
+  local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
+  local keymap_set = vim.keymap.set
 
   require("aerial").setup({
-    backends = { "lsp", "treesitter", "markdown", "man" },
     layout = {
       max_width = layout_width,
       width = layout_width,
@@ -49,10 +48,10 @@ M.config = function()
       Variable = "",
     },
     on_attach = function(bufnr)
-      local keymap_set = vim.keymap.set
+      local keymap_opts = { buffer = bufnr }
 
-      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", { buffer = bufnr })
-      keymap_set("n", "}", "<Cmd>AerialNext<CR>", { buffer = bufnr })
+      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", keymap_opts)
+      keymap_set("n", "}", "<Cmd>AerialNext<CR>", keymap_opts)
     end,
     show_guides = true,
     guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
@@ -64,7 +63,7 @@ M.config = function()
     command = "setlocal signcolumn=yes:1",
   })
 
-  vim.keymap.set("n", "<leader>st", require("aerial").toggle)
+  keymap_set("n", "<leader>st", require("aerial").toggle)
 end
 
 return M

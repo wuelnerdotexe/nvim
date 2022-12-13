@@ -7,6 +7,13 @@ M.config = function()
 
   local on_attach = require("wuelner.utils").lsp_on_attach
   local flags = { debounce_text_changes = 300 }
+  local validate = { validate = false }
+  local provideFormatter = { provideFormatter = false }
+  local server_setup = {
+    on_attach = on_attach,
+    flags = flags,
+    capabilities = capabilities,
+  }
 
   require("mason-lspconfig").setup({
     ensure_installed = {
@@ -24,7 +31,7 @@ M.config = function()
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
-    init_options = { provideFormatter = false },
+    init_options = provideFormatter,
     settings = {
       json = {
         schemas = require("schemastore").json.schemas(),
@@ -33,11 +40,7 @@ M.config = function()
     },
   })
 
-  require("lspconfig").tsserver.setup({
-    on_attach = on_attach,
-    flags = flags,
-    capabilities = capabilities,
-  })
+  require("lspconfig").tsserver.setup(server_setup)
 
   vim.api.nvim_create_augroup("EslintFixAll", {})
   require("lspconfig").eslint.setup({
@@ -50,11 +53,7 @@ M.config = function()
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
-    settings = {
-      css = { validate = false },
-      less = { validate = false },
-      scss = { validate = false },
-    },
+    settings = { css = validate, less = validate, scss = validate },
   })
 
   require("lspconfig").stylelint_lsp.setup({
@@ -66,14 +65,10 @@ M.config = function()
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
-    init_options = { provideFormatter = false },
+    init_options = provideFormatter,
   })
 
-  require("lspconfig").tailwindcss.setup({
-    on_attach = on_attach,
-    flags = flags,
-    capabilities = capabilities,
-  })
+  require("lspconfig").tailwindcss.setup(server_setup)
 
   require("lspconfig.ui.windows").default_options.border = "rounded"
 

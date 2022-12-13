@@ -2,14 +2,12 @@ local M = {}
 
 M.config = function()
   local select_horizontal = require("telescope.actions").select_horizontal
+  local mappings = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal }
 
   require("telescope").setup({
     pickers = { fd = { find_command = { "fd", "-I", "-H", "-t", "f" } } },
     defaults = {
-      mappings = {
-        n = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
-        i = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
-      },
+      mappings = { n = mappings, i = mappings },
       vimgrep_arguments = {
         "rg",
         "--hidden",

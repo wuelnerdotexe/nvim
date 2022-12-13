@@ -60,7 +60,7 @@ M.config = function()
 
   components_active[1][7] = {
     enabled = function()
-      return vim.o.cmdheight == 0
+      return vim.opt.cmdheight:get() == 0
     end,
     provider = { name = "vi_mode", opts = { padding = "center" } },
     left_sep = " ",

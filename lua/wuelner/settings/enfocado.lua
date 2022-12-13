@@ -50,7 +50,9 @@ M.config = function()
           .. "Winbar:WinbarSB,WinbarNC:WinbarSB",
       })
 
-      if vim.fn.has("termguicolors") and vim.o.termguicolors == true then
+      if
+        vim.fn.has("termguicolors") and vim.opt.termguicolors:get() == true
+      then
         vim.opt.winblend = 10
         vim.opt.pumblend = 10
       end

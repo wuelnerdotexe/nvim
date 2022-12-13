@@ -1,6 +1,10 @@
 local M = {}
 
 M.config = function()
+  local keymap_set = vim.keymap.set
+  local schedule = vim.schedule
+  local keymap_mode = { "n", "v" }
+
   require("gitsigns").setup({
     signs = {
       add = { hl = "GitSignsAdd", text = "│" },
@@ -14,55 +18,55 @@ M.config = function()
     update_debounce = 300,
     preview_config = { border = "rounded" },
     on_attach = function(bufnr)
-      local keymap_set = vim.keymap.set
       local wo_diff = vim.wo.diff
-      local vim_schedule = vim.schedule
+      local keymap_opts = { buffer = bufnr }
+      local keymap_opts_with_expr = { buffer = bufnr, expr = true }
 
       keymap_set("n", "[h", function()
         if wo_diff then
           return "[h"
         end
 
-        vim_schedule(function()
+        schedule(function()
           package.loaded.gitsigns.prev_hunk()
         end)
 
         return "<Ignore>"
-      end, { expr = true, buffer = bufnr })
+      end, keymap_opts_with_expr)
       keymap_set("n", "]h", function()
         if wo_diff then
           return "]h"
         end
 
-        vim_schedule(function()
+        schedule(function()
           package.loaded.gitsigns.next_hunk()
         end)
 
         return "<Ignore>"
-      end, { expr = true, buffer = bufnr })
+      end, keymap_opts_with_expr)
       keymap_set(
         "n",
         "<leader>hp",
         package.loaded.gitsigns.preview_hunk,
-        { buffer = bufnr }
+        keymap_opts
       )
       keymap_set(
-        { "n", "v" },
+        keymap_mode,
         "<leader>hr",
-        "<Cmd>Gitsigns reset_hunk<CR>",
-        { buffer = bufnr }
+        package.loaded.gitsigns.reset_hunk,
+        keymap_opts
       )
       keymap_set(
-        { "n", "v" },
+        keymap_mode,
         "<leader>hs",
-        "<Cmd>Gitsigns stage_hunk<CR>",
-        { buffer = bufnr }
+        package.loaded.gitsigns.stage_hunk,
+        keymap_opts
       )
       keymap_set(
         "n",
         "<leader>hu",
         package.loaded.gitsigns.undo_stage_hunk,
-        { buffer = bufnr }
+        keymap_opts
       )
     end,
   })
