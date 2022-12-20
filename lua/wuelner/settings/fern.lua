@@ -13,6 +13,7 @@ M.setup = function()
   vim.g["fern#drawer_hover_popup_delay"] = 40
   vim.g["fern_git_status#disable_ignored"] = 1
   vim.g["fern_git_status#disable_untracked"] = 1
+  vim.g["fern#mark_symbol"] = ""
   vim.g["fern#renderer"] = "nerdfont"
   vim.g["fern#renderer#nerdfont#root_symbol"] = ""
   vim.g["fern#renderer#nerdfont#root_leading"] = ""
@@ -22,8 +23,7 @@ end
 M.config = function()
   local keymap_set = vim.keymap.set
   local keymap_opts = { nowait = true, buffer = true }
-  local keymap_opts_with_expr =
-  { nowait = true, buffer = true, expr = true }
+  local keymap_opts_with_expr = { nowait = true, buffer = true, expr = true }
 
   local open_or_collapse = function()
     return vim.fn["fern#smart#leaf"](
