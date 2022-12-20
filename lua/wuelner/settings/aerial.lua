@@ -1,6 +1,9 @@
 local M = {}
 
 M.config = function()
+  vim.opt.foldmethod = "manual"
+  vim.opt.foldlevelstart = 99
+
   local columns = vim.opt.columns:get()
   local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
   local keymap_set = vim.keymap.set
@@ -47,6 +50,9 @@ M.config = function()
       TypeParameter = "",
       Variable = "",
     },
+    manage_folds = "auto",
+    link_folds_to_tree = true,
+    link_tree_to_folds = true,
     on_attach = function(bufnr)
       local keymap_opts = { buffer = bufnr }
 

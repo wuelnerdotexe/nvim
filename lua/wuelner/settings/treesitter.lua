@@ -52,10 +52,6 @@ M.config = function()
     autotag = enable,
     matchup = { enable = true, include_match_words = true },
   })
-
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-  vim.opt.foldenable = false
 end
 
 return M
