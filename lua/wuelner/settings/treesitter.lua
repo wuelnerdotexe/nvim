@@ -2,9 +2,11 @@ local M = {}
 
 M.config = function()
   local results = {}
-  local enable = { enable = true }
 
   setmetatable(results, { __mode = "kv" })
+
+  local enable = { enable = true }
+
   require("nvim-treesitter.configs").setup({
     ensure_installed = {
       "bash",
@@ -25,10 +27,9 @@ M.config = function()
         if results_buf then
           return results_buf
         else
-          local ok, stats =
-            pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
 
-          if ok and stats and stats.size > 100000 then
+          if stats and stats.size > 100000 then
             results[buf] = true
 
             return true

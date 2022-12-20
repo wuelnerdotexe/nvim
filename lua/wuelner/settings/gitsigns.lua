@@ -2,8 +2,8 @@ local M = {}
 
 M.config = function()
   local keymap_set = vim.keymap.set
-  local schedule = vim.schedule
   local keymap_mode = { "n", "v" }
+  local schedule = vim.schedule
 
   require("gitsigns").setup({
     signs = {

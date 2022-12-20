@@ -1,19 +1,26 @@
 local M = {}
 
 M.config = function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+  require("lspconfig.ui.windows").default_options.border = "rounded"
+
+  require("nvim-lightbulb").setup({
+    sign = { priority = 8 },
+    autocmd = { enabled = true },
+  })
+
+  vim.fn.sign_define("LightBulbSign", {
+    text = "",
+    texthl = "DiagnosticSignInfo",
+    linehl = "",
+    numhl = "",
+  })
 
   local on_attach = require("wuelner.utils").lsp_on_attach
   local flags = { debounce_text_changes = 300 }
-  local validate = { validate = false }
-  local provideFormatter = { provideFormatter = false }
-  local server_setup = {
-    on_attach = on_attach,
-    flags = flags,
-    capabilities = capabilities,
-  }
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   require("mason-lspconfig").setup({
     ensure_installed = {
@@ -26,6 +33,9 @@ M.config = function()
       "tailwindcss",
     },
   })
+
+  local provideFormatter = { provideFormatter = false }
+  local validate = { validate = false }
 
   require("lspconfig").jsonls.setup({
     on_attach = on_attach,
@@ -40,9 +50,16 @@ M.config = function()
     },
   })
 
+  local server_setup = {
+    on_attach = on_attach,
+    flags = flags,
+    capabilities = capabilities,
+  }
+
   require("lspconfig").tsserver.setup(server_setup)
 
   vim.api.nvim_create_augroup("EslintFixAll", {})
+
   require("lspconfig").eslint.setup({
     on_attach = on_attach,
     flags = flags,
@@ -69,18 +86,6 @@ M.config = function()
   })
 
   require("lspconfig").tailwindcss.setup(server_setup)
-
-  require("lspconfig.ui.windows").default_options.border = "rounded"
-
-  require("nvim-lightbulb").setup({
-    sign = { priority = 8 },
-    autocmd = { enabled = true },
-  })
-
-  vim.fn.sign_define(
-    "LightBulbSign",
-    { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" }
-  )
 end
 
 return M

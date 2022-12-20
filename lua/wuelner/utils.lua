@@ -82,6 +82,7 @@ M.lsp_on_attach = function(client, bufnr)
 
   if client_name == "eslint" then
     clear_autocmds({ group = "EslintFixAll", buffer = bufnr })
+
     create_autocmd("BufWritePre", {
       group = "EslintFixAll",
       buffer = bufnr,
@@ -92,7 +93,9 @@ M.lsp_on_attach = function(client, bufnr)
   if supports_method("textDocument/formatting") then
     if client_name == "null-ls" then
       client.server_capabilities.documentFormattingProvider = true
+
       clear_autocmds({ group = "lsp_format", buffer = bufnr })
+
       create_autocmd("BufWritePre", {
         group = "lsp_format",
         buffer = bufnr,

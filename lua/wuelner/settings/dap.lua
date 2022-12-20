@@ -162,6 +162,7 @@ M.config = function()
     repl_close()
     keymaps_del()
   end
+
   require("dap").listeners.before.event_terminated["dapui_config"] = function()
     dapui_close()
     repl_close()

@@ -16,6 +16,7 @@ M.config = function()
 
   local setup = require("cmp").setup
   local mapping = require("cmp").mapping
+  local scroll_docs = mapping.scroll_docs
   local visible = require("cmp").visible
   local complete = require("cmp").complete
   local select_next_item = require("cmp").select_next_item
@@ -57,8 +58,8 @@ M.config = function()
     end,
     performance = { debounce = 300, throttle = 40, fetching_timeout = 300 },
     mapping = mapping.preset.insert({
-      ["<C-b>"] = mapping.scroll_docs(-1),
-      ["<C-f>"] = mapping.scroll_docs(1),
+      ["<C-b>"] = scroll_docs(-1),
+      ["<C-f>"] = scroll_docs(1),
       ["<C-e>"] = mapping.abort(),
       ["<CR>"] = mapping.confirm({ select = false }),
       ["<S-Tab>"] = mapping(function(fallback)
@@ -126,7 +127,7 @@ M.config = function()
     sources = require("cmp").config.sources({
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "path", option = { trailing_slash = true } },
+      { name = "path" },
       { name = "cmp_tabnine" },
     }, {
       {

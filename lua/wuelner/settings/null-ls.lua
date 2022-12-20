@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
   vim.api.nvim_create_augroup("lsp_format", {})
+
   require("null-ls").setup({
     border = "rounded",
     update_in_insert = vim.diagnostic.config().update_in_insert,
@@ -15,14 +16,15 @@ M.config = function()
           return utils.root_has_file({
             ".prettierrc",
             ".prettierrc.json",
-            ".prettierrc.yaml",
             ".prettierrc.yml",
+            ".prettierrc.yaml",
             ".prettierrc.json5",
             ".prettierrc.js",
             ".prettierrc.cjs",
+            ".prettierrc.toml",
             "prettier.config.js",
             "prettier.config.cjs",
-            ".prettierrc.toml",
+            "package.json",
           })
         end,
       }),

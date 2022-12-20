@@ -9,6 +9,7 @@ end
 
 M.config = function()
   vim.g.did_load_filetypes = nil
+
   vim.api.nvim_create_autocmd("VimEnter", { command = "set regexpengine=0" })
 end
 

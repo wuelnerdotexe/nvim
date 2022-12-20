@@ -13,8 +13,6 @@ return require("packer").startup(function(use)
   use({
     "wbthomason/packer.nvim",
     "lewis6991/impatient.nvim",
-
-    -- Dependencies.
     { "nvim-lua/plenary.nvim", module = "plenary" },
     {
       "williamboman/mason.nvim",
@@ -25,8 +23,6 @@ return require("packer").startup(function(use)
       },
       config = "require('wuelner.settings.mason').config()",
     },
-
-    -- Options.
     {
       "wuelnerdotexe/human.vim",
       setup = "require('wuelner.settings.human').setup()",
@@ -37,8 +33,6 @@ return require("packer").startup(function(use)
       setup = "require('wuelner.settings.polyglot').setup()",
       config = "require('wuelner.settings.polyglot').config()",
     },
-
-    -- Development.
     {
       "mfussenegger/nvim-dap",
       keys = { { "n", "<F9>" }, { "n", "<F5>" } },
@@ -51,15 +45,11 @@ return require("packer").startup(function(use)
       ft = "markdown",
       setup = "require('wuelner.settings.markdown-preview').setup()",
     },
-
-    -- Git.
     {
       "lewis6991/gitsigns.nvim",
       after = "human.vim",
       config = "require('wuelner.settings.gitsigns').config()",
     },
-
-    -- Folders explorer.
     {
       "lambdalisue/fern.vim",
       after = "human.vim",
@@ -77,8 +67,6 @@ return require("packer").startup(function(use)
       setup = "require('wuelner.settings.fern').setup()",
       config = "require('wuelner.settings.fern').config()",
     },
-
-    -- Tree-sitter.
     {
       "nvim-treesitter/nvim-treesitter",
       after = "vim-polyglot",
@@ -103,8 +91,6 @@ return require("packer").startup(function(use)
       keys = { { "n", "gc" }, { "v", "gc" } },
       config = "require('wuelner.settings.comment').config()",
     },
-
-    -- Indent.
     {
       "tpope/vim-sleuth",
       after = "nvim-treesitter",
@@ -115,8 +101,6 @@ return require("packer").startup(function(use)
       after = "vim-sleuth",
       config = "require('wuelner.settings.indent-blankline').config()",
     },
-
-    -- Autocomplete.
     {
       "hrsh7th/nvim-cmp",
       after = "vim-sleuth",
@@ -153,8 +137,6 @@ return require("packer").startup(function(use)
       event = "InsertEnter",
       config = "require('wuelner.settings.autopairs').config()",
     },
-
-    -- LSP.
     {
       "jose-elias-alvarez/null-ls.nvim",
       after = "mason.nvim",
@@ -184,8 +166,6 @@ return require("packer").startup(function(use)
       after = "nvim-lspconfig",
       config = "require('wuelner.settings.colorizer').config()",
     },
-
-    -- Typing.
     {
       "mattn/emmet-vim",
       cmd = "EmmetInstall",
@@ -214,15 +194,11 @@ return require("packer").startup(function(use)
       },
       setup = "require('wuelner.settings.visual-multi').setup()",
     },
-
-    -- Theme.
     {
       "wuelnerdotexe/vim-enfocado",
       setup = "require('wuelner.settings.enfocado').setup()",
       config = "require('wuelner.settings.enfocado').config()",
     },
-
-    -- Statusline.
     {
       "feline-nvim/feline.nvim",
       after = { "aerial.nvim", "vim-enfocado" },
@@ -233,8 +209,6 @@ return require("packer").startup(function(use)
       after = "human.vim",
       config = "require('wuelner.settings.bufferline').config()",
     },
-
-    -- Improvements.
     {
       "folke/noice.nvim",
       disable = vim.version().minor < 9,
@@ -279,8 +253,6 @@ return require("packer").startup(function(use)
       keys = { { "n", "<leader>tt" } },
       config = "require('wuelner.settings.nerdterm').config()",
     },
-
-    -- Telescope.
     {
       "nvim-telescope/telescope.nvim",
       keys = {
@@ -297,8 +269,6 @@ return require("packer").startup(function(use)
       },
       config = "require('wuelner.settings.telescope').config()",
     },
-
-    -- Presence.
     {
       "andweeb/presence.nvim",
       config = "require('wuelner.settings.presence').config()",

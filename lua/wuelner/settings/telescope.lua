@@ -1,26 +1,6 @@
 local M = {}
 
 M.config = function()
-  local buffer_previewer_maker = function(filepath, bufnr, opts)
-    opts = opts or {}
-    filepath = vim.fn.expand(filepath)
-
-    vim.loop.fs_stat(filepath, function(_, stat)
-      if not stat then
-        return
-      end
-
-      if stat.size > 100000 then
-        return
-      else
-        require("telescope.previewers").buffer_previewer_maker(
-          filepath,
-          bufnr,
-          opts
-        )
-      end
-    end)
-  end
   local select_horizontal = require("telescope.actions").select_horizontal
   local mappings = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal }
 
@@ -53,7 +33,21 @@ M.config = function()
         "bower_components",
         "*.code-search",
       },
-      buffer_previewer_maker = buffer_previewer_maker,
+      buffer_previewer_maker = function(filepath, bufnr, opts)
+        opts = opts or {}
+
+        vim.loop.fs_stat(filepath, function(_, stat)
+          if not stat or stat.size > 100000 then
+            return
+          else
+            require("telescope.previewers").buffer_previewer_maker(
+              filepath,
+              bufnr,
+              opts
+            )
+          end
+        end)
+      end,
       mappings = { n = mappings, i = mappings },
     },
   })

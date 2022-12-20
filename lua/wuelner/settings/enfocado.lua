@@ -53,6 +53,7 @@ M.config = function()
       set_hl(0, "WinbarSB", { bg = "#000000", fg = "#000000" })
 
       vim.api.nvim_clear_autocmds({ group = "EnfocadoSB" })
+
       create_autocmd("FileType", {
         group = "EnfocadoSB",
         pattern = "fern,aerial,nerdterm,qf",

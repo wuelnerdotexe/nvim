@@ -36,10 +36,10 @@ M.config = function()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
     callback = function()
-      vim.fn["glyph_palette#apply"]()
-
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
+
+      vim.fn["glyph_palette#apply"]()
 
       keymap_set(
         "n",
