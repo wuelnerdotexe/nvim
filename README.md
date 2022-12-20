@@ -13,6 +13,7 @@ My personal Neovim setup written in Lua.
 - [Philosophy](#philosophy)
 - [Requirements](#requirements)
 - [Installation](#installation)
+  - [Post installation](#post-installation)
 - [Keymaps](#keymaps)
   - [General](#general)
   - [Folders explorer](#folders-explorer)
@@ -39,8 +40,8 @@ The main features and plugins provided by this setup are as follows:
 - ⚡ Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
 - 📂 Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
 - 🔭 Powerful fuzzy finder with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
-- 🔊 Integration with multiple languages by [vim-polyglot](https://github.com/sheerun/vim-polyglot)
-- 🌳 Advanced syntax recognition with [treesitter.nvim](https://github.com/nvim-treesitter/nvim-treesitter).
+- 🔊 Integration with multiple languages by [vim-polyglot](https://github.com/sheerun/vim-polyglot).
+- 🌳 Advanced syntax recognition with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - 💡 Neovim native language server protocol.
 - 🔗 Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
 - 📜 [Friendly snippets](https://github.com/rafamadriz/friendly-snippets) with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
@@ -66,6 +67,7 @@ The main features and plugins provided by this setup are as follows:
 
 - [Nerd Fonts](https://www.nerdfonts.com/) patched with [codicons.ttf](https://github.com/microsoft/vscode-codicons) - to show nice icons.
 - [Neovim](https://neovim.io/) >= v0.8 - obviously.
+- [Git](https://git-scm.com/) - to install nvim plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
 - [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters.
 - [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 - [fd](https://github.com/sharkdp/fd) - to find files with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
@@ -80,6 +82,17 @@ For example, to install on Linux/MacOS:
 
 ```bash
 git clone https://github.com/wuelnerdotexe/nvim ~/.config/nvim --depth 1
+```
+
+### Post installation
+
+After installing this setup, you will need to install [packer.nvim], the package manager for this setup, from your terminal:
+
+Linux/MacOS Installation:
+
+```bash
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
 ## Keymaps
