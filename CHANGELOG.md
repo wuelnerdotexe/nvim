@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Folding handling enabled from `aerial`.
 - Various optimizations are madded.
 
+### Changed
+
+- The `fzf-fuzzy` of `telescope` is turned off for exact results.
+
 ### Fixed
 
 - Removed `packer` bootstrapping, due to conflict with `impatient` and performance.

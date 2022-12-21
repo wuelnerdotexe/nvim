@@ -50,6 +50,7 @@ M.config = function()
       end,
       mappings = { n = mappings, i = mappings },
     },
+    extensions = { fzf = { fuzzy = false, case_mode = "ignore_case" } },
   })
 
   require("telescope").load_extension("fzf")
