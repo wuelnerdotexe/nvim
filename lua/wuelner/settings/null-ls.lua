@@ -12,11 +12,8 @@ M.config = function()
       require("null-ls").builtins.formatting.prettierd.with({
         condition = function(utils)
           local startpath = vim.fn.getcwd()
-          local project_root = require("lspconfig.util").find_git_ancestor(
-            startpath
-          ) or require("lspconfig.util").find_package_json_ancestor(
-            startpath
-          )
+          local project_root = require("lspconfig.util").find_git_ancestor(startpath)
+            or require("lspconfig.util").find_package_json_ancestor(startpath)
 
           if not project_root then
             return false
@@ -35,21 +32,11 @@ M.config = function()
             "prettier.config.cjs",
           }
 
-          local exists = utils.has_file(config_files)
-            or utils.root_has_file(config_files)
+          local exists = utils.has_file(config_files) or utils.root_has_file(config_files)
 
           if not exists then
             local ok, has_prettier_key = pcall(function()
-              local package_json = vim.json.decode(
-                table.concat(
-                  vim.fn.readfile(
-                    require("lspconfig.util").path.join(
-                      project_root,
-                      "/package.json"
-                    )
-                  )
-                )
-              )
+              local package_json = vim.json.decode(table.concat(vim.fn.readfile(project_root .. "/package.json")))
 
               return not not package_json["prettier"]
             end)

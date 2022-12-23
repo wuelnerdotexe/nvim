@@ -64,10 +64,7 @@ M.config = function()
     float = { border = "rounded", relative = "editor" },
   })
 
-  vim.api.nvim_create_autocmd("Filetype", {
-    pattern = "aerial",
-    command = "setlocal signcolumn=yes:1",
-  })
+  vim.api.nvim_create_autocmd("Filetype", { pattern = "aerial", command = "setlocal signcolumn=yes:1" })
 
   keymap_set("n", "<leader>st", require("aerial").toggle)
 end

@@ -5,8 +5,7 @@ M.aerial_breadcrumbs = function()
   local depth = nil or #symbols
   local table_unpack = table.unpack
 
-  symbols = depth > 0 and { table_unpack(symbols, 1, depth) }
-    or { table_unpack(symbols, #symbols + 1 + depth) }
+  symbols = depth > 0 and { table_unpack(symbols, 1, depth) } or { table_unpack(symbols, #symbols + 1 + depth) }
 
   local parts = {}
 
@@ -16,8 +15,7 @@ M.aerial_breadcrumbs = function()
 
   local table_concat = table.concat
 
-  return table_concat(parts, " > ") == "" and ""
-    or table_concat(parts, " > ")
+  return table_concat(parts, " > ") == "" and "" or table_concat(parts, " > ")
 end
 
 M.lsp_format = function(bufnr)
@@ -82,12 +80,7 @@ M.lsp_on_attach = function(client, bufnr)
   if null_ls and supports_method("textDocument/formatting") then
     client.server_capabilities.documentFormattingProvider = true
 
-    vim.api.nvim_buf_create_user_command(
-      bufnr,
-      "PrettierFormatAll",
-      lsp_format,
-      {}
-    )
+    vim.api.nvim_buf_create_user_command(bufnr, "PrettierFormatAll", lsp_format, {})
   elseif null_ls and supports_method("textDocument/rangeFormatting") then
     client.server_capabilities.documentRangeFormattingProvider = true
 

@@ -10,7 +10,7 @@ M.config = function()
       prompt_prefix = "  ",
       selection_caret = "  ",
       multi_icon = " ",
-      winblend = vim.opt.winblend:get(),
+      winblend = 10,
       vimgrep_arguments = {
         "rg",
         "--hidden",
@@ -40,11 +40,7 @@ M.config = function()
           if not stat or stat.size > 100000 then
             return
           else
-            require("telescope.previewers").buffer_previewer_maker(
-              filepath,
-              bufnr,
-              opts
-            )
+            require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
           end
         end)
       end,
@@ -55,10 +51,7 @@ M.config = function()
 
   require("telescope").load_extension("fzf")
 
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "TelescopePreviewerLoaded",
-    command = "setlocal wrap",
-  })
+  vim.api.nvim_create_autocmd("User", { pattern = "TelescopePreviewerLoaded", command = "setlocal wrap" })
 
   local keymap_set = vim.keymap.set
 

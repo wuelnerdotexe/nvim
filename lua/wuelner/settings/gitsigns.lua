@@ -44,30 +44,10 @@ M.config = function()
 
         return "<Ignore>"
       end, keymap_opts_with_expr)
-      keymap_set(
-        "n",
-        "<leader>hp",
-        package.loaded.gitsigns.preview_hunk,
-        keymap_opts
-      )
-      keymap_set(
-        keymap_mode,
-        "<leader>hr",
-        package.loaded.gitsigns.reset_hunk,
-        keymap_opts
-      )
-      keymap_set(
-        keymap_mode,
-        "<leader>hs",
-        package.loaded.gitsigns.stage_hunk,
-        keymap_opts
-      )
-      keymap_set(
-        "n",
-        "<leader>hu",
-        package.loaded.gitsigns.undo_stage_hunk,
-        keymap_opts
-      )
+      keymap_set("n", "<leader>hp", package.loaded.gitsigns.preview_hunk, keymap_opts)
+      keymap_set(keymap_mode, "<leader>hr", package.loaded.gitsigns.reset_hunk, keymap_opts)
+      keymap_set(keymap_mode, "<leader>hs", package.loaded.gitsigns.stage_hunk, keymap_opts)
+      keymap_set("n", "<leader>hu", package.loaded.gitsigns.undo_stage_hunk, keymap_opts)
     end,
   })
 end

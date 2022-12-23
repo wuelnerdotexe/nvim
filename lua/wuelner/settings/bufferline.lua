@@ -8,18 +8,8 @@ M.config = function()
       tab_size = 18,
       indicator = { icon = "▎", style = "icon" },
       offsets = {
-        {
-          filetype = "aerial",
-          text = "OUTLINE EXPLORER",
-          highlight = "Title",
-          separator = false,
-        },
-        {
-          filetype = "fern",
-          text = "FOLDERS EXPLORER",
-          highlight = "Title",
-          separator = false,
-        },
+        { filetype = "aerial", text = "OUTLINE EXPLORER", highlight = "Title", separator = false },
+        { filetype = "fern", text = "FOLDERS EXPLORER", highlight = "Title", separator = false },
       },
       show_buffer_icons = false,
       show_buffer_default_icon = false,

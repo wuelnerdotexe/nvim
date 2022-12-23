@@ -8,15 +8,7 @@ M.config = function()
   local enable = { enable = true }
 
   require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-      "bash",
-      "comment",
-      "lua",
-      "markdown",
-      "markdown_inline",
-      "regex",
-      "vim",
-    },
+    ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" },
     sync_install = true,
     auto_install = true,
     highlight = {

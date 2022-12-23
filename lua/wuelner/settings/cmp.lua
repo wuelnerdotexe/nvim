@@ -6,12 +6,7 @@ M.config = function()
   local has_words_before = function()
     local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 
-    return col ~= 0
-      and vim.api
-          .nvim_buf_get_lines(0, line - 1, line, true)[1]
-          :sub(col, col)
-          :match("%s")
-        == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
   local setup = require("cmp").setup
@@ -53,8 +48,7 @@ M.config = function()
 
   setup({
     enabled = function()
-      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-        or require("cmp_dap").is_dap_buffer()
+      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
     end,
     performance = { debounce = 300, throttle = 40, fetching_timeout = 300 },
     mapping = mapping.preset.insert({
@@ -139,12 +133,7 @@ M.config = function()
           get_bufnrs = function()
             local current_buf = vim.api.nvim_get_current_buf()
 
-            if
-              vim.api.nvim_buf_get_offset(
-                current_buf,
-                vim.api.nvim_buf_line_count(current_buf)
-              ) > 1048576
-            then
+            if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
               return {}
             end
 

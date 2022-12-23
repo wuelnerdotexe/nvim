@@ -76,10 +76,7 @@ M.config = function()
   }
 
   components_active[1][8] = {
-    provider = {
-      name = "position",
-      opts = { padding = { line = 3, col = 2 } },
-    },
+    provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
     left_sep = " ",
     right_sep = " ",
     hl = { name = "FelinePosition" },
@@ -165,17 +162,10 @@ M.config = function()
 
   table_insert(components_inactive, {})
 
-  components_inactive[1][1] = {
-    provider = "▎",
-    hl = { name = "FelineIndicatorInactive", fg = "bg" },
-    priority = 1,
-  }
+  components_inactive[1][1] = { provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 }
 
   components_inactive[1][2] = {
-    provider = {
-      name = "position",
-      opts = { padding = { line = 3, col = 2 } },
-    },
+    provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
     left_sep = " ",
     right_sep = " ",
     hl = { name = "FelinePositionInactive", fg = "gray" },
@@ -183,12 +173,7 @@ M.config = function()
   }
 
   components_inactive[1][3] = {
-    provider = {
-      name = "file_info",
-      opts = {
-        file_readonly_icon = " ",
-      },
-    },
+    provider = { name = "file_info", opts = { file_readonly_icon = " " } },
     icon = "",
     left_sep = " ",
     hl = { name = "FelineFilenameInactive", fg = "gray" },
@@ -244,14 +229,8 @@ M.config = function()
       ["V-REPLACE"] = "accent",
     },
     components = components,
-    force_inactive = {
-      filetypes = { "^nerdterm$" },
-      buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" },
-    },
-    disable = {
-      filetypes = { "^aerial$", "^fern$", "^fzf$" },
-      buftypes = { "^prompt$" },
-    },
+    force_inactive = { filetypes = { "^nerdterm$" }, buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
+    disable = { filetypes = { "^aerial$", "^fern$", "^fzf$" }, buftypes = { "^prompt$" } },
   })
 
   local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs
@@ -283,16 +262,7 @@ M.config = function()
         },
       },
     },
-    disable = {
-      buftypes = {
-        "^help$",
-        "^loclist$",
-        "^nofile$",
-        "^prompt$",
-        "^quickfix$",
-        "^terminal$",
-      },
-    },
+    disable = { buftypes = { "^help$", "^loclist$", "^nofile$", "^prompt$", "^quickfix$", "^terminal$" } },
   })
 end
 

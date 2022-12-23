@@ -42,31 +42,14 @@ M.config = function()
         ["cmp.entry.get_documentation"] = true,
       },
       hover = { view = "hover", opts = hover_opts },
-      signature = {
-        view = "hover",
-        auto_open = { throttle = 40 },
-        opts = hover_opts,
-      },
+      signature = { view = "hover", auto_open = { throttle = 40 }, opts = hover_opts },
     },
-    presets = {
-      command_palette = true,
-      long_message_to_split = true,
-      lsp_doc_border = true,
-    },
+    presets = { command_palette = true, long_message_to_split = true, lsp_doc_border = true },
     throttle = 40,
-    views = {
-      split = { size = "25%" },
-      win_options = { wrap = false },
-      hover = hover_opts,
-    },
+    views = { split = { size = "25%" }, win_options = { wrap = false }, hover = hover_opts },
   })
 
-  require("notify").setup({
-    background_colour = "NormalFloat",
-    fps = 24,
-    render = "minimal",
-    timeout = 300,
-  })
+  require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 300 })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",

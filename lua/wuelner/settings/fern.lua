@@ -5,10 +5,8 @@ M.setup = function()
 
   vim.g["fern#disable_default_mappings"] = 1
   vim.g["fern#default_hidden"] = 1
-  vim.g["fern#default_exclude"] =
-    [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]]
-  vim.g["fern#drawer_width"] =
-    math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
+  vim.g["fern#default_exclude"] = [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]]
+  vim.g["fern#drawer_width"] = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
   vim.g["fern#disable_drawer_hover_popup"] = 1
   vim.g["fern#drawer_hover_popup_delay"] = 40
   vim.g["fern_git_status#disable_ignored"] = 1

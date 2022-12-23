@@ -1,8 +1,7 @@
 local M = {}
 
 M.config = function()
-  local char_list =
-    { "|", "¦", "┆", "┊", "│", "│", "│", "│", "│", "│" }
+  local char_list = { "|", "¦", "┆", "┊", "│", "│", "│", "│", "│", "│" }
 
   require("indent_blankline").setup({
     use_treesitter = true,

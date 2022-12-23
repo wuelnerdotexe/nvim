@@ -52,14 +52,10 @@ M.config = function()
 
       create_autocmd("FileType", {
         pattern = "fern,aerial,nerdterm,qf",
-        command = "setlocal winhighlight="
-          .. "Normal:NormalSB,NormalNC:NormalSB,"
-          .. "Winbar:WinbarSB,WinbarNC:WinbarSB",
+        command = "setlocal winhighlight=Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
       })
 
-      if
-        vim.fn.has("termguicolors") and vim.opt.termguicolors:get() == true
-      then
+      if vim.fn.has("termguicolors") and vim.opt.termguicolors:get() == true then
         vim.opt.winblend = 10
         vim.opt.pumblend = 10
       end

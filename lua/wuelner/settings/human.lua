@@ -28,12 +28,10 @@ M.config = function()
   keymap_set("n", "1t", "<Cmd>tabonly<CR>")
   keymap_set("n", "<C-w>t", "<Cmd>tabedit %<CR>")
   keymap_set("n", "<leader>to", "<Cmd>terminal<CR>")
-  keymap_set(
-    "n",
-    "<C-w><C-l>",
-    ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>',
-    { noremap = true, silent = true }
-  )
+  keymap_set("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
+    noremap = true,
+    silent = true,
+  })
 end
 
 return M

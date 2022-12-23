@@ -5,9 +5,7 @@ M.config = function()
     type = "executable",
     command = "node",
     args = {
-      require("mason-registry")
-        .get_package("node-debug2-adapter")
-        :get_install_path() .. "/out/src/nodeDebug.js",
+      require("mason-registry").get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
     },
   }
 
@@ -15,18 +13,11 @@ M.config = function()
     type = "executable",
     command = "node",
     args = {
-      require("mason-registry")
-        .get_package("firefox-debug-adapter")
-        :get_install_path() .. "/dist/adapter.bundle.js",
+      require("mason-registry").get_package("firefox-debug-adapter"):get_install_path() .. "/dist/adapter.bundle.js",
     },
   }
 
-  for _, language in ipairs({
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-  }) do
+  for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
     require("dap").configurations[language] = {
       {
         name = "Launch Node against current file",
@@ -54,36 +45,11 @@ M.config = function()
 
   local sign_define = vim.fn.sign_define
 
-  sign_define("DapBreakpoint", {
-    linehl = "",
-    text = "",
-    texthl = "GitSignsDelete",
-    numhl = "",
-  })
-  sign_define("DapBreakpointCondition", {
-    linehl = "",
-    text = "",
-    texthl = "GitSignsDelete",
-    numhl = "",
-  })
-  sign_define("DapLogPoint", {
-    linehl = "",
-    text = "",
-    texthl = "GitSignsDelete",
-    numhl = "",
-  })
-  sign_define("DapStopped", {
-    linehl = "GitSignsChangeLn",
-    text = "",
-    texthl = "GitSignsChange",
-    numhl = "",
-  })
-  sign_define("DapBreakpointRejected", {
-    linehl = "",
-    text = "",
-    texthl = "",
-    numhl = "",
-  })
+  sign_define("DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
+  sign_define("DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
+  sign_define("DapLogPoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
+  sign_define("DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" })
+  sign_define("DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" })
 
   local keymap_set = vim.keymap.set
 

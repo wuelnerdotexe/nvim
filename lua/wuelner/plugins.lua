@@ -58,10 +58,7 @@ return require("packer").startup(function(use)
         "lambdalisue/fern-git-status.vim",
         {
           "lambdalisue/fern-renderer-nerdfont.vim",
-          requires = {
-            "lambdalisue/nerdfont.vim",
-            "lambdalisue/glyph-palette.vim",
-          },
+          requires = { "lambdalisue/nerdfont.vim", "lambdalisue/glyph-palette.vim" },
         },
       },
       setup = "require('wuelner.settings.fern').setup()",
@@ -72,10 +69,7 @@ return require("packer").startup(function(use)
       after = "vim-polyglot",
       run = ":TSUpdate",
       requires = {
-        {
-          "JoosepAlviste/nvim-ts-context-commentstring",
-          after = "nvim-treesitter",
-        },
+        { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
         { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
         { "windwp/nvim-ts-autotag", after = "nvim-treesitter" },
       },
@@ -113,10 +107,7 @@ return require("packer").startup(function(use)
           event = "InsertEnter",
           requires = {
             "L3MON4D3/LuaSnip",
-            requires = {
-              "rafamadriz/friendly-snippets",
-              module = "luasnip.loaders.from_vscode",
-            },
+            requires = { "rafamadriz/friendly-snippets", module = "luasnip.loaders.from_vscode" },
             config = "require('luasnip.loaders.from_vscode').lazy_load()",
           },
         },
@@ -125,9 +116,7 @@ return require("packer").startup(function(use)
           "tzachar/cmp-tabnine",
           run = "./install.sh",
           event = "InsertEnter",
-          config = "vim.schedule(function()"
-            .. "require('wuelner.settings.tabnine').config()"
-            .. "end)",
+          config = "vim.schedule(function() require('wuelner.settings.tabnine').config() end)",
         },
         { "rcarriga/cmp-dap", module = "cmp_dap" },
       },

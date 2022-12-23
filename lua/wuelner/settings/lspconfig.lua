@@ -3,17 +3,8 @@ local M = {}
 M.config = function()
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
-  require("nvim-lightbulb").setup({
-    sign = { priority = 8 },
-    autocmd = { enabled = true },
-  })
-
-  vim.fn.sign_define("LightBulbSign", {
-    text = "",
-    texthl = "DiagnosticSignInfo",
-    linehl = "",
-    numhl = "",
-  })
+  require("nvim-lightbulb").setup({ sign = { priority = 8 }, autocmd = { enabled = true } })
+  vim.fn.sign_define("LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
 
   local on_attach = require("wuelner.utils").lsp_on_attach
   local flags = { debounce_text_changes = 300 }
@@ -42,27 +33,14 @@ M.config = function()
     flags = flags,
     capabilities = capabilities,
     init_options = provideFormatter,
-    settings = {
-      json = {
-        schemas = require("schemastore").json.schemas(),
-        validate = { enable = true },
-      },
-    },
+    settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
   })
 
-  local server_setup = {
-    on_attach = on_attach,
-    flags = flags,
-    capabilities = capabilities,
-  }
+  local server_setup = { on_attach = on_attach, flags = flags, capabilities = capabilities }
 
   require("lspconfig").tsserver.setup(server_setup)
 
-  require("lspconfig").eslint.setup({
-    on_attach = on_attach,
-    flags = flags,
-    settings = { format = false },
-  })
+  require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
 
   require("lspconfig").cssls.setup({
     on_attach = on_attach,
@@ -71,10 +49,7 @@ M.config = function()
     settings = { css = validate, less = validate, scss = validate },
   })
 
-  require("lspconfig").stylelint_lsp.setup({
-    on_attach = on_attach,
-    flags = flags,
-  })
+  require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
 
   require("lspconfig").html.setup({
     on_attach = on_attach,
