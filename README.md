@@ -46,7 +46,6 @@ The main features and plugins provided by this setup are as follows:
 - 🔗 Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
 - 📜 [Friendly snippets](https://github.com/rafamadriz/friendly-snippets) with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 - 🤖 Autocomplete with Machine Learning by [Tabnine](https://www.tabnine.com/).
-- 🫰 Emmet integration with [emmet-vim](https://github.com/mattn/emmet-vim).
 - 👷 Git status of files with [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim).
 - 🚥 Integrations with [EsLint](https://eslint.org/), [StyleLint](https://stylelint.io/), [JSONLint](https://github.com/zaach/jsonlint), [MarkdownLint](https://github.com/DavidAnson/markdownlint), and [Prettier](https://prettier.io/).
 - 🐛 Code debugging with [nvim-dap](https://github.com/mfussenegger/nvim-dap).

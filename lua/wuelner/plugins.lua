@@ -107,6 +107,7 @@ return require("packer").startup(function(use)
       requires = {
         { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
         { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
+        { "hrsh7th/cmp-path", event = "InsertEnter" },
         {
           "saadparwaiz1/cmp_luasnip",
           event = "InsertEnter",
@@ -119,7 +120,7 @@ return require("packer").startup(function(use)
             config = "require('luasnip.loaders.from_vscode').lazy_load()",
           },
         },
-        { "hrsh7th/cmp-path", event = "InsertEnter" },
+        { "jackieaskins/cmp-emmet", run = "npm run release" },
         {
           "tzachar/cmp-tabnine",
           run = "./install.sh",
@@ -165,11 +166,6 @@ return require("packer").startup(function(use)
       "NvChad/nvim-colorizer.lua",
       after = "nvim-lspconfig",
       config = "require('wuelner.settings.colorizer').config()",
-    },
-    {
-      "mattn/emmet-vim",
-      cmd = "EmmetInstall",
-      setup = "require('wuelner.settings.emmet').setup()",
     },
     {
       "matze/vim-move",

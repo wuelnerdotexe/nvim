@@ -125,8 +125,9 @@ M.config = function()
       },
     },
     sources = require("cmp").config.sources({
-      { name = "path", keyword_length = 1, priority = 5 },
+      { name = "path", keyword_length = 1, priority = 6 },
     }, {
+      { name = "emmet", keyword_length = 1, priority = 5 },
       { name = "luasnip", keyword_length = 3, priority = 4 },
       { name = "nvim_lsp", keyword_length = 3, priority = 3 },
       { name = "cmp_tabnine", keyword_length = 3, priority = 2 },
