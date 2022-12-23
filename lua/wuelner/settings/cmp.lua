@@ -102,7 +102,7 @@ M.config = function()
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    completion = { completeopt = "menuone,noselect", keyword_length = 3 },
+    completion = { completeopt = "menuone,noselect" },
     formatting = {
       fields = { "abbr", "kind" },
       format = function(entry, vim_item)
@@ -125,15 +125,15 @@ M.config = function()
       },
     },
     sources = require("cmp").config.sources({
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "path" },
-      { name = "cmp_tabnine" },
+      { name = "path", keyword_length = 1, priority = 5 },
+    }, {
+      { name = "luasnip", keyword_length = 3, priority = 4 },
+      { name = "nvim_lsp", keyword_length = 3, priority = 3 },
+      { name = "cmp_tabnine", keyword_length = 3, priority = 2 },
     }, {
       {
         name = "buffer",
         option = {
-          keyword_length = 3,
           indexing_interval = 300,
           get_bufnrs = function()
             local current_buf = vim.api.nvim_get_current_buf()
@@ -150,6 +150,8 @@ M.config = function()
             return { current_buf }
           end,
         },
+        keyword_length = 3,
+        priority = 1,
       },
     }),
     experimental = { ghost_text = true },
