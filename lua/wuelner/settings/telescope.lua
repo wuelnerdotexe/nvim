@@ -5,7 +5,19 @@ M.config = function()
   local mappings = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal }
 
   require("telescope").setup({
-    pickers = { fd = { find_command = { "fd", "-I", "-H", "-t", "f" } } },
+    pickers = {
+      fd = {
+        find_command = {
+          "fd",
+          "-I",
+          "-H",
+          "-E",
+          "{.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,node_modules,bower_components,*.code-search}",
+          "-t",
+          "f",
+        },
+      },
+    },
     defaults = {
       prompt_prefix = "  ",
       selection_caret = "  ",
@@ -14,24 +26,14 @@ M.config = function()
       vimgrep_arguments = {
         "rg",
         "--hidden",
-        "--color=never",
-        "--no-heading",
+        "--glob=!.git,!.svn,!.hg,!CSV,!.DS_Store,!Thumbs.db,!node_modules,!bower_components,!*.code-search",
+        "--ignore-case",
         "--with-filename",
         "--line-number",
         "--column",
-        "--ignore-case",
+        "--no-heading",
         "--trim",
-      },
-      file_ignore_patterns = {
-        ".git",
-        ".svn",
-        ".hg",
-        "CSV",
-        ".DS_Store",
-        "Thumbs.db",
-        "node_modules",
-        "bower_components",
-        "*.code-search",
+        "--color=never",
       },
       buffer_previewer_maker = function(filepath, bufnr, opts)
         opts = opts or {}
@@ -39,9 +41,9 @@ M.config = function()
         vim.loop.fs_stat(filepath, function(_, stat)
           if not stat or stat.size > 100000 then
             return
-          else
-            require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
           end
+
+          require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
         end)
       end,
       mappings = { n = mappings, i = mappings },
