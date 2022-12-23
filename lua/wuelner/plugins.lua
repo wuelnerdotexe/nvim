@@ -139,11 +139,6 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.autopairs').config()",
     },
     {
-      "jose-elias-alvarez/null-ls.nvim",
-      after = "mason.nvim",
-      config = "require('wuelner.settings.null-ls').config()",
-    },
-    {
       "neovim/nvim-lspconfig",
       after = { "mason.nvim", "nvim-cmp" },
       requires = {
@@ -151,6 +146,11 @@ return require("packer").startup(function(use)
         { "kosayoda/nvim-lightbulb", module = "nvim-lightbulb" },
       },
       config = "require('wuelner.settings.lspconfig').config()",
+    },
+    {
+      "jose-elias-alvarez/null-ls.nvim",
+      after = { "mason.nvim", "nvim-lspconfig" },
+      config = "require('wuelner.settings.null-ls').config()",
     },
     {
       "RRethy/vim-illuminate",

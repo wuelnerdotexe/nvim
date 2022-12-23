@@ -1,11 +1,9 @@
 local M = {}
 
 M.config = function()
-  vim.api.nvim_create_augroup("lsp_format", {})
-
   require("null-ls").setup({
     border = "rounded",
-    update_in_insert = vim.diagnostic.config().update_in_insert,
+    update_in_insert = true,
     debounce = 300,
     on_attach = require("wuelner.utils").lsp_on_attach,
     sources = {
@@ -13,7 +11,18 @@ M.config = function()
       require("null-ls").builtins.diagnostics.markdownlint,
       require("null-ls").builtins.formatting.prettierd.with({
         condition = function(utils)
-          return utils.root_has_file({
+          local startpath = vim.fn.getcwd()
+          local project_root = require("lspconfig.util").find_git_ancestor(
+            startpath
+          ) or require("lspconfig.util").find_package_json_ancestor(
+            startpath
+          )
+
+          if not project_root then
+            return false
+          end
+
+          local config_files = {
             ".prettierrc",
             ".prettierrc.json",
             ".prettierrc.yml",
@@ -24,8 +33,31 @@ M.config = function()
             ".prettierrc.toml",
             "prettier.config.js",
             "prettier.config.cjs",
-            "package.json",
-          })
+          }
+
+          local exists = utils.has_file(config_files)
+            or utils.root_has_file(config_files)
+
+          if not exists then
+            local ok, has_prettier_key = pcall(function()
+              local package_json = vim.json.decode(
+                table.concat(
+                  vim.fn.readfile(
+                    require("lspconfig.util").path.join(
+                      project_root,
+                      "/package.json"
+                    )
+                  )
+                )
+              )
+
+              return not not package_json["prettier"]
+            end)
+
+            exists = ok and has_prettier_key
+          end
+
+          return exists
         end,
       }),
     },

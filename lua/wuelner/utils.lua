@@ -27,8 +27,6 @@ M.lsp_format = function(bufnr)
       return client.name == "null-ls"
     end,
   })
-
-  require("luasnip").session.current_nodes[bufnr] = nil
 end
 
 M.lsp_on_attach = function(client, bufnr)
@@ -76,36 +74,27 @@ M.lsp_on_attach = function(client, bufnr)
     keymap_set("n", "<leader>ca", vim.lsp.buf.code_action, keymap_opts)
   end
 
-  local client_name = client.name
-  local clear_autocmds = vim.api.nvim_clear_autocmds
-  local create_autocmd = vim.api.nvim_create_autocmd
-
-  if client_name == "eslint" then
-    clear_autocmds({ group = "EslintFixAll", buffer = bufnr })
-
-    create_autocmd("BufWritePre", {
-      group = "EslintFixAll",
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
+  local null_ls = client.name == "null-ls" and true or false
+  local lsp_format = function()
+    require("wuelner.utils").lsp_format(bufnr)
   end
 
-  if supports_method("textDocument/formatting") then
-    if client_name == "null-ls" then
-      client.server_capabilities.documentFormattingProvider = true
+  if null_ls and supports_method("textDocument/formatting") then
+    client.server_capabilities.documentFormattingProvider = true
 
-      clear_autocmds({ group = "lsp_format", buffer = bufnr })
+    vim.api.nvim_buf_create_user_command(
+      bufnr,
+      "PrettierFormatAll",
+      lsp_format,
+      {}
+    )
+  elseif null_ls and supports_method("textDocument/rangeFormatting") then
+    client.server_capabilities.documentRangeFormattingProvider = true
 
-      create_autocmd("BufWritePre", {
-        group = "lsp_format",
-        buffer = bufnr,
-        callback = function()
-          require("wuelner.utils").lsp_format(bufnr)
-        end,
-      })
-    else
-      client.server_capabilities.documentFormattingProvider = false
-    end
+    keymap_set("x", "<leader>f", lsp_format, keymap_opts)
+  else
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 end
 
