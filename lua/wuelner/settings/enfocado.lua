@@ -29,20 +29,18 @@ end
 M.config = function()
   local create_autocmd = vim.api.nvim_create_autocmd
 
-  vim.api.nvim_create_augroup("EnfocadoSB", {})
-
   create_autocmd("ColorScheme", {
     pattern = "enfocado",
     nested = true,
     callback = function()
       vim.opt.fillchars:append({
-        horiz = " ",
-        horizup = " ",
-        horizdown = " ",
         vert = " ",
-        vertleft = " ",
-        vertright = " ",
+        horiz = " ",
         verthoriz = " ",
+        vertleft = " ",
+        horizdown = " ",
+        horizup = " ",
+        vertright = " ",
       })
 
       local set_hl = vim.api.nvim_set_hl
@@ -52,10 +50,7 @@ M.config = function()
       set_hl(0, "NormalSB", { bg = "#000000", fg = "#b9b9b9" })
       set_hl(0, "WinbarSB", { bg = "#000000", fg = "#000000" })
 
-      vim.api.nvim_clear_autocmds({ group = "EnfocadoSB" })
-
       create_autocmd("FileType", {
-        group = "EnfocadoSB",
         pattern = "fern,aerial,nerdterm,qf",
         command = "setlocal winhighlight="
           .. "Normal:NormalSB,NormalNC:NormalSB,"
