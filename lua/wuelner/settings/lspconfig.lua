@@ -12,19 +12,25 @@ local config = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   require("mason-lspconfig").setup({
-    ensure_installed = {
-      "jsonls",
-      "tsserver",
-      "eslint",
-      "cssls",
-      "stylelint_lsp",
-      "html",
-      "tailwindcss",
-    },
+    ensure_installed = { "cssls", "eslint", "html", "jsonls", "stylelint_lsp", "tailwindcss", "tsserver" },
   })
 
+  require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
+  require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
+
+  local server_setup = { on_attach = on_attach, flags = flags, capabilities = capabilities }
+
+  require("lspconfig").tsserver.setup(server_setup)
+  require("lspconfig").tailwindcss.setup(server_setup)
+
   local provideFormatter = { provideFormatter = false }
-  local validate = { validate = false }
+
+  require("lspconfig").html.setup({
+    on_attach = on_attach,
+    flags = flags,
+    capabilities = capabilities,
+    init_options = provideFormatter,
+  })
 
   require("lspconfig").jsonls.setup({
     on_attach = on_attach,
@@ -34,11 +40,7 @@ local config = function()
     settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
   })
 
-  local server_setup = { on_attach = on_attach, flags = flags, capabilities = capabilities }
-
-  require("lspconfig").tsserver.setup(server_setup)
-
-  require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
+  local validate = { validate = false }
 
   require("lspconfig").cssls.setup({
     on_attach = on_attach,
@@ -46,17 +48,6 @@ local config = function()
     capabilities = capabilities,
     settings = { css = validate, less = validate, scss = validate },
   })
-
-  require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
-
-  require("lspconfig").html.setup({
-    on_attach = on_attach,
-    flags = flags,
-    capabilities = capabilities,
-    init_options = provideFormatter,
-  })
-
-  require("lspconfig").tailwindcss.setup(server_setup)
 end
 
 return config
