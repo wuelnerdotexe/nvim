@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("presence"):setup({
     neovim_image_text = "El editor de código más cool del mundo mundial",
     debounce_timeout = 40,
@@ -14,4 +12,4 @@ M.config = function()
   })
 end
 
-return M
+return config

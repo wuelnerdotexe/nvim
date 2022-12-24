@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("illuminate").configure({
     delay = 40,
     filetypes_denylist = {
@@ -29,4 +27,4 @@ M.config = function()
   })
 end
 
-return M
+return config

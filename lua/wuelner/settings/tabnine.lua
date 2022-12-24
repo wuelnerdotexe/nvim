@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("cmp_tabnine.config").setup({
     ignored_file_types = {
       ["aerial"] = true,
@@ -26,4 +24,4 @@ M.config = function()
   })
 end
 
-return M
+return config

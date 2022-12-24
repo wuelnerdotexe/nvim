@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   local fancy_opts = { cursor = nil, texthl = nil, linehl = nil }
 
   require("smoothcursor").setup({
@@ -36,4 +34,4 @@ M.config = function()
   })
 end
 
-return M
+return config

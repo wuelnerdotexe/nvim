@@ -21,7 +21,7 @@ return require("packer").startup(function(use)
         { "jayp0521/mason-null-ls.nvim", module = "mason-null-ls" },
         { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
       },
-      config = "require('wuelner.settings.mason').config()",
+      config = "require('wuelner.settings.mason')()",
     },
     {
       "wuelnerdotexe/human.vim",
@@ -37,18 +37,18 @@ return require("packer").startup(function(use)
       "mfussenegger/nvim-dap",
       keys = { { "n", "<F9>" }, { "n", "<F5>" } },
       requires = { "rcarriga/nvim-dap-ui", module = "dapui" },
-      config = "require('wuelner.settings.dap').config()",
+      config = "require('wuelner.settings.dap')()",
     },
     {
       "iamcco/markdown-preview.nvim",
       run = "cd app && npm install",
       ft = "markdown",
-      setup = "require('wuelner.settings.markdown-preview').setup()",
+      setup = "require('wuelner.settings.markdown-preview')()",
     },
     {
       "lewis6991/gitsigns.nvim",
       after = "human.vim",
-      config = "require('wuelner.settings.gitsigns').config()",
+      config = "require('wuelner.settings.gitsigns')()",
     },
     {
       "lambdalisue/fern.vim",
@@ -73,27 +73,27 @@ return require("packer").startup(function(use)
         { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
         { "windwp/nvim-ts-autotag", after = "nvim-treesitter" },
       },
-      config = "require('wuelner.settings.treesitter').config()",
+      config = "require('wuelner.settings.treesitter')()",
     },
     {
       "andymass/vim-matchup",
       after = "nvim-treesitter",
-      setup = "require('wuelner.settings.matchup').setup()",
+      setup = "require('wuelner.settings.matchup')()",
     },
     {
       "numToStr/Comment.nvim",
       keys = { { "n", "gc" }, { "v", "gc" } },
-      config = "require('wuelner.settings.comment').config()",
+      config = "require('wuelner.settings.comment')()",
     },
     {
       "tpope/vim-sleuth",
       after = "nvim-treesitter",
-      setup = "require('wuelner.settings.sleuth').setup()",
+      setup = "require('wuelner.settings.sleuth')()",
     },
     {
       "lukas-reineke/indent-blankline.nvim",
       after = "vim-sleuth",
-      config = "require('wuelner.settings.indent-blankline').config()",
+      config = "require('wuelner.settings.indent-blankline')()",
     },
     {
       "hrsh7th/nvim-cmp",
@@ -116,16 +116,16 @@ return require("packer").startup(function(use)
           "tzachar/cmp-tabnine",
           run = "./install.sh",
           event = "InsertEnter",
-          config = "vim.schedule(function() require('wuelner.settings.tabnine').config() end)",
+          config = "vim.schedule(function() require('wuelner.settings.tabnine')() end)",
         },
         { "rcarriga/cmp-dap", module = "cmp_dap" },
       },
-      config = "require('wuelner.settings.cmp').config()",
+      config = "require('wuelner.settings.cmp')()",
     },
     {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
-      config = "require('wuelner.settings.autopairs').config()",
+      config = "require('wuelner.settings.autopairs')()",
     },
     {
       "neovim/nvim-lspconfig",
@@ -134,27 +134,27 @@ return require("packer").startup(function(use)
         { "b0o/schemastore.nvim", module = "schemastore" },
         { "kosayoda/nvim-lightbulb", module = "nvim-lightbulb" },
       },
-      config = "require('wuelner.settings.lspconfig').config()",
+      config = "require('wuelner.settings.lspconfig')()",
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
       after = { "mason.nvim", "nvim-lspconfig" },
-      config = "require('wuelner.settings.null-ls').config()",
+      config = "require('wuelner.settings.null-ls')()",
     },
     {
       "RRethy/vim-illuminate",
       after = "nvim-lspconfig",
-      config = "require('wuelner.settings.illuminate').config()",
+      config = "require('wuelner.settings.illuminate')()",
     },
     {
       "stevearc/aerial.nvim",
       after = "nvim-lspconfig",
-      config = "require('wuelner.settings.aerial').config()",
+      config = "require('wuelner.settings.aerial')()",
     },
     {
       "NvChad/nvim-colorizer.lua",
       after = "nvim-lspconfig",
-      config = "require('wuelner.settings.colorizer').config()",
+      config = "require('wuelner.settings.colorizer')()",
     },
     {
       "matze/vim-move",
@@ -177,7 +177,7 @@ return require("packer").startup(function(use)
         { "n", "<Bslash><Bslash>" },
         { "x", "<Bslash><Bslash>" },
       },
-      setup = "require('wuelner.settings.visual-multi').setup()",
+      setup = "require('wuelner.settings.visual-multi')()",
     },
     {
       "wuelnerdotexe/vim-enfocado",
@@ -187,12 +187,12 @@ return require("packer").startup(function(use)
     {
       "feline-nvim/feline.nvim",
       after = { "aerial.nvim", "vim-enfocado" },
-      config = "require('wuelner.settings.feline').config()",
+      config = "require('wuelner.settings.feline')()",
     },
     {
       "akinsho/bufferline.nvim",
       after = "human.vim",
-      config = "require('wuelner.settings.bufferline').config()",
+      config = "require('wuelner.settings.bufferline')()",
     },
     {
       "folke/noice.nvim",
@@ -203,12 +203,12 @@ return require("packer").startup(function(use)
         { "MunifTanjim/nui.nvim", module_pattern = "nui.*" },
         { "rcarriga/nvim-notify", module = "notify" },
       },
-      config = "require('wuelner.settings.noice').config()",
+      config = "require('wuelner.settings.noice')()",
     },
     {
       "gen740/SmoothCursor.nvim",
       after = "human.vim",
-      config = "require('wuelner.settings.smoothcursor').config()",
+      config = "require('wuelner.settings.smoothcursor')()",
     },
     {
       "anuvyklack/windows.nvim",
@@ -217,7 +217,7 @@ return require("packer").startup(function(use)
         { "anuvyklack/middleclass", module = "middleclass" },
         { "anuvyklack/animation.nvim", module = "animation" },
       },
-      config = "require('wuelner.settings.windows').config()",
+      config = "require('wuelner.settings.windows')()",
     },
     {
       "aserowy/tmux.nvim",
@@ -231,12 +231,12 @@ return require("packer").startup(function(use)
         { "n", "<A-k>" },
         { "n", "<A-l>" },
       },
-      config = "require('wuelner.settings.tmux').config()",
+      config = "require('wuelner.settings.tmux')()",
     },
     {
       "wuelnerdotexe/nerdterm",
       keys = { { "n", "<leader>tt" } },
-      config = "require('wuelner.settings.nerdterm').config()",
+      config = "require('wuelner.settings.nerdterm')()",
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -252,11 +252,11 @@ return require("packer").startup(function(use)
         run = "make",
         module = "telescope._extensions.fzf",
       },
-      config = "require('wuelner.settings.telescope').config()",
+      config = "require('wuelner.settings.telescope')()",
     },
     {
       "andweeb/presence.nvim",
-      config = "require('wuelner.settings.presence').config()",
+      config = "require('wuelner.settings.presence')()",
     },
   })
 end)

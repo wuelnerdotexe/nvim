@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("tmux").setup({
     copy_sync = { enable = false },
     navigation = { cycle_navigation = true, enable_default_keybindings = true },
@@ -8,4 +6,4 @@ M.config = function()
   })
 end
 
-return M
+return config

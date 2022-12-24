@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("colorizer").setup({
     user_default_options = {
       names = false,
@@ -15,4 +13,4 @@ M.config = function()
   })
 end
 
-return M
+return config

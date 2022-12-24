@@ -1,6 +1,4 @@
-local M = {}
-
-M.setup = function()
+local setup = function()
   vim.g.sleuth_aerial_heuristics = 0
   vim.g.sleuth_checkhealth_heuristics = 0
   vim.g.sleuth_dapui_breakpoints_heuristics = 0
@@ -21,4 +19,4 @@ M.setup = function()
   vim.g.sleuth_TelescopePrompt_heuristics = 0
 end
 
-return M
+return setup

@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.opt.foldmethod = "manual"
   vim.opt.foldlevelstart = 99
 
@@ -69,4 +67,4 @@ M.config = function()
   keymap_set("n", "<leader>st", require("aerial").toggle)
 end
 
-return M
+return config

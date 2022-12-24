@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   local char_list = { "|", "¦", "┆", "┊", "│", "│", "│", "│", "│", "│" }
 
   require("indent_blankline").setup({
@@ -22,4 +20,4 @@ M.config = function()
   })
 end
 
-return M
+return config

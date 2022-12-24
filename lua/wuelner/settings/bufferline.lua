@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("bufferline").setup({
     options = {
       max_name_length = 14,
@@ -30,4 +28,4 @@ M.config = function()
   keymap_set("i", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>")
 end
 
-return M
+return config

@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.opt.shortmess:append("I")
   vim.opt.cmdheight = 0
   vim.opt.showcmd = false
@@ -57,4 +55,4 @@ M.config = function()
   })
 end
 
-return M
+return config

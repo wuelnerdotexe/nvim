@@ -1,7 +1,5 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.keymap.set("n", "<leader>tt", "<Plug>(NERDTermToggle)<CR>")
 end
 
-return M
+return config

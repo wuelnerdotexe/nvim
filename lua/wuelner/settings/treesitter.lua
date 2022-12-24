@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   local results = {}
 
   setmetatable(results, { __mode = "kv" })
@@ -47,4 +45,4 @@ M.config = function()
   })
 end
 
-return M
+return config

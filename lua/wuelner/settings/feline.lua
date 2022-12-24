@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.opt.ruler = false
 
   local components = { active = {}, inactive = {} }
@@ -266,4 +264,4 @@ M.config = function()
   })
 end
 
-return M
+return config

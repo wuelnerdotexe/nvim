@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("dap").adapters.node2 = {
     type = "executable",
     command = "node",
@@ -136,4 +134,4 @@ M.config = function()
   end
 end
 
-return M
+return config

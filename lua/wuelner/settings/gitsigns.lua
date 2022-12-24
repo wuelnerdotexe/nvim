@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   local keymap_set = vim.keymap.set
   local keymap_mode = { "n", "v" }
   local schedule = vim.schedule
@@ -52,4 +50,4 @@ M.config = function()
   })
 end
 
-return M
+return config

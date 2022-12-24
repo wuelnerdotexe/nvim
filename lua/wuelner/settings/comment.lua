@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("Comment").setup({
     toggler = { line = "gcc", block = "<Nop>" },
     opleader = { line = "gc", block = "<Nop>" },
@@ -29,4 +27,4 @@ M.config = function()
   })
 end
 
-return M
+return config

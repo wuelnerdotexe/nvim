@@ -10,12 +10,12 @@ M.aerial_breadcrumbs = function()
   local parts = {}
 
   for _, symbol in ipairs(symbols) do
-    table.insert(parts, string.format("%s %s", symbol.icon, symbol.name))
+    table.insert(parts, symbol.icon .. " " .. symbol.name)
   end
 
-  local table_concat = table.concat
+  local breadcrumbs = table.concat(parts, " > ")
 
-  return table_concat(parts, " > ") == "" and "" or table_concat(parts, " > ")
+  return breadcrumbs == "" and "" or breadcrumbs
 end
 
 M.lsp_format = function(bufnr)

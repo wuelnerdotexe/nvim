@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("null-ls").setup({
     border = "rounded",
     update_in_insert = true,
@@ -55,4 +53,4 @@ M.config = function()
   })
 end
 
-return M
+return config

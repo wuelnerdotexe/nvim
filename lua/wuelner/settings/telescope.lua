@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   local select_horizontal = require("telescope.actions").select_horizontal
   local mappings = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal }
 
@@ -64,4 +62,4 @@ M.config = function()
   keymap_set("n", "<leader>hf", require("telescope.builtin").help_tags)
 end
 
-return M
+return config

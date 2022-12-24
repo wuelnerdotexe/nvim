@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.opt.winwidth = 6
   vim.opt.winminwidth = 6
   vim.opt.equalalways = false
@@ -43,4 +41,4 @@ M.config = function()
   keymap_set(keymap_mode, "<C-w>=", "<Cmd>WindowsEqualize<CR>")
 end
 
-return M
+return config

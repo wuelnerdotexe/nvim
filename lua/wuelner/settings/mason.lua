@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("mason").setup({
     max_concurrent_installers = 3,
     ui = {
@@ -10,4 +8,4 @@ M.config = function()
   })
 end
 
-return M
+return config

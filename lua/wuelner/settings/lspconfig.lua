@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
   require("nvim-lightbulb").setup({ sign = { priority = 8 }, autocmd = { enabled = true } })
@@ -61,4 +59,4 @@ M.config = function()
   require("lspconfig").tailwindcss.setup(server_setup)
 end
 
-return M
+return config

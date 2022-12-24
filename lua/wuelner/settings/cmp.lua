@@ -1,6 +1,4 @@
-local M = {}
-
-M.config = function()
+local config = function()
   vim.opt.complete = nil
 
   local has_words_before = function()
@@ -17,7 +15,6 @@ M.config = function()
   local select_next_item = require("cmp").select_next_item
   local select_prev_item = require("cmp").select_prev_item
   local mapping_mode = { "i", "s" }
-  local string_format = string.format
   local codicons = {
     Text = "",
     Method = "",
@@ -102,10 +99,10 @@ M.config = function()
       format = function(entry, vim_item)
         local kind = vim_item.kind
 
-        vim_item.kind = string_format("%s %s", codicons[kind], kind)
+        vim_item.kind = codicons[kind] .. " " .. kind
 
         if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = string_format("%s %s", "", "Tabnine")
+          vim_item.kind = " Tabnine"
         end
 
         return vim_item
@@ -183,4 +180,4 @@ M.config = function()
   }, { enabled = false })
 end
 
-return M
+return config
