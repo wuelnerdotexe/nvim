@@ -35,7 +35,7 @@ My personal Neovim setup written in Lua.
 
 The main features and plugins provided by this setup are as follows:
 
-- 🧠 Updatetime, debounce, throttle times based on scientific research.
+- 🧠 Smooth times based on scientific research.
 - 🫴 Lazy loading of plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
 - ⚡ Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
 - 📂 Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
@@ -67,7 +67,7 @@ The main features and plugins provided by this setup are as follows:
 - [Nerd Fonts](https://www.nerdfonts.com/) patched with [codicons.ttf](https://github.com/microsoft/vscode-codicons) - to show nice icons.
 - [Neovim](https://neovim.io/) >= v0.8 - obviously.
 - [Git](https://git-scm.com/) - to install nvim plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
-- [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters.
+- [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters with [mason.nvim](https://github.com/williamboman/mason.nvim).
 - [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 - [fd](https://github.com/sharkdp/fd) - to find files with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 
@@ -85,9 +85,9 @@ git clone https://github.com/wuelnerdotexe/nvim ~/.config/nvim --depth 1
 
 ### Post installation
 
-After installing this setup, you will need to install [packer.nvim], the package manager for this setup, from your terminal:
+After installing this setup, you will need to install [packer.nvim](https://github.com/wbthomason/packer.nvim), the package manager for this setup, from your terminal.
 
-Linux/MacOS Installation:
+For example, to install on Linux/MacOS:
 
 ```bash
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
