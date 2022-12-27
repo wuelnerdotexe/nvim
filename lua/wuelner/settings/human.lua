@@ -1,8 +1,10 @@
 local M = {}
 
 M.setup = function()
-  vim.g.bufonly_exclude_buftypes = { "terminal" }
-  vim.g.bufonly_exclude_filetypes = {
+  local set_var = vim.api.nvim_set_var
+
+  set_var("bufonly_exclude_buftypes", { "terminal" })
+  set_var("bufonly_exclude_filetypes", {
     "aerial",
     "dap-repl",
     "dapui_breakpoints",
@@ -12,23 +14,44 @@ M.setup = function()
     "dapui_watches",
     "fern",
     "notify",
-  }
+  })
 end
 
 M.config = function()
-  vim.opt.spell = false
-  vim.opt.wrap = false
-  vim.opt.relativenumber = false
-  vim.opt.number = true
-  vim.opt.fillchars:append({ eob = " " })
+  local set_option_value = vim.api.nvim_set_option_value
+  local option_opts = {}
 
-  local keymap_set = vim.keymap.set
+  set_option_value("spell", false, option_opts)
+  set_option_value("wrap", false, option_opts)
+  set_option_value("relativenumber", false, option_opts)
+  set_option_value("number", true, option_opts)
+  set_option_value("fillchars", vim.api.nvim_get_option_value("fillchars", option_opts) .. "eob: ", option_opts)
 
-  keymap_set("n", "1b", "<Plug>(BufOnly)")
-  keymap_set("n", "1t", "<Cmd>tabonly<CR>")
-  keymap_set("n", "<C-w>t", "<Cmd>tabedit %<CR>")
-  keymap_set("n", "<leader>to", "<Cmd>terminal<CR>")
-  keymap_set("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
+  local set_keymap = vim.api.nvim_set_keymap
+
+  set_keymap("n", "1b", "<Plug>(BufOnly)", {})
+
+  local command = vim.api.nvim_command
+
+  set_keymap("n", "1t", "", {
+    callback = function()
+      command("tabonly")
+    end,
+  })
+
+  set_keymap("n", "<C-w>t", "", {
+    callback = function()
+      command("tabedit %")
+    end,
+  })
+
+  set_keymap("n", "<leader>to", "", {
+    callback = function()
+      command("terminal")
+    end,
+  })
+
+  set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
     noremap = true,
     silent = true,
   })

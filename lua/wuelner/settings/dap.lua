@@ -15,6 +15,8 @@ local config = function()
     },
   }
 
+  local call_function = vim.api.nvim_call_function
+
   for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
     require("dap").configurations[language] = {
       {
@@ -22,7 +24,7 @@ local config = function()
         type = "node2",
         request = "launch",
         program = "${file}",
-        cwd = vim.fn.getcwd(),
+        cwd = call_function("getcwd", {}),
         sourceMaps = true,
         protocol = "inspector",
         console = "integratedTerminal",
@@ -41,7 +43,9 @@ local config = function()
 
   require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
 
-  local sign_define = vim.fn.sign_define
+  local sign_define = function(name, tbl)
+    call_function("sign_define", { name, tbl })
+  end
 
   sign_define("DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
   sign_define("DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
@@ -49,12 +53,21 @@ local config = function()
   sign_define("DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" })
   sign_define("DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" })
 
-  local keymap_set = vim.keymap.set
+  local set_keymap = vim.api.nvim_set_keymap
 
-  keymap_set("n", "<F5>", require("dap").continue)
-  keymap_set("n", "<F9>", require("dap").toggle_breakpoint)
+  set_keymap("n", "<F5>", "", {
+    callback = function()
+      require("dap").continue()
+    end,
+  })
 
-  local columns = vim.opt.columns:get()
+  set_keymap("n", "<F9>", "", {
+    callback = function()
+      require("dap").toggle_breakpoint()
+    end,
+  })
+
+  local columns = vim.api.nvim_get_option_value("columns", {})
 
   require("dapui").setup({
     layouts = {
@@ -71,54 +84,102 @@ local config = function()
   local repl_close = require("dap").repl.close
 
   require("dap").listeners.after.event_initialized["dapui_config"] = function()
-    keymap_set("n", "<F6>", require("dap").pause)
-    keymap_set("n", "<F10>", require("dap").step_over)
+    set_keymap("n", "<F6>", "", {
+      callback = function()
+        require("dap").pause()
+      end,
+    })
+
+    set_keymap("n", "<F10>", "", {
+      callback = function()
+        require("dap").step_over()
+      end,
+    })
 
     local step_into = require("dap").step_into
 
-    keymap_set("n", "<F11>", step_into)
+    set_keymap("n", "<F11>", "", {
+      callback = function()
+        step_into()
+      end,
+    })
 
     local step_into_targets = function()
       step_into({ ask_for_targets = true })
     end
 
-    keymap_set("n", "<C-F11>", step_into_targets)
-    keymap_set("n", "<F35>", step_into_targets)
+    set_keymap("n", "<C-F11>", "", {
+      callback = function()
+        step_into_targets()
+      end,
+    })
+
+    set_keymap("n", "<F35>", "", {
+      callback = function()
+        step_into_targets()
+      end,
+    })
 
     local step_out = require("dap").step_out
 
-    keymap_set("n", "<S-F11>", step_out)
-    keymap_set("n", "<F23>", step_out)
+    set_keymap("n", "<S-F11>", "", {
+      callback = function()
+        step_out()
+      end,
+    })
+
+    set_keymap("n", "<F23>", "", {
+      callback = function()
+        step_out()
+      end,
+    })
 
     local run_last = require("dap").run_last
 
-    keymap_set("n", "<C-S-F5>", run_last)
-    keymap_set("n", "<F41>", run_last)
+    set_keymap("n", "<C-S-F5>", "", {
+      callback = function()
+        run_last()
+      end,
+    })
+
+    set_keymap("n", "<F41>", "", {
+      callback = function()
+        run_last()
+      end,
+    })
 
     local dap_terminate = function()
       require("dap").terminate(); dapui_close(); repl_close()
     end
 
-    keymap_set("n", "<S-F5>", dap_terminate)
-    keymap_set("n", "<F17>", dap_terminate)
+    set_keymap("n", "<S-F5>", "", {
+      callback = function()
+        dap_terminate()
+      end,
+    })
+
+    set_keymap("n", "<F17>", "", {
+      callback = function()
+        dap_terminate()
+      end,
+    })
 
     require("dapui").open()
   end
 
+  local del_keymap = vim.api.nvim_del_keymap
   local keymaps_del = function()
-    local keymap_del = vim.keymap.del
-
-    keymap_del("n", "<F6>")
-    keymap_del("n", "<F10>")
-    keymap_del("n", "<F11>")
-    keymap_del("n", "<C-F11>")
-    keymap_del("n", "<F35>")
-    keymap_del("n", "<S-F11>")
-    keymap_del("n", "<F23>")
-    keymap_del("n", "<C-S-F5>")
-    keymap_del("n", "<F41>")
-    keymap_del("n", "<S-F5>")
-    keymap_del("n", "<F17>")
+    del_keymap("n", "<F6>")
+    del_keymap("n", "<F10>")
+    del_keymap("n", "<F11>")
+    del_keymap("n", "<C-F11>")
+    del_keymap("n", "<F35>")
+    del_keymap("n", "<S-F11>")
+    del_keymap("n", "<F23>")
+    del_keymap("n", "<C-S-F5>")
+    del_keymap("n", "<F41>")
+    del_keymap("n", "<S-F5>")
+    del_keymap("n", "<F17>")
   end
 
   require("dap").listeners.before.event_exited["dapui_config"] = function()

@@ -3,8 +3,6 @@ local config = function()
 
   setmetatable(results, { __mode = "kv" })
 
-  local enable = { enable = true }
-
   require("nvim-treesitter.configs").setup({
     ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" },
     sync_install = true,
@@ -37,10 +35,10 @@ local config = function()
         node_decremental = "grm",
       },
     },
-    indent = enable,
+    indent = { enable = true },
     rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
     context_commentstring = { enable = true, enable_autocmd = false },
-    autotag = enable,
+    autotag = { enable = true },
     matchup = { enable = true, include_match_words = true },
   })
 end

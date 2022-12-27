@@ -16,16 +16,56 @@ local config = function()
     },
   })
 
-  local keymap_set = vim.keymap.set
+  local set_keymap = vim.api.nvim_set_keymap
+  local command = vim.api.nvim_command
 
-  keymap_set("n", "<S-Home>", "<Cmd>BufferLineMovePrev<CR>")
-  keymap_set("n", "gB", "<Cmd>BufferLineCyclePrev<CR>")
-  keymap_set("n", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>")
-  keymap_set("i", "<S-PageUp>", "<Cmd>BufferLineCyclePrev<CR>")
-  keymap_set("n", "<S-End>", "<Cmd>BufferLineMoveNext<CR>")
-  keymap_set("n", "gb", "<Cmd>BufferLineCycleNext<CR>")
-  keymap_set("n", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>")
-  keymap_set("i", "<S-PageDown>", "<Cmd>BufferLineCycleNext<CR>")
+  set_keymap("n", "<S-Home>", "", {
+    callback = function()
+      command("BufferLineMovePrev")
+    end,
+  })
+
+  set_keymap("n", "gB", "", {
+    callback = function()
+      command("BufferLineCyclePrev")
+    end,
+  })
+
+  set_keymap("n", "<S-PageUp>", "", {
+    callback = function()
+      command("BufferLineCyclePrev")
+    end,
+  })
+
+  set_keymap("i", "<S-PageUp>", "", {
+    callback = function()
+      command("BufferLineCyclePrev")
+    end,
+  })
+
+  set_keymap("n", "<S-End>", "", {
+    callback = function()
+      command("BufferLineMoveNext")
+    end,
+  })
+
+  set_keymap("n", "gb", "", {
+    callback = function()
+      command("BufferLineCycleNext")
+    end,
+  })
+
+  set_keymap("n", "<S-PageDown>", "", {
+    callback = function()
+      command("BufferLineCycleNext")
+    end,
+  })
+
+  set_keymap("i", "<S-PageDown>", "", {
+    callback = function()
+      command("BufferLineCycleNext")
+    end,
+  })
 end
 
 return config

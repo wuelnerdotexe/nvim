@@ -2,7 +2,11 @@ local config = function()
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
   require("nvim-lightbulb").setup({ sign = { priority = 8 }, autocmd = { enabled = true } })
-  vim.fn.sign_define("LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
+
+  vim.api.nvim_call_function(
+    "sign_define",
+    { "LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" } }
+  )
 
   local on_attach = require("wuelner.utils").lsp_on_attach
   local flags = { debounce_text_changes = 300 }
@@ -16,27 +20,22 @@ local config = function()
   })
 
   require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
+  require("lspconfig").tsserver.setup({ on_attach = on_attach, flags = flags, capabilities = capabilities })
+  require("lspconfig").tailwindcss.setup({ on_attach = on_attach, flags = flags, capabilities = capabilities })
   require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
-
-  local server_setup = { on_attach = on_attach, flags = flags, capabilities = capabilities }
-
-  require("lspconfig").tsserver.setup(server_setup)
-  require("lspconfig").tailwindcss.setup(server_setup)
-
-  local provideFormatter = { provideFormatter = false }
 
   require("lspconfig").html.setup({
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
-    init_options = provideFormatter,
+    init_options = { provideFormatter = false },
   })
 
   require("lspconfig").jsonls.setup({
     on_attach = on_attach,
     flags = flags,
     capabilities = capabilities,
-    init_options = provideFormatter,
+    init_options = { provideFormatter = false },
     settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
   })
 

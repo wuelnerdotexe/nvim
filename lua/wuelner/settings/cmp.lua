@@ -1,11 +1,5 @@
 local config = function()
-  vim.opt.complete = nil
-
-  local has_words_before = function()
-    local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-  end
+  vim.api.nvim_set_option_value("complete", nil, {})
 
   local setup = require("cmp").setup
   local mapping = require("cmp").mapping
@@ -15,6 +9,13 @@ local config = function()
   local select_next_item = require("cmp").select_next_item
   local select_prev_item = require("cmp").select_prev_item
   local mapping_mode = { "i", "s" }
+
+  local has_words_before = function()
+    local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
   local codicons = {
     Text = "",
     Method = "",
@@ -45,7 +46,7 @@ local config = function()
 
   setup({
     enabled = function()
-      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+      return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
     end,
     performance = { debounce = 300, throttle = 40, fetching_timeout = 300 },
     mapping = mapping.preset.insert({

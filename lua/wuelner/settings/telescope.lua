@@ -1,6 +1,5 @@
 local config = function()
   local select_horizontal = require("telescope.actions").select_horizontal
-  local mappings = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal }
 
   require("telescope").setup({
     pickers = {
@@ -44,22 +43,54 @@ local config = function()
           require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
         end)
       end,
-      mappings = { n = mappings, i = mappings },
+      mappings = {
+        n = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
+        i = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
+      },
     },
     extensions = { fzf = { fuzzy = false, case_mode = "ignore_case" } },
   })
 
   require("telescope").load_extension("fzf")
 
-  vim.api.nvim_create_autocmd("User", { pattern = "TelescopePreviewerLoaded", command = "setlocal wrap" })
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "TelescopePreviewerLoaded",
+    callback = function()
+      vim.api.nvim_set_option_value("wrap", false, { scope = "local" })
+    end,
+  })
 
-  local keymap_set = vim.keymap.set
+  local set_keymap = vim.api.nvim_set_keymap
 
-  keymap_set("n", "<leader>ff", require("telescope.builtin").fd)
-  keymap_set("n", "<leader>of", require("telescope.builtin").oldfiles)
-  keymap_set("n", "<leader>mf", require("telescope.builtin").marks)
-  keymap_set("n", "<leader>wf", require("telescope.builtin").live_grep)
-  keymap_set("n", "<leader>hf", require("telescope.builtin").help_tags)
+  set_keymap("n", "<leader>ff", "", {
+    callback = function()
+      require("telescope.builtin").fd()
+    end,
+  })
+
+  set_keymap("n", "<leader>of", "", {
+    callback = function()
+      require("telescope.builtin").oldfiles()
+    end,
+  })
+
+  set_keymap("n", "<leader>mf", "", {
+    callback = function()
+      require("telescope.builtin").marks()
+    end,
+  })
+
+  set_keymap("n", "<leader>wf", "", {
+    callback = function()
+      require("telescope.builtin").live_grep()
+    end,
+  })
+
+  set_keymap("n", "<leader>hf", "", {
+    callback = function()
+      require("telescope.builtin").help_tags()
+    end,
+  })
 end
 
 return config

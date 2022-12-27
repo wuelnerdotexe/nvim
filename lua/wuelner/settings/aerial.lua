@@ -1,10 +1,14 @@
 local config = function()
-  vim.opt.foldmethod = "manual"
-  vim.opt.foldlevelstart = 99
+  local set_option_value = vim.api.nvim_set_option_value
+  local option_opts = {}
 
-  local columns = vim.opt.columns:get()
+  set_option_value("foldmethod", "manual", option_opts)
+  set_option_value("foldlevelstart", 99, option_opts)
+
+  local columns = vim.api.nvim_get_option_value("columns", option_opts)
   local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
-  local keymap_set = vim.keymap.set
+  local buf_set_keymap = vim.api.nvim_buf_set_keymap
+  local command = vim.api.nvim_command
 
   require("aerial").setup({
     layout = {
@@ -52,19 +56,35 @@ local config = function()
     link_folds_to_tree = true,
     link_tree_to_folds = true,
     on_attach = function(bufnr)
-      local keymap_opts = { buffer = bufnr }
+      buf_set_keymap(bufnr, "n", "{", "", {
+        callback = function()
+          command("AerialPrev")
+        end,
+      })
 
-      keymap_set("n", "{", "<Cmd>AerialPrev<CR>", keymap_opts)
-      keymap_set("n", "}", "<Cmd>AerialNext<CR>", keymap_opts)
+      buf_set_keymap(bufnr, "n", "}", "", {
+        callback = function()
+          command("AerialNext")
+        end,
+      })
     end,
     show_guides = true,
     guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
     float = { border = "rounded", relative = "editor" },
   })
 
-  vim.api.nvim_create_autocmd("Filetype", { pattern = "aerial", command = "setlocal signcolumn=yes:1" })
+  vim.api.nvim_create_autocmd("Filetype", {
+    pattern = "aerial",
+    callback = function(ev)
+      set_option_value("signcolumn", "yes:1", { buf = ev.buf })
+    end,
+  })
 
-  keymap_set("n", "<leader>st", require("aerial").toggle)
+  vim.api.nvim_set_keymap("n", "<leader>st", "", {
+    callback = function()
+      require("aerial").toggle()
+    end,
+  })
 end
 
 return config

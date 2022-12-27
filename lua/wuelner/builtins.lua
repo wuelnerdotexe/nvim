@@ -1,40 +1,46 @@
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_cfilter = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_man = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_msgpack_autoload = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwFileHandlers = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_node_provider = 1
-vim.g.loaded_perl_provider = 1
-vim.g.loaded_python3_provider = 1
-vim.g.loaded_pythonx_provider = 1
-vim.g.loaded_remote_plugins = 1
-vim.g.loaded_ruby_provider = 1
-vim.g.loaded_shada_autoload = 1
-vim.g.loaded_shada_plugin = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_sql_completion = 1
-vim.g.loaded_syntax_completion = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
+local set_option_value = vim.api.nvim_set_option_value
 
-local executable = vim.fn.executable
+set_option_value("shadafile", "NONE", {})
 
-if executable("fzf") == 1 and executable("fd") == 1 then
-  vim.env.FZF_DEFAULT_COMMAND = 'fd -I -H -E "{'
-    .. ".git,.svn,.hg,CSV,.DS_Store,Thumbs.db,"
-    .. "node_modules,bower_components,*.code-search"
-    .. '}" -t f'
+local set_var = vim.api.nvim_set_var
+
+set_var("loaded_2html_plugin", 1)
+set_var("loaded_cfilter", 1)
+set_var("loaded_gzip", 1)
+set_var("loaded_man", 1)
+set_var("loaded_matchit", 1)
+set_var("loaded_matchparen", 1)
+set_var("loaded_msgpack_autoload", 1)
+set_var("loaded_netrw", 1)
+set_var("loaded_netrwFileHandlers", 1)
+set_var("loaded_netrwPlugin", 1)
+set_var("loaded_netrwSettings", 1)
+set_var("loaded_node_provider", 1)
+set_var("loaded_perl_provider", 1)
+set_var("loaded_python3_provider", 1)
+set_var("loaded_pythonx_provider", 1)
+set_var("loaded_remote_plugins", 1)
+set_var("loaded_ruby_provider", 1)
+set_var("loaded_shada_autoload", 1)
+set_var("loaded_shada_plugin", 1)
+set_var("loaded_spellfile_plugin", 1)
+set_var("loaded_sql_completion", 1)
+set_var("loaded_syntax_completion", 1)
+set_var("loaded_tar", 1)
+set_var("loaded_tarPlugin", 1)
+set_var("loaded_tutor_mode_plugin", 1)
+set_var("loaded_vimball", 1)
+set_var("loaded_vimballPlugin", 1)
+set_var("loaded_zip", 1)
+set_var("loaded_zipPlugin", 1)
+
+local call_function = vim.api.nvim_call_function
+
+if call_function("executable", { "fzf" }) == 1 and call_function("executable", { "fd" }) == 1 then
+  call_function("setenv", {
+    "FZF_DEFAULT_COMMAND",
+    'fd -I -H -E "{.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,node_modules,bower_components,*.code-search}" -t f',
+  })
 end
 
 vim.diagnostic.config({
@@ -56,3 +62,9 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
 
   return ref_floating_preview(contents, syntax, opts, ...)
 end
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPre" }, {
+  callback = function()
+    set_option_value("shadafile", "", {})
+  end,
+})

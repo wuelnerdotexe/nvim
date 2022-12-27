@@ -31,45 +31,91 @@ M.lsp_on_attach = function(client, bufnr)
   local supports_method = client.supports_method
 
   if supports_method("textDocument/completion") then
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   end
 
-  local keymap_set = vim.keymap.set
-  local keymap_opts = { buffer = bufnr }
+  local buf_set_keymap = vim.api.nvim_buf_set_keymap
 
   if supports_method("textDocument/publishDiagnostics") then
-    keymap_set("n", "<leader>dp", vim.diagnostic.open_float, keymap_opts)
-    keymap_set("n", "<leader>dl", vim.diagnostic.setloclist, keymap_opts)
-    keymap_set("n", "[d", vim.diagnostic.goto_prev, keymap_opts)
-    keymap_set("n", "]d", vim.diagnostic.goto_next, keymap_opts)
+    buf_set_keymap(bufnr, "n", "<leader>dp", "", {
+      callback = function()
+        vim.diagnostic.open_float()
+      end,
+    })
+
+    buf_set_keymap(bufnr, "n", "<leader>dl", "", {
+      callback = function()
+        vim.diagnostic.setloclist()
+      end,
+    })
+
+    buf_set_keymap(bufnr, "n", "[d", "", {
+      callback = function()
+        vim.diagnostic.goto_prev()
+      end,
+    })
+
+    buf_set_keymap(bufnr, "n", "]d", "", {
+      callback = function()
+        vim.diagnostic.goto_next()
+      end,
+    })
   end
 
   if supports_method("textDocument/hover") then
-    keymap_set("n", "K", vim.lsp.buf.hover, keymap_opts)
+    buf_set_keymap(bufnr, "n", "K", "", {
+      callback = function()
+        vim.lsp.buf.hover()
+      end,
+    })
   end
 
   if supports_method("textDocument/signatureHelp") then
-    keymap_set("i", "<C-k>", vim.lsp.buf.signature_help, keymap_opts)
+    buf_set_keymap(bufnr, "i", "<C-k>", "", {
+      callback = function()
+        vim.lsp.buf.signature_help()
+      end,
+    })
   end
 
   if supports_method("textDocument/rename") then
-    keymap_set("n", "<leader>sr", vim.lsp.buf.rename, keymap_opts)
+    buf_set_keymap(bufnr, "n", "<leader>sr", "", {
+      callback = function()
+        vim.lsp.buf.rename()
+      end,
+    })
   end
 
   if supports_method("textDocument/references") then
-    keymap_set("n", "<leader>rl", vim.lsp.buf.references, keymap_opts)
+    buf_set_keymap(bufnr, "n", "<leader>rl", "", {
+      callback = function()
+        vim.lsp.buf.references()
+      end,
+    })
   end
 
   if supports_method("textDocument/definition") then
-    keymap_set("n", "gd", vim.lsp.buf.definition, keymap_opts)
+    buf_set_keymap(bufnr, "n", "gd", "", {
+      callback = function()
+        vim.lsp.buf.definition()
+      end,
+    })
   end
 
   if supports_method("textDocument/implementation") then
-    keymap_set("n", "gi", vim.lsp.buf.implementation, keymap_opts)
+    buf_set_keymap(bufnr, "n", "gi", "", {
+      callback = function()
+        vim.lsp.buf.implementation()
+      end,
+    })
   end
 
   if supports_method("textDocument/codeAction") then
-    keymap_set("n", "<leader>ca", vim.lsp.buf.code_action, keymap_opts)
+    buf_set_keymap(bufnr, "n", "<leader>ca", "", {
+      callback = function()
+        vim.lsp.buf.code_action()
+      end,
+    })
   end
 
   local null_ls = client.name == "null-ls" and true or false
@@ -80,11 +126,17 @@ M.lsp_on_attach = function(client, bufnr)
   if null_ls and supports_method("textDocument/formatting") then
     client.server_capabilities.documentFormattingProvider = true
 
-    vim.api.nvim_buf_create_user_command(bufnr, "PrettierFormatAll", lsp_format, {})
+    vim.api.nvim_buf_create_user_command(bufnr, "PrettierFormatAll", function()
+      lsp_format()
+    end, {})
   elseif null_ls and supports_method("textDocument/rangeFormatting") then
     client.server_capabilities.documentRangeFormattingProvider = true
 
-    keymap_set("x", "<leader>f", lsp_format, keymap_opts)
+    buf_set_keymap(bufnr, "x", "<leader>f", "", {
+      callback = function()
+        lsp_format()
+      end,
+    })
   else
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false

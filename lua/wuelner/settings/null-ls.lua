@@ -9,7 +9,8 @@ local config = function()
       require("null-ls").builtins.diagnostics.markdownlint,
       require("null-ls").builtins.formatting.prettierd.with({
         condition = function(utils)
-          local startpath = vim.fn.getcwd()
+          local call_function = vim.api.nvim_call_function
+          local startpath = call_function("getcwd", {})
           local project_root = require("lspconfig.util").find_git_ancestor(startpath)
             or require("lspconfig.util").find_package_json_ancestor(startpath)
 
@@ -34,7 +35,8 @@ local config = function()
 
           if not exists then
             local ok, has_prettier_key = pcall(function()
-              local package_json = vim.json.decode(table.concat(vim.fn.readfile(project_root .. "/package.json")))
+              local package_json =
+                vim.json.decode(table.concat(call_function("readfile", { project_root .. "/package.json" })))
 
               return not not package_json["prettier"]
             end)

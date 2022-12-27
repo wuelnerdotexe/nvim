@@ -1,8 +1,11 @@
 local config = function()
-  vim.opt.shortmess:append("I")
-  vim.opt.cmdheight = 0
-  vim.opt.showcmd = false
-  vim.opt.showmode = false
+  local set_option_value = vim.api.nvim_set_option_value
+  local option_opts = {}
+
+  set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", option_opts) .. "I", option_opts)
+  set_option_value("cmdheight", 0, option_opts)
+  set_option_value("showcmd", false, option_opts)
+  set_option_value("showmode", false, option_opts)
 
   local hover_opts = { border = { style = "rounded" }, position = { row = 2 } }
 
@@ -49,9 +52,18 @@ local config = function()
 
   require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 300 })
 
+  local set_option_value = vim.api.nvim_set_option_value
+
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",
-    command = "setlocal signcolumn=no nonumber norelativenumber nolist",
+    callback = function(ev)
+      local option_opts = { buf = ev.buf }
+
+      set_option_value("signcolumn", "no", option_opts)
+      set_option_value("number", false, option_opts)
+      set_option_value("relativenumber", false, option_opts)
+      set_option_value("list", false, option_opts)
+    end,
   })
 end
 

@@ -4,9 +4,9 @@ local config = function()
     opleader = { line = "gc", block = "<Nop>" },
     mappings = { basic = true, extra = true },
     pre_hook = function(ctx)
-      local bo_filetype = vim.bo.filetype
+      local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
-      if bo_filetype == "javascriptreact" or bo_filetype == "typescriptreact" then
+      if filetype == "javascriptreact" or filetype == "typescriptreact" then
         local ctx_ctype = ctx.ctype
         local type = ctx_ctype == require("Comment.utils").ctype.linewise and "__default" or "__multiline"
         local location = nil

@@ -1,8 +1,10 @@
 local M = {}
 
 M.setup = function()
-  vim.g.enfocado_style = "nature"
-  vim.g.enfocado_plugins = {
+  local set_var = vim.api.nvim_set_var
+
+  set_var("enfocado_style", "nature")
+  set_var("enfocado_plugins", {
     "aerial",
     "bufferline",
     "cmp",
@@ -23,7 +25,7 @@ M.setup = function()
     "telescope",
     "treesitter",
     "visual-multi",
-  }
+  })
 end
 
 M.config = function()
@@ -33,31 +35,43 @@ M.config = function()
     pattern = "enfocado",
     nested = true,
     callback = function()
-      vim.opt.fillchars:append({
-        vert = " ",
-        horiz = " ",
-        verthoriz = " ",
-        vertleft = " ",
-        horizdown = " ",
-        horizup = " ",
-        vertright = " ",
-      })
+      local set_option_value = vim.api.nvim_set_option_value
+      local get_option_value = vim.api.nvim_get_option_value
+      local option_opts = {}
 
-      local set_hl = vim.api.nvim_set_hl
+      set_option_value(
+        "fillchars",
+        get_option_value("fillchars", option_opts)
+          .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
+        option_opts
+      )
 
-      set_hl(0, "Whitespace", { link = "DiagnosticError" })
-      set_hl(0, "NormalNC", { bg = "#1e1e1e" })
-      set_hl(0, "NormalSB", { bg = "#000000", fg = "#b9b9b9" })
-      set_hl(0, "WinbarSB", { bg = "#000000", fg = "#000000" })
+      vim.cmd([[
+      highlight NormalNC guibg=#1e1e1e
+
+      highlight default NormalSB guibg=#000000 guifg=#b9b9b9
+      highlight default WinbarSB guibg=#000000 guifg=#000000
+
+      highlight! link Whitespace DiagnosticError
+      ]])
 
       create_autocmd("FileType", {
         pattern = "fern,aerial,nerdterm,qf",
-        command = "setlocal winhighlight=Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
+        callback = function(ev)
+          set_option_value(
+            "winhighlight",
+            "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
+            { buf = ev.buf }
+          )
+        end,
       })
 
-      if vim.fn.has("termguicolors") and vim.opt.termguicolors:get() == true then
-        vim.opt.winblend = 10
-        vim.opt.pumblend = 10
+      if
+        vim.api.nvim_call_function("has", { "termguicolors" }) == 1
+        and get_option_value("termguicolors", option_opts) == true
+      then
+        set_option_value("winblend", 10, option_opts)
+        set_option_value("pumblend", 10, option_opts)
       end
     end,
   })

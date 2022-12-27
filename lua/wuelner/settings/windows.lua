@@ -1,7 +1,10 @@
 local config = function()
-  vim.opt.winwidth = 6
-  vim.opt.winminwidth = 6
-  vim.opt.equalalways = false
+  local set_option_value = vim.api.nvim_set_option_value
+  local option_opts = {}
+
+  set_option_value("winwidth", 6, option_opts)
+  set_option_value("winminwidth", 6, option_opts)
+  set_option_value("equalalways", false, option_opts)
 
   require("windows").setup({
     autowidth = { enable = false, winwidth = 3, filetype = {} },
@@ -32,13 +35,56 @@ local config = function()
     animation = { fps = 24 },
   })
 
-  local keymap_set = vim.keymap.set
-  local keymap_mode = { "n", "x" }
+  local set_keymap = vim.api.nvim_set_keymap
+  local command = vim.api.nvim_command
 
-  keymap_set(keymap_mode, "<C-w>m", "<Cmd>WindowsMaximize<CR>")
-  keymap_set(keymap_mode, "<C-w>_", "<Cmd>WindowsMaximizeVertically<CR>")
-  keymap_set(keymap_mode, "<C-w>|", "<Cmd>WindowsMaximizeHorizontally<CR>")
-  keymap_set(keymap_mode, "<C-w>=", "<Cmd>WindowsEqualize<CR>")
+  set_keymap("n", "<C-w>m", "", {
+    callback = function()
+      command("WindowsMaximize")
+    end,
+  })
+
+  set_keymap("x", "<C-w>m", "", {
+    callback = function()
+      command("WindowsMaximize")
+    end,
+  })
+
+  set_keymap("n", "<C-w>_", "", {
+    callback = function()
+      command("WindowsMaximizeVertically")
+    end,
+  })
+
+  set_keymap("x", "<C-w>_", "", {
+    callback = function()
+      command("WindowsMaximizeVertically")
+    end,
+  })
+
+  set_keymap("n", "<C-w>|", "", {
+    callback = function()
+      command("WindowsMaximizeHorizontally")
+    end,
+  })
+
+  set_keymap("x", "<C-w>|", "", {
+    callback = function()
+      command("WindowsMaximizeHorizontally")
+    end,
+  })
+
+  set_keymap("n", "<C-w>=", "", {
+    callback = function()
+      command("WindowsEqualize")
+    end,
+  })
+
+  set_keymap("x", "<C-w>=", "", {
+    callback = function()
+      command("WindowsEqualize")
+    end,
+  })
 end
 
 return config
