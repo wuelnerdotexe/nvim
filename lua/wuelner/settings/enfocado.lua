@@ -65,14 +65,26 @@ M.config = function()
         option_opts
       )
 
+      local loaded_sidebar_bufs = {}
+
+      setmetatable(loaded_sidebar_bufs, { __mode = "kv" })
+
       create_autocmd("FileType", {
         pattern = "fern,aerial,nerdterm,qf",
         callback = function(ev)
-          set_option_value(
-            "winhighlight",
-            "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
-            { buf = ev.buf }
-          )
+          local bufnr = ev.buf
+
+          if loaded_sidebar_bufs[bufnr] then
+            return
+          else
+            set_option_value(
+              "winhighlight",
+              "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
+              { buf = bufnr }
+            )
+
+            loaded_sidebar_bufs[bufnr] = true
+          end
         end,
       })
     end,

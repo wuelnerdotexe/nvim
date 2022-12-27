@@ -43,15 +43,29 @@ local config = function()
 
   require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
 
-  local sign_define = function(name, tbl)
-    call_function("sign_define", { name, tbl })
-  end
+  call_function(
+    "sign_define",
+    { "DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+  )
 
-  sign_define("DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
-  sign_define("DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
-  sign_define("DapLogPoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" })
-  sign_define("DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" })
-  sign_define("DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" })
+  call_function(
+    "sign_define",
+    { "DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+  )
+
+  call_function(
+    "sign_define",
+    { "DapLogPoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+  )
+
+  call_function(
+    "sign_define",
+    { "DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" } }
+  )
+
+  call_function(
+    "sign_define", { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } }
+  )
 
   local set_keymap = vim.api.nvim_set_keymap
 
@@ -80,8 +94,13 @@ local config = function()
     },
   })
 
-  local dapui_close = require("dapui").close
-  local repl_close = require("dap").repl.close
+  local dapui_close = function()
+    require("dapui").close()
+  end
+
+  local repl_close = function()
+    require("dap").repl.close()
+  end
 
   require("dap").listeners.after.event_initialized["dapui_config"] = function()
     set_keymap("n", "<F6>", "", {
@@ -96,7 +115,9 @@ local config = function()
       end,
     })
 
-    local step_into = require("dap").step_into
+    local step_into = function()
+      require("dap").step_into()
+    end
 
     set_keymap("n", "<F11>", "", {
       callback = function()
@@ -120,7 +141,9 @@ local config = function()
       end,
     })
 
-    local step_out = require("dap").step_out
+    local step_out = function()
+      require("dap").step_out()
+    end
 
     set_keymap("n", "<S-F11>", "", {
       callback = function()
@@ -134,7 +157,9 @@ local config = function()
       end,
     })
 
-    local run_last = require("dap").run_last
+    local run_last = function()
+      require("dap").run_last()
+    end
 
     set_keymap("n", "<C-S-F5>", "", {
       callback = function()

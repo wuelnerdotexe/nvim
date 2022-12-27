@@ -1,5 +1,7 @@
 local config = function()
-  local select_horizontal = require("telescope.actions").select_horizontal
+  local select_horizontal = function()
+    require("telescope.actions").select_horizontal()
+  end
 
   require("telescope").setup({
     pickers = {

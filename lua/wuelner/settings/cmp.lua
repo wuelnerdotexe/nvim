@@ -100,11 +100,7 @@ local config = function()
       format = function(entry, vim_item)
         local kind = vim_item.kind
 
-        vim_item.kind = codicons[kind] .. " " .. kind
-
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = " Tabnine"
-        end
+        vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine" or codicons[kind] .. " " .. kind
 
         return vim_item
       end,

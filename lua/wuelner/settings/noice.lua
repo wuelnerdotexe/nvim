@@ -53,16 +53,27 @@ local config = function()
   require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 300 })
 
   local set_option_value = vim.api.nvim_set_option_value
+  local loaded_noice_bufs = {}
+
+  setmetatable(loaded_noice_bufs, { __mode = "kv" })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "noice",
     callback = function(ev)
-      local option_opts = { buf = ev.buf }
+      local bufnr = ev.buf
 
-      set_option_value("signcolumn", "no", option_opts)
-      set_option_value("number", false, option_opts)
-      set_option_value("relativenumber", false, option_opts)
-      set_option_value("list", false, option_opts)
+      if loaded_noice_bufs[bufnr] then
+        return
+      else
+        local option_opts = { buf = ev.buf }
+
+        set_option_value("signcolumn", "no", option_opts)
+        set_option_value("number", false, option_opts)
+        set_option_value("relativenumber", false, option_opts)
+        set_option_value("list", false, option_opts)
+
+        loaded_noice_bufs[bufnr] = true
+      end
     end,
   })
 end

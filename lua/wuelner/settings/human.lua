@@ -33,6 +33,10 @@ M.config = function()
   local set_keymap = vim.api.nvim_set_keymap
 
   set_keymap("n", "1b", "<Plug>(BufOnly)", {})
+  set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
+    noremap = true,
+    silent = true,
+  })
 
   local command = vim.api.nvim_command
 
@@ -52,11 +56,6 @@ M.config = function()
     callback = function()
       command("terminal")
     end,
-  })
-
-  set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
-    noremap = true,
-    silent = true,
   })
 end
 

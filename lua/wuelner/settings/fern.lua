@@ -20,10 +20,15 @@ M.setup = function()
 end
 
 M.config = function()
+  local loaded_fern_bufs = {}
+
+  setmetatable(loaded_fern_bufs, { __mode = "kv" })
+
   local set_option_value = vim.api.nvim_set_option_value
   local call_function = vim.api.nvim_call_function
   local buf_set_keymap = vim.api.nvim_buf_set_keymap
 
+  local command = vim.api.nvim_command
   local keymap_opts = { nowait = true }
 
   local open_or_collapse = function()
@@ -46,66 +51,78 @@ M.config = function()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
     callback = function(ev)
-      call_function("glyph_palette#apply", {})
-
       local bufnr = ev.buf
 
-      set_option_value("number", false, { buf = bufnr })
-      set_option_value("relativenumber", false, { buf = bufnr })
+      if loaded_fern_bufs[bufnr] then
+        return
+      else
+        call_function("glyph_palette#apply", {})
 
-      buf_set_keymap(bufnr, "n", "h", "<Plug>(fern-action-collapse)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "l", "<Plug>(fern-action-expand)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "<CR>", "<Plug>(fern-action-open-or-expand)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "<BS>", "<Plug>(fern-action-collapse)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "<C-T>", "<Plug>(fern-action-open:tabedit)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "<C-s>", "<Plug>(fern-action-open:split)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "nf", "<Plug>(fern-action-new-file)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "nd", "<Plug>(fern-action-new-dir)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "m", "<Plug>(fern-action-move)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "c", "<Plug>(fern-action-copy)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "d", "<Plug>(fern-action-remove)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "q", "<Cmd>quit<CR>", keymap_opts)
-      buf_set_keymap(bufnr, "n", "<F5>", "<Plug>(fern-action-reload)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "g?", "<Plug>(fern-action-help)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
-      buf_set_keymap(bufnr, "n", "o", "", open_or_collapse_callback)
-      buf_set_keymap(bufnr, "n", "<2-LeftMouse>", "", open_or_collapse_callback)
-      buf_set_keymap(bufnr, "n", "n", "<Plug>(fern-action-new-path)", {})
+        set_option_value("number", false, { buf = bufnr })
+        set_option_value("relativenumber", false, { buf = bufnr })
 
-      buf_set_keymap(
-        bufnr,
-        "n",
-        "<",
-        "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
-        keymap_opts
-      )
+        buf_set_keymap(bufnr, "n", "q", "", {
+          callback = function()
+            command("quit")
+          end,
+          nowait = true,
+        })
 
-      buf_set_keymap(
-        bufnr,
-        "n",
-        ">",
-        "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
-        keymap_opts
-      )
+        buf_set_keymap(bufnr, "n", "h", "<Plug>(fern-action-collapse)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "l", "<Plug>(fern-action-expand)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "<CR>", "<Plug>(fern-action-open-or-expand)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "<BS>", "<Plug>(fern-action-collapse)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "<C-T>", "<Plug>(fern-action-open:tabedit)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "<C-s>", "<Plug>(fern-action-open:split)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "nf", "<Plug>(fern-action-new-file)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "nd", "<Plug>(fern-action-new-dir)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "m", "<Plug>(fern-action-move)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "c", "<Plug>(fern-action-copy)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "d", "<Plug>(fern-action-remove)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "<F5>", "<Plug>(fern-action-reload)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "g?", "<Plug>(fern-action-help)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "o", "", open_or_collapse_callback)
+        buf_set_keymap(bufnr, "n", "<2-LeftMouse>", "", open_or_collapse_callback)
+        buf_set_keymap(bufnr, "n", "n", "<Plug>(fern-action-new-path)", {})
 
-      buf_set_keymap(bufnr, "n", "<C-v>", "", {
-        callback = function()
-          return call_function("fern#smart#drawer", {
-            "<Plug>(fern-action-open:rightest)",
-            "<Plug>(fern-action-open:vsplit)",
-            "<Plug>(fern-action-open:vsplit)",
-          })
-        end,
-        nowait = true,
-        expr = true,
-        replace_keycodes = true,
-      })
+        buf_set_keymap(
+          bufnr,
+          "n",
+          "<",
+          "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          keymap_opts
+        )
+
+        buf_set_keymap(
+          bufnr,
+          "n",
+          ">",
+          "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          keymap_opts
+        )
+
+        buf_set_keymap(bufnr, "n", "<C-v>", "", {
+          callback = function()
+            return call_function("fern#smart#drawer", {
+              "<Plug>(fern-action-open:rightest)",
+              "<Plug>(fern-action-open:vsplit)",
+              "<Plug>(fern-action-open:vsplit)",
+            })
+          end,
+          nowait = true,
+          expr = true,
+          replace_keycodes = true,
+        })
+
+        loaded_fern_bufs[bufnr] = true
+      end
     end,
   })
 
   vim.api.nvim_set_keymap("n", "<leader>ft", "", {
     callback = function()
-      vim.api.nvim_command("Fern . -reveal=% -drawer -toggle")
+      command("Fern . -reveal=% -drawer -toggle")
     end,
   })
 end

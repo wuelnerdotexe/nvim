@@ -197,7 +197,7 @@ return require("packer").startup(function(use)
     {
       "folke/noice.nvim",
       disable = vim.version().minor < 9,
-      cond = "vim.fn.exists('g:neovide') ~= 1",
+      cond = "vim.api.nvim_call_function('exists', { 'g:neovide' }) ~= 1",
       after = "nvim-lspconfig",
       requires = {
         { "MunifTanjim/nui.nvim", module_pattern = "nui.*" },

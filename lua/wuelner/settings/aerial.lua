@@ -73,16 +73,28 @@ local config = function()
     float = { border = "rounded", relative = "editor" },
   })
 
-  vim.api.nvim_create_autocmd("Filetype", {
-    pattern = "aerial",
-    callback = function(ev)
-      set_option_value("signcolumn", "yes:1", { buf = ev.buf })
-    end,
-  })
-
   vim.api.nvim_set_keymap("n", "<leader>st", "", {
     callback = function()
       require("aerial").toggle()
+    end,
+  })
+
+  local loaded_aerial_bufs = {}
+
+  setmetatable(loaded_aerial_bufs, { __mode = "kv" })
+
+  vim.api.nvim_create_autocmd("Filetype", {
+    pattern = "aerial",
+    callback = function(ev)
+      local bufnr = ev.buf
+
+      if loaded_aerial_bufs[bufnr] then
+        return
+      else
+        set_option_value("signcolumn", "yes:1", { buf = bufnr })
+
+        loaded_aerial_bufs[bufnr] = true
+      end
     end,
   })
 end
