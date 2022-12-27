@@ -25,7 +25,10 @@ M.config = function()
   set_option_value("wrap", false, option_opts)
   set_option_value("relativenumber", false, option_opts)
   set_option_value("number", true, option_opts)
-  set_option_value("fillchars", vim.api.nvim_get_option_value("fillchars", option_opts) .. "eob: ", option_opts)
+
+  local fillchars = vim.api.nvim_get_option_value("fillchars", option_opts)
+
+  set_option_value("fillchars", fillchars == "" and "eob: " or fillchars .. ",eob: ", option_opts)
 
   local set_keymap = vim.api.nvim_set_keymap
 

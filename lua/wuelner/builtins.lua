@@ -1,7 +1,3 @@
-local set_option_value = vim.api.nvim_set_option_value
-
-set_option_value("shadafile", "NONE", {})
-
 local set_var = vim.api.nvim_set_var
 
 set_var("loaded_2html_plugin", 1)
@@ -62,9 +58,3 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
 
   return ref_floating_preview(contents, syntax, opts, ...)
 end
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPre" }, {
-  callback = function()
-    set_option_value("shadafile", "", {})
-  end,
-})

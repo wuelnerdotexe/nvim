@@ -35,17 +35,6 @@ M.config = function()
     pattern = "enfocado",
     nested = true,
     callback = function()
-      local set_option_value = vim.api.nvim_set_option_value
-      local get_option_value = vim.api.nvim_get_option_value
-      local option_opts = {}
-
-      set_option_value(
-        "fillchars",
-        get_option_value("fillchars", option_opts)
-          .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
-        option_opts
-      )
-
       vim.cmd([[
       highlight NormalNC guibg=#1e1e1e
 
@@ -54,6 +43,27 @@ M.config = function()
 
       highlight! link Whitespace DiagnosticError
       ]])
+
+      local get_option_value = vim.api.nvim_get_option_value
+      local set_option_value = vim.api.nvim_set_option_value
+      local option_opts = {}
+
+      if
+        vim.api.nvim_call_function("has", { "termguicolors" }) == 1
+        and get_option_value("termguicolors", option_opts) == true
+      then
+        set_option_value("winblend", 10, option_opts)
+        set_option_value("pumblend", 10, option_opts)
+      end
+
+      local fillchars = get_option_value("fillchars", option_opts)
+
+      set_option_value(
+        "fillchars",
+        fillchars == "" and "vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: "
+          or fillchars .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
+        option_opts
+      )
 
       create_autocmd("FileType", {
         pattern = "fern,aerial,nerdterm,qf",
@@ -65,14 +75,6 @@ M.config = function()
           )
         end,
       })
-
-      if
-        vim.api.nvim_call_function("has", { "termguicolors" }) == 1
-        and get_option_value("termguicolors", option_opts) == true
-      then
-        set_option_value("winblend", 10, option_opts)
-        set_option_value("pumblend", 10, option_opts)
-      end
     end,
   })
 end
