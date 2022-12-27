@@ -24,29 +24,11 @@ M.config = function()
 
   setmetatable(loaded_fern_bufs, { __mode = "kv" })
 
-  local set_option_value = vim.api.nvim_set_option_value
   local call_function = vim.api.nvim_call_function
+  local set_option_value = vim.api.nvim_set_option_value
   local buf_set_keymap = vim.api.nvim_buf_set_keymap
-
-  local command = vim.api.nvim_command
   local keymap_opts = { nowait = true }
-
-  local open_or_collapse = function()
-    return call_function("fern#smart#leaf", {
-      "<Plug>(fern-action-open)",
-      "<Plug>(fern-action-expand)",
-      "<Plug>(fern-action-collapse)",
-    })
-  end
-
-  local open_or_collapse_callback = {
-    callback = function()
-      open_or_collapse()
-    end,
-    nowait = true,
-    expr = true,
-    replace_keycodes = true,
-  }
+  local command = vim.api.nvim_command
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "fern",
@@ -60,13 +42,6 @@ M.config = function()
 
         set_option_value("number", false, { buf = bufnr })
         set_option_value("relativenumber", false, { buf = bufnr })
-
-        buf_set_keymap(bufnr, "n", "q", "", {
-          callback = function()
-            command("quit")
-          end,
-          nowait = true,
-        })
 
         buf_set_keymap(bufnr, "n", "h", "<Plug>(fern-action-collapse)", keymap_opts)
         buf_set_keymap(bufnr, "n", "l", "<Plug>(fern-action-expand)", keymap_opts)
@@ -82,9 +57,46 @@ M.config = function()
         buf_set_keymap(bufnr, "n", "<F5>", "<Plug>(fern-action-reload)", keymap_opts)
         buf_set_keymap(bufnr, "n", "g?", "<Plug>(fern-action-help)", keymap_opts)
         buf_set_keymap(bufnr, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
-        buf_set_keymap(bufnr, "n", "o", "", open_or_collapse_callback)
-        buf_set_keymap(bufnr, "n", "<2-LeftMouse>", "", open_or_collapse_callback)
         buf_set_keymap(bufnr, "n", "n", "<Plug>(fern-action-new-path)", {})
+
+        buf_set_keymap(bufnr, "n", "o", "", {
+          callback = function()
+            return call_function("fern#smart#leaf", {
+              "<Plug>(fern-action-open)",
+              "<Plug>(fern-action-expand)",
+              "<Plug>(fern-action-collapse)",
+            })
+          end,
+          nowait = true,
+          expr = true,
+          replace_keycodes = true,
+        })
+
+        buf_set_keymap(bufnr, "n", "<2-LeftMouse>", "", {
+          callback = function()
+            return call_function("fern#smart#leaf", {
+              "<Plug>(fern-action-open)",
+              "<Plug>(fern-action-expand)",
+              "<Plug>(fern-action-collapse)",
+            })
+          end,
+          nowait = true,
+          expr = true,
+          replace_keycodes = true,
+        })
+
+        buf_set_keymap(bufnr, "n", "<C-v>", "", {
+          callback = function()
+            return call_function("fern#smart#drawer", {
+              "<Plug>(fern-action-open:rightest)",
+              "<Plug>(fern-action-open:vsplit)",
+              "<Plug>(fern-action-open:vsplit)",
+            })
+          end,
+          nowait = true,
+          expr = true,
+          replace_keycodes = true,
+        })
 
         buf_set_keymap(
           bufnr,
@@ -102,17 +114,11 @@ M.config = function()
           keymap_opts
         )
 
-        buf_set_keymap(bufnr, "n", "<C-v>", "", {
+        buf_set_keymap(bufnr, "n", "q", "", {
           callback = function()
-            return call_function("fern#smart#drawer", {
-              "<Plug>(fern-action-open:rightest)",
-              "<Plug>(fern-action-open:vsplit)",
-              "<Plug>(fern-action-open:vsplit)",
-            })
+            command("quit")
           end,
           nowait = true,
-          expr = true,
-          replace_keycodes = true,
         })
 
         loaded_fern_bufs[bufnr] = true
