@@ -1,5 +1,7 @@
 local config = function()
-  vim.api.nvim_set_option_value("ruler", false, {})
+  local tbl = {}
+
+  vim.api.nvim_set_option_value("ruler", false, tbl)
 
   local components = { active = {}, inactive = {} }
   local components_active = components.active
@@ -59,7 +61,7 @@ local config = function()
 
   components_active[1][7] = {
     enabled = function()
-      return vim.api.nvim_get_option_value("cmdheight", { scope = "global" }) == 0
+      return vim.api.nvim_get_option_value("cmdheight", tbl) == 0
     end,
     provider = { name = "vi_mode", opts = { padding = "center" } },
     left_sep = " ",
@@ -141,7 +143,7 @@ local config = function()
 
   components_active[3][3] = {
     provider = function()
-      return string.upper(call_function("SleuthIndicator", {}))
+      return string.upper(call_function("SleuthIndicator", tbl))
     end,
     right_sep = " ",
     hl = { name = "FelineSleuth" },
@@ -180,7 +182,7 @@ local config = function()
     truncate_hide = true,
   }
 
-  local enfocado_colors = call_function("enfocado#getColorScheme", {})
+  local enfocado_colors = call_function("enfocado#getColorScheme", tbl)
 
   require("feline").setup({
     theme = {

@@ -47,7 +47,7 @@ return require("packer").startup(function(use)
     },
     {
       "lewis6991/gitsigns.nvim",
-      after = "human.vim",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.gitsigns')()",
     },
     {
@@ -77,7 +77,7 @@ return require("packer").startup(function(use)
     },
     {
       "andymass/vim-matchup",
-      after = "nvim-treesitter",
+      event = { "BufNewFile", "BufRead" },
       setup = "require('wuelner.settings.matchup')()",
     },
     {
@@ -92,7 +92,7 @@ return require("packer").startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      after = "vim-sleuth",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.indent-blankline')()",
     },
     {
@@ -107,8 +107,11 @@ return require("packer").startup(function(use)
           event = "InsertEnter",
           requires = {
             "L3MON4D3/LuaSnip",
-            requires = { "rafamadriz/friendly-snippets", module = "luasnip.loaders.from_vscode" },
-            config = "require('luasnip.loaders.from_vscode').lazy_load()",
+            requires = {
+              "rafamadriz/friendly-snippets",
+              event = "InsertEnter",
+              config = "require('luasnip.loaders.from_vscode').lazy_load()",
+            },
           },
         },
         { "jackieaskins/cmp-emmet", run = "npm run release" },
@@ -138,22 +141,22 @@ return require("packer").startup(function(use)
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
-      after = { "mason.nvim", "nvim-lspconfig" },
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.null-ls')()",
     },
     {
       "RRethy/vim-illuminate",
-      after = "nvim-lspconfig",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.illuminate')()",
     },
     {
       "stevearc/aerial.nvim",
-      after = "nvim-lspconfig",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.aerial')()",
     },
     {
       "NvChad/nvim-colorizer.lua",
-      after = "nvim-lspconfig",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.colorizer')()",
     },
     {
@@ -186,19 +189,19 @@ return require("packer").startup(function(use)
     },
     {
       "feline-nvim/feline.nvim",
-      after = { "aerial.nvim", "vim-enfocado" },
+      event = "UIEnter",
       config = "require('wuelner.settings.feline')()",
     },
     {
       "akinsho/bufferline.nvim",
-      after = "human.vim",
+      event = "UIEnter",
       config = "require('wuelner.settings.bufferline')()",
     },
     {
       "folke/noice.nvim",
       disable = vim.version().minor < 9,
       cond = "vim.api.nvim_call_function('exists', { 'g:neovide' }) ~= 1",
-      after = "nvim-lspconfig",
+      event = "UIEnter",
       requires = {
         { "MunifTanjim/nui.nvim", module_pattern = "nui.*" },
         { "rcarriga/nvim-notify", module = "notify" },
@@ -207,7 +210,7 @@ return require("packer").startup(function(use)
     },
     {
       "gen740/SmoothCursor.nvim",
-      after = "human.vim",
+      event = "UIEnter",
       config = "require('wuelner.settings.smoothcursor')()",
     },
     {
@@ -256,6 +259,7 @@ return require("packer").startup(function(use)
     },
     {
       "andweeb/presence.nvim",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.presence')()",
     },
   })

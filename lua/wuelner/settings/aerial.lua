@@ -1,11 +1,9 @@
 local config = function()
   local set_option_value = vim.api.nvim_set_option_value
-  local option_opts = {}
 
-  set_option_value("foldmethod", "manual", option_opts)
-  set_option_value("foldlevelstart", 99, option_opts)
+  set_option_value("foldmethod", "manual", {})
 
-  local columns = vim.api.nvim_get_option_value("columns", option_opts)
+  local columns = vim.api.nvim_get_option_value("columns", {})
   local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
   local buf_set_keymap = vim.api.nvim_buf_set_keymap
   local command = vim.api.nvim_command

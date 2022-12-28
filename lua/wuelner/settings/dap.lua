@@ -64,7 +64,8 @@ local config = function()
   )
 
   call_function(
-    "sign_define", { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } }
+    "sign_define",
+    { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } }
   )
 
   local set_keymap = vim.api.nvim_set_keymap

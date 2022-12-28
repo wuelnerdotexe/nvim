@@ -1,7 +1,13 @@
 local M = {}
 
 M.aerial_breadcrumbs = function()
-  local symbols = require("aerial").get_location(true)
+  local ok, aerial = pcall(require, "aerial")
+
+  if not ok then
+    return "No symbols"
+  end
+
+  local symbols = aerial.get_location(true)
   local depth = nil or #symbols
   local table_unpack = table.unpack
 
