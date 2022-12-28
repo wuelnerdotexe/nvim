@@ -107,6 +107,7 @@ return require("packer").startup(function(use)
           event = "InsertEnter",
           requires = {
             "L3MON4D3/LuaSnip",
+            event = { "BufNewFile", "BufRead" },
             requires = {
               "rafamadriz/friendly-snippets",
               event = "InsertEnter",
