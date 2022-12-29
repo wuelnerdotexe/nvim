@@ -16,7 +16,7 @@ M.aerial_breadcrumbs = function()
   local parts = {}
 
   for _, symbol in ipairs(symbols) do
-    table.insert(parts, symbol.icon .. " " .. symbol.name)
+    table.insert(parts, "%#Aerial" .. symbol.kind .. "Icon#" .. symbol.icon .. " %*" .. symbol.name)
   end
 
   local breadcrumbs = table.concat(parts, " > ")

@@ -11,7 +11,6 @@ end
 
 M.config = function()
   vim.api.nvim_set_var("did_load_filetypes", nil)
-
   vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
       vim.api.nvim_set_option_value("regexpengine", 0, {})

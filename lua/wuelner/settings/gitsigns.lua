@@ -9,18 +9,6 @@ local config = function()
     package.loaded.gitsigns.stage_hunk()
   end
 
-  local reset_hunk_callback = {
-    callback = function()
-      reset_hunk()
-    end,
-  }
-
-  local stage_hunk_callback = {
-    callback = function()
-      stage_hunk()
-    end,
-  }
-
   local schedule = vim.schedule
 
   require("gitsigns").setup({
@@ -36,10 +24,29 @@ local config = function()
     update_debounce = 300,
     preview_config = { border = "rounded" },
     on_attach = function(bufnr)
-      buf_set_keymap(bufnr, "n", "<leader>hr", "", reset_hunk_callback)
-      buf_set_keymap(bufnr, "v", "<leader>hr", "", reset_hunk_callback)
-      buf_set_keymap(bufnr, "n", "<leader>hs", "", stage_hunk_callback)
-      buf_set_keymap(bufnr, "v", "<leader>hs", "", stage_hunk_callback)
+      buf_set_keymap(bufnr, "n", "<leader>hr", "", {
+        callback = function()
+          reset_hunk()
+        end,
+      })
+
+      buf_set_keymap(bufnr, "v", "<leader>hr", "", {
+        callback = function()
+          reset_hunk()
+        end,
+      })
+
+      buf_set_keymap(bufnr, "n", "<leader>hs", "", {
+        callback = function()
+          stage_hunk()
+        end,
+      })
+
+      buf_set_keymap(bufnr, "v", "<leader>hs", "", {
+        callback = function()
+          stage_hunk()
+        end,
+      })
 
       buf_set_keymap(bufnr, "n", "<leader>hp", "", {
         callback = function()
@@ -47,9 +54,27 @@ local config = function()
         end,
       })
 
-      buf_set_keymap(bufnr, "n", "<leader>hu", "", {
+      buf_set_keymap(bufnr, "n", "<leader>bp", "", {
         callback = function()
-          package.loaded.gitsigns.undo_stage_hunk()
+          package.loaded.gitsigns.blame_line({ full = true })
+        end,
+      })
+
+      buf_set_keymap(bufnr, "n", "<leader>bt", "", {
+        callback = function()
+          package.loaded.gitsigns.toggle_current_line_blame()
+        end,
+      })
+
+      buf_set_keymap(bufnr, "n", "<leader>dt", "", {
+        callback = function()
+          package.loaded.gitsigns.toggle_deleted()
+        end,
+      })
+
+      buf_set_keymap(bufnr, "n", "<leader>gd", "", {
+        callback = function()
+          package.loaded.gitsigns.diffthis("~")
         end,
       })
 

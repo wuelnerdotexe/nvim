@@ -109,7 +109,6 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
 | Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
 | Normal  | `<leader>` + `w` + `f` | Find words in the current directory |
-| Normal  | `<leader>` + `h` + `f` | Find Vim help tags                  |
 | Normal  | `<leader>` + `s` + `t` | Toggle document symbols             |
 | Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
 | Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal              |
@@ -118,8 +117,8 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 | VI Mode |         Keymap          | Action                       |
 | :-----: | :---------------------: | ---------------------------- |
-| Normal  |           `>`           | Leave directory              |
-| Normal  |           `<`           | Enter directory              |
+| Normal  |           `>`           | Enter directory              |
+| Normal  |           `<`           | Leave directory              |
 | Normal  |           `h`           | Collapse node                |
 | Normal  |           `l`           | Expand node                  |
 | Normal  |           `o`           | Expand/Collapse or open node |
@@ -208,14 +207,17 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Git Signs
 
-|      VI Mode      |         Keymap         | Action                      |
-| :---------------: | :--------------------: | --------------------------- |
-|      Normal       |       `[` + `h`        | Go to the previous hunk     |
-|      Normal       |       `]` + `h`        | Go to the next hunk         |
-| Normal and Visual | `<leader>` + `h` + `p` | Preview the current hunk    |
-| Normal and Visual | `<leader>` + `h` + `u` | Undo the current stage hunk |
-| Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk      |
-| Normal and Visual | `<leader>` + `h` + `r` | Reset the current hunk      |
+|      VI Mode      |         Keymap         | Action                         |
+| :---------------: | :--------------------: | ------------------------------ |
+|      Normal       | `<leader>` + `g` + `d` | Split git diffs                |
+|      Normal       | `<leader>` + `d` + `t` | Toggle show deleted lines      |
+|      Normal       | `<leader>` + `b` + `t` | Toggle the current line blame  |
+|      Normal       |       `[` + `h`        | Go to the previous hunk        |
+|      Normal       |       `]` + `h`        | Go to the next hunk            |
+|      Normal       | `<leader>` + `h` + `p` | Preview the current hunk       |
+|      Normal       | `<leader>` + `b` + `p` | Preview the current line blame |
+| Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk         |
+| Normal and Visual | `<leader>` + `h` + `r` | Reset the current hunk         |
 
 ### Diagnostics
 

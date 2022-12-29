@@ -211,7 +211,7 @@ return require("packer").startup(function(use)
     },
     {
       "gen740/SmoothCursor.nvim",
-      event = "UIEnter",
+      event = { "BufNewFile", "BufRead" },
       config = "require('wuelner.settings.smoothcursor')()",
     },
     {

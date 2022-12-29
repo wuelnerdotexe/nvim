@@ -87,12 +87,6 @@ local config = function()
       require("telescope.builtin").live_grep()
     end,
   })
-
-  set_keymap("n", "<leader>hf", "", {
-    callback = function()
-      require("telescope.builtin").help_tags()
-    end,
-  })
 end
 
 return config

@@ -59,6 +59,22 @@ M.config = function()
         buf_set_keymap(bufnr, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
         buf_set_keymap(bufnr, "n", "n", "<Plug>(fern-action-new-path)", {})
 
+        buf_set_keymap(
+          bufnr,
+          "n",
+          "<",
+          "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          keymap_opts
+        )
+
+        buf_set_keymap(
+          bufnr,
+          "n",
+          ">",
+          "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          keymap_opts
+        )
+
         buf_set_keymap(bufnr, "n", "o", "", {
           callback = function()
             return call_function("fern#smart#leaf", {
@@ -97,22 +113,6 @@ M.config = function()
           expr = true,
           replace_keycodes = true,
         })
-
-        buf_set_keymap(
-          bufnr,
-          "n",
-          "<",
-          "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
-          keymap_opts
-        )
-
-        buf_set_keymap(
-          bufnr,
-          "n",
-          ">",
-          "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
-          keymap_opts
-        )
 
         buf_set_keymap(bufnr, "n", "q", "", {
           callback = function()
