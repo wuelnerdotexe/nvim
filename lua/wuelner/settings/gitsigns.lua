@@ -2,11 +2,11 @@ local config = function()
   local buf_set_keymap = vim.api.nvim_buf_set_keymap
 
   local reset_hunk = function()
-    package.loaded.gitsigns.reset_hunk()
+    require("gitsigns").reset_hunk()
   end
 
   local stage_hunk = function()
-    package.loaded.gitsigns.stage_hunk()
+    require("gitsigns").stage_hunk()
   end
 
   local schedule = vim.schedule
@@ -50,31 +50,31 @@ local config = function()
 
       buf_set_keymap(bufnr, "n", "<leader>hp", "", {
         callback = function()
-          package.loaded.gitsigns.preview_hunk()
+          require("gitsigns").preview_hunk()
         end,
       })
 
       buf_set_keymap(bufnr, "n", "<leader>bp", "", {
         callback = function()
-          package.loaded.gitsigns.blame_line({ full = true })
+          require("gitsigns").blame_line({ full = true })
         end,
       })
 
       buf_set_keymap(bufnr, "n", "<leader>bt", "", {
         callback = function()
-          package.loaded.gitsigns.toggle_current_line_blame()
+          require("gitsigns").toggle_current_line_blame()
         end,
       })
 
       buf_set_keymap(bufnr, "n", "<leader>dt", "", {
         callback = function()
-          package.loaded.gitsigns.toggle_deleted()
+          require("gitsigns").toggle_deleted()
         end,
       })
 
       buf_set_keymap(bufnr, "n", "<leader>gd", "", {
         callback = function()
-          package.loaded.gitsigns.diffthis("~")
+          require("gitsigns").diffthis("~")
         end,
       })
 
@@ -87,7 +87,7 @@ local config = function()
           end
 
           schedule(function()
-            package.loaded.gitsigns.prev_hunk()
+            require("gitsigns").prev_hunk()
           end)
 
           return "<Ignore>"
@@ -103,7 +103,7 @@ local config = function()
           end
 
           schedule(function()
-            package.loaded.gitsigns.next_hunk()
+            require("gitsigns").next_hunk()
           end)
 
           return "<Ignore>"
