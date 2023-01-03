@@ -9,6 +9,8 @@ require("packer").init({
   autoremove = true,
 })
 
+local VeryLazy = { "BufNewFile", "BufRead" }
+
 return require("packer").startup(function(use)
   use({
     "wbthomason/packer.nvim",
@@ -47,7 +49,7 @@ return require("packer").startup(function(use)
     },
     {
       "lewis6991/gitsigns.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.gitsigns')()",
     },
     {
@@ -77,7 +79,7 @@ return require("packer").startup(function(use)
     },
     {
       "andymass/vim-matchup",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       setup = "require('wuelner.settings.matchup')()",
     },
     {
@@ -92,7 +94,7 @@ return require("packer").startup(function(use)
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.indent-blankline')()",
     },
     {
@@ -107,7 +109,7 @@ return require("packer").startup(function(use)
           event = "InsertEnter",
           requires = {
             "L3MON4D3/LuaSnip",
-            event = { "BufNewFile", "BufRead" },
+            event = VeryLazy,
             requires = {
               "rafamadriz/friendly-snippets",
               after = "LuaSnip",
@@ -143,22 +145,22 @@ return require("packer").startup(function(use)
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.null-ls')()",
     },
     {
       "RRethy/vim-illuminate",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.illuminate')()",
     },
     {
       "stevearc/aerial.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.aerial')()",
     },
     {
       "NvChad/nvim-colorizer.lua",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.colorizer')()",
     },
     {
@@ -212,7 +214,7 @@ return require("packer").startup(function(use)
     },
     {
       "gen740/SmoothCursor.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.smoothcursor')()",
     },
     {
@@ -260,7 +262,7 @@ return require("packer").startup(function(use)
     },
     {
       "andweeb/presence.nvim",
-      event = { "BufNewFile", "BufRead" },
+      event = VeryLazy,
       config = "require('wuelner.settings.presence')()",
     },
   })
