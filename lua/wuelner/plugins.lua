@@ -247,7 +247,6 @@ return require("packer").startup(function(use)
       "nvim-telescope/telescope.nvim",
       keys = {
         { "n", "<leader>ff" },
-        { "n", "<leader>hf" },
         { "n", "<leader>mf" },
         { "n", "<leader>of" },
         { "n", "<leader>wf" },

@@ -30,15 +30,6 @@ set_var("loaded_vimballPlugin", 1)
 set_var("loaded_zip", 1)
 set_var("loaded_zipPlugin", 1)
 
-local call_function = vim.api.nvim_call_function
-
-if call_function("executable", { "fzf" }) == 1 and call_function("executable", { "fd" }) == 1 then
-  call_function("setenv", {
-    "FZF_DEFAULT_COMMAND",
-    'fd -I -H -E "{.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,node_modules,bower_components,*.code-search}" -t f',
-  })
-end
-
 vim.diagnostic.config({
   signs = { priority = 9 },
   virtual_text = { prefix = "▎" },

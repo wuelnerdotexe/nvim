@@ -164,7 +164,6 @@ local config = function()
     "dapui_scopes",
     "dapui_stacks",
     "fern",
-    "fzf",
     "lspinfo",
     "mason",
     "nerdterm",

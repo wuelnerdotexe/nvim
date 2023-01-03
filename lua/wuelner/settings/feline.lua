@@ -231,7 +231,7 @@ local config = function()
     },
     components = components,
     force_inactive = { filetypes = { "^nerdterm$" }, buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
-    disable = { filetypes = { "^aerial$", "^fern$", "^fzf$" }, buftypes = { "^prompt$" } },
+    disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
   })
 
   local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs

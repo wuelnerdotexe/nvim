@@ -3,14 +3,13 @@ local M = {}
 M.setup = function()
   local set_var = vim.api.nvim_set_var
 
-  set_var("enfocado_style", "neon")
+  set_var("enfocado_style", "nature")
   set_var("enfocado_plugins", {
     "aerial",
     "bufferline",
     "cmp",
     "dap-ui",
     "fern",
-    "fzf",
     "gitsigns",
     "glyph-palette",
     "illuminate",
