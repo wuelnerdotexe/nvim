@@ -14,7 +14,10 @@ M.config = function()
   vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
       vim.api.nvim_set_option_value("regexpengine", 0, {})
+
+      return true
     end,
+    once = true,
   })
 end
 

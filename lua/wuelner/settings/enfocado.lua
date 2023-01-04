@@ -33,7 +33,6 @@ M.config = function()
 
   create_autocmd("ColorScheme", {
     pattern = "enfocado",
-    nested = true,
     callback = function()
       command("highlight NormalNC guibg=#1e1e1e")
       command("highlight default NormalSB guibg=#000000 guifg=#b9b9b9")
@@ -86,7 +85,15 @@ M.config = function()
     end,
   })
 
-  command("colorscheme enfocado")
+  create_autocmd("UIEnter", {
+    callback = function()
+      command("colorscheme enfocado")
+
+      return true
+    end,
+    once = true,
+    nested = true,
+  })
 end
 
 return M

@@ -16,5 +16,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
       return ref_floating_preview(contents, syntax, opts, ...)
     end
+
+    return true
   end,
+  once = true,
 })
