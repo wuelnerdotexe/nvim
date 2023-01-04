@@ -188,6 +188,7 @@ return require("packer").startup(function(use)
     },
     {
       "wuelnerdotexe/vim-enfocado",
+      after = "human.vim",
       setup = "require('wuelner.settings.enfocado').setup()",
       config = "require('wuelner.settings.enfocado').config()",
     },

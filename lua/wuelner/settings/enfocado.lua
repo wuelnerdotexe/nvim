@@ -29,13 +29,12 @@ end
 
 M.config = function()
   local create_autocmd = vim.api.nvim_create_autocmd
+  local command = vim.api.nvim_command
 
   create_autocmd("ColorScheme", {
     pattern = "enfocado",
     nested = true,
     callback = function()
-      local command = vim.api.nvim_command
-
       command("highlight NormalNC guibg=#1e1e1e")
       command("highlight default NormalSB guibg=#000000 guifg=#b9b9b9")
       command("highlight default WinbarSB guibg=#000000 guifg=#000000")
@@ -86,6 +85,8 @@ M.config = function()
       })
     end,
   })
+
+  command("colorscheme enfocado")
 end
 
 return M
