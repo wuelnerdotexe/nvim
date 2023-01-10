@@ -199,6 +199,7 @@ return require("packer").startup(function(use)
     {
       "akinsho/bufferline.nvim",
       event = "UIEnter",
+      requires = "roobert/bufferline-cycle-windowless.nvim",
       config = "require('wuelner.settings.bufferline')()",
     },
     {

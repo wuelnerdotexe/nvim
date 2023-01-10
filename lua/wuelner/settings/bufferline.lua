@@ -16,6 +16,8 @@ local config = function()
     },
   })
 
+  require("bufferline-cycle-windowless").setup({ default_enabled = true })
+
   local set_keymap = vim.api.nvim_set_keymap
   local command = vim.api.nvim_command
 
@@ -27,19 +29,19 @@ local config = function()
 
   set_keymap("n", "gB", "", {
     callback = function()
-      command("BufferLineCyclePrev")
+      command("BufferLineCycleWindowlessPrev")
     end,
   })
 
   set_keymap("n", "<S-PageUp>", "", {
     callback = function()
-      command("BufferLineCyclePrev")
+      command("BufferLineCycleWindowlessPrev")
     end,
   })
 
   set_keymap("i", "<S-PageUp>", "", {
     callback = function()
-      command("BufferLineCyclePrev")
+      command("BufferLineCycleWindowlessPrev")
     end,
   })
 
@@ -51,19 +53,19 @@ local config = function()
 
   set_keymap("n", "gb", "", {
     callback = function()
-      command("BufferLineCycleNext")
+      command("BufferLineCycleWindowlessNext")
     end,
   })
 
   set_keymap("n", "<S-PageDown>", "", {
     callback = function()
-      command("BufferLineCycleNext")
+      command("BufferLineCycleWindowlessNext")
     end,
   })
 
   set_keymap("i", "<S-PageDown>", "", {
     callback = function()
-      command("BufferLineCycleNext")
+      command("BufferLineCycleWindowlessNext")
     end,
   })
 end
