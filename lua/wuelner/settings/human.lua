@@ -33,6 +33,7 @@ M.config = function()
   local set_keymap = vim.api.nvim_set_keymap
 
   set_keymap("n", "1b", "<Plug>(BufOnly)", {})
+  set_keymap("n", "<C-w>m", "<Plug>(MaximizerToggle)", {})
   set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
     noremap = true,
     silent = true,

@@ -218,13 +218,9 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.smoothcursor')()",
     },
     {
-      "anuvyklack/windows.nvim",
-      keys = { { "n", "<C-w>" }, { "x", "<C-w>" } },
-      requires = {
-        { "anuvyklack/middleclass", module = "middleclass" },
-        { "anuvyklack/animation.nvim", module = "animation" },
-      },
-      config = "require('wuelner.settings.windows')()",
+      "echasnovski/mini.animate",
+      event = "UIEnter",
+      config = "require('wuelner.settings.animate')()",
     },
     {
       "aserowy/tmux.nvim",
