@@ -52,6 +52,29 @@ local config = function()
 
   require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 300 })
 
+  local set_keymap = vim.api.nvim_set_keymap
+  local scroll = require("noice.lsp").scroll
+
+  set_keymap("n", "<C-b>", "", {
+    callback = function()
+      if not scroll(-1) then
+        return "<c-b>"
+      end
+    end,
+    expr = true,
+    replace_keycodes = true,
+  })
+
+  set_keymap("n", "<C-f>", "", {
+    callback = function()
+      if not scroll(1) then
+        return "<c-f>"
+      end
+    end,
+    expr = true,
+    replace_keycodes = true,
+  })
+
   local loaded_noice_bufs = {}
 
   setmetatable(loaded_noice_bufs, { __mode = "kv" })
