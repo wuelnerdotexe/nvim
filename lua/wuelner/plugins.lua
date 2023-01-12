@@ -140,6 +140,11 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.autopairs')()",
     },
     {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      event = "UIEnter",
+      config = "require('wuelner.settings.lsp_lines')",
+    },
+    {
       "neovim/nvim-lspconfig",
       after = { "mason.nvim", "nvim-cmp" },
       requires = {

@@ -224,6 +224,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 | VI Mode |         Keymap         | Action                            |
 | :-----: | :--------------------: | --------------------------------- |
+| Normal  | `<leader>` + `l` + `t` | Toggle lines diagnostics          |
 | Normal  | `<leader>` + `d` + `p` | Preview of the current diagnostic |
 | Normal  | `<leader>` + `d` + `l` | Show list of diagnostics          |
 | Normal  |       `[` + `d`        | Go to previous diagnostic         |
