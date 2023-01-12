@@ -229,6 +229,11 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.noice')()",
     },
     {
+      'stevearc/dressing.nvim',
+      event = "UIEnter",
+      config = "require('wuelner.settings.dressing')()",
+    },
+    {
       "gen740/SmoothCursor.nvim",
       event = VeryLazy,
       config = "require('wuelner.settings.smoothcursor')()",

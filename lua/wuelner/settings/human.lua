@@ -12,6 +12,8 @@ M.setup = function()
     "dapui_scopes",
     "dapui_stacks",
     "dapui_watches",
+    "DressingInput",
+    "DressingSelect",
     "fern",
     "notify",
   })

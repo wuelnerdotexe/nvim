@@ -7,6 +7,8 @@ local config = function()
       "dapui_console",
       "dapui_scopes",
       "dapui_stacks",
+      "DressingInput",
+      "DressingSelect",
       "fern",
       "lspinfo",
       "mason",
