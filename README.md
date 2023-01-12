@@ -52,7 +52,7 @@ The main features and plugins provided by this setup are as follows:
 - 👀 Markdown previewer with [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim).
 - 🐱 Useful and smart status bar with [feline.nvim](https://github.com/feline-nvim/feline.nvim).
 - 👁 Harmonic and consistent theme by [Enfocado](https://wuelnerdotexe.github.io/enfocado).
-- 💅 Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [noice.nvim](https://github.com/folke/noice.nvim), and [nvim-notify](https://github.com/rcarriga/nvim-notify).
+- 💅 Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [dressing.nvim](https://github.com/stevearc/dressing.nvim), [noice.nvim](https://github.com/folke/noice.nvim), and [nvim-notify](https://github.com/rcarriga/nvim-notify).
 - 🟩 Tmux integration with [tmux.nvim](https://github.com/aserowy/tmux.nvim).
 - 😎 Last but not least, announce your presence on Discord with funny messages (in Spanish) by [presence.nvim](https://github.com/andweeb/presence.nvim).
 

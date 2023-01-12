@@ -1,6 +1,7 @@
 require("projections").setup({ workspaces = { { "~/Workspace", {} } }, patterns = { ".git" } })
 
-local create_autocmd, cwd = vim.api.nvim_create_autocmd, vim.loop.cwd
+local create_autocmd = vim.api.nvim_create_autocmd
+local cwd = vim.loop.cwd
 
 create_autocmd("VimLeavePre", {
   callback = function()

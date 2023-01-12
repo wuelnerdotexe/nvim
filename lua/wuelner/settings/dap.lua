@@ -23,7 +23,7 @@ for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "type
       type = "node2",
       request = "launch",
       program = "${file}",
-      cwd = call_function("getcwd", {}),
+      cwd = vim.loop.cwd(),
       sourceMaps = true,
       protocol = "inspector",
       console = "integratedTerminal",
