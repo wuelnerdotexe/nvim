@@ -256,6 +256,13 @@ return require("packer").startup(function(use)
       config = "require('stay-in-place').setup()",
     },
     {
+      "marklcrns/vim-smartq",
+      cmd = { "q", "bd" },
+      keys = { { "n", "q" }, { "n", "<C-q>" }, { "n", "<C-w>" }, { "v", "<C-w>" } },
+      setup = "require('wuelner.settings.smartq').setup()",
+      config = "require('wuelner.settings.smartq').config()",
+    },
+    {
       "aserowy/tmux.nvim",
       keys = {
         { "n", "<C-h>" },
