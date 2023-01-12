@@ -35,9 +35,10 @@ M.config = function()
     pattern = "enfocado",
     callback = function()
       command("highlight NormalNC guibg=#1e1e1e")
-      command("highlight default NormalSB guibg=#000000 guifg=#b9b9b9")
-      command("highlight default WinbarSB guibg=#000000 guifg=#000000")
+      command("highlight! link FloatTitle NormalFloat")
       command("highlight! link Whitespace DiagnosticError")
+      command("highlight NormalSB guibg=#000000 guifg=#b9b9b9")
+      command("highlight WinbarSB guibg=#000000 guifg=#000000")
 
       local get_option_value = vim.api.nvim_get_option_value
       local set_option_value = vim.api.nvim_set_option_value
