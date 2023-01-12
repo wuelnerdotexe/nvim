@@ -11,8 +11,10 @@ local config = function()
     intervals = 40,
     priority = 11,
     threshold = 1,
+    disable_float_win = true,
     disabled_filetypes = {
       "aerial",
+      "checkhealth",
       "dap-repl",
       "dapui_breakpoints",
       "dapui_console",

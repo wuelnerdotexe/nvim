@@ -3,6 +3,7 @@ local config = function()
     delay = 40,
     filetypes_denylist = {
       "aerial",
+      "checkhealth",
       "dap-repl",
       "dapui_breakpoints",
       "dapui_console",
