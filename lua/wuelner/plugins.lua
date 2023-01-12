@@ -213,6 +213,11 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.bufferline')()",
     },
     {
+      "petertriho/nvim-scrollbar",
+      event = "UIEnter",
+      config = "require('wuelner.settings.scrollbar')()",
+    },
+    {
       "folke/noice.nvim",
       disable = vim.version().minor < 9,
       cond = "vim.api.nvim_call_function('exists', { 'g:neovide' }) ~= 1",
