@@ -1,29 +1,25 @@
-local config = function()
-  require("projections").setup({ workspaces = { { "~/Workspace", {} } }, patterns = { ".git" } })
+require("projections").setup({ workspaces = { { "~/Workspace", {} } }, patterns = { ".git" } })
 
-  local create_autocmd, cwd = vim.api.nvim_create_autocmd, vim.loop.cwd
+local create_autocmd, cwd = vim.api.nvim_create_autocmd, vim.loop.cwd
 
-  create_autocmd("VimLeavePre", {
-    callback = function()
-      require("projections.session").store(cwd())
+create_autocmd("VimLeavePre", {
+  callback = function()
+    require("projections.session").store(cwd())
 
-      return true
-    end,
-    once = true,
-  })
+    return true
+  end,
+  once = true,
+})
 
-  create_autocmd("VimEnter", {
-    callback = function()
-      if vim.api.nvim_call_function("argc", {}) == 0 then
-        require("projections.switcher").switch(cwd())
-
-        return true
-      end
+create_autocmd("VimEnter", {
+  callback = function()
+    if vim.api.nvim_call_function("argc", {}) == 0 then
+      require("projections.switcher").switch(cwd())
 
       return true
-    end,
-    once = true,
-  })
-end
+    end
 
-return config
+    return true
+  end,
+  once = true,
+})

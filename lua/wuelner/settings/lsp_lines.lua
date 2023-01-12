@@ -1,11 +1,7 @@
-local config = function()
-  require("lsp_lines").setup()
+require("lsp_lines").setup()
 
-  vim.api.nvim_set_keymap("n", "<leader>lt", "", {
-    callback = function()
-      require("lsp_lines").toggle()
-    end,
-  })
-end
-
-return config
+vim.api.nvim_set_keymap("n", "<leader>lt", "", {
+  callback = function()
+    require("lsp_lines").toggle()
+  end,
+})
