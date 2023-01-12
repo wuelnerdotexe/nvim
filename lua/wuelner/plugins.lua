@@ -229,7 +229,7 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.noice')",
     },
     {
-      'stevearc/dressing.nvim',
+      "stevearc/dressing.nvim",
       event = "UIEnter",
       config = "require('wuelner.settings.dressing')",
     },
@@ -242,6 +242,18 @@ return require("packer").startup(function(use)
       "echasnovski/mini.animate",
       event = "UIEnter",
       config = "require('wuelner.settings.animate')",
+    },
+    {
+      "gbprod/stay-in-place.nvim",
+      keys = {
+        { "n", ">" },
+        { "v", ">" },
+        { "n", "<" },
+        { "v", "<" },
+        { "n", "=" },
+        { "v", "=" },
+      },
+      config = "require('stay-in-place').setup()",
     },
     {
       "aserowy/tmux.nvim",
