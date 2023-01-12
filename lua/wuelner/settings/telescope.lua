@@ -57,7 +57,9 @@ local config = function()
     extensions = { fzf = { fuzzy = false, case_mode = "ignore_case" } },
   })
 
-  require("telescope").load_extension("fzf")
+  local load_extension = require("telescope").load_extension
+
+  load_extension("fzf"); load_extension("projections")
 
   vim.api.nvim_create_autocmd("User", {
     pattern = "TelescopePreviewerLoaded",
@@ -89,6 +91,12 @@ local config = function()
   set_keymap("n", "<leader>wf", "", {
     callback = function()
       require("telescope.builtin").live_grep()
+    end,
+  })
+
+  set_keymap("n", "<leader>pf", "", {
+    callback = function()
+      vim.api.nvim_command("Telescope projections")
     end,
   })
 end

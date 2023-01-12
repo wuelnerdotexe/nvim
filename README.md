@@ -106,6 +106,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | :-----: | :--------------------: | ----------------------------------- |
 | Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer         |
 | Normal  | `<leader>` + `f` + `f` | Find files in the current directory |
+| Normal  | `<leader>` + `p` + `f` | Find the workspace projects         |
 | Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
 | Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
 | Normal  | `<leader>` + `w` + `f` | Find words in the current directory |

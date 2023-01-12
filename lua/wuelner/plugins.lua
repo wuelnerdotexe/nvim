@@ -67,12 +67,17 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.fern').config()",
     },
     {
+      "gnikdroy/projections.nvim",
+      after = "fern.vim",
+      config = "require('wuelner.settings.projections')()",
+    },
+    {
       "nvim-treesitter/nvim-treesitter",
       after = "vim-polyglot",
       run = ":TSUpdate",
       requires = {
         { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
-        { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
+        { "mrjones2014/nvim-ts-rainbow", after = "nvim-treesitter" },
         { "windwp/nvim-ts-autotag", after = "nvim-treesitter" },
       },
       config = "require('wuelner.settings.treesitter')()",
@@ -249,6 +254,7 @@ return require("packer").startup(function(use)
         { "n", "<leader>mf" },
         { "n", "<leader>of" },
         { "n", "<leader>wf" },
+        { "n", "<leader>pf" },
       },
       requires = {
         "nvim-telescope/telescope-fzf-native.nvim",
