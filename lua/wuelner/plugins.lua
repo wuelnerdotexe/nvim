@@ -219,7 +219,8 @@ return require("packer").startup(function(use)
     },
     {
       "folke/noice.nvim",
-      disable = vim.version().minor < 9,
+      disable = true,
+      -- disable = vim.version().minor < 9,
       cond = "vim.api.nvim_call_function('exists', { 'g:neovide' }) ~= 1",
       event = "UIEnter",
       requires = {

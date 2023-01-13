@@ -8,6 +8,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- Massive improvements are added.
+
+The following plugins are added to the setup:
+
+- [bufferline-cycle-windowless.nvim](https://github.com/roobert/bufferline-cycle-windowless.nvim).
+- [dressing.nvim](https://github.com/stevearc/dressing.nvim).
+- [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim).
+- [nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar).
+- [projections.nvim](https://github.com/GnikDroy/projections.nvim).
+- [stay-in-place.nvim](https://github.com/gbprod/stay-in-place.nvim).
+- [vim-smartq](https://github.com/marklcrns/vim-smartq).
+
+### Changed
+
+- Changed `p00f/nvim-ts-rainbow` for `mrjones2014/nvim-ts-rainbow` plugin.
+- Changed `windows.nvim` for `mini.animate` plugin.
+
+### Removed
+
+- Unnecesary functions and returns are removed from the plugin's settings.
+
+## 1.20.0 - 2022-12-29
+
+### Added
+
 - Added more `gitsigns` keymaps.
 - Small optimizations and fixes are made.
 
