@@ -8,7 +8,7 @@ require("nvim-treesitter.configs").setup({
   auto_install = true,
   highlight = {
     enable = true,
-    disable = function(lang, buf)
+    disable = function(_, buf)
       local results_buf = results[buf]
 
       if results_buf then

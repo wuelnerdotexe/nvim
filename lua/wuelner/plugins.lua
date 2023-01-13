@@ -214,7 +214,7 @@ return require("packer").startup(function(use)
     },
     {
       "petertriho/nvim-scrollbar",
-      event = "UIEnter",
+      after = "gitsigns.nvim",
       config = "require('wuelner.settings.scrollbar')",
     },
     {
