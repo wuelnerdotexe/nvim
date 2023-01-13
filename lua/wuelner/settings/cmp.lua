@@ -106,9 +106,10 @@ setup({
   },
   sorting = {
     comparators = {
-      function(...)
-        return require("cmp_buffer"):compare_locality(...)
-      end,
+      require('cmp.config.compare').scopes,
+      require('cmp.config.compare').score,
+      require('cmp.config.compare').exact,
+      require('cmp.config.compare').order,
     },
   },
   sources = require("cmp").config.sources({

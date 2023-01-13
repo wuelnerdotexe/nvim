@@ -106,7 +106,6 @@ return require("packer").startup(function(use)
       "hrsh7th/nvim-cmp",
       after = "vim-sleuth",
       requires = {
-        { "hrsh7th/cmp-buffer", module = "cmp_buffer" },
         { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
         { "hrsh7th/cmp-path", event = "InsertEnter" },
         {
@@ -130,6 +129,7 @@ return require("packer").startup(function(use)
           event = "InsertEnter",
           config = "vim.schedule(function() require('wuelner.settings.tabnine') end)",
         },
+        { "hrsh7th/cmp-buffer", event = VeryLazy },
         { "rcarriga/cmp-dap", module = "cmp_dap" },
       },
       config = "require('wuelner.settings.cmp')",
