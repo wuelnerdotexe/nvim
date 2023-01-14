@@ -1,6 +1,9 @@
-vim.api.nvim_set_option_value("complete", nil, {})
+local tbl = {}
+
+vim.api.nvim_set_option_value("complete", nil, tbl)
 
 local setup = require("cmp").setup
+local call_function = vim.api.nvim_call_function
 local mapping = require("cmp").mapping
 local scroll_docs = mapping.scroll_docs
 local visible = require("cmp").visible
@@ -45,9 +48,11 @@ local codicons = {
 
 setup({
   enabled = function()
-    return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
+    return (vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer())
+      and call_function("reg_recording", tbl) == ""
+      and call_function("reg_executing", tbl) == ""
   end,
-  performance = { debounce = 300, throttle = 40, fetching_timeout = 300 },
+  performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
   mapping = mapping.preset.insert({
     ["<C-b>"] = scroll_docs(-1),
     ["<C-f>"] = scroll_docs(1),
@@ -128,7 +133,7 @@ setup({
           local current_buf = vim.api.nvim_get_current_buf()
 
           if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
-            return {}
+            return tbl
           end
 
           return { current_buf }
