@@ -53,6 +53,11 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.gitsigns')",
     },
     {
+      "gnikdroy/projections.nvim",
+      event = "VimEnter",
+      config = "require('wuelner.settings.projections')",
+    },
+    {
       "lambdalisue/fern.vim",
       after = "human.vim",
       requires = {
@@ -65,11 +70,6 @@ return require("packer").startup(function(use)
       },
       setup = "require('wuelner.settings.fern').setup()",
       config = "require('wuelner.settings.fern').config()",
-    },
-    {
-      "gnikdroy/projections.nvim",
-      after = "fern.vim",
-      config = "require('wuelner.settings.projections')",
     },
     {
       "nvim-treesitter/nvim-treesitter",
@@ -106,11 +106,12 @@ return require("packer").startup(function(use)
       "hrsh7th/nvim-cmp",
       after = "vim-sleuth",
       requires = {
+        { "hrsh7th/cmp-path", event = VeryLazy },
+        { "hrsh7th/cmp-buffer", event = VeryLazy },
         { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
-        { "hrsh7th/cmp-path", event = "InsertEnter" },
         {
           "saadparwaiz1/cmp_luasnip",
-          event = "InsertEnter",
+          event = VeryLazy,
           requires = {
             "L3MON4D3/LuaSnip",
             event = VeryLazy,
@@ -122,14 +123,13 @@ return require("packer").startup(function(use)
             },
           },
         },
-        { "jackieaskins/cmp-emmet", run = "npm run release" },
         {
           "tzachar/cmp-tabnine",
           run = "./install.sh",
-          event = "InsertEnter",
+          event = VeryLazy,
           config = "vim.schedule(function() require('wuelner.settings.tabnine') end)",
         },
-        { "hrsh7th/cmp-buffer", event = VeryLazy },
+        { "jackieaskins/cmp-emmet", run = "npm run release" },
         { "rcarriga/cmp-dap", module = "cmp_dap" },
       },
       config = "require('wuelner.settings.cmp')",
