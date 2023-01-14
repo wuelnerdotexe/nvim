@@ -94,6 +94,12 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
+Next, you need to install the Neovim plugins with the following instruction:
+
+```bash
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+```
+
 ## Keymaps
 
 The keymaps created by this config are very well thought out to be intuitive, meaningful, and most of all, to stick to the essence of Vim without conflicting with it. Keymaps are normally assigned two letters, which signify an action, for example: `d` + `p` = `d`iagnostic `p`review. Keep in mind that the functionality will always come first and then the action. This is the standard created and used by this configuration for unique consistency.
@@ -102,7 +108,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### General
 
-| VI Mode |         Keymap         | Action                              |
+| VI Mode |         Keymap         | Description                         |
 | :-----: | :--------------------: | ----------------------------------- |
 | Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer         |
 | Normal  | `<leader>` + `f` + `f` | Find files in the current directory |
@@ -116,7 +122,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Folders explorer
 
-| VI Mode |         Keymap          | Action                       |
+| VI Mode |         Keymap          | Description                  |
 | :-----: | :---------------------: | ---------------------------- |
 | Normal  |           `>`           | Enter directory              |
 | Normal  |           `<`           | Leave directory              |
@@ -140,7 +146,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Windows
 
-| VI Mode |       Keymap       | Action                                   |
+| VI Mode |       Keymap       | Description                              |
 | :-----: | :----------------: | ---------------------------------------- |
 | Normal  |    `CTRL` + `h`    | Move to the left window                  |
 | Normal  |    `CTRL` + `j`    | Move to the down window                  |
@@ -158,7 +164,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Buffers
 
-| VI Mode |        Keymap         | Action                                   |
+| VI Mode |        Keymap         | Description                              |
 | :-----: | :-------------------: | ---------------------------------------- |
 | Normal  |       `g` + `B`       | Go to previous buffer                    |
 | Insert  |  `SHIFT` + `PAGE UP`  | Go to previous buffer                    |
@@ -170,7 +176,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Tabs
 
-| VI Mode |        Keymap        | Action                                |
+| VI Mode |        Keymap        | Description                           |
 | :-----: | :------------------: | ------------------------------------- |
 | Normal  |      `g` + `T`       | Go to the previous tab                |
 | Insert  |  `CTRL` + `PAGE UP`  | Go to the previous tab                |
@@ -180,7 +186,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Autocomplete
 
-| VI Mode |     Keymap      | Action                                                              |
+| VI Mode |     Keymap      | Description                                                         |
 | :-----: | :-------------: | ------------------------------------------------------------------- |
 | Insert  |  `CTRL` + `p`   | Turn on autocomplete and select the previous item                   |
 | Insert  |  `CTRL` + `n`   | Turn on autocomplete and select the next item                       |
@@ -192,14 +198,14 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Commenting
 
-| VI Mode |     Keymap     | Action                    |
+| VI Mode |     Keymap     | Description               |
 | :-----: | :------------: | ------------------------- |
 | Normal  | `g` + `c`+ `c` | Comment the current line  |
 | Visual  |   `g` + `c`    | Comment current selection |
 
 ### Moving Text
 
-| VI Mode |     Keymap      | Action          |
+| VI Mode |     Keymap      | Description     |
 | :-----: | :-------------: | --------------- |
 | Normal  | `Alt` + `Left`  | Move char left  |
 | Normal  | `Alt` + `Down`  | Move line down  |
@@ -208,7 +214,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Git Signs
 
-|      VI Mode      |         Keymap         | Action                         |
+|      VI Mode      |         Keymap         | Description                    |
 | :---------------: | :--------------------: | ------------------------------ |
 |      Normal       | `<leader>` + `g` + `d` | Split git diffs                |
 |      Normal       | `<leader>` + `d` + `t` | Toggle show deleted lines      |
@@ -222,7 +228,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Diagnostics
 
-| VI Mode |         Keymap         | Action                            |
+| VI Mode |         Keymap         | Description                       |
 | :-----: | :--------------------: | --------------------------------- |
 | Normal  | `<leader>` + `l` + `t` | Toggle lines diagnostics          |
 | Normal  | `<leader>` + `d` + `p` | Preview of the current diagnostic |
@@ -239,7 +245,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Debugging
 
-| VI Mode |          Keymap           | Action                                  |
+| VI Mode |          Keymap           | Description                             |
 | :-----: | :-----------------------: | --------------------------------------- |
 | Normal  |          `<F9>`           | Toggle breakpoint on the current line   |
 | Normal  |          `<F5>`           | Run and debug                           |
