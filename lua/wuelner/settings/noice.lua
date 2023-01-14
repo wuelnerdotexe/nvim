@@ -78,8 +78,6 @@ local loaded_noice_bufs = {}
 
 setmetatable(loaded_noice_bufs, { __mode = "kv" })
 
-local set_option_value = vim.api.nvim_set_option_value
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "noice",
   callback = function(ev)
@@ -88,12 +86,12 @@ vim.api.nvim_create_autocmd("FileType", {
     if loaded_noice_bufs[bufnr] then
       return
     else
-      local option_opts = { buf = bufnr }
+      local buf_option_opts = { buf = bufnr }
 
-      set_option_value("signcolumn", "no", option_opts)
-      set_option_value("number", false, option_opts)
-      set_option_value("relativenumber", false, option_opts)
-      set_option_value("list", false, option_opts)
+      set_option_value("signcolumn", "no", buf_option_opts)
+      set_option_value("number", false, buf_option_opts)
+      set_option_value("relativenumber", false, buf_option_opts)
+      set_option_value("list", false, buf_option_opts)
 
       loaded_noice_bufs[bufnr] = true
     end
