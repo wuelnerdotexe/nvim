@@ -106,38 +106,38 @@ setup({
   },
   sorting = {
     comparators = {
-      require('cmp.config.compare').scopes,
-      require('cmp.config.compare').score,
-      require('cmp.config.compare').exact,
-      require('cmp.config.compare').order,
+      require("cmp.config.compare").scopes,
+      require("cmp.config.compare").score,
+      require("cmp.config.compare").exact,
+      require("cmp.config.compare").order,
     },
   },
   sources = require("cmp").config.sources({
     { name = "path", keyword_length = 1, priority = 6 },
   }, {
-      { name = "emmet", keyword_length = 1, priority = 5 },
-      { name = "luasnip", keyword_length = 3, priority = 4 },
-      { name = "nvim_lsp", keyword_length = 3, priority = 3 },
-      { name = "cmp_tabnine", keyword_length = 3, priority = 2 },
-    }, {
-      {
-        name = "buffer",
-        option = {
-          indexing_interval = 300,
-          get_bufnrs = function()
-            local current_buf = vim.api.nvim_get_current_buf()
+    { name = "emmet", keyword_length = 1, priority = 5 },
+    { name = "luasnip", keyword_length = 3, priority = 4 },
+    { name = "nvim_lsp", keyword_length = 3, priority = 3 },
+    { name = "cmp_tabnine", keyword_length = 3, priority = 2 },
+  }, {
+    {
+      name = "buffer",
+      option = {
+        indexing_interval = 300,
+        get_bufnrs = function()
+          local current_buf = vim.api.nvim_get_current_buf()
 
-            if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
-              return {}
-            end
+          if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
+            return {}
+          end
 
-            return { current_buf }
-          end,
-        },
-        keyword_length = 3,
-        priority = 1,
+          return { current_buf }
+        end,
       },
-    }),
+      keyword_length = 3,
+      priority = 1,
+    },
+  }),
   experimental = { ghost_text = true },
   window = {
     completion = { scrolloff = 3 },

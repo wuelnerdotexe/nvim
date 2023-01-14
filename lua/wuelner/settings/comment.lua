@@ -13,9 +13,7 @@ require("Comment").setup({
 
       if ctx_ctype == require("Comment.utils").ctype.blockwise then
         location = require("ts_context_commentstring.utils").get_cursor_location()
-      elseif
-        ctx_cmotion == require("Comment.utils").cmotion.v or ctx_cmotion == require("Comment.utils").cmotion.V
-      then
+      elseif ctx_cmotion == require("Comment.utils").cmotion.v or ctx_cmotion == require("Comment.utils").cmotion.V then
         location = require("ts_context_commentstring.utils").get_visual_start_location()
       end
 

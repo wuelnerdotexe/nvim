@@ -53,7 +53,7 @@ require("telescope").setup({
       i = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
     },
   },
-  extensions = { fzf = { fuzzy = false, case_mode = "ignore_case" } },
+  extensions = { fzf = { case_mode = "ignore_case" } },
 })
 
 local load_extension = require("telescope").load_extension
