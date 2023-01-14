@@ -9,9 +9,8 @@ M.aerial_breadcrumbs = function()
 
   local symbols = aerial.get_location(true)
   local depth = nil or #symbols
-  local table_unpack = table.unpack
 
-  symbols = depth > 0 and { table_unpack(symbols, 1, depth) } or { table_unpack(symbols, #symbols + 1 + depth) }
+  symbols = depth > 0 and { unpack(symbols, 1, depth) } or { unpack(symbols, #symbols + 1 + depth) }
 
   local parts = {}
 

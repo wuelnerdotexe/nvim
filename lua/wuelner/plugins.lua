@@ -1,5 +1,4 @@
 require("packer").init({
-  max_jobs = 3,
   display = {
     prompt_border = "rounded",
     open_fn = function()

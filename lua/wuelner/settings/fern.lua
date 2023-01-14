@@ -63,7 +63,7 @@ M.config = function()
           bufnr,
           "n",
           "<",
-          "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>pwd<CR>",
           keymap_opts
         )
 
@@ -71,7 +71,7 @@ M.config = function()
           bufnr,
           "n",
           ">",
-          "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>echomsg getcwd()<CR>",
+          "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>pwd<CR>",
           keymap_opts
         )
 

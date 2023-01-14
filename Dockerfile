@@ -26,7 +26,8 @@ RUN apk --no-cache add \
     fd  \
     ripgrep \
     git \
-    node
+    nodejs \
+    npm
 
 # Copy the entire setup
 COPY . /root/.config/nvim/

@@ -1,2 +1,2 @@
-require("impatient")
+pcall(require, "impatient")
 require("wuelner")
