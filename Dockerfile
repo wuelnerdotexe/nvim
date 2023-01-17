@@ -29,11 +29,4 @@ RUN apk --no-cache add \
     nodejs \
     npm
 
-# Copy the entire setup
-COPY . /root/.config/nvim/
-
-# Clone and install packer.nvim manually and install plugins
-RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-WORKDIR /neovim
+WORKDIR /code
