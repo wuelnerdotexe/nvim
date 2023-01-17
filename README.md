@@ -126,12 +126,9 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | :-----: | :---------------------: | ---------------------------- |
 | Normal  |           `>`           | Enter directory              |
 | Normal  |           `<`           | Leave directory              |
-| Normal  |           `h`           | Collapse node                |
-| Normal  |           `l`           | Expand node                  |
-| Normal  |           `o`           | Expand/Collapse or open node |
-| Normal  | Double left mouse click | Expand/Collapse or open node |
-| Normal  |         `ENTER`         | Expand or open node          |
-| Normal  |       `BACKSPACE`       | Collapse node                |
+| Normal  |           `o`           | Open node                    |
+| Normal  | Double left mouse click | Expand or collapse node      |
+| Normal  |         `ENTER`         | Expand or collapse node      |
 | Normal  |      `CTRL` + `t`       | Open in a new tab            |
 | Normal  |      `CTRL` + `s`       | Open in a new split          |
 | Normal  |      `CTRL` + `v`       | Open to the side             |

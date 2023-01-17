@@ -16,6 +16,17 @@ require("aerial").setup({
     placement = "edge",
   },
   attach_mode = "global",
+  keymaps = {
+    ["p"] = false,
+    ["<C-j>"] = false,
+    ["<C-k>"] = false,
+    ["o"] = false,
+    ["O"] = false,
+    ["l"] = false,
+    ["L"] = false,
+    ["h"] = false,
+    ["H"] = false,
+  },
   disable_max_size = 102400,
   filter_kind = false,
   highlight_mode = "last",
@@ -89,6 +100,7 @@ vim.api.nvim_create_autocmd("Filetype", {
       return
     else
       set_option_value("signcolumn", "yes:1", { buf = bufnr })
+      set_option_value("cursorline", true, { buf = bufnr })
 
       loaded_aerial_bufs[bufnr] = true
     end

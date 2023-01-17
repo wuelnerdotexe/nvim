@@ -4,19 +4,19 @@ M.setup = function()
   local set_var = vim.api.nvim_set_var
   local columns = vim.api.nvim_get_option_value("columns", {})
 
-  set_var("fern#disable_default_mappings", 1)
   set_var("fern#default_hidden", 1)
   set_var("fern#default_exclude", [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]])
-  set_var("fern#drawer_width", math.floor((columns / (columns >= 160 and 3 or 2)) / 2))
+  set_var("fern#disable_default_mappings", 1)
   set_var("fern#disable_drawer_hover_popup", 1)
+  set_var("fern#drawer_width", math.floor((columns / (columns >= 160 and 3 or 2)) / 2))
   set_var("fern#drawer_hover_popup_delay", 40)
-  set_var("fern_git_status#disable_ignored", 1)
-  set_var("fern_git_status#disable_untracked", 1)
-  set_var("fern#mark_symbol", "")
   set_var("fern#renderer", "nerdfont")
   set_var("fern#renderer#nerdfont#root_symbol", "")
   set_var("fern#renderer#nerdfont#root_leading", "")
   set_var("fern#renderer#nerdfont#indent_markers", 1)
+  set_var("fern_git_status#disable_ignored", 1)
+  set_var("fern_git_status#disable_untracked", 1)
+  set_var("fern#mark_symbol", "")
 end
 
 M.config = function()
@@ -43,10 +43,7 @@ M.config = function()
         set_option_value("number", false, { buf = bufnr })
         set_option_value("relativenumber", false, { buf = bufnr })
 
-        buf_set_keymap(bufnr, "n", "h", "<Plug>(fern-action-collapse)", keymap_opts)
-        buf_set_keymap(bufnr, "n", "l", "<Plug>(fern-action-expand)", keymap_opts)
-        buf_set_keymap(bufnr, "n", "<CR>", "<Plug>(fern-action-open-or-expand)", keymap_opts)
-        buf_set_keymap(bufnr, "n", "<BS>", "<Plug>(fern-action-collapse)", keymap_opts)
+        buf_set_keymap(bufnr, "n", "o", "<Plug>(fern-action-open)", keymap_opts)
         buf_set_keymap(bufnr, "n", "<C-T>", "<Plug>(fern-action-open:tabedit)", keymap_opts)
         buf_set_keymap(bufnr, "n", "<C-s>", "<Plug>(fern-action-open:split)", keymap_opts)
         buf_set_keymap(bufnr, "n", "nf", "<Plug>(fern-action-new-file)", keymap_opts)
@@ -75,13 +72,19 @@ M.config = function()
           keymap_opts
         )
 
-        buf_set_keymap(bufnr, "n", "o", "", {
+        buf_set_keymap(bufnr, "n", "q", "", {
           callback = function()
-            return call_function("fern#smart#leaf", {
-              "<Plug>(fern-action-open)",
-              "<Plug>(fern-action-expand)",
-              "<Plug>(fern-action-collapse)",
-            })
+            command("q")
+          end,
+          nowait = true,
+        })
+
+        buf_set_keymap(bufnr, "n", "<CR>", "", {
+          callback = function()
+            return call_function(
+              "fern#smart#leaf",
+              { "", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)" }
+            )
           end,
           nowait = true,
           expr = true,
@@ -90,11 +93,10 @@ M.config = function()
 
         buf_set_keymap(bufnr, "n", "<2-LeftMouse>", "", {
           callback = function()
-            return call_function("fern#smart#leaf", {
-              "<Plug>(fern-action-open)",
-              "<Plug>(fern-action-expand)",
-              "<Plug>(fern-action-collapse)",
-            })
+            return call_function(
+              "fern#smart#leaf",
+              { "", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)" }
+            )
           end,
           nowait = true,
           expr = true,
@@ -112,13 +114,6 @@ M.config = function()
           nowait = true,
           expr = true,
           replace_keycodes = true,
-        })
-
-        buf_set_keymap(bufnr, "n", "q", "", {
-          callback = function()
-            command("quit")
-          end,
-          nowait = true,
         })
 
         loaded_fern_bufs[bufnr] = true

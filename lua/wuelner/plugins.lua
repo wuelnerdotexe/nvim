@@ -1,9 +1,9 @@
 require("packer").init({
   display = {
-    prompt_border = "rounded",
     open_fn = function()
       return require("packer.util").float({ border = "rounded" })
     end,
+    prompt_border = "rounded",
   },
   autoremove = true,
 })
@@ -52,23 +52,22 @@ return require("packer").startup(function(use)
       config = "require('wuelner.settings.gitsigns')",
     },
     {
-      "gnikdroy/projections.nvim",
-      event = "VimEnter",
-      config = "require('wuelner.settings.projections')",
-    },
-    {
       "lambdalisue/fern.vim",
       after = "human.vim",
       requires = {
         "lambdalisue/fern-hijack.vim",
-        "lambdalisue/fern-git-status.vim",
         {
           "lambdalisue/fern-renderer-nerdfont.vim",
           requires = { "lambdalisue/nerdfont.vim", "lambdalisue/glyph-palette.vim" },
         },
+        "lambdalisue/fern-git-status.vim",
       },
       setup = "require('wuelner.settings.fern').setup()",
       config = "require('wuelner.settings.fern').config()",
+    },
+    {
+      "gnikdroy/projections.nvim",
+      config = "require('wuelner.settings.projections')",
     },
     {
       "nvim-treesitter/nvim-treesitter",
@@ -217,7 +216,7 @@ return require("packer").startup(function(use)
     {
       "akinsho/bufferline.nvim",
       event = "UIEnter",
-      requires = "roobert/bufferline-cycle-windowless.nvim",
+      requires = { "roobert/bufferline-cycle-windowless.nvim", module = "bufferline-cycle-windowless" },
       config = "require('wuelner.settings.bufferline')",
     },
     {
@@ -251,18 +250,6 @@ return require("packer").startup(function(use)
       "echasnovski/mini.animate",
       event = "UIEnter",
       config = "require('wuelner.settings.animate')",
-    },
-    {
-      "gbprod/stay-in-place.nvim",
-      keys = {
-        { "n", ">" },
-        { "x", ">" },
-        { "n", "<" },
-        { "x", "<" },
-        { "n", "=" },
-        { "x", "=" },
-      },
-      config = "require('stay-in-place').setup()",
     },
     {
       "marklcrns/vim-smartq",

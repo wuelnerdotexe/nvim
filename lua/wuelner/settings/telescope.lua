@@ -1,7 +1,3 @@
-local select_horizontal = function()
-  require("telescope.actions").select_horizontal()
-end
-
 require("telescope").setup({
   pickers = {
     fd = {
@@ -49,8 +45,8 @@ require("telescope").setup({
       end)
     end,
     mappings = {
-      n = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
-      i = { ["<C-x>"] = false, ["<C-s>"] = select_horizontal },
+      i = { ["<C-s>"] = "select_horizontal", ["<C-x>"] = false, ["<C-e>"] = "close", ["<C-c>"] = false },
+      n = { ["<C-s>"] = "select_horizontal", ["<C-x>"] = false, ["g?"] = "which_key", ["q"] = "close", },
     },
   },
   extensions = { fzf = { case_mode = "ignore_case" } },

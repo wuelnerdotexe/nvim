@@ -1,4 +1,12 @@
-require("projections").setup({ workspaces = { { "~/Workspace", {} } }, patterns = { ".git" } })
+require("projections").setup({
+  workspaces = { { "~/Workspace", {} } },
+  patterns = { ".git" },
+  store_hooks = {
+    pre = function()
+      vim.api.nvim_command("FernDo close")
+    end,
+  },
+})
 
 local create_autocmd = vim.api.nvim_create_autocmd
 local cwd = vim.loop.cwd

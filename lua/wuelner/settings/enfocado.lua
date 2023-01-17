@@ -35,10 +35,9 @@ M.config = function()
     pattern = "enfocado",
     callback = function()
       command("highlight NormalNC guibg=#1e1e1e")
-      command("highlight! link FloatTitle NormalFloat")
-      command("highlight! link Whitespace DiagnosticError")
       command("highlight NormalSB guibg=#000000 guifg=#b9b9b9")
       command("highlight WinbarSB guibg=#000000 guifg=#000000")
+      command("highlight! link Whitespace DiagnosticError")
 
       local get_option_value = vim.api.nvim_get_option_value
       local set_option_value = vim.api.nvim_set_option_value
@@ -66,7 +65,7 @@ M.config = function()
       setmetatable(loaded_sidebar_bufs, { __mode = "kv" })
 
       create_autocmd("FileType", {
-        pattern = "fern,aerial,nerdterm,qf",
+        pattern = "aerial,fern,nerdterm,qf",
         callback = function(ev)
           local bufnr = ev.buf
 
@@ -75,7 +74,9 @@ M.config = function()
           else
             set_option_value(
               "winhighlight",
-              "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB",
+              get_option_value("filetype", { buf = bufnr }) == "nerdterm"
+                  and "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB"
+                or "Normal:NormalSB,NormalNC:NormalSB",
               { buf = bufnr }
             )
 

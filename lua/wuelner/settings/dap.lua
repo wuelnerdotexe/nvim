@@ -1,8 +1,10 @@
+local get_package = require("mason-registry").get_package
+
 require("dap").adapters.node2 = {
   type = "executable",
   command = "node",
   args = {
-    require("mason-registry").get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
+    get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
   },
 }
 
@@ -10,11 +12,9 @@ require("dap").adapters.firefox = {
   type = "executable",
   command = "node",
   args = {
-    require("mason-registry").get_package("firefox-debug-adapter"):get_install_path() .. "/dist/adapter.bundle.js",
+    get_package("firefox-debug-adapter"):get_install_path() .. "/dist/adapter.bundle.js",
   },
 }
-
-local call_function = vim.api.nvim_call_function
 
 for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
   require("dap").configurations[language] = {
@@ -41,6 +41,8 @@ for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "type
 end
 
 require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
+
+local call_function = vim.api.nvim_call_function
 
 call_function(
   "sign_define",
