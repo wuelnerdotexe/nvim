@@ -13,7 +13,6 @@ My personal Neovim setup written in Lua.
 - [Philosophy](#philosophy)
 - [Requirements](#requirements)
 - [Installation](#installation)
-  - [Post installation](#post-installation)
 - [Keymaps](#keymaps)
   - [General](#general)
   - [Folders explorer](#folders-explorer)
@@ -28,6 +27,7 @@ My personal Neovim setup written in Lua.
   - [Debugging](#debugging)
 - [Recommendations](#recommendations)
   - [Fonts](#fonts)
+  - [Docker](#docker)
 - [Maintainer](#maintainer)
 - [License](#license)
 
@@ -36,11 +36,10 @@ My personal Neovim setup written in Lua.
 The main features and plugins provided by this setup are as follows:
 
 - 🧠 Smooth times based on scientific research.
-- 🫴 Lazy loading of plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
+- 🫴 Lazy loading of plugins with [lazy.nvim](https://github.com/folke/lazy.nvim).
 - ⚡ Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
 - 📂 Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
 - 🔭 Powerful fuzzy finder with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
-- 🔊 Integration with multiple languages by [vim-polyglot](https://github.com/sheerun/vim-polyglot).
 - 🌳 Advanced syntax recognition with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - 💡 Neovim native language server protocol.
 - 🔗 Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
@@ -66,7 +65,7 @@ The main features and plugins provided by this setup are as follows:
 
 - [Nerd Fonts](https://www.nerdfonts.com/) patched with [codicons.ttf](https://github.com/microsoft/vscode-codicons) - to show nice icons.
 - [Neovim](https://neovim.io/) >= v0.8 - obviously.
-- [Git](https://git-scm.com/) - to install nvim plugins with [packer.nvim](https://github.com/wbthomason/packer.nvim).
+- [Git](https://git-scm.com/) - to install nvim plugins with [lazy.nvim](https://github.com/folke/lazy.nvim).
 - [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters with [mason.nvim](https://github.com/williamboman/mason.nvim).
 - [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 - [fd](https://github.com/sharkdp/fd) - to find files with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
@@ -81,23 +80,6 @@ For example, to install on Linux/MacOS:
 
 ```bash
 git clone https://github.com/wuelnerdotexe/nvim ~/.config/nvim --depth 1
-```
-
-### Post installation
-
-After installing this setup, you will need to install [packer.nvim](https://github.com/wbthomason/packer.nvim), the package manager for this setup, from your terminal.
-
-For example, to install on Linux/MacOS:
-
-```bash
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
-
-Next, you need to install the Neovim plugins with the following instruction:
-
-```bash
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 ```
 
 ## Keymaps
@@ -266,6 +248,7 @@ In order for the **[Enfocado](https://wuelnerdotexe.github.io/enfocado)'s Human 
 - [Victor Mono](https://rubjo.github.io/victor-mono/).
 
 ### Docker
+
 If you would like to test my configuration without overriting yours or simply run neovim with my configuration in a container now is possible.
 You must have docker installed, and your user should be able to run docker without sudo command (withou this you may need to run your the following commands as sudo)
 Run the command `make build` this will prepare everything for you, the first time you run this may take some moment to download the necessary files
@@ -274,8 +257,7 @@ Even changes done in the config directory in your machine will not affect the co
 If you would like to continue using neovim in this way you can run `make install` which will create a symlink to your `~/.local/bin` directory which is expected to be part of your PATH if is not you should add it in your `.bashrc`, `.profile`, or `.zshrc` depending on your configuration
 The way the container is run the contents of the folders `~/.config/nvim` and `~/.local/share/nvim` are persisted in volumes of docker, running the build again will clean these.
 
-Once you are in the editor from the container you need to run the first time `:PackerSync` which will download all the plugins, Note some errors are expected will be clear in the future but does not prevent the execution of neovim and my configuration.
-
+Note some errors are expected will be clear in the future but does not prevent the execution of neovim and my configuration.
 
 ## Maintainer
 

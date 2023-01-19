@@ -1,4 +1,3 @@
 cache = true
-exclude_files = { "**/packer_compiled.lua" }
-globals = { "vim", "packer_plugins", "css" }
+globals = { "vim", "css" }
 ignore = { "631" }

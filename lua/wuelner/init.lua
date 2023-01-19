@@ -1,2 +1,1 @@
-require("wuelner.builtins")
-require("wuelner.plugins")
+require("wuelner.lazy")

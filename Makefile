@@ -5,7 +5,7 @@ build: clean
 	docker container create -v wuelner-nvim-config:/data --name tmp busybox
 	docker cp . tmp:/data
 	docker rm tmp
-	docker run --rm -v wuelner-nvim-store:/root/.local/share/nvim wuelner-nvim git clone --depth 1 https://github.com/wbthomason/packer.nvim /root/.local/share/nvim/site/pack/packer/start/packer.nvim
+	docker run --rm -v wuelner-nvim-store:/root/.local/share/nvim wuelner-nvim git clone --filter=blob:none https://github.com/folke/lazy.nvim.git /root/.local/share/nvim/lazy/lazy.nvim
 
 clean::
 	unlink ~/.local/bin/wnvim || true

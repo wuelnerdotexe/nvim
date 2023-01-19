@@ -1,6 +1,6 @@
 vim.diagnostic.config({
   signs = { priority = 9 },
-  virtual_text = false, -- { prefix = "▎" },
+  virtual_text = false,
   virtual_lines = true,
   float = { header = { "Diagnostics", "Title" }, border = "rounded" },
   update_in_insert = true,

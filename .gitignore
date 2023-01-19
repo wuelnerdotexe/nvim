@@ -2,6 +2,3 @@
 
 # dependencies
 .luacheckcache
-
-# production
-**/packer_compiled.lua

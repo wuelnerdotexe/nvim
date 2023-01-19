@@ -1,0 +1,79 @@
+local call_function = vim.api.nvim_call_function
+
+call_function("glyph_palette#apply", {})
+
+local set_option_value = vim.api.nvim_set_option_value
+
+set_option_value("number", false, { buf = 0 })
+set_option_value("relativenumber", false, { buf = 0 })
+
+local buf_set_keymap = vim.api.nvim_buf_set_keymap
+local command = vim.api.nvim_command
+
+buf_set_keymap(0, "n", "q", "", {
+  callback = function()
+    command("q")
+  end,
+  nowait = true,
+})
+
+local keymap_opts = { nowait = true }
+
+buf_set_keymap(0, "n", "o", "<Plug>(fern-action-open)", keymap_opts)
+buf_set_keymap(0, "n", "<C-T>", "<Plug>(fern-action-open:tabedit)", keymap_opts)
+buf_set_keymap(0, "n", "<C-s>", "<Plug>(fern-action-open:split)", keymap_opts)
+buf_set_keymap(0, "n", "nf", "<Plug>(fern-action-new-file)", keymap_opts)
+buf_set_keymap(0, "n", "nd", "<Plug>(fern-action-new-dir)", keymap_opts)
+buf_set_keymap(0, "n", "m", "<Plug>(fern-action-move)", keymap_opts)
+buf_set_keymap(0, "n", "c", "<Plug>(fern-action-copy)", keymap_opts)
+buf_set_keymap(0, "n", "d", "<Plug>(fern-action-remove)", keymap_opts)
+buf_set_keymap(0, "n", "<F5>", "<Plug>(fern-action-reload)", keymap_opts)
+buf_set_keymap(0, "n", "g?", "<Plug>(fern-action-help)", keymap_opts)
+buf_set_keymap(0, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
+buf_set_keymap(0, "n", "n", "<Plug>(fern-action-new-path)", {})
+
+buf_set_keymap(
+  0,
+  "n",
+  "<",
+  "<Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>pwd<CR>",
+  keymap_opts
+)
+
+buf_set_keymap(
+  0,
+  "n",
+  ">",
+  "<Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-cd:root)<Cmd>pwd<CR>",
+  keymap_opts
+)
+
+buf_set_keymap(0, "n", "<CR>", "", {
+  callback = function()
+    return call_function("fern#smart#leaf", { "", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)" })
+  end,
+  nowait = true,
+  expr = true,
+  replace_keycodes = true,
+})
+
+buf_set_keymap(0, "n", "<2-LeftMouse>", "", {
+  callback = function()
+    return call_function("fern#smart#leaf", { "", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)" })
+  end,
+  nowait = true,
+  expr = true,
+  replace_keycodes = true,
+})
+
+buf_set_keymap(0, "n", "<C-v>", "", {
+  callback = function()
+    return call_function(
+      "fern#smart#drawer",
+      { "<Plug>(fern-action-open:rightest)", "<Plug>(fern-action-open:vsplit)", "<Plug>(fern-action-open:vsplit)" }
+    )
+  end,
+  nowait = true,
+  expr = true,
+  replace_keycodes = true,
+})
