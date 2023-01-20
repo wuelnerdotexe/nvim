@@ -1,6 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   dependencies = {
     {
       "rafamadriz/friendly-snippets",

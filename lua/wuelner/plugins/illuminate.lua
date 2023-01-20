@@ -1,6 +1,6 @@
 return {
   "RRethy/vim-illuminate",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("illuminate").configure({
       delay = 40,

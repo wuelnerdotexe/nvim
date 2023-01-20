@@ -27,13 +27,9 @@ return {
       "treesitter",
       "visual-multi",
     })
-  end,
-  config = function()
-    local command = vim.api.nvim_command
-
-    command("colorscheme enfocado")
 
     local create_autocmd = vim.api.nvim_create_autocmd
+    local command = vim.api.nvim_command
 
     create_autocmd("ColorScheme", {
       pattern = "enfocado",
@@ -90,5 +86,8 @@ return {
         })
       end,
     })
+  end,
+  config = function()
+    vim.api.nvim_command("colorscheme enfocado")
   end,
 }

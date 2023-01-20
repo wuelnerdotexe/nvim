@@ -1,6 +1,6 @@
 return {
   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("lsp_lines").setup()
 

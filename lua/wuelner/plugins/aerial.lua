@@ -1,6 +1,6 @@
 return {
   "stevearc/aerial.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     vim.api.nvim_set_option_value("foldmethod", "manual", {})
 

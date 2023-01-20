@@ -1,6 +1,5 @@
 return {
   "folke/noice.nvim",
-  enabled = false,
   event = "UIEnter",
   dependencies = {
     "MunifTanjim/nui.nvim",

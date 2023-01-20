@@ -1,6 +1,6 @@
 return {
   "tpope/vim-sleuth",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   init = function()
     local set_var = vim.api.nvim_set_var
 

@@ -1,9 +1,7 @@
 return {
   "petertriho/nvim-scrollbar",
-  event = "UIEnter",
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
-    vim.api.nvim_set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", {}) .. "I", {})
-
     require("scrollbar").setup({
       show_in_active_only = true,
       throttle_ms = 40,

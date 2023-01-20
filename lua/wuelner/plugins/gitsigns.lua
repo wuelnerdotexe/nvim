@@ -1,6 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     local buf_set_keymap = vim.api.nvim_buf_set_keymap
     local reset_hunk = require("gitsigns").reset_hunk

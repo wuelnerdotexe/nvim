@@ -1,6 +1,6 @@
 return {
   "gen740/SmoothCursor.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("smoothcursor").setup({
       cursor = nil,

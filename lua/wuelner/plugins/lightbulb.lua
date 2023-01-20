@@ -1,6 +1,6 @@
 return {
   "kosayoda/nvim-lightbulb",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("nvim-lightbulb").setup({ sign = { priority = 8 }, autocmd = { enabled = true } })
 

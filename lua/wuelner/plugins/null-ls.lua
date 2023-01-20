@@ -1,6 +1,6 @@
 return {
   "jose-elias-alvarez/null-ls.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = "BufReadPre",
   dependencies = {
     "nvim-lua/plenary.nvim",
     {

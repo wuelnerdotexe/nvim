@@ -1,6 +1,6 @@
 return {
   "andweeb/presence.nvim",
-  event = { "BufNewFile", "BufReadPre" },
+  event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("presence"):setup({
       neovim_image_text = "El editor de código más cool del mundo mundial",
