@@ -9,6 +9,5 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
-    "saadparwaiz1/cmp_luasnip",
   },
 }

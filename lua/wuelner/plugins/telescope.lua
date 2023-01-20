@@ -90,8 +90,7 @@ return {
 
     local load_extension = require("telescope").load_extension
 
-    load_extension("fzf")
-    load_extension("projections")
+    load_extension("fzf"); load_extension("projections")
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
