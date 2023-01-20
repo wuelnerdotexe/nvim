@@ -12,7 +12,7 @@ local rtp = vim.api.nvim_get_option_value("rtp", {})
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, {})
 
 require("lazy").setup("wuelner.plugins", {
-  defaults = { version = false },
+  defaults = { lazy= true, version = false },
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" } },
   install = { colorscheme = { "enfocado" } },
   ui = { border = "rounded", browser = "chrome", throttle = 40, custom_keys = { ["<localleader>l"] = false } },

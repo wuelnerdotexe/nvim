@@ -1,5 +1,6 @@
 return {
   "wuelnerdotexe/human.vim",
+  lazy = false,
   init = function()
     local set_var = vim.api.nvim_set_var
 

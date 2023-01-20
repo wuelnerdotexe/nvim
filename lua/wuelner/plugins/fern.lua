@@ -1,5 +1,6 @@
 return {
   "lambdalisue/fern.vim",
+  lazy = false,
   dependencies = {
     "lambdalisue/fern-hijack.vim",
     {
