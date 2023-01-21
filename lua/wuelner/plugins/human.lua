@@ -21,14 +21,16 @@ return {
   end,
   config = function()
     local set_option_value = vim.api.nvim_set_option_value
+    local get_option_value = vim.api.nvim_get_option_value
     local option_opts = {}
 
+    set_option_value("shortmess", get_option_value("shortmess", option_opts) .. "I", option_opts)
     set_option_value("spell", false, option_opts)
     set_option_value("wrap", false, option_opts)
     set_option_value("relativenumber", false, option_opts)
     set_option_value("number", true, option_opts)
 
-    local fillchars = vim.api.nvim_get_option_value("fillchars", option_opts)
+    local fillchars = get_option_value("fillchars", option_opts)
 
     set_option_value("fillchars", fillchars == "" and "eob: " or fillchars .. ",eob: ", option_opts)
 

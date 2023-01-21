@@ -1,5 +1,7 @@
 return {
   "folke/noice.nvim",
+  enabled = vim.version().minor >= 9,
+  cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
   event = "UIEnter",
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -14,7 +16,6 @@ return {
     local set_option_value = vim.api.nvim_set_option_value
     local option_opts = {}
 
-    set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", option_opts) .. "I", option_opts)
     set_option_value("cmdheight", 0, option_opts)
     set_option_value("showcmd", false, option_opts)
     set_option_value("showmode", false, option_opts)
