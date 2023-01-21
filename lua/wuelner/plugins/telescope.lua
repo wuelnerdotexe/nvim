@@ -8,6 +8,18 @@ return {
       end,
     },
     {
+      "<leader>cf",
+      function()
+        require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })
+      end,
+    },
+    {
+      "<leader>df",
+      function()
+        require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" })
+      end,
+    },
+    {
       "<leader>of",
       function()
         require("telescope.builtin").oldfiles()
