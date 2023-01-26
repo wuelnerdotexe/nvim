@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.animate",
-  event = "UIEnter",
+  event = "VeryLazy",
   config = function()
     local timing_linear = require("mini.animate").gen_timing.linear({ duration = 40, unit = "total" })
     local config_timing = { timing = timing_linear }

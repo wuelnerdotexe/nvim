@@ -8,11 +8,10 @@ set_option_value("number", false, { buf = 0 })
 set_option_value("relativenumber", false, { buf = 0 })
 
 local buf_set_keymap = vim.api.nvim_buf_set_keymap
-local command = vim.api.nvim_command
 
 buf_set_keymap(0, "n", "q", "", {
   callback = function()
-    command("q")
+    vim.api.nvim_command("quite")
   end,
   nowait = true,
 })

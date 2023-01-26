@@ -24,12 +24,7 @@ M.aerial_breadcrumbs = function()
 end
 
 M.lsp_format = function(bufnr)
-  vim.lsp.buf.format({
-    bufnr = bufnr,
-    filter = function(client)
-      return client.name == "null-ls"
-    end,
-  })
+  vim.lsp.buf.format({ bufnr = bufnr })
 end
 
 M.lsp_on_attach = function(client, bufnr)
@@ -123,28 +118,24 @@ M.lsp_on_attach = function(client, bufnr)
     })
   end
 
-  local null_ls = client.name == "null-ls" and true or false
-  local lsp_format = function()
-    require("wuelner.utils").lsp_format(bufnr)
-  end
+  local lsp_format = require("wuelner.utils").lsp_format
 
-  if null_ls and supports_method("textDocument/formatting") then
+  if supports_method("textDocument/formatting") then
     client.server_capabilities.documentFormattingProvider = true
-
-    vim.api.nvim_buf_create_user_command(bufnr, "PrettierFormatAll", function()
-      lsp_format()
-    end, {})
-  elseif null_ls and supports_method("textDocument/rangeFormatting") then
-    client.server_capabilities.documentRangeFormattingProvider = true
-
-    buf_set_keymap(bufnr, "x", "<leader>f", "", {
+    buf_set_keymap(bufnr, "n", "<leader>cf", "", {
       callback = function()
-        lsp_format()
+        lsp_format(bufnr)
       end,
     })
-  else
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
+  end
+
+  if null_ls and supports_method("textDocument/rangeFormatting") then
+    client.server_capabilities.documentRangeFormattingProvider = true
+    buf_set_keymap(bufnr, "x", "<leader>cf", "", {
+      callback = function()
+        lsp_format(bufnr)
+      end,
+    })
   end
 end
 
