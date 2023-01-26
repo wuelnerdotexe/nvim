@@ -61,6 +61,7 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    local string_format = string.format
     local codicons = {
       Text = "",
       Method = "",
@@ -146,6 +147,25 @@ return {
         fields = { "abbr", "kind" },
         format = function(entry, vim_item)
           local kind = vim_item.kind
+          local documentation = entry.completion_item.documentation
+
+          if kind == "Color" and documentation then
+            local _, _, r, g, b = string.find(documentation, "^rgb%((%d+), (%d+), (%d+)")
+
+            if r and g and b then
+              local color = string_format("%02x", r) .. string_format("%02x", g) .. string_format("%02x", b)
+              local group = "Tw_" .. color
+
+              if vim.api.nvim_call_function("hlID", { group }) < 1 then
+                vim.api.nvim_command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
+              end
+
+              vim_item.kind = "󱏿 Color"
+              vim_item.kind_hl_group = group
+
+              return vim_item
+            end
+          end
 
           vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine" or codicons[kind] .. " " .. kind
 
