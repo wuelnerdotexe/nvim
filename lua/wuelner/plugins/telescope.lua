@@ -9,7 +9,7 @@ return {
       end,
     },
     {
-      "<leader>cf",
+      "<leader>sf",
       function()
         require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })
       end,
