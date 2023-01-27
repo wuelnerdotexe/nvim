@@ -11,7 +11,7 @@ local buf_set_keymap = vim.api.nvim_buf_set_keymap
 
 buf_set_keymap(0, "n", "q", "", {
   callback = function()
-    vim.api.nvim_command("quite")
+    vim.api.nvim_command("quit")
   end,
   nowait = true,
 })

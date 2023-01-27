@@ -8,6 +8,7 @@ return {
     setmetatable(results, { __mode = "kv" })
 
     require("nvim-treesitter.configs").setup({
+      context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" },
       sync_install = true,
       auto_install = true,
@@ -30,6 +31,7 @@ return {
         end,
         additional_vim_regex_highlighting = false,
       },
+      indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -39,9 +41,7 @@ return {
           node_decremental = "grm",
         },
       },
-      indent = { enable = true },
       rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
-      context_commentstring = { enable = true, enable_autocmd = false },
       autotag = { enable = true },
       matchup = { enable = true, include_match_words = true },
     })

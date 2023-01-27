@@ -45,6 +45,7 @@ return {
 
     vim.api.nvim_set_option_value("complete", nil, tbl)
 
+    local setup = require("cmp").setup
     local call_function = vim.api.nvim_call_function
     local mapping = require("cmp").mapping
     local scroll_docs = mapping.scroll_docs
@@ -89,7 +90,7 @@ return {
       TypeParameter = "",
     }
 
-    require("cmp").setup({
+    setup({
       enabled = function()
         return (vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer())
           and call_function("reg_recording", tbl) == ""
@@ -215,7 +216,7 @@ return {
       },
     })
 
-    require("cmp").setup.filetype({
+    setup.filetype({
       "aerial",
       "checkhealth",
       "dapui_breakpoints",
