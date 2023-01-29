@@ -37,6 +37,8 @@ return {
     end,
   },
   config = function()
+    vim.api.nvim_set_option_value("termguicolors", true, {})
+
     require("bufferline").setup({
       options = {
         max_name_length = 14,

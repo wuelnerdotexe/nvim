@@ -8,7 +8,9 @@ return {
     {
       "rcarriga/nvim-notify",
       config = function()
-        require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 300 })
+        vim.api.nvim_set_option_value("termguicolors", true, {})
+
+        require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 600 })
       end,
     },
   },
@@ -60,7 +62,15 @@ return {
       },
       presets = { command_palette = true, long_message_to_split = true, lsp_doc_border = true },
       throttle = 40,
-      views = { split = { size = "25%" }, win_options = { wrap = false }, hover = hover_opts },
+      views = {
+        popupmenu = { win_options = { winhighlight = { Normal = "NormalFloat" } } },
+        split = {
+          size = "25%",
+          win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
+        },
+        cmdline_popup = { win_options = { wrap = true, linebreak = true } },
+        hover = hover_opts,
+      },
     })
 
     local set_keymap = vim.api.nvim_set_keymap

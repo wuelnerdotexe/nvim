@@ -2,6 +2,8 @@ return {
   "NvChad/nvim-colorizer.lua",
   event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
+    vim.api.nvim_set_option_value("termguicolors", true, {})
+
     require("colorizer").setup({
       user_default_options = {
         names = false,

@@ -1,5 +1,6 @@
 return {
   "gnikdroy/projections.nvim",
+  lazy = false,
   config = function()
     require("projections").setup({
       workspaces = { { "~/Workspace", {} } },

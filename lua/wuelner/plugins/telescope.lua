@@ -63,9 +63,7 @@ return {
       },
       defaults = {
         sorting_strategy = "ascending",
-        layout_config = {
-          prompt_position = "top",
-        },
+        layout_config = { prompt_position = "top" },
         prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = " ",

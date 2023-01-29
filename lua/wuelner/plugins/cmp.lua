@@ -41,9 +41,11 @@ return {
     { "jackieaskins/cmp-emmet", build = "npm run release" },
   },
   config = function()
+    local set_option_value = vim.api.nvim_set_option_value
     local tbl = {}
 
-    vim.api.nvim_set_option_value("complete", nil, tbl)
+    set_option_value("complete", nil, tbl)
+    set_option_value("completeopt", "menuone,noselect", tbl)
 
     local setup = require("cmp").setup
     local call_function = vim.api.nvim_call_function

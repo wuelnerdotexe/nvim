@@ -14,6 +14,7 @@ return {
         max_width = layout_width,
         width = layout_width,
         min_width = layout_width,
+        win_opts = { signcolumn = "yes:1", cursorline = true },
         default_direction = "right",
         placement = "edge",
       },

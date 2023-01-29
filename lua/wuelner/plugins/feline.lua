@@ -2,9 +2,11 @@ return {
   "feline-nvim/feline.nvim",
   event = "UIEnter",
   config = function()
+    local set_option_value = vim.api.nvim_set_option_value
     local tbl = {}
 
-    vim.api.nvim_set_option_value("ruler", false, tbl)
+    set_option_value("ruler", false, tbl)
+    set_option_value("termguicolors", true, tbl)
 
     local components = { active = {}, inactive = {} }
     local components_active = components.active
