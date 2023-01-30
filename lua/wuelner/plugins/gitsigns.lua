@@ -10,6 +10,7 @@ return {
     local toggle_current_line_blame = require("gitsigns").toggle_current_line_blame
     local toggle_deleted = require("gitsigns").toggle_deleted
     local diffthis = require("gitsigns").diffthis
+    local get_option_value = vim.api.nvim_get_option_value
     local schedule = vim.schedule
     local prev_hunk = require("gitsigns").prev_hunk
     local next_hunk = require("gitsigns").next_hunk
@@ -81,7 +82,7 @@ return {
           end,
         })
 
-        local diff = vim.api.nvim_get_option_value("diff", { win = 0 })
+        local diff = get_option_value("diff", { win = 0 })
 
         buf_set_keymap(bufnr, "n", "[h", "", {
           callback = function()

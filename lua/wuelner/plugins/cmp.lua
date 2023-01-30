@@ -63,6 +63,7 @@ return {
     end
 
     local setup = require("cmp").setup
+    local get_option_value = vim.api.nvim_get_option_value
     local call_function = vim.api.nvim_call_function
     local mapping = require("cmp").mapping
     local scroll_docs = mapping.scroll_docs
@@ -110,7 +111,7 @@ return {
     setup({
       enabled = function()
         return (
-          vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
+          get_option_value("buftype", { buf = 0 }) ~= "prompt"
           or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
         )
           and call_function("reg_recording", tbl) == ""
