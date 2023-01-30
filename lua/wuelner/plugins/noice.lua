@@ -75,8 +75,7 @@ return {
 
     local set_keymap = vim.api.nvim_set_keymap
     local scroll = require("noice.lsp").scroll
-
-    set_keymap("n", "<C-b>", "", {
+    local keymap_callback_scroll_backward = {
       callback = function()
         if not scroll(-1) then
           return "<c-b>"
@@ -84,9 +83,13 @@ return {
       end,
       expr = true,
       replace_keycodes = true,
-    })
+    }
 
-    set_keymap("n", "<C-f>", "", {
+    set_keymap("n", "<C-b>", "", keymap_callback_scroll_backward)
+    set_keymap("i", "<C-b>", "", keymap_callback_scroll_backward)
+    set_keymap("s", "<C-b>", "", keymap_callback_scroll_backward)
+
+    local keymap_callback_scroll_forward = {
       callback = function()
         if not scroll(1) then
           return "<c-f>"
@@ -94,6 +97,10 @@ return {
       end,
       expr = true,
       replace_keycodes = true,
-    })
+    }
+
+    set_keymap("n", "<C-f>", "", keymap_callback_scroll_forward)
+    set_keymap("i", "<C-f>", "", keymap_callback_scroll_forward)
+    set_keymap("s", "<C-f>", "", keymap_callback_scroll_forward)
   end,
 }
