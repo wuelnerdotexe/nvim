@@ -4,7 +4,15 @@ return {
   dependencies = {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
-    "saadparwaiz1/cmp_luasnip",
+    { "jackieaskins/cmp-emmet", build = "npm run release" },
+    {
+      "L3MON4D3/LuaSnip",
+      build = "make install_jsregexp",
+      dependencies = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    },
     {
       "tzachar/cmp-tabnine",
       build = "./install.sh",
@@ -38,7 +46,6 @@ return {
         end)
       end,
     },
-    { "jackieaskins/cmp-emmet", build = "npm run release" },
   },
   config = function()
     local set_option_value = vim.api.nvim_set_option_value
@@ -94,7 +101,10 @@ return {
 
     setup({
       enabled = function()
-        return (vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer())
+        return (
+          vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
+          or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
+        )
           and call_function("reg_recording", tbl) == ""
           and call_function("reg_executing", tbl) == ""
       end,
@@ -238,5 +248,7 @@ return {
       "qf",
       "TelescopePrompt",
     }, { enabled = false })
+
+    require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
   end,
 }

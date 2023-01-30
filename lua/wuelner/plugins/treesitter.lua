@@ -1,6 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  lazy = false,
   dependencies = { "mrjones2014/nvim-ts-rainbow", "windwp/nvim-ts-autotag" },
   config = function()
     local results = {}

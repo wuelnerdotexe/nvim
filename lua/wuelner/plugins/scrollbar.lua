@@ -1,6 +1,6 @@
 return {
   "petertriho/nvim-scrollbar",
-  event = { "BufNewFile", "BufRead", "BufAdd" },
+  event = "VeryLazy",
   config = function()
     require("scrollbar").setup({
       show_in_active_only = true,

@@ -39,7 +39,7 @@ return {
           "dap-repl",
           "dapui_watches",
           "dapui_hover",
-        }, { sources = { { name = "dap", keyword_length = 1 } } })
+        }, { sources = { { name = "dap" } } })
       end,
     },
     {

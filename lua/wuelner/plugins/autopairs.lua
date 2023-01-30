@@ -28,7 +28,5 @@ return {
       map_cr = true,
       fast_wrap = { highlight = "Question", highlight_grey = "Dimmed" },
     })
-
-    require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
   end,
 }
