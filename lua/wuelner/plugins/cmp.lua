@@ -63,8 +63,11 @@ return {
     local select_next_item = require("cmp").select_next_item
     local complete = require("cmp").complete
     local scroll_docs = mapping.scroll_docs
+    local confirm = mapping.confirm
+    local abort = mapping.abort
     local locally_jumpable = require("luasnip").locally_jumpable
     local jump = require("luasnip").jump
+    local lsp_expand = require("luasnip").lsp_expand
     local string_find = string.find
     local string_format = string.format
     local command = vim.api.nvim_command
@@ -127,7 +130,7 @@ return {
         end),
         ["<C-b>"] = scroll_docs(-1),
         ["<C-f>"] = scroll_docs(1),
-        ["<CR>"] = mapping.confirm({ select = false }),
+        ["<CR>"] = confirm({ select = false }),
         ["<S-Tab>"] = mapping(function(fallback)
           if locally_jumpable(-1) then
             jump(-1)
@@ -142,19 +145,19 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<C-e>"] = mapping.abort(),
+        ["<C-e>"] = abort(),
       }),
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+          lsp_expand(args.body)
         end,
       },
       completion = { completeopt = "menuone,noselect" },
       formatting = {
         fields = { "abbr", "kind" },
         format = function(entry, vim_item)
-          local kind = vim_item.kind
           local documentation = entry.completion_item.documentation
+          local kind = vim_item.kind
 
           if kind == "Color" and documentation then
             local _, _, r, g, b = string_find(documentation, "^rgb%((%d+), (%d+), (%d+)")
@@ -244,6 +247,8 @@ return {
       "TelescopePrompt",
     }, { enabled = false })
 
-    require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+    local on_confirm_done = require("nvim-autopairs.completion.cmp").on_confirm_done
+
+    require("cmp").event:on("confirm_done", on_confirm_done())
   end,
 }
