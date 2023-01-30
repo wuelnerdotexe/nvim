@@ -1,3 +1,5 @@
+local get_option_value = vim.api.nvim_get_option_value
+
 return {
   "numToStr/Comment.nvim",
   keys = { { "gc", mode = { "n", "x" } }, { "gc", mode = { "n", "x" } } },
@@ -8,7 +10,7 @@ return {
       opleader = { line = "gc", block = "<Nop>" },
       mappings = { basic = true, extra = true },
       pre_hook = function(ctx)
-        local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+        local filetype = get_option_value("filetype", { buf = 0 })
 
         if filetype == "javascriptreact" or filetype == "typescriptreact" then
           local ctx_ctype = ctx.ctype

@@ -47,6 +47,9 @@ return {
   },
   dependencies = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
   config = function()
+    local fs_stat = vim.loop.fs_stat
+    local buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker
+
     require("telescope").setup({
       pickers = {
         fd = {
@@ -83,12 +86,12 @@ return {
         buffer_previewer_maker = function(filepath, bufnr, opts)
           opts = opts or {}
 
-          vim.loop.fs_stat(filepath, function(_, stat)
+          fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 100000 then
               return
             end
 
-            require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
+            buffer_previewer_maker(filepath, bufnr, opts)
           end)
         end,
         mappings = {
@@ -103,10 +106,12 @@ return {
 
     load_extension("fzf"); load_extension("projections")
 
+    local set_option_value = vim.api.nvim_set_option_value
+
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
       callback = function()
-        vim.api.nvim_set_option_value("wrap", false, { scope = "local" })
+        set_option_value("wrap", false, { scope = "local" })
       end,
     })
   end,

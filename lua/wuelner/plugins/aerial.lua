@@ -84,9 +84,11 @@ return {
       float = { border = "rounded", relative = "editor" },
     })
 
+    local toggle = require("aerial").toggle
+
     vim.api.nvim_set_keymap("n", "<leader>st", "", {
       callback = function()
-        require("aerial").toggle()
+        toggle()
       end,
     })
   end,

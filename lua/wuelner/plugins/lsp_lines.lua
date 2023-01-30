@@ -4,9 +4,11 @@ return {
   config = function()
     require("lsp_lines").setup()
 
+    local toggle = require("lsp_lines").toggle
+
     vim.api.nvim_set_keymap("n", "<leader>lt", "", {
       callback = function()
-        require("lsp_lines").toggle()
+        toggle()
       end,
     })
   end,

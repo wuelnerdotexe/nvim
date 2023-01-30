@@ -8,9 +8,14 @@ return {
     set_option_value("ruler", false, tbl)
     set_option_value("termguicolors", true, tbl)
 
+    local get_option_value = vim.api.nvim_get_option_value
     local components = { active = {}, inactive = {} }
     local components_active = components.active
     local table_insert = table.insert
+    local string_upper = string.upper
+    local diagnostics_exist = require("feline.providers.lsp").diagnostics_exist
+    local get_mode_highlight_name = require("feline.providers.vi_mode").get_mode_highlight_name
+    local get_mode_color = require("feline.providers.vi_mode").get_mode_color
     local call_function = vim.api.nvim_call_function
 
     table_insert(components_active, {})
@@ -51,7 +56,7 @@ return {
 
     components_active[1][5] = {
       enabled = function()
-        return require("feline.providers.lsp").diagnostics_exist()
+        return diagnostics_exist()
       end,
       provider = " ",
       hl = { name = "FelineDiagnosticsSeparator", bg = "base", fg = "bg" },
@@ -66,16 +71,12 @@ return {
 
     components_active[1][7] = {
       enabled = function()
-        return vim.api.nvim_get_option_value("cmdheight", tbl) == 0
+        return get_option_value("cmdheight", tbl) == 0
       end,
       provider = { name = "vi_mode", opts = { padding = "center" } },
       left_sep = " ",
       hl = function()
-        return {
-          name = require("feline.providers.vi_mode").get_mode_highlight_name(),
-          fg = require("feline.providers.vi_mode").get_mode_color(),
-          style = "bold",
-        }
+        return { name = get_mode_highlight_name(), fg = get_mode_color(), style = "bold" }
       end,
       icon = "",
       priority = 1,
@@ -151,7 +152,7 @@ return {
         local ok, sleuth_indicator = pcall(call_function, "SleuthIndicator", tbl)
 
         if ok then
-          return string.upper(sleuth_indicator)
+          return string_upper(sleuth_indicator)
         end
 
         return ""

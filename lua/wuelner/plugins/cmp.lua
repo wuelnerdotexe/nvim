@@ -54,6 +54,14 @@ return {
     set_option_value("complete", nil, tbl)
     set_option_value("completeopt", "menuone,noselect", tbl)
 
+    local win_get_cursor = vim.api.nvim_win_get_cursor
+    local buf_get_lines = vim.api.nvim_buf_get_lines
+    local has_words_before = function()
+      local line, col = unpack(win_get_cursor(0))
+
+      return col ~= 0 and buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
     local setup = require("cmp").setup
     local call_function = vim.api.nvim_call_function
     local mapping = require("cmp").mapping
@@ -64,13 +72,9 @@ return {
     local select_prev_item = require("cmp").select_prev_item
     local mapping_mode = { "i", "s" }
 
-    local has_words_before = function()
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
-
+    local string_find = string.find
     local string_format = string.format
+    local command = vim.api.nvim_command
     local codicons = {
       Text = "",
       Method = "",
@@ -98,6 +102,10 @@ return {
       Operator = "",
       TypeParameter = "",
     }
+
+    local get_current_buf = vim.api.nvim_get_current_buf
+    local buf_get_offset = vim.api.nvim_buf_get_offset
+    local buf_line_count = vim.api.nvim_buf_line_count
 
     setup({
       enabled = function()
@@ -162,14 +170,14 @@ return {
           local documentation = entry.completion_item.documentation
 
           if kind == "Color" and documentation then
-            local _, _, r, g, b = string.find(documentation, "^rgb%((%d+), (%d+), (%d+)")
+            local _, _, r, g, b = string_find(documentation, "^rgb%((%d+), (%d+), (%d+)")
 
             if r and g and b then
               local color = string_format("%02x", r) .. string_format("%02x", g) .. string_format("%02x", b)
               local group = "Tw_" .. color
 
-              if vim.api.nvim_call_function("hlID", { group }) < 1 then
-                vim.api.nvim_command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
+              if call_function("hlID", { group }) < 1 then
+                command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
               end
 
               vim_item.kind = "󱏿 Color"
@@ -205,9 +213,9 @@ return {
           option = {
             indexing_interval = 300,
             get_bufnrs = function()
-              local current_buf = vim.api.nvim_get_current_buf()
+              local current_buf = get_current_buf()
 
-              if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
+              if buf_get_offset(current_buf, buf_line_count(current_buf)) > 1048576 then
                 return tbl
               end
 

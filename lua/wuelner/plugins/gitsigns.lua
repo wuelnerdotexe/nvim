@@ -5,7 +5,14 @@ return {
     local buf_set_keymap = vim.api.nvim_buf_set_keymap
     local reset_hunk = require("gitsigns").reset_hunk
     local stage_hunk = require("gitsigns").stage_hunk
+    local preview_hunk = require("gitsigns").preview_hunk
+    local blame_line = require("gitsigns").blame_line
+    local toggle_current_line_blame = require("gitsigns").toggle_current_line_blame
+    local toggle_deleted = require("gitsigns").toggle_deleted
+    local diffthis = require("gitsigns").diffthis
     local schedule = vim.schedule
+    local prev_hunk = require("gitsigns").prev_hunk
+    local next_hunk = require("gitsigns").next_hunk
 
     require("gitsigns").setup({
       signs = {
@@ -46,31 +53,31 @@ return {
 
         buf_set_keymap(bufnr, "n", "<leader>hp", "", {
           callback = function()
-            require("gitsigns").preview_hunk()
+            preview_hunk()
           end,
         })
 
         buf_set_keymap(bufnr, "n", "<leader>bp", "", {
           callback = function()
-            require("gitsigns").blame_line({ full = true })
+            blame_line({ full = true })
           end,
         })
 
         buf_set_keymap(bufnr, "n", "<leader>bt", "", {
           callback = function()
-            require("gitsigns").toggle_current_line_blame()
+            toggle_current_line_blame()
           end,
         })
 
         buf_set_keymap(bufnr, "n", "<leader>dt", "", {
           callback = function()
-            require("gitsigns").toggle_deleted()
+            toggle_deleted()
           end,
         })
 
         buf_set_keymap(bufnr, "n", "<leader>gd", "", {
           callback = function()
-            require("gitsigns").diffthis("~")
+            diffthis("~")
           end,
         })
 
@@ -83,7 +90,7 @@ return {
             end
 
             schedule(function()
-              require("gitsigns").prev_hunk()
+              prev_hunk()
             end)
 
             return "<Ignore>"
@@ -99,7 +106,7 @@ return {
             end
 
             schedule(function()
-              require("gitsigns").next_hunk()
+              next_hunk()
             end)
 
             return "<Ignore>"

@@ -38,9 +38,11 @@ return {
     set_var("fern#mark_symbol", "")
   end,
   config = function()
+    local command = vim.api.nvim_command
+
     vim.api.nvim_set_keymap("n", "<leader>ft", "", {
       callback = function()
-        vim.api.nvim_command("Fern . -reveal=% -drawer -toggle")
+        command("Fern . -reveal=% -drawer -toggle")
       end,
     })
   end,

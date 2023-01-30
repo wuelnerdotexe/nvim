@@ -3,11 +3,6 @@ return {
   lazy = true,
   cmd = "Mason",
   config = function()
-    require("mason").setup({
-      ui = {
-        border = "rounded",
-        icons = { package_installed = "✓", package_pending = "⟳", package_uninstalled = "-" },
-      },
-    })
+    require("mason").setup({ ui = { border = "rounded" } })
   end,
 }
