@@ -54,25 +54,17 @@ return {
     set_option_value("complete", nil, tbl)
     set_option_value("completeopt", "menuone,noselect", tbl)
 
-    local win_get_cursor = vim.api.nvim_win_get_cursor
-    local buf_get_lines = vim.api.nvim_buf_get_lines
-    local has_words_before = function()
-      local line, col = unpack(win_get_cursor(0))
-
-      return col ~= 0 and buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
-
     local setup = require("cmp").setup
     local get_option_value = vim.api.nvim_get_option_value
     local call_function = vim.api.nvim_call_function
     local mapping = require("cmp").mapping
-    local scroll_docs = mapping.scroll_docs
     local visible = require("cmp").visible
-    local complete = require("cmp").complete
-    local select_next_item = require("cmp").select_next_item
     local select_prev_item = require("cmp").select_prev_item
-    local mapping_mode = { "i", "s" }
-
+    local select_next_item = require("cmp").select_next_item
+    local complete = require("cmp").complete
+    local scroll_docs = mapping.scroll_docs
+    local locally_jumpable = require("luasnip").locally_jumpable
+    local jump = require("luasnip").jump
     local string_find = string.find
     local string_format = string.format
     local command = vim.api.nvim_command
@@ -119,44 +111,38 @@ return {
       end,
       performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
       mapping = mapping.preset.insert({
-        ["<C-b>"] = scroll_docs(-1),
-        ["<C-f>"] = scroll_docs(1),
-        ["<C-e>"] = mapping.abort(),
-        ["<CR>"] = mapping.confirm({ select = false }),
-        ["<S-Tab>"] = mapping(function(fallback)
-          if visible() then
-            select_prev_item()
-          elseif require("luasnip").jumpable(-1) then
-            require("luasnip").jump(-1)
-          else
-            fallback()
-          end
-        end, mapping_mode),
-        ["<Tab>"] = mapping(function(fallback)
-          if visible() then
-            select_next_item()
-          elseif require("luasnip").expand_or_locally_jumpable() then
-            require("luasnip").expand_or_jump()
-          elseif has_words_before() then
-            complete()
-          else
-            fallback()
-          end
-        end, mapping_mode),
         ["<C-p>"] = mapping(function()
           if visible() then
             select_prev_item()
           else
             complete()
           end
-        end, mapping_mode),
+        end),
         ["<C-n>"] = mapping(function()
           if visible() then
             select_next_item()
           else
             complete()
           end
-        end, mapping_mode),
+        end),
+        ["<C-b>"] = scroll_docs(-1),
+        ["<C-f>"] = scroll_docs(1),
+        ["<CR>"] = mapping.confirm({ select = false }),
+        ["<S-Tab>"] = mapping(function(fallback)
+          if locally_jumpable(-1) then
+            jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<Tab>"] = mapping(function(fallback)
+          if locally_jumpable(1) then
+            jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<C-e>"] = mapping.abort(),
       }),
       snippet = {
         expand = function(args)

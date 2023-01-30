@@ -165,15 +165,17 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Autocomplete
 
-| VI Mode |     Keymap      | Description                                                         |
-| :-----: | :-------------: | ------------------------------------------------------------------- |
-| Insert  |  `CTRL` + `p`   | Turn on autocomplete and select the previous item                   |
-| Insert  |  `CTRL` + `n`   | Turn on autocomplete and select the next item                       |
-| Insert  | `SHIFT` + `TAB` | Turn on autocomplete only after a word and select the previous item |
-| Insert  |      `TAB`      | Turn on autocomplete only after a word and select the next item     |
-| Insert  |  `CTRL` + `b`   | Scroll up in the item documentation                                 |
-| Insert  |  `CTRL` + `f`   | Scroll down in the item documentation                               |
-| Insert  |  `CTRL` + `e`   | Abort the autocomplete menu                                         |
+|      VI Mode      |     Keymap      | Description                                       |
+| :---------------: | :-------------: | ------------------------------------------------- |
+|      Insert       |  `CTRL` + `p`   | Turn on autocomplete and select the previous item |
+|      Insert       |  `CTRL` + `n`   | Turn on autocomplete and select the next item     |
+|      Insert       |  `CTRL` + `b`   | Scroll up in the item documentation               |
+|      Insert       |  `CTRL` + `f`   | Scroll down in the item documentation             |
+|      Insert       |  `CTRL` + `f`   | Scroll down in the item documentation             |
+|      Insert       |     `ENTER`     | Select or expand the current item                 |
+| Insert and select | `SHIFT` + `TAB` | Jump to the previous snippet node                 |
+| Insert and select |      `TAB`      | Jump to the next snippet node                     |
+|      Insert       |  `CTRL` + `e`   | Abort the autocomplete menu                       |
 
 ### Commenting
 
