@@ -166,13 +166,11 @@ return {
       truncate_hide = true,
     }
 
-    local components_inactive = components.inactive
+    table.insert(components.inactive, {})
 
-    table.insert(components_inactive, {})
+    components.inactive[1][1] = { provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 }
 
-    components_inactive[1][1] = { provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 }
-
-    components_inactive[1][2] = {
+    components.inactive[1][2] = {
       provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
       left_sep = " ",
       right_sep = " ",
@@ -180,7 +178,7 @@ return {
       truncate_hide = true,
     }
 
-    components_inactive[1][3] = {
+    components.inactive[1][3] = {
       provider = { name = "file_info", opts = { file_readonly_icon = " " } },
       icon = "",
       left_sep = " ",
