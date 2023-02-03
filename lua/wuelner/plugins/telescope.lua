@@ -95,8 +95,14 @@ return {
           end)
         end,
         mappings = {
-          i = { ["<C-s>"] = "select_horizontal", ["<C-x>"] = false, ["<C-e>"] = "close", ["<C-c>"] = false },
-          n = { ["<C-s>"] = "select_horizontal", ["<C-x>"] = false, ["g?"] = "which_key", ["q"] = "close" },
+          i = {
+            ["<C-y>"] = "select_default",
+            ["<C-x>"] = false,
+            ["<C-s>"] = "select_horizontal",
+            ["<C-c>"] = false,
+            ["<C-e>"] = "close",
+          },
+          n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
         },
       },
       extensions = { fzf = { case_mode = "ignore_case" } },
@@ -110,8 +116,11 @@ return {
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
-      callback = function()
-        set_option_value("wrap", false, { scope = "local" })
+      callback = function(ev)
+        local bufnr = ev.buf
+
+        set_option_value("number", true, { buf = bufnr })
+        set_option_value("wrap", true, { buf = bufnr })
       end,
     })
   end,

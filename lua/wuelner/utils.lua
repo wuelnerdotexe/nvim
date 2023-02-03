@@ -129,7 +129,7 @@ M.lsp_on_attach = function(client, bufnr)
     })
   end
 
-  if null_ls and supports_method("textDocument/rangeFormatting") then
+  if supports_method("textDocument/rangeFormatting") then
     client.server_capabilities.documentRangeFormattingProvider = true
     buf_set_keymap(bufnr, "x", "<leader>cf", "", {
       callback = function()

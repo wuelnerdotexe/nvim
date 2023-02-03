@@ -39,7 +39,7 @@ return {
           "dap-repl",
           "dapui_watches",
           "dapui_hover",
-        }, { sources = { { name = "dap" } } })
+        }, { sources = require("cmp").config.sources({ { name = "dap", keyword_lenght = 1 } }) })
       end,
     },
     {

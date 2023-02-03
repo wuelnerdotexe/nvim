@@ -68,7 +68,6 @@ return {
           size = "25%",
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
-        cmdline_popup = { win_options = { wrap = true, linebreak = true } },
         hover = hover_opts,
       },
     })
@@ -78,7 +77,7 @@ return {
     local keymap_callback_scroll_backward = {
       callback = function()
         if not scroll(-1) then
-          return "<c-b>"
+          return "<C-b>"
         end
       end,
       expr = true,
@@ -92,7 +91,7 @@ return {
     local keymap_callback_scroll_forward = {
       callback = function()
         if not scroll(1) then
-          return "<c-f>"
+          return "<C-f>"
         end
       end,
       expr = true,

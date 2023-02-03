@@ -25,7 +25,7 @@ return {
       },
       enable_check_bracket_line = false,
       check_ts = true,
-      map_cr = true,
+      map_cr = false,
       fast_wrap = { highlight = "Question", highlight_grey = "Dimmed" },
     })
   end,

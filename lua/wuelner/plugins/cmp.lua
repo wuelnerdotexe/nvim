@@ -48,11 +48,9 @@ return {
     },
   },
   config = function()
-    local set_option_value = vim.api.nvim_set_option_value
     local tbl = {}
 
-    set_option_value("complete", nil, tbl)
-    set_option_value("completeopt", "menuone,noselect", tbl)
+    vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", tbl)
 
     local setup = require("cmp").setup
     local get_option_value = vim.api.nvim_get_option_value
@@ -152,7 +150,6 @@ return {
           lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = "menuone,noselect" },
       formatting = {
         fields = { "abbr", "kind" },
         format = function(entry, vim_item)
@@ -219,10 +216,7 @@ return {
       experimental = { ghost_text = true },
       window = {
         completion = { scrolloff = 3 },
-        documentation = {
-          border = "rounded",
-          winhighlight = "FloatBorder:FloatBorder",
-        },
+        documentation = { border = "rounded", winhighlight = "FloatBorder:FloatBorder" },
       },
     })
 
