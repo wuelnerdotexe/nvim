@@ -3,17 +3,7 @@ return {
   enabled = vim.version().minor >= 9,
   cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
   event = "UIEnter",
-  dependencies = {
-    "MunifTanjim/nui.nvim",
-    {
-      "rcarriga/nvim-notify",
-      config = function()
-        vim.api.nvim_set_option_value("termguicolors", true, {})
-
-        require("notify").setup({ background_colour = "NormalFloat", fps = 24, render = "minimal", timeout = 600 })
-      end,
-    },
-  },
+  dependencies = "MunifTanjim/nui.nvim",
   config = function()
     local set_option_value = vim.api.nvim_set_option_value
     local option_opts = {}
@@ -25,6 +15,7 @@ return {
     local hover_opts = { border = { style = "rounded" }, position = { row = 2 } }
 
     require("noice").setup({
+      cmdline = { view = "cmdline", format = { search_down = { view = "cmdline" }, search_up = { view = "cmdline" } } },
       popupmenu = {
         kind_icons = {
           Class = "",
@@ -60,7 +51,7 @@ return {
         hover = { view = "hover", opts = hover_opts },
         signature = { view = "hover", auto_open = { throttle = 40 }, opts = hover_opts },
       },
-      presets = { command_palette = true, long_message_to_split = true, lsp_doc_border = true },
+      presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = true },
       throttle = 40,
       views = {
         popupmenu = { win_options = { winhighlight = { Normal = "NormalFloat" } } },
