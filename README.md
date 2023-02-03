@@ -98,6 +98,8 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
 | Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
 | Normal  | `<leader>` + `w` + `f` | Find words in the current directory |
+| Normal  | `<leader>` + `g` + `f` | Find files from git status          |
+| Normal  | `<leader>` + `r` + `f` | Find resume                         |
 | Normal  | `<leader>` + `s` + `t` | Toggle document symbols             |
 | Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
 | Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal              |

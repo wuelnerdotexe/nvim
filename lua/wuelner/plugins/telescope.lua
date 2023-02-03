@@ -21,6 +21,12 @@ return {
       end,
     },
     {
+      "<leader>gf",
+      function()
+        require("telescope.builtin").git_status()
+      end,
+    },
+    {
       "<leader>of",
       function()
         require("telescope.builtin").oldfiles()
@@ -36,6 +42,12 @@ return {
       "<leader>wf",
       function()
         require("telescope.builtin").live_grep()
+      end,
+    },
+    {
+      "<leader>rf",
+      function()
+        require("telescope.builtin").resume()
       end,
     },
     {
