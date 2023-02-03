@@ -173,8 +173,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 |      Insert       |  `CTRL` + `n`   | Turn on autocomplete and select the next item     |
 |      Insert       |  `CTRL` + `b`   | Scroll up in the item documentation               |
 |      Insert       |  `CTRL` + `f`   | Scroll down in the item documentation             |
-|      Insert       |  `CTRL` + `f`   | Scroll down in the item documentation             |
-|      Insert       |     `ENTER`     | Select or expand the current item                 |
+|      Insert       |  `CTRL` + `y`   | Select or expand the current item                 |
 | Insert and select | `SHIFT` + `TAB` | Jump to the previous snippet node                 |
 | Insert and select |      `TAB`      | Jump to the next snippet node                     |
 |      Insert       |  `CTRL` + `e`   | Abort the autocomplete menu                       |

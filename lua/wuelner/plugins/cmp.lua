@@ -4,7 +4,6 @@ return {
   dependencies = {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-cmdline",
     { "jackieaskins/cmp-emmet", build = "npm run release" },
     {
       "L3MON4D3/LuaSnip",
@@ -47,6 +46,57 @@ return {
         end)
       end,
     },
+    {
+      "hrsh7th/cmp-cmdline",
+      config = function()
+        local setup_cmdline = require("cmp").setup.cmdline
+        local preset_cmdline = require("cmp").mapping.preset.cmdline
+        local config_sources = require("cmp").config.sources
+        local visible = require("cmp").visible
+        local select_next_item = require("cmp").select_next_item
+        local complete = require("cmp").complete
+        local mapping_confirm = require("cmp").mapping.confirm
+        local mapping_abort = require("cmp").mapping.abort
+
+        setup_cmdline({ "/", "?" }, {
+          mapping = preset_cmdline({
+            ["<C-z>"] = {
+              c = function()
+                if visible() then
+                  select_next_item()
+                else
+                  complete()
+                end
+              end,
+            },
+            ["<C-e>"] = { c = mapping_abort() },
+            ["<C-y>"] = { c = mapping_confirm({ select = false }) },
+          }),
+          sources = config_sources({ { name = "buffer", keyword_length = 1 } }),
+        })
+
+        setup_cmdline(":", {
+          mapping = preset_cmdline({
+            ["<C-z>"] = {
+              c = function()
+                if visible() then
+                  select_next_item()
+                else
+                  complete()
+                end
+              end,
+            },
+            ["<C-e>"] = { c = mapping_abort() },
+            ["<C-y>"] = { c = mapping_confirm({ select = false }) },
+          }),
+          sources = config_sources({
+            { name = "path", keyword_length = 1 },
+          }, {
+            { name = "cmdline", keyword_length = 1 },
+          }),
+        })
+      end,
+    },
   },
   config = function()
     local tbl = {}
@@ -64,9 +114,6 @@ return {
     local locally_jumpable = require("luasnip").locally_jumpable
     local jump = require("luasnip").jump
     local lsp_expand = require("luasnip").lsp_expand
-    local config_sources = require("cmp").config.sources
-    local confirm = mapping.confirm
-    local abort = mapping.abort
     local string_find = string.find
     local string_format = string.format
     local command = vim.api.nvim_command
@@ -184,7 +231,7 @@ return {
           require("cmp.config.compare").order,
         },
       },
-      sources = config_sources({
+      sources = require("cmp").config.sources({
         { name = "path", keyword_length = 1, priority = 6 },
       }, {
         { name = "emmet", keyword_length = 1, priority = 5 },
@@ -215,45 +262,6 @@ return {
         completion = { scrolloff = 3 },
         documentation = { border = "rounded", winhighlight = "FloatBorder:FloatBorder" },
       },
-    })
-
-    local setup_cmdline = setup.cmdline
-    local preset_cmdline = mapping.preset.cmdline
-
-    setup_cmdline({ "/", "?" }, {
-      mapping = preset_cmdline({
-        ["<C-z>"] = {
-          c = function()
-            if visible() then
-              select_next_item()
-            else
-              complete()
-            end
-          end,
-        },
-        ["<C-e>"] = { c = abort() },
-        ["<C-y>"] = { c = confirm({ select = false }) },
-      }),
-      sources = config_sources({ { name = "buffer", keyword_length = 1 } }),
-    })
-
-    setup_cmdline(":", {
-      mapping = preset_cmdline({
-        ["<C-z>"] = {
-          c = function()
-            if visible() then
-              select_next_item()
-            else
-              complete()
-            end
-          end,
-        },
-        ["<C-e>"] = { c = abort() },
-        ["<C-y>"] = { c = confirm({ select = false }) },
-      }),
-      sources = config_sources({ { name = "path", keyword_length = 1 } }, {
-        { name = "cmdline", keyword_length = 1 },
-      }),
     })
 
     setup.filetype({

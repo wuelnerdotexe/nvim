@@ -1,11 +1,11 @@
-local set_option_value = vim.api.nvim_set_option_value
-local option_opts = {}
-
 return {
   "wuelnerdotexe/vim-enfocado",
   lazy = false,
   priority = 1000,
   init = function()
+    local set_option_value = vim.api.nvim_set_option_value
+    local option_opts = {}
+
     set_option_value("termguicolors", true, option_opts)
     set_option_value("t_Co", 256, option_opts)
     set_option_value("background", "dark", option_opts)
