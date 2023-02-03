@@ -7,7 +7,7 @@ return {
       "jayp0521/mason-null-ls.nvim",
       config = function()
         require("mason-null-ls").setup({
-          ensure_installed = { "jsonlint", "markdownlint", "prettierd" },
+          ensure_installed = { "actionlint", "hadolint", "jsonlint", "markdownlint", "prettierd", "shfmt", "yamllint" },
         })
       end,
     },
@@ -19,8 +19,12 @@ return {
       debounce = 300,
       on_attach = require("wuelner.utils").lsp_on_attach,
       sources = {
-        require("null-ls").builtins.diagnostics.jsonlint,
         require("null-ls").builtins.diagnostics.markdownlint,
+        require("null-ls").builtins.diagnostics.hadolint,
+        require("null-ls").builtins.diagnostics.jsonlint,
+        require("null-ls").builtins.diagnostics.yamllint,
+        require("null-ls").builtins.diagnostics.actionlint,
+        require("null-ls").builtins.formatting.shfmt,
         require("null-ls").builtins.formatting.prettierd.with({
           condition = function(utils)
             local startpath = vim.loop.cwd()
