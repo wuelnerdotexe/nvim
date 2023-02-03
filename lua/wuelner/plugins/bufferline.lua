@@ -1,5 +1,3 @@
-local command = vim.api.nvim_command
-
 return {
   "akinsho/bufferline.nvim",
   event = "UIEnter",
@@ -9,26 +7,26 @@ return {
       {
         "gB",
         function()
-          command("BufferLineCycleWindowlessPrev")
+          vim.api.nvim_command("BufferLineCycleWindowlessPrev")
         end,
       },
       {
         "<S-PageUp>",
         function()
-          command("BufferLineCycleWindowlessPrev")
+          vim.api.nvim_command("BufferLineCycleWindowlessPrev")
         end,
         mode = { "n", "i" },
       },
       {
         "gb",
         function()
-          command("BufferLineCycleWindowlessNext")
+          vim.api.nvim_command("BufferLineCycleWindowlessNext")
         end,
       },
       {
         "<S-PageDown>",
         function()
-          command("BufferLineCycleWindowlessNext")
+          vim.api.nvim_command("BufferLineCycleWindowlessNext")
         end,
       },
     },
@@ -56,17 +54,15 @@ return {
       },
     })
 
-    local set_keymap = vim.api.nvim_set_keymap
-
-    set_keymap("n", "<S-Home>", "", {
+    vim.api.nvim_set_keymap("n", "<S-Home>", "", {
       callback = function()
-        command("BufferLineMovePrev")
+        vim.api.nvim_command("BufferLineMovePrev")
       end,
     })
 
-    set_keymap("n", "<S-End>", "", {
+    vim.api.nvim_set_keymap("n", "<S-End>", "", {
       callback = function()
-        command("BufferLineMoveNext")
+        vim.api.nvim_command("BufferLineMoveNext")
       end,
     })
   end,

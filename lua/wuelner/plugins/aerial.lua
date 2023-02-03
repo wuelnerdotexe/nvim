@@ -6,8 +6,6 @@ return {
 
     local columns = vim.api.nvim_get_option_value("columns", {})
     local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
-    local buf_set_keymap = vim.api.nvim_buf_set_keymap
-    local command = vim.api.nvim_command
 
     require("aerial").setup({
       layout = {
@@ -67,15 +65,15 @@ return {
       link_folds_to_tree = true,
       link_tree_to_folds = true,
       on_attach = function(bufnr)
-        buf_set_keymap(bufnr, "n", "{", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", {
           callback = function()
-            command("AerialPrev")
+            vim.api.nvim_command("AerialPrev")
           end,
         })
 
-        buf_set_keymap(bufnr, "n", "}", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "", {
           callback = function()
-            command("AerialNext")
+            vim.api.nvim_command("AerialNext")
           end,
         })
       end,
@@ -84,11 +82,9 @@ return {
       float = { border = "rounded", relative = "editor" },
     })
 
-    local toggle = require("aerial").toggle
-
     vim.api.nvim_set_keymap("n", "<leader>st", "", {
       callback = function()
-        toggle()
+        require("aerial").toggle()
       end,
     })
   end,

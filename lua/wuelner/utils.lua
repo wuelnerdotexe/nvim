@@ -23,117 +23,107 @@ M.aerial_breadcrumbs = function()
   return breadcrumbs == "" and "" or breadcrumbs
 end
 
-M.lsp_format = function(bufnr)
-  vim.lsp.buf.format({ bufnr = bufnr })
-end
-
 M.lsp_on_attach = function(client, bufnr)
-  local supports_method = client.supports_method
-
-  if supports_method("textDocument/completion") then
+  if client.supports_method("textDocument/completion") then
     vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   end
 
-  local buf_set_keymap = vim.api.nvim_buf_set_keymap
-
-  if supports_method("textDocument/publishDiagnostics") then
-    buf_set_keymap(bufnr, "n", "<leader>dp", "", {
+  if client.supports_method("textDocument/publishDiagnostics") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dp", "", {
       callback = function()
         vim.diagnostic.open_float()
       end,
     })
 
-    buf_set_keymap(bufnr, "n", "<leader>dl", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dl", "", {
       callback = function()
         vim.diagnostic.setloclist()
       end,
     })
 
-    buf_set_keymap(bufnr, "n", "[d", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "", {
       callback = function()
         vim.diagnostic.goto_prev()
       end,
     })
 
-    buf_set_keymap(bufnr, "n", "]d", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "", {
       callback = function()
         vim.diagnostic.goto_next()
       end,
     })
   end
 
-  if supports_method("textDocument/hover") then
-    buf_set_keymap(bufnr, "n", "K", "", {
+  if client.supports_method("textDocument/hover") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "", {
       callback = function()
         vim.lsp.buf.hover()
       end,
     })
   end
 
-  if supports_method("textDocument/signatureHelp") then
-    buf_set_keymap(bufnr, "i", "<C-k>", "", {
+  if client.supports_method("textDocument/signatureHelp") then
+    vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-k>", "", {
       callback = function()
         vim.lsp.buf.signature_help()
       end,
     })
   end
 
-  if supports_method("textDocument/rename") then
-    buf_set_keymap(bufnr, "n", "<leader>sr", "", {
+  if client.supports_method("textDocument/rename") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sr", "", {
       callback = function()
         vim.lsp.buf.rename()
       end,
     })
   end
 
-  if supports_method("textDocument/references") then
-    buf_set_keymap(bufnr, "n", "<leader>rl", "", {
+  if client.supports_method("textDocument/references") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rl", "", {
       callback = function()
         vim.lsp.buf.references()
       end,
     })
   end
 
-  if supports_method("textDocument/definition") then
-    buf_set_keymap(bufnr, "n", "gd", "", {
+  if client.supports_method("textDocument/definition") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "", {
       callback = function()
         vim.lsp.buf.definition()
       end,
     })
   end
 
-  if supports_method("textDocument/implementation") then
-    buf_set_keymap(bufnr, "n", "gi", "", {
+  if client.supports_method("textDocument/implementation") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "", {
       callback = function()
         vim.lsp.buf.implementation()
       end,
     })
   end
 
-  if supports_method("textDocument/codeAction") then
-    buf_set_keymap(bufnr, "n", "<leader>ca", "", {
+  if client.supports_method("textDocument/codeAction") then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "", {
       callback = function()
         vim.lsp.buf.code_action()
       end,
     })
   end
 
-  local lsp_format = require("wuelner.utils").lsp_format
-
-  if supports_method("textDocument/formatting") then
+  if client.supports_method("textDocument/formatting") then
     client.server_capabilities.documentFormattingProvider = true
-    buf_set_keymap(bufnr, "n", "<leader>cf", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cf", "", {
       callback = function()
-        lsp_format(bufnr)
+        vim.lsp.buf.format({ bufnr = bufnr })
       end,
     })
   end
 
-  if supports_method("textDocument/rangeFormatting") then
+  if client.supports_method("textDocument/rangeFormatting") then
     client.server_capabilities.documentRangeFormattingProvider = true
-    buf_set_keymap(bufnr, "x", "<leader>cf", "", {
+    vim.api.nvim_buf_set_keymap(bufnr, "x", "<leader>cf", "", {
       callback = function()
-        lsp_format(bufnr)
+        vim.lsp.buf.format({ bufnr = bufnr })
       end,
     })
   end

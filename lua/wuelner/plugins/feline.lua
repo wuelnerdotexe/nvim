@@ -2,27 +2,18 @@ return {
   "feline-nvim/feline.nvim",
   event = "UIEnter",
   config = function()
-    local set_option_value = vim.api.nvim_set_option_value
     local tbl = {}
 
-    set_option_value("ruler", false, tbl)
-    set_option_value("termguicolors", true, tbl)
+    vim.api.nvim_set_option_value("ruler", false, tbl)
+    vim.api.nvim_set_option_value("termguicolors", true, tbl)
 
-    local get_option_value = vim.api.nvim_get_option_value
     local components = { active = {}, inactive = {} }
-    local components_active = components.active
-    local table_insert = table.insert
-    local string_upper = string.upper
-    local diagnostics_exist = require("feline.providers.lsp").diagnostics_exist
-    local get_mode_highlight_name = require("feline.providers.vi_mode").get_mode_highlight_name
-    local get_mode_color = require("feline.providers.vi_mode").get_mode_color
-    local call_function = vim.api.nvim_call_function
 
-    table_insert(components_active, {})
-    table_insert(components_active, {})
-    table_insert(components_active, {})
+    table.insert(components.active, {})
+    table.insert(components.active, {})
+    table.insert(components.active, {})
 
-    components_active[1][1] = {
+    components.active[1][1] = {
       provider = "diagnostic_errors",
       icon = " E:",
       hl = { name = "FelineErrors", bg = "base", fg = "red", style = "bold" },
@@ -30,7 +21,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[1][2] = {
+    components.active[1][2] = {
       provider = "diagnostic_warnings",
       icon = " W:",
       hl = { name = "FelineWarns", bg = "base", fg = "orange", style = "bold" },
@@ -38,7 +29,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[1][3] = {
+    components.active[1][3] = {
       provider = "diagnostic_info",
       icon = " I:",
       hl = { name = "FelineInfo", bg = "base", fg = "yellow", style = "bold" },
@@ -46,7 +37,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[1][4] = {
+    components.active[1][4] = {
       provider = "diagnostic_hints",
       icon = " H:",
       hl = { name = "FelineHints", bg = "base", fg = "skyblue", style = "bold" },
@@ -54,35 +45,39 @@ return {
       truncate_hide = true,
     }
 
-    components_active[1][5] = {
+    components.active[1][5] = {
       enabled = function()
-        return diagnostics_exist()
+        return require("feline.providers.lsp").diagnostics_exist()
       end,
       provider = " ",
       hl = { name = "FelineDiagnosticsSeparator", bg = "base", fg = "bg" },
       priority = -5,
     }
 
-    components_active[1][6] = {
+    components.active[1][6] = {
       provider = "▎",
       hl = { name = "FelineIndicator", fg = "accent" },
       priority = 2,
     }
 
-    components_active[1][7] = {
+    components.active[1][7] = {
       enabled = function()
-        return get_option_value("cmdheight", tbl) == 0
+        return vim.api.nvim_get_option_value("cmdheight", tbl) == 0
       end,
       provider = { name = "vi_mode", opts = { padding = "center" } },
       left_sep = " ",
       hl = function()
-        return { name = get_mode_highlight_name(), fg = get_mode_color(), style = "bold" }
+        return {
+          name = require("feline.providers.vi_mode").get_mode_highlight_name(),
+          fg = require("feline.providers.vi_mode").get_mode_color(),
+          style = "bold",
+        }
       end,
       icon = "",
       priority = 1,
     }
 
-    components_active[1][8] = {
+    components.active[1][8] = {
       provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
       left_sep = " ",
       right_sep = " ",
@@ -90,7 +85,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[1][9] = {
+    components.active[1][9] = {
       provider = "%P/%L",
       right_sep = " ",
       hl = { name = "FelineLines" },
@@ -98,7 +93,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[2][1] = {
+    components.active[2][1] = {
       provider = "git_branch",
       icon = " ",
       hl = { name = "FelineBranch", fg = "orange" },
@@ -106,7 +101,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[2][2] = {
+    components.active[2][2] = {
       provider = "git_diff_added",
       icon = "  ",
       hl = { name = "FelineAdded", fg = "darkgreen" },
@@ -114,7 +109,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[2][3] = {
+    components.active[2][3] = {
       provider = "git_diff_removed",
       icon = "  ",
       hl = { name = "FelineRemoved", fg = "darkred" },
@@ -122,7 +117,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[2][4] = {
+    components.active[2][4] = {
       provider = "git_diff_changed",
       icon = "  ",
       right_sep = " ",
@@ -131,7 +126,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[3][1] = {
+    components.active[3][1] = {
       provider = "file_type",
       right_sep = " ",
       hl = { name = "FelineFiletype" },
@@ -139,7 +134,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[3][2] = {
+    components.active[3][2] = {
       provider = "file_encoding",
       right_sep = " ",
       hl = { name = "FelineEncoding" },
@@ -147,15 +142,15 @@ return {
       truncate_hide = true,
     }
 
-    components_active[3][3] = {
+    components.active[3][3] = {
       provider = function()
-        local ok, sleuth_indicator = pcall(call_function, "SleuthIndicator", tbl)
+        local ok, sleuth_indicator = pcall(vim.api.nvim_call_function, "SleuthIndicator", tbl)
 
-        if ok then
-          return string_upper(sleuth_indicator)
+        if not ok then
+          return ""
         end
 
-        return ""
+        return string.upper(sleuth_indicator)
       end,
       right_sep = " ",
       hl = { name = "FelineSleuth" },
@@ -163,7 +158,7 @@ return {
       truncate_hide = true,
     }
 
-    components_active[3][4] = {
+    components.active[3][4] = {
       provider = "file_format",
       right_sep = " ",
       hl = { name = "FelineFormat" },
@@ -173,7 +168,7 @@ return {
 
     local components_inactive = components.inactive
 
-    table_insert(components_inactive, {})
+    table.insert(components_inactive, {})
 
     components_inactive[1][1] = { provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 }
 
@@ -194,7 +189,7 @@ return {
       truncate_hide = true,
     }
 
-    local enfocado_colors = call_function("enfocado#getColorScheme", tbl)
+    local enfocado_colors = vim.api.nvim_call_function("enfocado#getColorScheme", tbl)
 
     require("feline").setup({
       theme = {
@@ -246,15 +241,13 @@ return {
       disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
     })
 
-    local aerial_breadcrumbs = require("wuelner.utils").aerial_breadcrumbs
-
     require("feline").winbar.setup({
       components = {
         active = {
           {
             {
               provider = function()
-                return aerial_breadcrumbs()
+                return require("wuelner.utils").aerial_breadcrumbs()
               end,
               left_sep = " ",
               right_sep = " ",
@@ -266,7 +259,7 @@ return {
           {
             {
               provider = function()
-                return aerial_breadcrumbs()
+                return require("wuelner.utils").aerial_breadcrumbs()
               end,
               left_sep = " ",
               right_sep = " ",

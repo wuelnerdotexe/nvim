@@ -49,47 +49,38 @@ return {
     {
       "hrsh7th/cmp-cmdline",
       config = function()
-        local setup_cmdline = require("cmp").setup.cmdline
-        local preset_cmdline = require("cmp").mapping.preset.cmdline
-        local config_sources = require("cmp").config.sources
-        local visible = require("cmp").visible
-        local select_next_item = require("cmp").select_next_item
-        local complete = require("cmp").complete
-        local mapping_confirm = require("cmp").mapping.confirm
-        local mapping_abort = require("cmp").mapping.abort
-
-        setup_cmdline({ "/", "?" }, {
-          mapping = preset_cmdline({
+        require("cmp").setup.cmdline({ "/", "?" }, {
+          mapping = require("cmp").mapping.preset.cmdline({
             ["<C-z>"] = {
               c = function()
-                if visible() then
-                  select_next_item()
+                if require("cmp").visible() then
+                  require("cmp").select_next_item()
                 else
-                  complete()
+                  require("cmp").complete()
                 end
               end,
             },
-            ["<C-e>"] = { c = mapping_abort() },
-            ["<C-y>"] = { c = mapping_confirm({ select = false }) },
+            ["<C-e>"] = { c = require("cmp").mapping.abort() },
+            ["<C-y>"] = { c = require("cmp").mapping.confirm({ select = false }) },
           }),
-          sources = config_sources({ { name = "buffer", keyword_length = 1 } }),
+          sources = require("cmp").config.sources({ { name = "buffer", keyword_length = 1 } }),
         })
 
-        setup_cmdline(":", {
-          mapping = preset_cmdline({
+        require("cmp").setup.cmdline(":", {
+          mapping = require("cmp").mapping.preset.cmdline({
             ["<C-z>"] = {
               c = function()
-                if visible() then
-                  select_next_item()
+                if require("cmp").visible() then
+                  require("cmp").select_next_item()
                 else
-                  complete()
+                  require("cmp").complete()
                 end
               end,
             },
-            ["<C-e>"] = { c = mapping_abort() },
-            ["<C-y>"] = { c = mapping_confirm({ select = false }) },
+            ["<C-e>"] = { c = require("cmp").mapping.abort() },
+            ["<C-y>"] = { c = require("cmp").mapping.confirm({ select = false }) },
           }),
-          sources = config_sources({
+          sources = require("cmp").config.sources({
             { name = "path", keyword_length = 1 },
           }, {
             { name = "cmdline", keyword_length = 1 },
@@ -103,20 +94,6 @@ return {
 
     vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", tbl)
 
-    local setup = require("cmp").setup
-    local get_option_value = vim.api.nvim_get_option_value
-    local call_function = vim.api.nvim_call_function
-    local mapping = require("cmp").mapping
-    local visible = require("cmp").visible
-    local select_prev_item = require("cmp").select_prev_item
-    local select_next_item = require("cmp").select_next_item
-    local complete = require("cmp").complete
-    local locally_jumpable = require("luasnip").locally_jumpable
-    local jump = require("luasnip").jump
-    local lsp_expand = require("luasnip").lsp_expand
-    local string_find = string.find
-    local string_format = string.format
-    local command = vim.api.nvim_command
     local codicons = {
       Text = "",
       Method = "",
@@ -145,45 +122,41 @@ return {
       TypeParameter = "",
     }
 
-    local get_current_buf = vim.api.nvim_get_current_buf
-    local buf_get_offset = vim.api.nvim_buf_get_offset
-    local buf_line_count = vim.api.nvim_buf_line_count
-
-    setup({
+    require("cmp").setup({
       enabled = function()
         return (
-          get_option_value("buftype", { buf = 0 }) ~= "prompt"
+          vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
           or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
         )
-          and call_function("reg_recording", tbl) == ""
-          and call_function("reg_executing", tbl) == ""
+          and vim.api.nvim_call_function("reg_recording", tbl) == ""
+          and vim.api.nvim_call_function("reg_executing", tbl) == ""
       end,
       performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
-      mapping = mapping.preset.insert({
-        ["<C-p>"] = mapping(function()
-          if visible() then
-            select_prev_item()
+      mapping = require("cmp").mapping.preset.insert({
+        ["<C-p>"] = require("cmp").mapping(function()
+          if require("cmp").visible() then
+            require("cmp").select_prev_item()
           else
-            complete()
+            require("cmp").complete()
           end
         end),
-        ["<C-n>"] = mapping(function()
-          if visible() then
-            select_next_item()
+        ["<C-n>"] = require("cmp").mapping(function()
+          if require("cmp").visible() then
+            require("cmp").select_next_item()
           else
-            complete()
+            require("cmp").complete()
           end
         end),
-        ["<S-Tab>"] = mapping(function(fallback)
-          if locally_jumpable(-1) then
-            jump(-1)
+        ["<S-Tab>"] = require("cmp").mapping(function(fallback)
+          if require("luasnip").locally_jumpable(-1) then
+            require("luasnip").jump(-1)
           else
             fallback()
           end
         end, { "i", "s" }),
-        ["<Tab>"] = mapping(function(fallback)
-          if locally_jumpable(1) then
-            jump(1)
+        ["<Tab>"] = require("cmp").mapping(function(fallback)
+          if require("luasnip").locally_jumpable(1) then
+            require("luasnip").jump(1)
           else
             fallback()
           end
@@ -191,24 +164,21 @@ return {
       }),
       snippet = {
         expand = function(args)
-          lsp_expand(args.body)
+          require("luasnip").lsp_expand(args.body)
         end,
       },
       formatting = {
         fields = { "abbr", "kind" },
         format = function(entry, vim_item)
-          local documentation = entry.completion_item.documentation
-          local kind = vim_item.kind
-
-          if kind == "Color" and documentation then
-            local _, _, r, g, b = string_find(documentation, "^rgb%((%d+), (%d+), (%d+)")
+          if vim_item.kind == "Color" and entry.completion_item.documentation then
+            local _, _, r, g, b = string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
 
             if r and g and b then
-              local color = string_format("%02x", r) .. string_format("%02x", g) .. string_format("%02x", b)
+              local color = string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
               local group = "Tw_" .. color
 
-              if call_function("hlID", { group }) < 1 then
-                command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
+              if vim.api.nvim_call_function("hlID", { group }) < 1 then
+                vim.api.nvim_command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
               end
 
               vim_item.kind = "󱏿 Color"
@@ -218,7 +188,8 @@ return {
             end
           end
 
-          vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine" or codicons[kind] .. " " .. kind
+          vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine"
+            or codicons[vim_item.kind] .. " " .. vim_item.kind
 
           return vim_item
         end,
@@ -244,9 +215,9 @@ return {
           option = {
             indexing_interval = 300,
             get_bufnrs = function()
-              local current_buf = get_current_buf()
+              local current_buf = vim.api.nvim_get_current_buf()
 
-              if buf_get_offset(current_buf, buf_line_count(current_buf)) > 1048576 then
+              if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
                 return tbl
               end
 
@@ -264,7 +235,7 @@ return {
       },
     })
 
-    setup.filetype({
+    require("cmp").setup.filetype({
       "aerial",
       "checkhealth",
       "dapui_breakpoints",
@@ -285,8 +256,6 @@ return {
       "TelescopePrompt",
     }, { enabled = false })
 
-    local on_confirm_done = require("nvim-autopairs.completion.cmp").on_confirm_done
-
-    require("cmp").event:on("confirm_done", on_confirm_done())
+    require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
   end,
 }

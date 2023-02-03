@@ -5,42 +5,17 @@ return {
   event = "UIEnter",
   dependencies = "MunifTanjim/nui.nvim",
   config = function()
-    local set_option_value = vim.api.nvim_set_option_value
     local option_opts = {}
 
-    set_option_value("cmdheight", 0, option_opts)
-    set_option_value("showcmd", false, option_opts)
-    set_option_value("showmode", false, option_opts)
+    vim.api.nvim_set_option_value("cmdheight", 0, option_opts)
+    vim.api.nvim_set_option_value("showcmd", false, option_opts)
+    vim.api.nvim_set_option_value("showmode", false, option_opts)
 
     local hover_opts = { border = { style = "rounded" }, position = { row = 2 } }
 
     require("noice").setup({
       cmdline = { view = "cmdline", format = { search_down = { view = "cmdline" }, search_up = { view = "cmdline" } } },
-      popupmenu = {
-        kind_icons = {
-          Class = "",
-          Color = "",
-          Constant = "",
-          Constructor = "",
-          Enum = "",
-          EnumMember = "",
-          Field = "",
-          File = "",
-          Folder = "",
-          Function = "",
-          Interface = "",
-          Keyword = "",
-          Method = "",
-          Module = "",
-          Property = "",
-          Snippet = "",
-          Struct = "",
-          Text = "",
-          Unit = "",
-          Value = "",
-          Variable = "",
-        },
-      },
+      popupmenu = { enabled = false },
       lsp = {
         progress = { enabled = false, throttle = 40 },
         override = {
@@ -63,11 +38,9 @@ return {
       },
     })
 
-    local set_keymap = vim.api.nvim_set_keymap
-    local scroll = require("noice.lsp").scroll
     local keymap_callback_scroll_backward = {
       callback = function()
-        if not scroll(-1) then
+        if not require("noice.lsp").scroll(-1) then
           return "<C-b>"
         end
       end,
@@ -75,13 +48,13 @@ return {
       replace_keycodes = true,
     }
 
-    set_keymap("n", "<C-b>", "", keymap_callback_scroll_backward)
-    set_keymap("i", "<C-b>", "", keymap_callback_scroll_backward)
-    set_keymap("s", "<C-b>", "", keymap_callback_scroll_backward)
+    vim.api.nvim_set_keymap("n", "<C-b>", "", keymap_callback_scroll_backward)
+    vim.api.nvim_set_keymap("i", "<C-b>", "", keymap_callback_scroll_backward)
+    vim.api.nvim_set_keymap("s", "<C-b>", "", keymap_callback_scroll_backward)
 
     local keymap_callback_scroll_forward = {
       callback = function()
-        if not scroll(1) then
+        if not require("noice.lsp").scroll(1) then
           return "<C-f>"
         end
       end,
@@ -89,8 +62,8 @@ return {
       replace_keycodes = true,
     }
 
-    set_keymap("n", "<C-f>", "", keymap_callback_scroll_forward)
-    set_keymap("i", "<C-f>", "", keymap_callback_scroll_forward)
-    set_keymap("s", "<C-f>", "", keymap_callback_scroll_forward)
+    vim.api.nvim_set_keymap("n", "<C-f>", "", keymap_callback_scroll_forward)
+    vim.api.nvim_set_keymap("i", "<C-f>", "", keymap_callback_scroll_forward)
+    vim.api.nvim_set_keymap("s", "<C-f>", "", keymap_callback_scroll_forward)
   end,
 }

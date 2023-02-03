@@ -50,13 +50,11 @@ return {
     },
   },
   config = function()
-    local get_package = require("mason-registry").get_package
-
     require("dap").adapters.node2 = {
       type = "executable",
       command = "node",
       args = {
-        get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
+        require("mason-registry").get_package("node-debug2-adapter"):get_install_path() .. "/out/src/nodeDebug.js",
       },
     }
 
@@ -64,11 +62,9 @@ return {
       type = "executable",
       command = "node",
       args = {
-        get_package("firefox-debug-adapter"):get_install_path() .. "/dist/adapter.bundle.js",
+        require("mason-registry").get_package("firefox-debug-adapter"):get_install_path() .. "/dist/adapter.bundle.js",
       },
     }
-
-    local cwd = vim.loop.cwd
 
     for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
       require("dap").configurations[language] = {
@@ -77,7 +73,7 @@ return {
           type = "node2",
           request = "launch",
           program = "${file}",
-          cwd = cwd(),
+          cwd = vim.loop.cwd(),
           sourceMaps = true,
           protocol = "inspector",
           console = "integratedTerminal",
@@ -94,109 +90,103 @@ return {
       }
     end
 
-    local call_function = vim.api.nvim_call_function
-
-    call_function(
+    vim.api.nvim_call_function(
       "sign_define",
       { "DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
     )
 
-    call_function(
+    vim.api.nvim_call_function(
       "sign_define",
       { "DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
     )
 
-    call_function(
+    vim.api.nvim_call_function(
       "sign_define",
       { "DapLogPoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
     )
 
-    call_function(
+    vim.api.nvim_call_function(
       "sign_define",
       { "DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" } }
     )
 
-    call_function("sign_define", { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } })
-
-    local set_keymap = vim.api.nvim_set_keymap
-    local step_into = require("dap").step_into
-    local terminate = require("dap").terminate
-    local dapui_close = require("dapui").close
-    local repl_close = require("dap").repl.close
-    local pause = require("dap").pause
-    local step_over = require("dap").step_over
-    local step_out = require("dap").step_out
-    local run_last = require("dap").run_last
-    local dapui_open = require("dapui").open
-    local del_keymap = vim.api.nvim_del_keymap
-    local keymaps_del = function()
-      del_keymap("n", "<F6>")
-      del_keymap("n", "<F10>")
-      del_keymap("n", "<F11>")
-      del_keymap("n", "<F17>") -- S-F5
-      del_keymap("n", "<F23>") -- S-F11
-      del_keymap("n", "<F35>") -- C-F11
-      del_keymap("n", "<F41>") -- S-C-F5
-    end
+    vim.api.nvim_call_function(
+      "sign_define",
+      { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } }
+    )
 
     require("dap").listeners.after.event_initialized["dapui_config"] = function()
-      set_keymap("n", "<F35>", "", {
+      vim.api.nvim_set_keymap("n", "<F35>", "", {
         callback = function()
-          step_into({ ask_for_targets = true })
+          require("dap").step_into({ ask_for_targets = true })
         end,
       })
 
-      set_keymap("n", "<F11>", "", {
+      vim.api.nvim_set_keymap("n", "<F11>", "", {
         callback = function()
-          step_into()
+          require("dap").step_into()
         end,
       })
 
-      set_keymap("n", "<F17>", "", {
+      vim.api.nvim_set_keymap("n", "<F17>", "", {
         callback = function()
-          terminate()
-          dapui_close()
-          repl_close()
+          require("dap").terminate()
+          require("dapui").close()
+          require("dap").repl.close()
         end,
       })
 
-      set_keymap("n", "<F6>", "", {
+      vim.api.nvim_set_keymap("n", "<F6>", "", {
         callback = function()
-          pause()
+          require("dap").pause()
         end,
       })
 
-      set_keymap("n", "<F10>", "", {
+      vim.api.nvim_set_keymap("n", "<F10>", "", {
         callback = function()
-          step_over()
+          require("dap").step_over()
         end,
       })
 
-      set_keymap("n", "<F23>", "", {
+      vim.api.nvim_set_keymap("n", "<F23>", "", {
         callback = function()
-          step_out()
+          require("dap").step_out()
         end,
       })
 
-      set_keymap("n", "<F41>", "", {
+      vim.api.nvim_set_keymap("n", "<F41>", "", {
         callback = function()
-          run_last()
+          require("dap").run_last()
         end,
       })
 
-      dapui_open()
+      require("dapui").open()
     end
 
     require("dap").listeners.before.event_exited["dapui_config"] = function()
-      dapui_close()
-      repl_close()
-      keymaps_del()
+      vim.api.nvim_del_keymap("n", "<F6>")
+      vim.api.nvim_del_keymap("n", "<F10>")
+      vim.api.nvim_del_keymap("n", "<F11>")
+      vim.api.nvim_del_keymap("n", "<F17>") -- S-F5
+      vim.api.nvim_del_keymap("n", "<F23>") -- S-F11
+      vim.api.nvim_del_keymap("n", "<F35>") -- C-F11
+      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
+
+      require("dapui").close()
+      require("dap").repl.close()
     end
 
     require("dap").listeners.before.event_terminated["dapui_config"] = function()
-      dapui_close()
-      repl_close()
-      keymaps_del()
+      vim.api.nvim_del_keymap("n", "<F6>")
+      vim.api.nvim_del_keymap("n", "<F10>")
+      vim.api.nvim_del_keymap("n", "<F11>")
+      vim.api.nvim_del_keymap("n", "<F17>") -- S-F5
+      vim.api.nvim_del_keymap("n", "<F23>") -- S-F11
+      vim.api.nvim_del_keymap("n", "<F35>") -- C-F11
+      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
+
+      require("dapui").close()
+      require("dap").repl.close()
     end
   end,
 }

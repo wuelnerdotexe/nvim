@@ -8,9 +8,6 @@ return {
 
     setmetatable(results, { __mode = "kv" })
 
-    local fs_stat = vim.loop.fs_stat
-    local buf_get_name = vim.api.nvim_buf_get_name
-
     require("nvim-treesitter.configs").setup({
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" },
@@ -24,7 +21,7 @@ return {
           if results_buf then
             return results_buf
           else
-            local stats = fs_stat(buf_get_name(buf))
+            local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
 
             if stats and stats.size > 100000 then
               results[buf] = true
