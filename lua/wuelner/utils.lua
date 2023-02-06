@@ -1,13 +1,11 @@
 local M = {}
 
 M.aerial_breadcrumbs = function()
-  local ok, aerial = pcall(require, "aerial")
-
-  if not ok then
+  if not package.loaded["aerial"] then
     return "No symbols"
   end
 
-  local symbols = aerial.get_location(true)
+  local symbols = require("aerial").get_location(true)
   local depth = nil or #symbols
 
   symbols = depth > 0 and { unpack(symbols, 1, depth) } or { unpack(symbols, #symbols + 1 + depth) }

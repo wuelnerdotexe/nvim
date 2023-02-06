@@ -3,27 +3,15 @@ return {
   cmd = "Telescope",
   keys = {
     {
+      "<leader>pf",
+      function()
+        vim.api.nvim_command("Telescope projections")
+      end,
+    },
+    {
       "<leader>ff",
       function()
         require("telescope.builtin").fd()
-      end,
-    },
-    {
-      "<leader>sf",
-      function()
-        require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })
-      end,
-    },
-    {
-      "<leader>df",
-      function()
-        require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" })
-      end,
-    },
-    {
-      "<leader>gf",
-      function()
-        require("telescope.builtin").git_status()
       end,
     },
     {
@@ -45,15 +33,27 @@ return {
       end,
     },
     {
-      "<leader>rf",
+      "<leader>gf",
       function()
-        require("telescope.builtin").resume()
+        require("telescope.builtin").git_status()
       end,
     },
     {
-      "<leader>pf",
+      "<leader>sf",
       function()
-        vim.api.nvim_command("Telescope projections")
+        require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })
+      end,
+    },
+    {
+      "<leader>df",
+      function()
+        require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" })
+      end,
+    },
+    {
+      "<leader>rf",
+      function()
+        require("telescope.builtin").resume()
       end,
     },
   },

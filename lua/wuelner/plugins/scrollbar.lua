@@ -18,7 +18,6 @@ return {
         "DressingInput",
         "DressingSelect",
         "noice",
-        "notify",
         "TelescopePrompt",
       },
       handlers = { gitsigns = true },

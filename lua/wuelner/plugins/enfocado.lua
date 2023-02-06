@@ -23,7 +23,6 @@ return {
       "lspconfig",
       "matchup",
       "noice",
-      "notify",
       "null-ls",
       "smoothcursor",
       "telescope",
@@ -56,26 +55,16 @@ return {
           option_opts
         )
 
-        local loaded_sidebar_bufs = {}
-
-        setmetatable(loaded_sidebar_bufs, { __mode = "kv" })
-
         vim.api.nvim_create_autocmd("FileType", {
           pattern = "aerial,fern,nerdterm,qf",
           callback = function(ev)
-            if loaded_sidebar_bufs[ev.buf] then
-              return
-            else
-              vim.api.nvim_set_option_value(
-                "winhighlight",
-                vim.api.nvim_get_option_value("filetype", { buf = ev.buf }) == "nerdterm"
-                    and "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB"
-                  or "Normal:NormalSB,NormalNC:NormalSB",
-                { buf = ev.buf }
-              )
-
-              loaded_sidebar_bufs[ev.buf] = true
-            end
+            vim.api.nvim_set_option_value(
+              "winhighlight",
+              vim.api.nvim_get_option_value("filetype", { buf = ev.buf }) == "nerdterm"
+                  and "Normal:NormalSB,NormalNC:NormalSB,Winbar:WinbarSB,WinbarNC:WinbarSB"
+                or "Normal:NormalSB,NormalNC:NormalSB",
+              { buf = ev.buf }
+            )
           end,
         })
       end,

@@ -19,7 +19,6 @@ return {
     vim.api.nvim_set_var("sleuth_mason_heuristics", 0)
     vim.api.nvim_set_var("sleuth_nerdterm_heuristics", 0)
     vim.api.nvim_set_var("sleuth_noice_heuristics", 0)
-    vim.api.nvim_set_var("sleuth_notify_heuristics", 0)
     vim.api.nvim_set_var("sleuth_qf_heuristics", 0)
     vim.api.nvim_set_var("sleuth_TelescopePrompt_heuristics", 0)
   end,

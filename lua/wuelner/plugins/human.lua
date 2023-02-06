@@ -14,7 +14,6 @@ return {
       "DressingInput",
       "DressingSelect",
       "fern",
-      "notify",
     })
   end,
   config = function()

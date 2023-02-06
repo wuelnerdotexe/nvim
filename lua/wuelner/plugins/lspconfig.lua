@@ -48,6 +48,21 @@ return {
       init_options = { provideFormatter = false },
     })
 
+    require("lspconfig").jsonls.setup({
+      on_attach = require("wuelner.utils").lsp_on_attach,
+      flags = flags,
+      capabilities = capabilities,
+      init_options = { provideFormatter = false },
+      settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
+    })
+
+    require("lspconfig").yamlls.setup({
+      on_attach = require("wuelner.utils").lsp_on_attach,
+      flags = flags,
+      capabilities = capabilities,
+      settings = { yaml = { schemas = require("schemastore").json.schemas() } },
+    })
+
     local validate = { validate = false }
 
     require("lspconfig").cssls.setup({
@@ -64,22 +79,5 @@ return {
     require("lspconfig").dockerls.setup(basic_setup)
     require("lspconfig").tsserver.setup(basic_setup)
     require("lspconfig").tailwindcss.setup(basic_setup)
-
-    local json_schemas = require("schemastore").json.schemas
-
-    require("lspconfig").jsonls.setup({
-      on_attach = require("wuelner.utils").lsp_on_attach,
-      flags = flags,
-      capabilities = capabilities,
-      init_options = { provideFormatter = false },
-      settings = { json = { schemas = json_schemas(), validate = { enable = true } } },
-    })
-
-    require("lspconfig").yamlls.setup({
-      on_attach = require("wuelner.utils").lsp_on_attach,
-      flags = flags,
-      capabilities = capabilities,
-      settings = { yaml = { schemas = json_schemas() } },
-    })
   end,
 }

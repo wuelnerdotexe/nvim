@@ -33,7 +33,6 @@ return {
         "mason",
         "nerdterm",
         "noice",
-        "notify",
         "null-ls-info",
         "qf",
         "TelescopePrompt",

@@ -10,31 +10,30 @@ return {
     vim.api.nvim_set_option_value("cmdheight", 0, option_opts)
     vim.api.nvim_set_option_value("showcmd", false, option_opts)
     vim.api.nvim_set_option_value("showmode", false, option_opts)
-
-    local hover_opts = { border = { style = "rounded" }, position = { row = 2 } }
+    vim.api.nvim_set_option_value(
+      "shortmess",
+      vim.api.nvim_get_option_value("shortmess", option_opts) .. "Wc",
+      option_opts
+    )
 
     require("noice").setup({
-      cmdline = { view = "cmdline", format = { search_down = { view = "cmdline" }, search_up = { view = "cmdline" } } },
+      cmdline = { view = "cmdline" },
       popupmenu = { enabled = false },
       lsp = {
-        progress = { enabled = false, throttle = 40 },
+        progress = { enabled = false },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
-        hover = { view = "hover", opts = hover_opts },
-        signature = { view = "hover", auto_open = { throttle = 40 }, opts = hover_opts },
       },
       presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = true },
       throttle = 40,
       views = {
-        popupmenu = { win_options = { winhighlight = { Normal = "NormalFloat" } } },
         split = {
           size = "25%",
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
-        hover = hover_opts,
       },
     })
 

@@ -29,7 +29,6 @@ return {
     vim.api.nvim_set_var("fern#disable_default_mappings", 1)
     vim.api.nvim_set_var("fern#disable_drawer_hover_popup", 1)
     vim.api.nvim_set_var("fern#drawer_width", math.floor((columns / (columns >= 160 and 3 or 2)) / 2))
-    vim.api.nvim_set_var("fern#drawer_hover_popup_delay", 40)
     vim.api.nvim_set_var("fern#mark_symbol", "")
   end,
   config = function()
