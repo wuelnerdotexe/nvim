@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.1.0 - 2023-02-06
+
+### Added
+
+- Treesitter integrations with `gistsigns` and `lsp` keymaps.
+- Better `noice` statusline integration with `feline` is added.
+- Spell suggestions are enabled with `telescope` picker integration.
+
+The following plugins are added to the setup:
+
+- [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects).
+- [vim-argwrap](https://github.com/FooSoft/vim-argwrap).
+- [nvim-surround](https://github.com/kylechui/nvim-surround).
+- [substitute.nvim](https://github.com/gbprod/substitute.nvim).
+- [yanky.nvim](https://github.com/gbprod/yanky.nvim).
+
+### Removed
+
+- Plugin `smartq` is removed for bad integration with Vim macros.
+
 ## 2.0.1 - 2023-02-02
 
 ### Added

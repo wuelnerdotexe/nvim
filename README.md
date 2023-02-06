@@ -127,21 +127,21 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Windows
 
-| VI Mode |       Keymap       | Description                              |
-| :-----: | :----------------: | ---------------------------------------- |
-| Normal  |    `CTRL` + `h`    | Move to the left window                  |
-| Normal  |    `CTRL` + `j`    | Move to the down window                  |
-| Normal  |    `CTRL` + `k`    | Move to the up window                    |
-| Normal  |    `CTRL` + `l`    | Move to the right window                 |
-| Normal  |    `Alt` + `h`     | Resize the window on the left            |
-| Normal  |    `Alt` + `j`     | Resize the window on the down            |
-| Normal  |    `Alt` + `k`     | Resize the window on the up              |
-| Normal  |    `Alt` + `l`     | Resize the window on the right           |
-| Normal  | `CTRL` + `w` + `m` | Toggle maximizer window                  |
-| Normal  | `CTRL` + `w` + `o` | Close all windows except the current one |
-| Normal  | `CTRL` + `w` + `t` | Open the current file in a new tab       |
-| Normal  | `CTRL` + `w` + `s` | Split horizontally the current file      |
-| Normal  | `CTRL` + `w` + `v` | Split vertically the current file        |
+|      VI Mode      |       Keymap       | Description                              |
+| :---------------: | :----------------: | ---------------------------------------- |
+| Normal and visual |    `CTRL` + `h`    | Move to the left window                  |
+| Normal and visual |    `CTRL` + `j`    | Move to the down window                  |
+| Normal and visual |    `CTRL` + `k`    | Move to the up window                    |
+| Normal and visual |    `CTRL` + `l`    | Move to the right window                 |
+| Normal and visual |    `Alt` + `h`     | Resize the window on the left            |
+| Normal and visual |    `Alt` + `j`     | Resize the window on the down            |
+| Normal and visual |    `Alt` + `k`     | Resize the window on the up              |
+| Normal and visual |    `Alt` + `l`     | Resize the window on the right           |
+| Normal and visual | `CTRL` + `w` + `m` | Toggle maximizer window                  |
+| Normal and visual | `CTRL` + `w` + `o` | Close all windows except the current one |
+| Normal and visual | `CTRL` + `w` + `t` | Open the current file in a new tab       |
+| Normal and visual | `CTRL` + `w` + `s` | Split horizontally the current file      |
+| Normal and visual | `CTRL` + `w` + `v` | Split vertically the current file        |
 
 ### Buffers
 
@@ -178,53 +178,68 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Insert and select |      `TAB`      | Jump to the next snippet node                     |
 |      Insert       |  `CTRL` + `e`   | Abort the autocomplete menu                       |
 
+### Selection
+
+|           VI Mode           |    Keymap    | Description                  |
+| :-------------------------: | :----------: | ---------------------------- |
+|           Normal            | `Alt` + `v`  | Init incremental selection   |
+|           Visual            | `CTRL` + `a` | Increment the node selection |
+|           Visual            | `CTRL` + `x` | Decrement the node selection |
+| Visual and operator pending |  `a` + `f`   | Select arround function      |
+| Visual and operator pending |  `i` + `f`   | Select inner function        |
+| Visual and operator pending |  `a` + `c`   | Select arround condition     |
+| Visual and operator pending |  `i` + `c`   | Select inner condition       |
+| Visual and operator pending |  `a` + `l`   | Select arround loop          |
+| Visual and operator pending |  `i` + `l`   | Select inner loop            |
+
 ### Commenting
 
-| VI Mode |     Keymap     | Description               |
-| :-----: | :------------: | ------------------------- |
-| Normal  | `g` + `c`+ `c` | Comment the current line  |
-| Visual  |   `g` + `c`    | Comment current selection |
+|           VI Mode           |     Keymap     | Description               |
+| :-------------------------: | :------------: | ------------------------- |
+|           Normal            | `g` + `c`+ `c` | Comment the current line  |
+| Visual and operator pending |   `g` + `c`    | Comment current selection |
 
 ### Moving Text
 
-| VI Mode |     Keymap      | Description     |
-| :-----: | :-------------: | --------------- |
-| Normal  | `Alt` + `Left`  | Move char left  |
-| Normal  | `Alt` + `Down`  | Move line down  |
-| Normal  |  `Alt` + `Up`   | Move line up    |
-| Normal  | `Alt` + `Right` | Move char right |
+|      VI Mode      |     Keymap      | Description     |
+| :---------------: | :-------------: | --------------- |
+| Normal and visual | `Alt` + `Left`  | Move char left  |
+| Normal and visual | `Alt` + `Down`  | Move line down  |
+| Normal and visual |  `Alt` + `Up`   | Move line up    |
+| Normal and visual | `Alt` + `Right` | Move char right |
 
 ### Git Signs
 
-|      VI Mode      |         Keymap         | Description                    |
-| :---------------: | :--------------------: | ------------------------------ |
-|      Normal       | `<leader>` + `g` + `d` | Split git diffs                |
-|      Normal       | `<leader>` + `d` + `t` | Toggle show deleted lines      |
-|      Normal       | `<leader>` + `b` + `t` | Toggle the current line blame  |
-|      Normal       |       `[` + `h`        | Go to the previous hunk        |
-|      Normal       |       `]` + `h`        | Go to the next hunk            |
-|      Normal       | `<leader>` + `h` + `p` | Preview the current hunk       |
-|      Normal       | `<leader>` + `b` + `p` | Preview the current line blame |
-| Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk         |
-| Normal and Visual | `<leader>` + `h` + `r` | Reset the current hunk         |
+|      VI Mode      |         Keymap         | Description                                                 |
+| :---------------: | :--------------------: | ----------------------------------------------------------- |
+|      Normal       | `<leader>` + `g` + `d` | Split git diffs                                             |
+|      Normal       | `<leader>` + `d` + `t` | Toggle show deleted lines                                   |
+|      Normal       | `<leader>` + `b` + `t` | Toggle the current line blame                               |
+|      Normal       |       `[` + `h`        | Go to the previous hunk (can be repetable with `,` and `;`) |
+|      Normal       |       `]` + `h`        | Go to the next hunk (can be repetable with `,` and `;`)     |
+|      Normal       | `<leader>` + `h` + `p` | Preview the current hunk                                    |
+|      Normal       | `<leader>` + `b` + `p` | Preview the current line blame                              |
+| Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk                                      |
+|      Normal       | `<leader>` + `h` + `r` | Reset the current hunk                                      |
 
-### Diagnostics
+### Language Servers
 
-|      VI Mode      |         Keymap         | Description                       |
-| :---------------: | :--------------------: | --------------------------------- |
-|      Normal       | `<leader>` + `l` + `t` | Toggle lines diagnostics          |
-|      Normal       | `<leader>` + `d` + `p` | Preview of the current diagnostic |
-|      Normal       | `<leader>` + `d` + `l` | Show list of diagnostics          |
-|      Normal       |       `[` + `d`        | Go to previous diagnostic         |
-|      Normal       |       `]` + `d`        | Go to next diagnostic             |
-|      Normal       |          `K`           | Show hover documentation          |
-|      Insert       |      `CTRL` + `k`      | Show signature help               |
-|      Normal       | `<leader>` + `s` + `r` | Rename the current symbol         |
-|      Normal       | `<leader>` + `r` + `l` | Show list of references           |
-|      Normal       |       `g` + `d`        | Go to definition                  |
-|      Normal       |       `g` + `i`        | Go to implementation              |
-|      Normal       | `<leader>` + `c` + `a` | Show current code actions         |
-| Normal and Visual | `<leader>` + `c` + `f` | Format the code                   |
+|      VI Mode      |         Keymap         | Description                                                   |
+| :---------------: | :--------------------: | ------------------------------------------------------------- |
+|      Normal       | `<leader>` + `l` + `t` | Toggle lines diagnostics                                      |
+|      Normal       | `<leader>` + `d` + `p` | Preview of the current diagnostic                             |
+|      Normal       | `<leader>` + `d` + `l` | Show list of diagnostics                                      |
+|      Normal       |       `[` + `d`        | Go to previous diagnostic (can be repetable with `,` and `;`) |
+|      Normal       |       `]` + `d`        | Go to next diagnostic (can be repetable with `,` and `;`)     |
+|      Normal       |          `K`           | Show hover documentation                                      |
+|      Insert       |      `CTRL` + `k`      | Show signature help                                           |
+|      Normal       | `<leader>` + `s` + `r` | Rename the current symbol                                     |
+|      Normal       | `<leader>` + `r` + `l` | Show list of references                                       |
+|      Normal       |       `g` + `d`        | Go to definition                                              |
+|      Normal       |       `g` + `D`        | Peek definition                                               |
+|      Normal       |       `g` + `i`        | Go to implementation                                          |
+|      Normal       | `<leader>` + `c` + `a` | Show current code actions                                     |
+| Normal and Visual | `<leader>` + `c` + `f` | Format the code                                               |
 
 ### Debugging
 
