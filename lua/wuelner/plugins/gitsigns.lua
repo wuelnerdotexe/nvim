@@ -69,21 +69,11 @@ return {
           end,
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "", {
-          callback = function()
-            if vim.api.nvim_get_option_value("diff", { win = 0 }) then
-              return "[h"
-            end
-
-            vim.schedule(function()
-              require("gitsigns").prev_hunk()
-            end)
-
-            return "<Ignore>"
-          end,
-          expr = true,
-          replace_keycodes = true,
-        })
+        local next_hunk_repeatable, prev_hunk_repeatable =
+          require("nvim-treesitter.textobjects.repeatable_move").make_repeatable_move_pair(
+            require("gitsigns").next_hunk,
+            require("gitsigns").prev_hunk
+          )
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", {
           callback = function()
@@ -92,7 +82,23 @@ return {
             end
 
             vim.schedule(function()
-              require("gitsigns").next_hunk()
+              next_hunk_repeatable()
+            end)
+
+            return "<Ignore>"
+          end,
+          expr = true,
+          replace_keycodes = true,
+        })
+
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "", {
+          callback = function()
+            if vim.api.nvim_get_option_value("diff", { win = 0 }) then
+              return "[h"
+            end
+
+            vim.schedule(function()
+              prev_hunk_repeatable()
             end)
 
             return "<Ignore>"
