@@ -39,6 +39,12 @@ return {
       end,
     },
     {
+      "z=",
+      function()
+        require("telescope.builtin").spell_suggest()
+      end,
+    },
+    {
       "<leader>sf",
       function()
         require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })

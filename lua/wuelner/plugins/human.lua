@@ -25,7 +25,6 @@ return {
       option_opts
     )
 
-    vim.api.nvim_set_option_value("spell", false, option_opts)
     vim.api.nvim_set_option_value("wrap", false, option_opts)
     vim.api.nvim_set_option_value("relativenumber", false, option_opts)
     vim.api.nvim_set_option_value("number", true, option_opts)
