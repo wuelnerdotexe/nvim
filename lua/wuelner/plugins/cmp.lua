@@ -132,13 +132,6 @@ return {
       end,
       performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
       mapping = require("cmp").mapping.preset.insert({
-        ["<C-p>"] = require("cmp").mapping(function()
-          if require("cmp").visible() then
-            require("cmp").select_prev_item()
-          else
-            require("cmp").complete()
-          end
-        end),
         ["<C-n>"] = require("cmp").mapping(function()
           if require("cmp").visible() then
             require("cmp").select_next_item()
@@ -146,16 +139,23 @@ return {
             require("cmp").complete()
           end
         end),
-        ["<S-Tab>"] = require("cmp").mapping(function(fallback)
-          if require("luasnip").locally_jumpable(-1) then
-            require("luasnip").jump(-1)
+        ["<C-p>"] = require("cmp").mapping(function()
+          if require("cmp").visible() then
+            require("cmp").select_prev_item()
+          else
+            require("cmp").complete()
+          end
+        end),
+        ["<Tab>"] = require("cmp").mapping(function(fallback)
+          if require("luasnip").locally_jumpable(1) then
+            require("luasnip").jump(1)
           else
             fallback()
           end
         end, { "i", "s" }),
-        ["<Tab>"] = require("cmp").mapping(function(fallback)
-          if require("luasnip").locally_jumpable(1) then
-            require("luasnip").jump(1)
+        ["<S-Tab>"] = require("cmp").mapping(function(fallback)
+          if require("luasnip").locally_jumpable(-1) then
+            require("luasnip").jump(-1)
           else
             fallback()
           end

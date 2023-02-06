@@ -65,15 +65,15 @@ return {
       link_folds_to_tree = true,
       link_tree_to_folds = true,
       on_attach = function(bufnr)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", {
-          callback = function()
-            vim.api.nvim_command("AerialPrev")
-          end,
-        })
-
         vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "", {
           callback = function()
             vim.api.nvim_command("AerialNext")
+          end,
+        })
+
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", {
+          callback = function()
+            vim.api.nvim_command("AerialPrev")
           end,
         })
       end,

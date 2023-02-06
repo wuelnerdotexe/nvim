@@ -5,6 +5,18 @@ return {
     "roobert/bufferline-cycle-windowless.nvim",
     keys = {
       {
+        "gb",
+        function()
+          vim.api.nvim_command("BufferLineCycleWindowlessNext")
+        end,
+      },
+      {
+        "<S-PageDown>",
+        function()
+          vim.api.nvim_command("BufferLineCycleWindowlessNext")
+        end,
+      },
+      {
         "gB",
         function()
           vim.api.nvim_command("BufferLineCycleWindowlessPrev")
@@ -16,18 +28,6 @@ return {
           vim.api.nvim_command("BufferLineCycleWindowlessPrev")
         end,
         mode = { "n", "i" },
-      },
-      {
-        "gb",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessNext")
-        end,
-      },
-      {
-        "<S-PageDown>",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessNext")
-        end,
       },
     },
     config = function()
@@ -54,15 +54,15 @@ return {
       },
     })
 
-    vim.api.nvim_set_keymap("n", "<S-Home>", "", {
-      callback = function()
-        vim.api.nvim_command("BufferLineMovePrev")
-      end,
-    })
-
     vim.api.nvim_set_keymap("n", "<S-End>", "", {
       callback = function()
         vim.api.nvim_command("BufferLineMoveNext")
+      end,
+    })
+
+    vim.api.nvim_set_keymap("n", "<S-Home>", "", {
+      callback = function()
+        vim.api.nvim_command("BufferLineMovePrev")
       end,
     })
   end,
