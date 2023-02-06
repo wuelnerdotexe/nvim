@@ -35,12 +35,7 @@ return {
       indent = { enable = true },
       incremental_selection = {
         enable = true,
-        keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
-        },
+        keymaps = { init_selection = "<A-v>", node_incremental = "<C-a>", node_decremental = "<C-x>" },
       },
       rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
       autotag = { enable = true },
