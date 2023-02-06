@@ -45,13 +45,6 @@ return {
       end,
       mode = "x",
     },
-    {
-      "X",
-      function()
-        require("substitute.exchange").visual()
-      end,
-      mode = "x",
-    },
   },
   config = function()
     require("substitute").setup({ on_substitute = require("yanky.integration").substitute() })

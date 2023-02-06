@@ -6,6 +6,8 @@ return {
     { "y", "<Plug>(YankyYank)", mode = mode },
     { "P", "<Plug>(YankyPutBefore)", mode = mode },
     { "p", "<Plug>(YankyPutAfter)", mode = mode },
+    { "gP", "<Plug>(YankyGPutBefore)", mode = mode },
+    { "gp", "<Plug>(YankyGPutAfter)", mode = mode },
     { "<C-Left>", "<Plug>(YankyCycleBackward)" },
     { "<C-Right>", "<Plug>(YankyCycleForward)" },
   },
