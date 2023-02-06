@@ -47,20 +47,43 @@ return {
 
     components.active[1][5] = {
       enabled = function()
-        return require("feline.providers.lsp").diagnostics_exist()
+        return vim.api.nvim_get_option_value("cmdheight", tbl) == 0
+          and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
       end,
-      provider = " ",
-      hl = { name = "FelineDiagnosticsSeparator", bg = "base", fg = "bg" },
-      priority = -5,
+      provider = function()
+        return tostring(require("noice").api.statusline.mode.get())
+      end,
+      left_sep = { str = " ", hl = { bg = "base" } },
+      hl = function()
+        return {
+          name = require("feline.providers.vi_mode").get_mode_highlight_name(),
+          fg = require("feline.providers.vi_mode").get_mode_color(),
+          bg = "base",
+        }
+      end,
+      priority = 1,
     }
 
     components.active[1][6] = {
+      enabled = function()
+        return require("feline.providers.lsp").diagnostics_exist()
+          or (
+            vim.api.nvim_get_option_value("cmdheight", tbl) == 0
+            and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
+          )
+      end,
+      provider = " ",
+      hl = { name = "FelineSidebar", bg = "base", fg = "bg" },
+      priority = -5,
+    }
+
+    components.active[1][7] = {
       provider = "▎",
       hl = { name = "FelineIndicator", fg = "accent" },
       priority = 2,
     }
 
-    components.active[1][7] = {
+    components.active[1][8] = {
       enabled = function()
         return vim.api.nvim_get_option_value("cmdheight", tbl) == 0
       end,
@@ -77,7 +100,7 @@ return {
       priority = 1,
     }
 
-    components.active[1][8] = {
+    components.active[1][9] = {
       provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
       left_sep = " ",
       right_sep = " ",
@@ -85,7 +108,7 @@ return {
       truncate_hide = true,
     }
 
-    components.active[1][9] = {
+    components.active[1][10] = {
       provider = "%P/%L",
       right_sep = " ",
       hl = { name = "FelineLines" },
