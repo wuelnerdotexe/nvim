@@ -25,6 +25,7 @@ return {
       "noice",
       "null-ls",
       "smoothcursor",
+      "substitute",
       "surround",
       "telescope",
       "treesitter",
