@@ -3,9 +3,10 @@ return {
   event = "BufReadPre",
   dependencies = {
     "b0o/schemastore.nvim",
-    "hrsh7th/cmp-nvim-lsp",
+    { "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
     {
       "williamboman/mason-lspconfig.nvim",
+      dependencies = "williamboman/mason.nvim",
       config = function()
         require("mason-lspconfig").setup({
           ensure_installed = {

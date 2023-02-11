@@ -1,6 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim",
   event = { "BufNewFile", "BufRead", "BufAdd" },
+  dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
   config = function()
     require("gitsigns").setup({
       signs = {

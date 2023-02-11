@@ -46,6 +46,7 @@ return {
       mode = "x",
     },
   },
+  dependencies = "gbprod/yanky.nvim",
   config = function()
     require("substitute").setup({ on_substitute = require("yanky.integration").substitute() })
   end,

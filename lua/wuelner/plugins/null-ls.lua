@@ -5,6 +5,7 @@ return {
     "nvim-lua/plenary.nvim",
     {
       "jayp0521/mason-null-ls.nvim",
+      dependencies = "williamboman/mason.nvim",
       config = function()
         require("mason-null-ls").setup({
           ensure_installed = { "actionlint", "hadolint", "jsonlint", "markdownlint", "prettierd", "shfmt", "yamllint" },

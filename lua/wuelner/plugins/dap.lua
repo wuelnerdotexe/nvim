@@ -34,6 +34,7 @@ return {
     },
     {
       "rcarriga/cmp-dap",
+      dependencies = "hrsh7th/nvim-cmp",
       config = function()
         require("cmp").setup.filetype({
           "dap-repl",
@@ -44,6 +45,7 @@ return {
     },
     {
       "jayp0521/mason-nvim-dap.nvim",
+      dependencies = "williamboman/mason.nvim",
       config = function()
         require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
       end,

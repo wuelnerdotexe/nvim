@@ -68,8 +68,6 @@ return {
           vim.api.nvim_set_keymap("o", "T", "", keymap_callback_builtin_T)
         end,
       },
-      "mrjones2014/nvim-ts-rainbow",
-      "windwp/nvim-ts-autotag",
     },
     config = function()
       local results = {}
@@ -142,9 +140,22 @@ return {
     end,
   },
   {
+    "mrjones2014/nvim-ts-rainbow",
+    event = { "BufNewFile", "BufRead", "BufAdd" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
     "danymat/neogen",
     cmd = "Neogen",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
+    dependencies = "nvim-treesitter/nvim-treesitter",
     config = function()
       require("neogen").setup({ snippet_engine = "luasnip" })
     end,
