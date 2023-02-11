@@ -237,6 +237,24 @@ return {
               end
             end,
           },
+          ["<Tab>"] = {
+            c = function()
+              if require("cmp").visible() then
+                require("cmp").select_next_item()
+              else
+                require("cmp").complete()
+              end
+            end,
+          },
+          ["<S-Tab>"] = {
+            c = function()
+              if require("cmp").visible() then
+                require("cmp").select_prev_item()
+              else
+                require("cmp").complete()
+              end
+            end,
+          },
           ["<C-e>"] = { c = require("cmp").mapping.abort() },
           ["<C-y>"] = { c = require("cmp").mapping.confirm({ select = false }) },
         }),
@@ -249,6 +267,24 @@ return {
             c = function()
               if require("cmp").visible() then
                 require("cmp").select_next_item()
+              else
+                require("cmp").complete()
+              end
+            end,
+          },
+          ["<Tab>"] = {
+            c = function()
+              if require("cmp").visible() then
+                require("cmp").select_next_item()
+              else
+                require("cmp").complete()
+              end
+            end,
+          },
+          ["<S-Tab>"] = {
+            c = function()
+              if require("cmp").visible() then
+                require("cmp").select_prev_item()
               else
                 require("cmp").complete()
               end
