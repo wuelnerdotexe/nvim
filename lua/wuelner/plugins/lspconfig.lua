@@ -35,7 +35,6 @@ return {
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-    require("lspconfig").stylelint_lsp.setup({ on_attach = require("wuelner.utils").lsp_on_attach, flags = flags })
     require("lspconfig").eslint.setup({
       on_attach = require("wuelner.utils").lsp_on_attach,
       flags = flags,
@@ -62,6 +61,37 @@ return {
       flags = flags,
       capabilities = capabilities,
       settings = { yaml = { schemas = require("schemastore").json.schemas() } },
+    })
+
+    require("lspconfig").stylelint_lsp.setup({
+      on_attach = require("wuelner.utils").lsp_on_attach,
+      flags = flags,
+      root_dir = function(fname)
+        local root_file = {
+          ".stylelintrc",
+          ".stylelintrc.cjs",
+          ".stylelintrc.js",
+          ".stylelintrc.json",
+          ".stylelintrc.yaml",
+          ".stylelintrc.yml",
+          "stylelint.config.cjs",
+          "stylelint.config.js",
+        }
+
+        local root_with_package =
+          require("lspconfig.util").find_package_json_ancestor(vim.api.nvim_call_function("expand", { "%:p:h" }))
+
+        if root_with_package then
+          for line in io.lines(root_with_package .. "/package.json") do
+            if line:find("stylelint") then
+              table.insert(root_file, "package.json")
+              break
+            end
+          end
+        end
+
+        return require("lspconfig.util").root_pattern(unpack(root_file))(fname)
+      end,
     })
 
     local validate = { validate = false }
