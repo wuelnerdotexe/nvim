@@ -10,25 +10,15 @@ local rtp = vim.api.nvim_get_option_value("rtp", {})
 
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, {})
 
-require("lazy").setup("wuelnerdotexe", {
+require("lazy").setup({
+  spec = { { import = "wuelnerdotexe.plugin" }, { import = "wuelnerdotexe.plugin.fancy" } },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
   ui = { border = "rounded", browser = "chrome", throttle = 40, custom_keys = { ["<localleader>l"] = false } },
-  checker = { notify = false },
-  change_detection = { enabled = false, notify = false },
   performance = {
     rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
+      disabled_plugins = { "gzip", "matchit", "matchparen", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
     },
   },
 })

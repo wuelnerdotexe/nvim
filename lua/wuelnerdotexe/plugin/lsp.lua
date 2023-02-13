@@ -204,6 +204,7 @@ return {
     event = "BufReadPre",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
       {
         "jayp0521/mason-null-ls.nvim",
         dependencies = "williamboman/mason.nvim",
