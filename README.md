@@ -19,11 +19,12 @@ My personal Neovim setup written in Lua.
   - [Windows](#windows)
   - [Buffers](#buffers)
   - [Tabs](#tabs)
-  - [Autocomplete](#autocomplete)
+  - [Snippets](#snippets)
+  - [Selection](#selection)
   - [Commenting](#commenting)
   - [Moving text](#moving-text)
   - [Git signs](#git-signs)
-  - [Diagnostics](#diagnostics)
+  - [Language servers](#language-servers)
   - [Debugging](#debugging)
 - [Recommendations](#recommendations)
   - [Fonts](#fonts)
@@ -106,24 +107,26 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Folders explorer
 
-| VI Mode |         Keymap          | Description                  |
-| :-----: | :---------------------: | ---------------------------- |
-| Normal  |           `>`           | Enter directory              |
-| Normal  |           `<`           | Leave directory              |
-| Normal  |           `o`           | Open node                    |
-| Normal  | Double left mouse click | Expand or collapse node      |
-| Normal  |         `ENTER`         | Expand or collapse node      |
-| Normal  |      `CTRL` + `t`       | Open in a new tab            |
-| Normal  |      `CTRL` + `s`       | Open in a new split          |
-| Normal  |      `CTRL` + `v`       | Open to the side             |
-| Normal  |           `n`           | New path                     |
-| Normal  |        `n` + `f`        | New file                     |
-| Normal  |        `n` + `d`        | New directory                |
-| Normal  |           `m`           | Move node                    |
-| Normal  |           `c`           | Copy node                    |
-| Normal  |           `d`           | Delete node                  |
-| Normal  |           `q`           | Exit                         |
-| Normal  |         `<F5>`          | Refresh the folders explorer |
+| VI Mode |         Keymap          | Description                                 |
+| :-----: | :---------------------: | ------------------------------------------- |
+| Normal  |           `>`           | Enter directory                             |
+| Normal  |           `<`           | Leave directory                             |
+| Normal  |          `TAB`          | Toggle selection and move to next selection |
+| Normal  |     `SHIFT` + `TAB`     | Toggle selection and move to prev selection |
+| Normal  |           `o`           | Open node                                   |
+| Normal  | Double left mouse click | Expand or collapse node                     |
+| Normal  |         `ENTER`         | Expand or collapse node                     |
+| Normal  |      `CTRL` + `t`       | Open in a new tab                           |
+| Normal  |      `CTRL` + `s`       | Open in a new split                         |
+| Normal  |      `CTRL` + `v`       | Open to the side                            |
+| Normal  |           `n`           | New path                                    |
+| Normal  |        `n` + `f`        | New file                                    |
+| Normal  |        `n` + `d`        | New directory                               |
+| Normal  |           `m`           | Move node                                   |
+| Normal  |           `c`           | Copy node                                   |
+| Normal  |           `d`           | Delete node                                 |
+| Normal  |           `q`           | Exit                                        |
+| Normal  |         `<F5>`          | Refresh the folders explorer                |
 
 ### Windows
 
@@ -165,18 +168,13 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Insert  | `CTRL` + `PAGE DOWN` | Go to the next tab                    |
 | Normal  |      `1` + `t`       | Close all tabs except the current one |
 
-### Autocomplete
+### Snippets
 
-|      VI Mode      |     Keymap      | Description                                       |
-| :---------------: | :-------------: | ------------------------------------------------- |
-|      Insert       |  `CTRL` + `p`   | Turn on autocomplete and select the previous item |
-|      Insert       |  `CTRL` + `n`   | Turn on autocomplete and select the next item     |
-|      Insert       |  `CTRL` + `b`   | Scroll up in the item documentation               |
-|      Insert       |  `CTRL` + `f`   | Scroll down in the item documentation             |
-|      Insert       |  `CTRL` + `y`   | Select or expand the current item                 |
-| Insert and select | `SHIFT` + `TAB` | Jump to the previous snippet node                 |
-| Insert and select |      `TAB`      | Jump to the next snippet node                     |
-|      Insert       |  `CTRL` + `e`   | Abort the autocomplete menu                       |
+|      VI Mode      |     Keymap      | Description                                     |
+| :---------------: | :-------------: | ----------------------------------------------- |
+|      Insert       |      `TAB`      | Expand snippet or jump to the next snippet node |
+| Insert and select | `SHIFT` + `TAB` | Jump to the previous snippet node               |
+|      select       |      `TAB`      | Jump to the next snippet node                   |
 
 ### Selection
 
@@ -199,7 +197,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 |           Normal            | `g` + `c`+ `c` | Comment the current line  |
 | Visual and operator pending |   `g` + `c`    | Comment current selection |
 
-### Moving Text
+### Moving text
 
 |      VI Mode      |     Keymap      | Description     |
 | :---------------: | :-------------: | --------------- |
@@ -208,7 +206,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal and visual |  `Alt` + `Up`   | Move line up    |
 | Normal and visual | `Alt` + `Right` | Move char right |
 
-### Git Signs
+### Git signs
 
 |      VI Mode      |         Keymap         | Description                                                 |
 | :---------------: | :--------------------: | ----------------------------------------------------------- |
@@ -222,7 +220,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk                                      |
 |      Normal       | `<leader>` + `h` + `r` | Reset the current hunk                                      |
 
-### Language Servers
+### Language servers
 
 |      VI Mode      |         Keymap         | Description                                                   |
 | :---------------: | :--------------------: | ------------------------------------------------------------- |
@@ -231,6 +229,8 @@ The keymaps created by this config are very well thought out to be intuitive, me
 |      Normal       | `<leader>` + `d` + `l` | Show list of diagnostics                                      |
 |      Normal       |       `[` + `d`        | Go to previous diagnostic (can be repetable with `,` and `;`) |
 |      Normal       |       `]` + `d`        | Go to next diagnostic (can be repetable with `,` and `;`)     |
+|      Insert       |      `CTRL` + `b`      | Scroll up in the documentation                                |
+|      Insert       |      `CTRL` + `f`      | Scroll down in the documentation                              |
 |      Normal       |          `K`           | Show hover documentation                                      |
 |      Insert       |      `CTRL` + `k`      | Show signature help                                           |
 |      Normal       | `<leader>` + `s` + `r` | Rename the current symbol                                     |

@@ -23,6 +23,8 @@ vim.api.nvim_buf_set_keymap(0, "n", "<F5>", "<Plug>(fern-action-reload)", keymap
 vim.api.nvim_buf_set_keymap(0, "n", "g?", "<Plug>(fern-action-help)", keymap_opts)
 vim.api.nvim_buf_set_keymap(0, "n", "?", "<Plug>(fern-action-help)", keymap_opts)
 vim.api.nvim_buf_set_keymap(0, "n", "n", "<Plug>(fern-action-new-path)", {})
+vim.api.nvim_buf_set_keymap(0, "n", "<Tab>", "<Plug>(fern-action-mark)j", keymap_opts)
+vim.api.nvim_buf_set_keymap(0, "n", "<S-Tab>", "<Plug>(fern-action-mark)k", keymap_opts)
 
 vim.api.nvim_buf_set_keymap(
   0,

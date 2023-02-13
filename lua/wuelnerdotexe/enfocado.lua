@@ -36,18 +36,8 @@ return {
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "enfocado",
       callback = function()
-        vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e")
-        vim.api.nvim_command("highlight NormalSB guibg=#000000 guifg=#b9b9b9")
-        vim.api.nvim_command("highlight WinbarSB guibg=#000000 guifg=#000000")
-        vim.api.nvim_command("highlight! link Whitespace DiagnosticError")
-
-        if
-          vim.api.nvim_call_function("has", { "termguicolors" }) == 1
-          and vim.api.nvim_get_option_value("termguicolors", option_opts) == true
-        then
-          vim.api.nvim_set_option_value("winblend", 10, option_opts)
-          vim.api.nvim_set_option_value("pumblend", 10, option_opts)
-        end
+        vim.api.nvim_set_option_value("winblend", 10, option_opts)
+        vim.api.nvim_set_option_value("pumblend", 10, option_opts)
 
         local fillchars = vim.api.nvim_get_option_value("fillchars", option_opts)
 
@@ -57,6 +47,11 @@ return {
             or fillchars .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
           option_opts
         )
+
+        vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e")
+        vim.api.nvim_command("highlight NormalSB guibg=#000000 guifg=#b9b9b9")
+        vim.api.nvim_command("highlight WinbarSB guibg=#000000 guifg=#000000")
+        vim.api.nvim_command("highlight! link Whitespace DiagnosticError")
 
         vim.api.nvim_create_autocmd("FileType", {
           pattern = "aerial,fern,nerdterm,qf",

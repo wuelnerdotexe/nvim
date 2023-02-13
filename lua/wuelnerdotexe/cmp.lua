@@ -1,33 +1,7 @@
 return {
   {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    keys = {
-      {
-        "<Tab>",
-        function()
-          return require("luasnip").locally_jumpable(1) and "<Plug>luasnip-jump-next" or "<Tab>"
-        end,
-        expr = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<S-Tab>",
-        function()
-          return require("luasnip").locally_jumpable(-1) and "<Plug>luasnip-jump-prev" or "<S-Tab>"
-        end,
-        expr = true,
-        mode = { "i", "s" },
-      },
-    },
-    dependencies = "rafamadriz/friendly-snippets",
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     config = function()
       local tbl = {}
 
@@ -71,22 +45,7 @@ return {
             and vim.api.nvim_call_function("reg_executing", tbl) == ""
         end,
         performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
-        mapping = require("cmp").mapping.preset.insert({
-          ["<C-n>"] = require("cmp").mapping(function()
-            if require("cmp").visible() then
-              require("cmp").select_next_item()
-            else
-              require("cmp").complete()
-            end
-          end),
-          ["<C-p>"] = require("cmp").mapping(function()
-            if require("cmp").visible() then
-              require("cmp").select_prev_item()
-            else
-              require("cmp").complete()
-            end
-          end),
-        }),
+        mapping = require("cmp").mapping.preset.insert(),
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
@@ -183,10 +142,28 @@ return {
       }, { enabled = false })
     end,
   },
-  { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-path", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
-  { "jackieaskins/cmp-emmet", build = "npm run release", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
-  { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" } },
+  { "hrsh7th/cmp-buffer", event = { "InsertEnter", "CmdlineEnter" }, dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdlineEnter" }, dependencies = "hrsh7th/nvim-cmp" },
+  {
+    "hrsh7th/cmp-cmdline",
+    event = "CmdlineEnter",
+    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+    config = function()
+      require("cmp").setup.cmdline({ "/", "?" }, {
+        mapping = require("cmp").mapping.preset.cmdline(),
+        sources = require("cmp").config.sources({ { name = "buffer", keyword_length = 1 } }),
+      })
+
+      require("cmp").setup.cmdline(":", {
+        mapping = require("cmp").mapping.preset.cmdline(),
+        sources = require("cmp").config.sources({
+          { name = "path", keyword_length = 1 },
+        }, {
+          { name = "cmdline", keyword_length = 1 },
+        }),
+      })
+    end,
+  },
   {
     "tzachar/cmp-tabnine",
     build = "./install.sh",
@@ -221,84 +198,6 @@ return {
       end)
     end,
   },
-  {
-    "hrsh7th/cmp-cmdline",
-    event = "CmdlineEnter",
-    dependencies = "hrsh7th/nvim-cmp",
-    config = function()
-      require("cmp").setup.cmdline({ "/", "?" }, {
-        mapping = require("cmp").mapping.preset.cmdline({
-          ["<C-z>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_next_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<Tab>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_next_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<S-Tab>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_prev_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<C-e>"] = { c = require("cmp").mapping.abort() },
-          ["<C-y>"] = { c = require("cmp").mapping.confirm({ select = false }) },
-        }),
-        sources = require("cmp").config.sources({ { name = "buffer", keyword_length = 1 } }),
-      })
-
-      require("cmp").setup.cmdline(":", {
-        mapping = require("cmp").mapping.preset.cmdline({
-          ["<C-z>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_next_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<Tab>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_next_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<S-Tab>"] = {
-            c = function()
-              if require("cmp").visible() then
-                require("cmp").select_prev_item()
-              else
-                require("cmp").complete()
-              end
-            end,
-          },
-          ["<C-e>"] = { c = require("cmp").mapping.abort() },
-          ["<C-y>"] = { c = require("cmp").mapping.confirm({ select = false }) },
-        }),
-        sources = require("cmp").config.sources({
-          { name = "path", keyword_length = 1 },
-        }, {
-          { name = "cmdline", keyword_length = 1 },
-        }),
-      })
-    end,
-  },
+  { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" } },
+  { "jackieaskins/cmp-emmet", build = "npm run release", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
 }

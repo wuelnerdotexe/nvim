@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   config = function()
     require("scrollbar").setup({
-      show_in_active_only = true,
       throttle_ms = 40,
       handle = { highlight = "PmenuSbar" },
       marks = {

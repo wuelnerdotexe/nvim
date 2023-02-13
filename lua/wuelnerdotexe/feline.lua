@@ -257,38 +257,55 @@ return {
         ["VISUAL"] = "accent",
         ["V-REPLACE"] = "accent",
       },
+      custom_providers = {
+        aerial_breadcrumbs = function()
+          if not package.loaded["aerial"] then
+            return "No symbols"
+          end
+
+          local symbols = require("aerial").get_location(true)
+          local depth = nil or #symbols
+
+          symbols = depth > 0 and { unpack(symbols, 1, depth) } or { unpack(symbols, #symbols + 1 + depth) }
+
+          local parts = {}
+
+          for _, symbol in ipairs(symbols) do
+            table.insert(parts, "%#Aerial" .. symbol.kind .. "Icon#" .. symbol.icon .. " %*" .. symbol.name)
+          end
+
+          local breadcrumbs = table.concat(parts, " > ")
+
+          return breadcrumbs == "" and "" or breadcrumbs
+        end,
+      },
       components = components,
       force_inactive = { filetypes = { "^nerdterm$" }, buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
       disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
     })
 
+    local winbar_components = { active = {}, inactive = {} }
+
+    table.insert(winbar_components.active, {})
+
+    winbar_components.active[1][1] = {
+      provider = "aerial_breadcrumbs",
+      left_sep = " ",
+      right_sep = " ",
+      hl = { name = "FelineWinbar", fg = "fg" },
+    }
+
+    table.insert(winbar_components.inactive, {})
+
+    winbar_components.inactive[1][1] = {
+      provider = "aerial_breadcrumbs",
+      left_sep = " ",
+      right_sep = " ",
+      hl = { name = "FelineInactiveWinbar", fg = "gray" },
+    }
+
     require("feline").winbar.setup({
-      components = {
-        active = {
-          {
-            {
-              provider = function()
-                return require("wuelner.utils").aerial_breadcrumbs()
-              end,
-              left_sep = " ",
-              right_sep = " ",
-              hl = { name = "FelineWinbar", fg = "fg" },
-            },
-          },
-        },
-        inactive = {
-          {
-            {
-              provider = function()
-                return require("wuelner.utils").aerial_breadcrumbs()
-              end,
-              left_sep = " ",
-              right_sep = " ",
-              hl = { name = "FelineInactiveWinbar", fg = "gray" },
-            },
-          },
-        },
-      },
+      components = winbar_components,
       disable = { buftypes = { "^help$", "^loclist$", "^nofile$", "^prompt$", "^quickfix$", "^terminal$" } },
     })
   end,

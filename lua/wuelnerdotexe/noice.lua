@@ -31,6 +31,7 @@ return {
       throttle = 40,
       views = {
         split = {
+          enter = true,
           size = "25%",
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
