@@ -78,6 +78,7 @@ return {
             return vim_item
           end,
         },
+        matching = { disallow_partial_fuzzy_matching = false },
         sorting = {
           comparators = {
             require("cmp.config.compare").scopes,
