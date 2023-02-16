@@ -117,6 +117,7 @@ return {
             ensure_installed = {
               "bashls",
               "cssls",
+              "docker_compose_language_service",
               "dockerls",
               "eslint",
               "html",
@@ -196,6 +197,7 @@ return {
 
       require("lspconfig").bashls.setup(basic_setup)
       require("lspconfig").dockerls.setup(basic_setup)
+      require("lspconfig").docker_compose_language_service.setup(basic_setup)
       require("lspconfig").tsserver.setup(basic_setup)
       require("lspconfig").tailwindcss.setup(basic_setup)
     end,
