@@ -44,10 +44,9 @@ The main features and plugins provided by this setup are as follows:
 - 🌳 Advanced syntax recognition with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - 💡 Neovim native language server protocol.
 - 🔗 Multiple cursors with [vim-visual-multi](https://github.com/mg979/vim-visual-multi).
-- 📜 [Friendly snippets](https://github.com/rafamadriz/friendly-snippets) with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
-- 🤖 Autocomplete with Machine Learning by [Tabnine](https://www.tabnine.com/).
+- 📜 [Friendly snippets](https://github.com/rafamadriz/friendly-snippets) with [LuaSnip](https://github.com/L3MON4D3/LuaSnip).
+- 🤖 Autocomplete with [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) powered by [Tabnine](https://www.tabnine.com/) Machine Learning.
 - 👷 Git status of files with [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim).
-- 🚥 Integrations with [EsLint](https://eslint.org/), [StyleLint](https://stylelint.io/), [JSONLint](https://github.com/zaach/jsonlint), [MarkdownLint](https://github.com/DavidAnson/markdownlint), and [Prettier](https://prettier.io/).
 - 🐛 Code debugging with [nvim-dap](https://github.com/mfussenegger/nvim-dap).
 - 👀 Markdown previewer with [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim).
 - 🐱 Useful and smart status bar with [feline.nvim](https://github.com/feline-nvim/feline.nvim).
