@@ -108,6 +108,7 @@ return {
     dependencies = {
       "b0o/schemastore.nvim",
       { "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
+      { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
         "williamboman/mason-lspconfig.nvim",
         dependencies = "williamboman/mason.nvim",
@@ -205,6 +206,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
+      { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
         "jayp0521/mason-null-ls.nvim",
         dependencies = "williamboman/mason.nvim",

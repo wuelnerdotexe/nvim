@@ -42,6 +42,23 @@ return {
     end,
   },
   {
+    "tamton-aquib/duck.nvim",
+    keys = {
+      {
+        "<leader>dh",
+        function()
+          require("duck").hatch()
+        end,
+      },
+      {
+        "<leader>dc",
+        function()
+          require("duck").cook()
+        end,
+      },
+    },
+  },
+  {
     "echasnovski/mini.animate",
     event = "VeryLazy",
     config = function()
@@ -54,17 +71,6 @@ return {
         resize = config_timing,
         open = config_timing,
         close = config_timing,
-      })
-    end,
-  },
-  {
-    "tamton-aquib/flirt.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("flirt").setup({
-        default_move_mappings = false,
-        default_resize_mappings = false,
-        default_mouse_mappings = false,
       })
     end,
   },
