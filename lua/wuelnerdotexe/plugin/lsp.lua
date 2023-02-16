@@ -150,7 +150,7 @@ return {
 
       require("lspconfig.ui.windows").default_options.border = "rounded"
 
-      local flags = { debounce_text_changes = 300 }
+      local flags = { debounce_text_changes = 284 }
       local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
@@ -227,7 +227,7 @@ return {
       require("null-ls").setup({
         border = "rounded",
         update_in_insert = true,
-        debounce = 300,
+        debounce = 284,
         on_attach = on_attach,
         sources = {
           require("null-ls").builtins.diagnostics.markdownlint,

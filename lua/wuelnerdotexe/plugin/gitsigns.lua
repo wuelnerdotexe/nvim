@@ -11,9 +11,9 @@ return {
         topdelete = { hl = "GitSignsDelete", text = "‾" },
         changedelete = { hl = "GitSignsChange", text = "│" },
       },
-      current_line_blame_opts = { delay = 40 },
+      current_line_blame_opts = { delay = 42 },
       sign_priority = 7,
-      update_debounce = 300,
+      update_debounce = 284,
       preview_config = { border = "rounded" },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {

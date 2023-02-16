@@ -44,7 +44,7 @@ return {
             and vim.api.nvim_call_function("reg_recording", tbl) == ""
             and vim.api.nvim_call_function("reg_executing", tbl) == ""
         end,
-        performance = { debounce = 40, throttle = 40, fetching_timeout = 300 },
+        performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),
         snippet = {
           expand = function(args)
@@ -97,7 +97,7 @@ return {
           {
             name = "buffer",
             option = {
-              indexing_interval = 300,
+              indexing_interval = 284,
               get_bufnrs = function()
                 local current_buf = vim.api.nvim_get_current_buf()
 

@@ -3,7 +3,7 @@ return {
   event = { "BufNewFile", "BufRead", "BufAdd" },
   config = function()
     require("illuminate").configure({
-      delay = 40,
+      delay = 42,
       filetypes_denylist = {
         "aerial",
         "checkhealth",

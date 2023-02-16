@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   config = function()
     require("scrollbar").setup({
-      throttle_ms = 40,
+      throttle_ms = 42,
       handle = { highlight = "PmenuSbar" },
       marks = {
         Error = { highlight = "DiagnosticError" },

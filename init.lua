@@ -15,7 +15,7 @@ require("lazy").setup({
   defaults = { lazy = true, version = false },
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
-  ui = { border = "rounded", browser = "chrome", throttle = 40, custom_keys = { ["<localleader>l"] = false } },
+  ui = { border = "rounded", browser = "chrome", throttle = 42, custom_keys = { ["<localleader>l"] = false } },
   performance = {
     rtp = {
       disabled_plugins = { "gzip", "matchit", "matchparen", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin" },

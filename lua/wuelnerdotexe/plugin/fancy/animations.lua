@@ -11,8 +11,8 @@ return {
           head = { cursor = nil, texthl = nil, linehl = nil },
           tail = { cursor = nil, texthl = nil, linehl = nil },
         },
-        speed = 24,
-        intervals = 40,
+        speed = 42,
+        intervals = 67,
         priority = 11,
         threshold = 1,
         disable_float_win = true,
@@ -45,7 +45,7 @@ return {
     "echasnovski/mini.animate",
     event = "VeryLazy",
     config = function()
-      local timing_linear = require("mini.animate").gen_timing.linear({ duration = 40, unit = "total" })
+      local timing_linear = require("mini.animate").gen_timing.linear({ duration = 67, unit = "total" })
       local config_timing = { timing = timing_linear }
 
       require("mini.animate").setup({
