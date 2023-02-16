@@ -1,5 +1,5 @@
 {
-  "Comment.nvim": { "branch": "master", "commit": "418d3117dab2f54c4340ea73e0070dd78fc81753" },
+  "Comment.nvim": { "branch": "master", "commit": "6821b3ae27a57f1f3cf8ed030e4a55d70d0c4e43" },
   "LuaSnip": { "branch": "master", "commit": "58fbfc627a93281a77f7d161d4ff702e639677b1" },
   "SmoothCursor.nvim": { "branch": "main", "commit": "79f02173317a76ab406d182ac89b20b59f5e34fe" },
   "aerial.nvim": { "branch": "master", "commit": "89031be806abded509a7bafd99bd9944eb5108a5" },
@@ -28,8 +28,8 @@
   "lsp_lines.nvim": { "branch": "main", "commit": "ec98b45c8280e5ef8c84028d4f38aa447276c002" },
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "93e58e100f37ef4fb0f897deeed20599dae9d128" },
-  "mason-null-ls.nvim": { "branch": "main", "commit": "9ad7503c32545ee6e8000e52d9ae4a93d49231fb" },
-  "mason-nvim-dap.nvim": { "branch": "main", "commit": "28d87f3e91f9a333cc2726eea4922768a67bfc8e" },
+  "mason-null-ls.nvim": { "branch": "main", "commit": "3a588ae89981ae67ae2704f2f22d5ca6bba52f07" },
+  "mason-nvim-dap.nvim": { "branch": "main", "commit": "d31a7810a1c895f5d3eb0b38cf9ebbe0a3cc7123" },
   "mason.nvim": { "branch": "main", "commit": "fecabaff94c34bf8ed9c3b2a45d42a5906ea251c" },
   "mini.animate": { "branch": "main", "commit": "b0c717ed5513b5f23e7c48615449c7dc9fabd05b" },
   "neogen": { "branch": "main", "commit": "465af9d6c6fb7f360175991dcc23fc10917e3a06" },

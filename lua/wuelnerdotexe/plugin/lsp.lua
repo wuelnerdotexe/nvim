@@ -210,7 +210,7 @@ return {
       "neovim/nvim-lspconfig",
       { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
-        "jayp0521/mason-null-ls.nvim",
+        "jay-babu/mason-null-ls.nvim",
         dependencies = "williamboman/mason.nvim",
         config = function()
           require("mason-null-ls").setup({
