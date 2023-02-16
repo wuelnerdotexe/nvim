@@ -10,6 +10,11 @@ local rtp = vim.api.nvim_get_option_value("rtp", {})
 
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, {})
 
+vim.api.nvim_set_var("loaded_python3_provider", 0)
+vim.api.nvim_set_var("loaded_node_provider", 0)
+vim.api.nvim_set_var("loaded_ruby_provider", 0)
+vim.api.nvim_set_var("loaded_perl_provider", 0)
+
 require("lazy").setup({
   spec = { { import = "wuelnerdotexe.plugin" }, { import = "wuelnerdotexe.plugin.fancy" } },
   defaults = { lazy = true, version = false },
@@ -18,7 +23,20 @@ require("lazy").setup({
   ui = { border = "rounded", browser = "chrome", throttle = 42, custom_keys = { ["<localleader>l"] = false } },
   performance = {
     rtp = {
-      disabled_plugins = { "gzip", "matchit", "matchparen", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
+      disabled_plugins = {
+        "gzip",
+        "nvim",
+        "man",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "rplugin",
+        "spellfile",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
     },
   },
 })
