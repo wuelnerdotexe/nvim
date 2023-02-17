@@ -38,15 +38,11 @@ return {
       link_tree_to_folds = true,
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "", {
-          callback = function()
-            vim.api.nvim_command("AerialNext")
-          end,
+          callback = function() vim.api.nvim_command("AerialNext") end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", {
-          callback = function()
-            vim.api.nvim_command("AerialPrev")
-          end,
+          callback = function() vim.api.nvim_command("AerialPrev") end,
         })
       end,
       show_guides = true,
@@ -54,10 +50,6 @@ return {
       float = { border = require("wuelnerdotexe.utils").interface.border.style, relative = "editor" },
     })
 
-    vim.api.nvim_set_keymap("n", "<leader>st", "", {
-      callback = function()
-        require("aerial").toggle()
-      end,
-    })
+    vim.api.nvim_set_keymap("n", "<leader>st", "", { callback = function() require("aerial").toggle() end })
   end,
 }

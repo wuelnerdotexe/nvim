@@ -48,9 +48,7 @@ return {
         return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0
           and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
       end,
-      provider = function()
-        return tostring(require("noice").api.statusline.mode.get())
-      end,
+      provider = function() return tostring(require("noice").api.statusline.mode.get()) end,
       left_sep = { str = " ", hl = { bg = "base" } },
       hl = function()
         return {
@@ -82,9 +80,7 @@ return {
     }
 
     components.active[1][8] = {
-      enabled = function()
-        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0
-      end,
+      enabled = function() return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0 end,
       provider = { name = "vi_mode", opts = { padding = "center" } },
       left_sep = " ",
       hl = function()
@@ -168,9 +164,7 @@ return {
         local ok, sleuth_indicator =
           pcall(vim.api.nvim_call_function, "SleuthIndicator", require("wuelnerdotexe.utils").empty_table)
 
-        if not ok then
-          return ""
-        end
+        if not ok then return "" end
 
         return string.upper(sleuth_indicator)
       end,
@@ -259,9 +253,7 @@ return {
       },
       custom_providers = {
         aerial_breadcrumbs = function()
-          if not package.loaded["aerial"] then
-            return "No symbols"
-          end
+          if not package.loaded["aerial"] then return "No symbols" end
 
           local symbols = require("aerial").get_location(true)
           local depth = nil or #symbols

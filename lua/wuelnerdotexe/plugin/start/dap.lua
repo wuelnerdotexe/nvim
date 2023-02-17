@@ -1,18 +1,8 @@
 return {
   "mfussenegger/nvim-dap",
   keys = {
-    {
-      "<F9>",
-      function()
-        require("dap").toggle_breakpoint()
-      end,
-    },
-    {
-      "<F5>",
-      function()
-        require("dap").continue()
-      end,
-    },
+    { "<F9>", function() require("dap").toggle_breakpoint() end },
+    { "<F5>", function() require("dap").continue() end },
   },
   dependencies = {
     {
@@ -44,9 +34,7 @@ return {
     {
       "jay-babu/mason-nvim-dap.nvim",
       dependencies = "williamboman/mason.nvim",
-      config = function()
-        require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } })
-      end,
+      config = function() require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } }) end,
     },
   },
   config = function()
@@ -116,47 +104,21 @@ return {
     )
 
     require("dap").listeners.after.event_initialized["dapui_config"] = function()
+      vim.api.nvim_set_keymap("n", "<F41>", "", { callback = function() require("dap").run_last() end })
       vim.api.nvim_set_keymap("n", "<F35>", "", {
-        callback = function()
-          require("dap").step_into({ ask_for_targets = true })
-        end,
+        callback = function() require("dap").step_into({ ask_for_targets = true }) end,
       })
 
-      vim.api.nvim_set_keymap("n", "<F11>", "", {
-        callback = function()
-          require("dap").step_into()
-        end,
-      })
+      vim.api.nvim_set_keymap("n", "<F23>", "", { callback = function() require("dap").step_out() end })
+      vim.api.nvim_set_keymap("n", "<F11>", "", { callback = function() require("dap").step_into() end })
+      vim.api.nvim_set_keymap("n", "<F10>", "", { callback = function() require("dap").step_over() end })
+      vim.api.nvim_set_keymap("n", "<F6>", "", { callback = function() require("dap").pause() end })
 
       vim.api.nvim_set_keymap("n", "<F17>", "", {
         callback = function()
           require("dap").terminate()
           require("dapui").close()
           require("dap").repl.close()
-        end,
-      })
-
-      vim.api.nvim_set_keymap("n", "<F6>", "", {
-        callback = function()
-          require("dap").pause()
-        end,
-      })
-
-      vim.api.nvim_set_keymap("n", "<F10>", "", {
-        callback = function()
-          require("dap").step_over()
-        end,
-      })
-
-      vim.api.nvim_set_keymap("n", "<F23>", "", {
-        callback = function()
-          require("dap").step_out()
-        end,
-      })
-
-      vim.api.nvim_set_keymap("n", "<F41>", "", {
-        callback = function()
-          require("dap").run_last()
         end,
       })
 

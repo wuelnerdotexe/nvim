@@ -75,7 +75,5 @@ return {
       end,
     })
   end,
-  config = function()
-    vim.api.nvim_command("colorscheme enfocado")
-  end,
+  config = function() vim.api.nvim_command("colorscheme enfocado") end,
 }

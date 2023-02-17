@@ -8,9 +8,7 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()
           local keymap_callback_repeat_last_move = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move() end,
           }
 
           vim.api.nvim_set_keymap("n", ";", "", keymap_callback_repeat_last_move)
@@ -18,9 +16,7 @@ return {
           vim.api.nvim_set_keymap("o", ";", "", keymap_callback_repeat_last_move)
 
           local keymap_callback_repeat_last_move_opposite = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite() end,
           }
 
           vim.api.nvim_set_keymap("n", ",", "", keymap_callback_repeat_last_move_opposite)
@@ -28,9 +24,7 @@ return {
           vim.api.nvim_set_keymap("o", ",", "", keymap_callback_repeat_last_move_opposite)
 
           local keymap_callback_builtin_f = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").builtin_f()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_f() end,
           }
 
           vim.api.nvim_set_keymap("n", "f", "", keymap_callback_builtin_f)
@@ -38,9 +32,7 @@ return {
           vim.api.nvim_set_keymap("o", "f", "", keymap_callback_builtin_f)
 
           local keymap_callback_builtin_F = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").builtin_F()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_F() end,
           }
 
           vim.api.nvim_set_keymap("n", "F", "", keymap_callback_builtin_F)
@@ -48,9 +40,7 @@ return {
           vim.api.nvim_set_keymap("o", "F", "", keymap_callback_builtin_F)
 
           local keymap_callback_builtin_t = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").builtin_t()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_t() end,
           }
 
           vim.api.nvim_set_keymap("n", "t", "", keymap_callback_builtin_t)
@@ -58,9 +48,7 @@ return {
           vim.api.nvim_set_keymap("o", "t", "", keymap_callback_builtin_t)
 
           local keymap_callback_builtin_T = {
-            callback = function()
-              require("nvim-treesitter.textobjects.repeatable_move").builtin_T()
-            end,
+            callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_T() end,
           }
 
           vim.api.nvim_set_keymap("n", "T", "", keymap_callback_builtin_T)
@@ -153,8 +141,6 @@ return {
     "danymat/neogen",
     cmd = "Neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("neogen").setup({ snippet_engine = "luasnip" })
-    end,
+    config = function() require("neogen").setup({ snippet_engine = "luasnip" }) end,
   },
 }

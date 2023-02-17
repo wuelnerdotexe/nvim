@@ -83,9 +83,7 @@ return {
 
       local keymap_callback_scroll_forward = {
         callback = function()
-          if not require("noice.lsp").scroll(1) then
-            return "<C-f>"
-          end
+          if not require("noice.lsp").scroll(1) then return "<C-f>" end
         end,
         expr = true,
         replace_keycodes = true,
@@ -97,9 +95,7 @@ return {
 
       local keymap_callback_scroll_backward = {
         callback = function()
-          if not require("noice.lsp").scroll(-1) then
-            return "<C-b>"
-          end
+          if not require("noice.lsp").scroll(-1) then return "<C-b>" end
         end,
         expr = true,
         replace_keycodes = true,

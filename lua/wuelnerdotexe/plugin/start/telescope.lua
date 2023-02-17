@@ -2,66 +2,22 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   keys = {
-    {
-      "<leader>pf",
-      function()
-        vim.api.nvim_command("Telescope projections")
-      end,
-    },
-    {
-      "<leader>ff",
-      function()
-        require("telescope.builtin").fd()
-      end,
-    },
-    {
-      "<leader>of",
-      function()
-        require("telescope.builtin").oldfiles()
-      end,
-    },
-    {
-      "<leader>mf",
-      function()
-        require("telescope.builtin").marks()
-      end,
-    },
-    {
-      "<leader>wf",
-      function()
-        require("telescope.builtin").live_grep()
-      end,
-    },
-    {
-      "<leader>gf",
-      function()
-        require("telescope.builtin").git_status()
-      end,
-    },
-    {
-      "z=",
-      function()
-        require("telescope.builtin").spell_suggest()
-      end,
-    },
+    { "<leader>pf", function() vim.api.nvim_command("Telescope projections") end },
+    { "<leader>ff", function() require("telescope.builtin").fd() end },
+    { "<leader>of", function() require("telescope.builtin").oldfiles() end },
+    { "<leader>mf", function() require("telescope.builtin").marks() end },
+    { "<leader>wf", function() require("telescope.builtin").live_grep() end },
+    { "<leader>gf", function() require("telescope.builtin").git_status() end },
     {
       "<leader>sf",
-      function()
-        require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" })
-      end,
+      function() require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" }) end,
     },
     {
       "<leader>df",
-      function()
-        require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" })
-      end,
+      function() require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" }) end,
     },
-    {
-      "<leader>rf",
-      function()
-        require("telescope.builtin").resume()
-      end,
-    },
+    { "<leader>rf", function() require("telescope.builtin").resume() end },
+    { "z=", function() require("telescope.builtin").spell_suggest() end },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -107,9 +63,7 @@ return {
           opts = opts or require("wuelnerdotexe.utils").empty_table
 
           vim.loop.fs_stat(filepath, function(_, stat)
-            if not stat or stat.size > 100000 then
-              return
-            end
+            if not stat or stat.size > 100000 then return end
 
             require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
           end)

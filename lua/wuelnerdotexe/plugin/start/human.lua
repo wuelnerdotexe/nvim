@@ -37,28 +37,13 @@ return {
     )
 
     vim.api.nvim_set_keymap("n", "1b", "<Plug>(BufOnly)", require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_keymap("n", "1t", "", { callback = function() vim.api.nvim_command("tabonly") end })
+    vim.api.nvim_set_keymap("n", "<C-w>t", "", { callback = function() vim.api.nvim_command("tabedit %") end })
     vim.api.nvim_set_keymap("n", "<C-w>m", "<Plug>(MaximizerToggle)", require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_keymap("n", "<leader>to", "", { callback = function() vim.api.nvim_command("terminal") end })
     vim.api.nvim_set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
       noremap = true,
       silent = true,
-    })
-
-    vim.api.nvim_set_keymap("n", "1t", "", {
-      callback = function()
-        vim.api.nvim_command("tabonly")
-      end,
-    })
-
-    vim.api.nvim_set_keymap("n", "<C-w>t", "", {
-      callback = function()
-        vim.api.nvim_command("tabedit %")
-      end,
-    })
-
-    vim.api.nvim_set_keymap("n", "<leader>to", "", {
-      callback = function()
-        vim.api.nvim_command("terminal")
-      end,
     })
   end,
 }

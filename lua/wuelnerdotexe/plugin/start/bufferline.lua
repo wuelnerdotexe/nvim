@@ -23,15 +23,11 @@ return {
       })
 
       vim.api.nvim_set_keymap("n", "<S-End>", "", {
-        callback = function()
-          vim.api.nvim_command("BufferLineMoveNext")
-        end,
+        callback = function() vim.api.nvim_command("BufferLineMoveNext") end,
       })
 
       vim.api.nvim_set_keymap("n", "<S-Home>", "", {
-        callback = function()
-          vim.api.nvim_command("BufferLineMovePrev")
-        end,
+        callback = function() vim.api.nvim_command("BufferLineMovePrev") end,
       })
     end,
   },
@@ -39,34 +35,11 @@ return {
     "roobert/bufferline-cycle-windowless.nvim",
     dependencies = "akinsho/bufferline.nvim",
     keys = {
-      {
-        "gb",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessNext")
-        end,
-      },
-      {
-        "<S-PageDown>",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessNext")
-        end,
-      },
-      {
-        "gB",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessPrev")
-        end,
-      },
-      {
-        "<S-PageUp>",
-        function()
-          vim.api.nvim_command("BufferLineCycleWindowlessPrev")
-        end,
-        mode = { "n", "i" },
-      },
+      { "gb", function() vim.api.nvim_command("BufferLineCycleWindowlessNext") end },
+      { "<S-PageDown>", function() vim.api.nvim_command("BufferLineCycleWindowlessNext") end, mode = { "n", "i" } },
+      { "gB", function() vim.api.nvim_command("BufferLineCycleWindowlessPrev") end },
+      { "<S-PageUp>", function() vim.api.nvim_command("BufferLineCycleWindowlessPrev") end, mode = { "n", "i" } },
     },
-    config = function()
-      require("bufferline-cycle-windowless").setup({ default_enabled = true })
-    end,
+    config = function() require("bufferline-cycle-windowless").setup({ default_enabled = true }) end,
   },
 }

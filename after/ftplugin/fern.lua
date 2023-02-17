@@ -3,9 +3,7 @@ vim.api.nvim_set_option_value("number", false, { buf = 0 })
 vim.api.nvim_set_option_value("relativenumber", false, { buf = 0 })
 
 vim.api.nvim_buf_set_keymap(0, "n", "q", "", {
-  callback = function()
-    vim.api.nvim_command("quit")
-  end,
+  callback = function() vim.api.nvim_command("quit") end,
   nowait = true,
 })
 

@@ -10,7 +10,5 @@ return {
     { "<C-g>s", mode = "i" },
     { "<C-g>S", mode = "i" },
   },
-  config = function()
-    require("nvim-surround").setup()
-  end,
+  config = function() require("nvim-surround").setup() end,
 }

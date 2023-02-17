@@ -11,7 +11,5 @@ return {
     { "<C-Left>", "<Plug>(YankyCycleBackward)" },
     { "<C-Right>", "<Plug>(YankyCycleForward)" },
   },
-  config = function()
-    require("yanky").setup({ highlight = { timer = 125 } })
-  end,
+  config = function() require("yanky").setup({ highlight = { timer = 125 } }) end,
 }

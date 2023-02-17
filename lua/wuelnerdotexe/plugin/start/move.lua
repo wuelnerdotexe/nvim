@@ -10,7 +10,5 @@ return {
     { "<A-Up>", "<Plug>MoveBlockUp", mode = "v" },
     { "<A-Right>", "<Plug>MoveBlockRight", mode = "v" },
   },
-  init = function()
-    vim.api.nvim_set_var("move_map_keys", 0)
-  end,
+  init = function() vim.api.nvim_set_var("move_map_keys", 0) end,
 }

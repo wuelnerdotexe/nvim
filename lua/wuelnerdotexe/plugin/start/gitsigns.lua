@@ -17,57 +17,39 @@ return {
       preview_config = { border = require("wuelnerdotexe.utils").interface.border.style },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
-          callback = function()
-            require("gitsigns").reset_hunk()
-          end,
+          callback = function() require("gitsigns").reset_hunk() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hr", "", {
-          callback = function()
-            require("gitsigns").reset_hunk()
-          end,
+          callback = function() require("gitsigns").reset_hunk() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hs", "", {
-          callback = function()
-            require("gitsigns").stage_hunk()
-          end,
+          callback = function() require("gitsigns").stage_hunk() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hs", "", {
-          callback = function()
-            require("gitsigns").stage_hunk()
-          end,
+          callback = function() require("gitsigns").stage_hunk() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hp", "", {
-          callback = function()
-            require("gitsigns").preview_hunk()
-          end,
+          callback = function() require("gitsigns").preview_hunk() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bp", "", {
-          callback = function()
-            require("gitsigns").blame_line({ full = true })
-          end,
+          callback = function() require("gitsigns").blame_line({ full = true }) end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bt", "", {
-          callback = function()
-            require("gitsigns").toggle_current_line_blame()
-          end,
+          callback = function() require("gitsigns").toggle_current_line_blame() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dt", "", {
-          callback = function()
-            require("gitsigns").toggle_deleted()
-          end,
+          callback = function() require("gitsigns").toggle_deleted() end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "", {
-          callback = function()
-            require("gitsigns").diffthis("~")
-          end,
+          callback = function() require("gitsigns").diffthis("~") end,
         })
 
         local next_hunk_repeatable, prev_hunk_repeatable =
@@ -78,13 +60,9 @@ return {
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", {
           callback = function()
-            if vim.api.nvim_get_option_value("diff", { win = 0 }) then
-              return "]h"
-            end
+            if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "]h" end
 
-            vim.schedule(function()
-              next_hunk_repeatable()
-            end)
+            vim.schedule(function() next_hunk_repeatable() end)
 
             return "<Ignore>"
           end,
@@ -94,13 +72,9 @@ return {
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "", {
           callback = function()
-            if vim.api.nvim_get_option_value("diff", { win = 0 }) then
-              return "[h"
-            end
+            if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "[h" end
 
-            vim.schedule(function()
-              prev_hunk_repeatable()
-            end)
+            vim.schedule(function() prev_hunk_repeatable() end)
 
             return "<Ignore>"
           end,

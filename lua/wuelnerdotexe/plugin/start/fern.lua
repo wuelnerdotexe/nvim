@@ -31,9 +31,7 @@ return {
   end,
   config = function()
     vim.api.nvim_set_keymap("n", "<leader>ft", "", {
-      callback = function()
-        vim.api.nvim_command("Fern . -reveal=% -drawer -toggle")
-      end,
+      callback = function() vim.api.nvim_command("Fern . -reveal=% -drawer -toggle") end,
     })
   end,
 }

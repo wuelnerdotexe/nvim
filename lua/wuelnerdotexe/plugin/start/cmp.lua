@@ -16,11 +16,7 @@ return {
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
+        snippet = { expand = function(args) require("luasnip").lsp_expand(args.body) end },
         formatting = {
           fields = { "abbr", "kind" },
           format = function(entry, vim_item)
@@ -97,8 +93,8 @@ return {
       require("cmp").setup.filetype(require("wuelnerdotexe.utils").interface.filetypes, { enabled = false })
     end,
   },
-  { "hrsh7th/cmp-buffer", event = { "InsertEnter", "CmdlineEnter" }, dependencies = "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdlineEnter" }, dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-path", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
   {
     "hrsh7th/cmp-cmdline",
     event = "CmdlineEnter",
@@ -131,9 +127,7 @@ return {
         ignored_file_types[filetype] = true
       end
 
-      vim.schedule(function()
-        require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types })
-      end)
+      vim.schedule(function() require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types }) end)
     end,
   },
   { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" } },
