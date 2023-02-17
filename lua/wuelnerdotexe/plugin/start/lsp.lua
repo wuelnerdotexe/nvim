@@ -133,10 +133,10 @@ return {
     },
     config = function()
       vim.diagnostic.config({
-        signs = { priority = 9 },
+        signs = { priority = require("wuelnerdotexe.utils").signs_priority.diagnostic },
         virtual_text = false,
         virtual_lines = true,
-        float = { header = { "Diagnostics", "Title" }, border = "rounded" },
+        float = { header = { "Diagnostics", "Title" }, border = require("wuelnerdotexe.utils").interface.border.style },
         update_in_insert = true,
         severity_sort = true,
       })
@@ -144,13 +144,13 @@ return {
       local ref_floating_preview = vim.lsp.util.open_floating_preview
 
       vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = "rounded"
+        opts = opts or require("wuelnerdotexe.utils").empty_table
+        opts.border = require("wuelnerdotexe.utils").interface.border.style
 
         return ref_floating_preview(contents, syntax, opts, ...)
       end
 
-      require("lspconfig.ui.windows").default_options.border = "rounded"
+      require("lspconfig.ui.windows").default_options.border = require("wuelnerdotexe.utils").interface.border.style
 
       local flags = { debounce_text_changes = 284 }
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -229,7 +229,7 @@ return {
     },
     config = function()
       require("null-ls").setup({
-        border = "rounded",
+        border = require("wuelnerdotexe.utils").interface.border.style,
         update_in_insert = true,
         debounce = 284,
         on_attach = on_attach,
@@ -264,9 +264,12 @@ return {
   },
   {
     "kosayoda/nvim-lightbulb",
-    event = { "BufNewFile", "BufRead", "BufAdd" },
+    event = require("wuelnerdotexe.utils").plugins.open_file_event,
     config = function()
-      require("nvim-lightbulb").setup({ sign = { priority = 8 }, autocmd = { enabled = true } })
+      require("nvim-lightbulb").setup({
+        sign = { priority = require("wuelnerdotexe.utils").signs_priority.lightbulb },
+        autocmd = { enabled = true },
+      })
 
       vim.api.nvim_call_function(
         "sign_define",
@@ -276,7 +279,7 @@ return {
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = { "BufNewFile", "BufRead", "BufAdd" },
+    event = require("wuelnerdotexe.utils").plugins.open_file_event,
     config = function()
       require("lsp_lines").setup()
 

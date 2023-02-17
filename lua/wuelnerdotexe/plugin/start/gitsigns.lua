@@ -1,6 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = { "BufNewFile", "BufRead", "BufAdd" },
+  event = require("wuelnerdotexe.utils").plugins.open_file_event,
   dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
   config = function()
     require("gitsigns").setup({
@@ -12,9 +12,9 @@ return {
         changedelete = { hl = "GitSignsChange", text = "│" },
       },
       current_line_blame_opts = { delay = 42 },
-      sign_priority = 7,
+      sign_priority = require("wuelnerdotexe.utils").signs_priority.git,
       update_debounce = 284,
-      preview_config = { border = "rounded" },
+      preview_config = { border = require("wuelnerdotexe.utils").interface.border.style },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
           callback = function()

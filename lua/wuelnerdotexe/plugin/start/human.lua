@@ -14,27 +14,30 @@ return {
       "DressingInput",
       "DressingSelect",
       "fern",
+      "fern-replacer",
     })
   end,
   config = function()
-    local option_opts = {}
-
     vim.api.nvim_set_option_value(
       "shortmess",
-      vim.api.nvim_get_option_value("shortmess", option_opts) .. "I",
-      option_opts
+      vim.api.nvim_get_option_value("shortmess", require("wuelnerdotexe.utils").empty_table) .. "I",
+      require("wuelnerdotexe.utils").empty_table
     )
 
-    vim.api.nvim_set_option_value("wrap", false, option_opts)
-    vim.api.nvim_set_option_value("relativenumber", false, option_opts)
-    vim.api.nvim_set_option_value("number", true, option_opts)
+    vim.api.nvim_set_option_value("wrap", false, require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("relativenumber", false, require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("number", true, require("wuelnerdotexe.utils").empty_table)
 
-    local fillchars = vim.api.nvim_get_option_value("fillchars", option_opts)
+    local fillchars = vim.api.nvim_get_option_value("fillchars", require("wuelnerdotexe.utils").empty_table)
 
-    vim.api.nvim_set_option_value("fillchars", fillchars == "" and "eob: " or fillchars .. ",eob: ", option_opts)
+    vim.api.nvim_set_option_value(
+      "fillchars",
+      fillchars == "" and "eob: " or fillchars .. ",eob: ",
+      require("wuelnerdotexe.utils").empty_table
+    )
 
-    vim.api.nvim_set_keymap("n", "1b", "<Plug>(BufOnly)", {})
-    vim.api.nvim_set_keymap("n", "<C-w>m", "<Plug>(MaximizerToggle)", {})
+    vim.api.nvim_set_keymap("n", "1b", "<Plug>(BufOnly)", require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_keymap("n", "<C-w>m", "<Plug>(MaximizerToggle)", require("wuelnerdotexe.utils").empty_table)
     vim.api.nvim_set_keymap("n", "<C-w><C-l>", ':nohlsearch<C-R>=has("diff") ? "<Bar>diffupdate" : ""<CR><CR><C-l>', {
       noremap = true,
       silent = true,

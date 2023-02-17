@@ -1,17 +1,16 @@
 return {
   "stevearc/aerial.nvim",
-  event = { "BufNewFile", "BufRead", "BufAdd" },
+  event = require("wuelnerdotexe.utils").plugins.open_file_event,
   config = function()
-    vim.api.nvim_set_option_value("foldmethod", "manual", {})
+    vim.api.nvim_set_option_value("foldmethod", "manual", require("wuelnerdotexe.utils").empty_table)
 
-    local columns = vim.api.nvim_get_option_value("columns", {})
-    local layout_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
+    local width = require("wuelnerdotexe.utils").interface.get_sidebar_width()
 
     require("aerial").setup({
       layout = {
-        max_width = layout_width,
-        width = layout_width,
-        min_width = layout_width,
+        max_width = width,
+        width = width,
+        min_width = width,
         win_opts = { signcolumn = "yes:1", cursorline = true },
         default_direction = "right",
         placement = "edge",
@@ -33,34 +32,7 @@ return {
       highlight_mode = "last",
       highlight_closest = false,
       highlight_on_jump = 125,
-      icons = {
-        Array = "",
-        Boolean = "",
-        Class = "",
-        Constant = "",
-        Constructor = "",
-        Enum = "",
-        EnumMember = "",
-        Event = "",
-        Field = "",
-        File = "",
-        Function = "",
-        Interface = "",
-        Key = "",
-        Method = "",
-        Module = "",
-        Namespace = "",
-        Null = "ﳠ",
-        Number = "",
-        Object = "",
-        Operator = "",
-        Package = "",
-        Property = "",
-        String = "",
-        Struct = "",
-        TypeParameter = "",
-        Variable = "",
-      },
+      icons = require("wuelnerdotexe.utils").interface.codicons,
       manage_folds = "auto",
       link_folds_to_tree = true,
       link_tree_to_folds = true,
@@ -79,7 +51,7 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = "rounded", relative = "editor" },
+      float = { border = require("wuelnerdotexe.utils").interface.border.style, relative = "editor" },
     })
 
     vim.api.nvim_set_keymap("n", "<leader>st", "", {

@@ -3,7 +3,7 @@ return {
   lazy = false,
   config = function()
     require("projections").setup({
-      workspaces = { { "~/Workspace", {} } },
+      workspaces = { { "~/Workspace", require("wuelnerdotexe.utils").empty_table } },
       patterns = { ".git" },
       store_hooks = {
         pre = function()

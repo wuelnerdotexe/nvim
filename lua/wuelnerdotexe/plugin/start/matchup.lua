@@ -1,6 +1,6 @@
 return {
   "andymass/vim-matchup",
-  event = { "BufNewFile", "BufRead", "BufAdd" },
+  event = require("wuelnerdotexe.utils").plugins.open_file_event,
   init = function()
     vim.api.nvim_set_var("matchup_matchparen_timeout", 284)
     vim.api.nvim_set_var("matchup_matchparen_insert_timeout", 284)

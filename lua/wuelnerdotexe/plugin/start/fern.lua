@@ -22,13 +22,11 @@ return {
     },
   },
   init = function()
-    local columns = vim.api.nvim_get_option_value("columns", {})
-
     vim.api.nvim_set_var("fern#default_hidden", 1)
     vim.api.nvim_set_var("fern#default_exclude", [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]])
     vim.api.nvim_set_var("fern#disable_default_mappings", 1)
     vim.api.nvim_set_var("fern#disable_drawer_hover_popup", 1)
-    vim.api.nvim_set_var("fern#drawer_width", math.floor((columns / (columns >= 160 and 3 or 2)) / 2))
+    vim.api.nvim_set_var("fern#drawer_width", require("wuelnerdotexe.utils").interface.get_sidebar_width())
     vim.api.nvim_set_var("fern#mark_symbol", "")
   end,
   config = function()

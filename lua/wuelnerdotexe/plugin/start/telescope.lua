@@ -84,12 +84,13 @@ return {
         },
       },
       defaults = {
+        borderchars = require("wuelnerdotexe.utils").interface.border.chars,
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
         prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = " ",
-        winblend = 10,
+        winblend = require("wuelnerdotexe.utils").interface.blend,
         vimgrep_arguments = {
           "rg",
           "--hidden",
@@ -103,7 +104,7 @@ return {
           "--color=never",
         },
         buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or {}
+          opts = opts or require("wuelnerdotexe.utils").empty_table
 
           vim.loop.fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 100000 then
@@ -114,13 +115,7 @@ return {
           end)
         end,
         mappings = {
-          i = {
-            ["<C-y>"] = "select_default",
-            ["<C-x>"] = false,
-            ["<C-s>"] = "select_horizontal",
-            ["<C-c>"] = false,
-            ["<C-e>"] = "close",
-          },
+          i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
           n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
         },
       },

@@ -18,13 +18,11 @@ return {
     {
       "rcarriga/nvim-dap-ui",
       config = function()
-        local columns = vim.api.nvim_get_option_value("columns", {})
-
         require("dapui").setup({
           layouts = {
             {
               elements = { "scopes", "watches", "stacks", "breakpoints" },
-              size = math.floor((columns / (columns >= 160 and 3 or 2)) / 2),
+              size = require("wuelnerdotexe.utils").interface.get_sidebar_width(),
               position = "left",
             },
             { elements = { "console", "repl" }, size = 0.25, position = "bottom" },

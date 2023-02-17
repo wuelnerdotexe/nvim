@@ -3,11 +3,9 @@ return {
   lazy = false,
   priority = 1000,
   init = function()
-    local option_opts = {}
-
-    vim.api.nvim_set_option_value("termguicolors", true, option_opts)
-    vim.api.nvim_set_option_value("t_Co", 256, option_opts)
-    vim.api.nvim_set_option_value("background", "dark", option_opts)
+    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("t_Co", 256, require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("background", "dark", require("wuelnerdotexe.utils").empty_table)
 
     vim.api.nvim_set_var("enfocado_plugins", {
       "aerial",
@@ -36,16 +34,25 @@ return {
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "enfocado",
       callback = function()
-        vim.api.nvim_set_option_value("winblend", 10, option_opts)
-        vim.api.nvim_set_option_value("pumblend", 10, option_opts)
+        vim.api.nvim_set_option_value(
+          "winblend",
+          require("wuelnerdotexe.utils").interface.blend,
+          require("wuelnerdotexe.utils").empty_table
+        )
 
-        local fillchars = vim.api.nvim_get_option_value("fillchars", option_opts)
+        vim.api.nvim_set_option_value(
+          "pumblend",
+          require("wuelnerdotexe.utils").interface.blend,
+          require("wuelnerdotexe.utils").empty_table
+        )
+
+        local fillchars = vim.api.nvim_get_option_value("fillchars", require("wuelnerdotexe.utils").empty_table)
 
         vim.api.nvim_set_option_value(
           "fillchars",
           fillchars == "" and "vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: "
             or fillchars .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
-          option_opts
+          require("wuelnerdotexe.utils").empty_table
         )
 
         vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e")

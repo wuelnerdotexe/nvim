@@ -141,7 +141,7 @@ return {
   },
   {
     "mrjones2014/nvim-ts-rainbow",
-    event = { "BufNewFile", "BufRead", "BufAdd" },
+    event = require("wuelnerdotexe.utils").plugins.open_file_event,
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {

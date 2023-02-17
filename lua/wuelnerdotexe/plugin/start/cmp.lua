@@ -1,39 +1,9 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
+    lazy = true,
     config = function()
-      local tbl = {}
-
-      vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", tbl)
-
-      local codicons = {
-        Text = "",
-        Method = "",
-        Function = "",
-        Constructor = "",
-        Field = "",
-        Variable = "",
-        Class = "",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Unit = "",
-        Value = "",
-        Enum = "",
-        Keyword = "",
-        Snippet = "",
-        Color = "",
-        File = "",
-        Reference = "",
-        Folder = "",
-        EnumMember = "",
-        Constant = "",
-        Struct = "",
-        Event = "",
-        Operator = "",
-        TypeParameter = "",
-      }
+      vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", require("wuelnerdotexe.utils").empty_table)
 
       require("cmp").setup({
         enabled = function()
@@ -41,8 +11,8 @@ return {
             vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
             or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
           )
-            and vim.api.nvim_call_function("reg_recording", tbl) == ""
-            and vim.api.nvim_call_function("reg_executing", tbl) == ""
+            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.utils").empty_table) == ""
+            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.utils").empty_table) == ""
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),
@@ -73,7 +43,7 @@ return {
             end
 
             vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine"
-              or codicons[vim_item.kind] .. " " .. vim_item.kind
+              or require("wuelnerdotexe.utils").interface.codicons[vim_item.kind] .. " " .. vim_item.kind
 
             return vim_item
           end,
@@ -103,7 +73,7 @@ return {
                 local current_buf = vim.api.nvim_get_current_buf()
 
                 if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
-                  return tbl
+                  return require("wuelnerdotexe.utils").empty_table
                 end
 
                 return { current_buf }
@@ -116,31 +86,15 @@ return {
         experimental = { ghost_text = true },
         window = {
           completion = { scrolloff = 3 },
-          documentation = { border = "rounded", winhighlight = "FloatBorder:FloatBorder" },
+          documentation = {
+            border = require("wuelnerdotexe.utils").interface.border.style,
+            winhighlight = "FloatBorder:FloatBorder",
+          },
         },
       })
 
       require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
-      require("cmp").setup.filetype({
-        "aerial",
-        "checkhealth",
-        "dapui_breakpoints",
-        "dapui_console",
-        "dapui_scopes",
-        "dapui_stacks",
-        "DressingInput",
-        "DressingSelect",
-        "fern",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "nerdterm",
-        "noice",
-        "null-ls-info",
-        "qf",
-        "TelescopePrompt",
-      }, { enabled = false })
+      require("cmp").setup.filetype(require("wuelnerdotexe.utils").interface.filetypes, { enabled = false })
     end,
   },
   { "hrsh7th/cmp-buffer", event = { "InsertEnter", "CmdlineEnter" }, dependencies = "hrsh7th/nvim-cmp" },
@@ -171,31 +125,14 @@ return {
     event = "InsertEnter",
     dependencies = "hrsh7th/nvim-cmp",
     config = function()
+      local ignored_file_types = {}
+
+      for _, filetype in ipairs(require("wuelnerdotexe.utils").interface.filetypes) do
+        ignored_file_types[filetype] = true
+      end
+
       vim.schedule(function()
-        require("cmp_tabnine.config").setup({
-          ignored_file_types = {
-            ["aerial"] = true,
-            ["checkhealth"] = true,
-            ["dap-repl"] = true,
-            ["dapui_breakpoints"] = true,
-            ["dapui_console"] = true,
-            ["dapui_hover"] = true,
-            ["dapui_scopes"] = true,
-            ["dapui_stacks"] = true,
-            ["dapui_watches"] = true,
-            ["DressingInput"] = true,
-            ["DressingSelect"] = true,
-            ["fern"] = true,
-            ["lazy"] = true,
-            ["lspinfo"] = true,
-            ["mason"] = true,
-            ["nerdterm"] = true,
-            ["noice"] = true,
-            ["null-ls-info"] = true,
-            ["qf"] = true,
-            ["TelescopePrompt"] = true,
-          },
-        })
+        require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types })
       end)
     end,
   },

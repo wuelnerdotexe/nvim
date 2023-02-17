@@ -16,11 +16,16 @@ vim.api.nvim_set_var("loaded_ruby_provider", 0)
 vim.api.nvim_set_var("loaded_perl_provider", 0)
 
 require("lazy").setup({
-  spec = { { import = "wuelnerdotexe.plugin" }, { import = "wuelnerdotexe.plugin.fancy" } },
+  spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
-  ui = { border = "rounded", browser = "chrome", throttle = 42, custom_keys = { ["<localleader>l"] = false } },
+  ui = {
+    border = require("wuelnerdotexe.utils").interface.border.style,
+    browser = "chrome",
+    throttle = 42,
+    custom_keys = { ["<localleader>l"] = false },
+  },
   performance = {
     rtp = {
       disabled_plugins = {
