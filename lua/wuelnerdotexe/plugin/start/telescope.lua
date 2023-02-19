@@ -47,6 +47,7 @@ return {
         selection_caret = "  ",
         multi_icon = " ",
         winblend = require("wuelnerdotexe.utils").interface.blend,
+        preview = { filesize_limit = false, timeout = 284 },
         vimgrep_arguments = {
           "rg",
           "--hidden",
@@ -63,7 +64,7 @@ return {
           opts = opts or require("wuelnerdotexe.utils").empty_table
 
           vim.loop.fs_stat(filepath, function(_, stat)
-            if not stat or stat.size > 100000 then return end
+            if not stat or stat.size > 102400 then return end
 
             require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
           end)

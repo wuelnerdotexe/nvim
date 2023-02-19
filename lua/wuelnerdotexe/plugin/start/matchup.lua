@@ -2,6 +2,10 @@ return {
   "andymass/vim-matchup",
   event = require("wuelnerdotexe.utils").plugins.open_file_event,
   init = function()
+    vim.api.nvim_set_var("matchup_motion_enabled", 0)
+    vim.api.nvim_set_var("matchup_text_obj_enabled", 0)
+    vim.api.nvim_set_var("matchup_delim_stopline", 1000)
+    vim.api.nvim_set_var("matchup_matchparen_fallback", 0)
     vim.api.nvim_set_var("matchup_matchparen_timeout", 284)
     vim.api.nvim_set_var("matchup_matchparen_insert_timeout", 284)
     vim.api.nvim_set_var("matchup_matchparen_deferred", 1)

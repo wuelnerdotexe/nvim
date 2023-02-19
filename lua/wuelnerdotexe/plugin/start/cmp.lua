@@ -61,24 +61,9 @@ return {
           { name = "nvim_lsp", keyword_length = 3, priority = 3 },
           { name = "cmp_tabnine", keyword_length = 3, priority = 2 },
         }, {
-          {
-            name = "buffer",
-            option = {
-              indexing_interval = 284,
-              get_bufnrs = function()
-                local current_buf = vim.api.nvim_get_current_buf()
-
-                if vim.api.nvim_buf_get_offset(current_buf, vim.api.nvim_buf_line_count(current_buf)) > 1048576 then
-                  return require("wuelnerdotexe.utils").empty_table
-                end
-
-                return { current_buf }
-              end,
-            },
-            keyword_length = 3,
-            priority = 1,
-          },
+          { name = "buffer", option = { indexing_interval = 284 }, keyword_length = 3, priority = 1 },
         }),
+        confirmation = { default_behavior = require("cmp.types").cmp.ConfirmBehavior.Replace },
         experimental = { ghost_text = true },
         window = {
           completion = { scrolloff = 3 },
@@ -102,15 +87,17 @@ return {
     config = function()
       require("cmp").setup.cmdline({ "/", "?" }, {
         mapping = require("cmp").mapping.preset.cmdline(),
-        sources = require("cmp").config.sources({ { name = "buffer", keyword_length = 1 } }),
+        sources = require("cmp").config.sources({
+          { name = "buffer", option = { indexing_interval = 284 }, keyword_length = 1, priority = 1 },
+        }),
       })
 
       require("cmp").setup.cmdline(":", {
         mapping = require("cmp").mapping.preset.cmdline(),
         sources = require("cmp").config.sources({
-          { name = "path", keyword_length = 1 },
+          { name = "path", keyword_length = 1, priority = 2 },
         }, {
-          { name = "cmdline", keyword_length = 1 },
+          { name = "cmdline", keyword_length = 1, priority = 1 },
         }),
       })
     end,

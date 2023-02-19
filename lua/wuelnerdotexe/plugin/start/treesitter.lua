@@ -107,7 +107,7 @@ return {
             else
               local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
 
-              if stats and stats.size > 100000 then
+              if stats and stats.size > 102400 then
                 results[buf] = true
 
                 return true

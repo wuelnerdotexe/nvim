@@ -27,6 +27,7 @@ return {
         ["h"] = false,
         ["H"] = false,
       },
+      disable_max_lines = 1000,
       disable_max_size = 102400,
       filter_kind = false,
       highlight_mode = "last",
@@ -48,6 +49,10 @@ return {
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
       float = { border = require("wuelnerdotexe.utils").interface.border.style, relative = "editor" },
+      lsp = { diagnostics_trigger_update = false, update_delay = 284 },
+      treesitter = { update_delay = 284 },
+      markdown = { update_delay = 284 },
+      man = { update_delay = 284 },
     })
 
     vim.api.nvim_set_keymap("n", "<leader>st", "", { callback = function() require("aerial").toggle() end })
