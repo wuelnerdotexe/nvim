@@ -3,7 +3,7 @@ return {
     "akinsho/bufferline.nvim",
     event = "UIEnter",
     config = function()
-      vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.utils").empty_table)
+      vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.utils").empty_table)
 
       require("bufferline").setup({
         options = {

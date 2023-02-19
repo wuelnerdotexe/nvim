@@ -13,10 +13,10 @@ return {
         },
         speed = 42,
         intervals = 67,
-        priority = require("wuelnerdotexe.utils").signs_priority.smoothcursor,
+        priority = require("wuelnerdotexe.plugin.configs").signs_priority.smoothcursor,
         threshold = 1,
         disable_float_win = true,
-        disabled_filetypes = require("wuelnerdotexe.utils").interface.filetypes,
+        disabled_filetypes = require("wuelnerdotexe.plugin.configs").uifiletypes,
       })
     end,
   },

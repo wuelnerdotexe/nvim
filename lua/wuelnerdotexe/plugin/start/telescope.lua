@@ -40,13 +40,17 @@ return {
         },
       },
       defaults = {
-        borderchars = require("wuelnerdotexe.utils").interface.border.chars,
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
+        winblend = require("wuelnerdotexe.plugin.configs").blend,
         prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = " ",
-        winblend = require("wuelnerdotexe.utils").interface.blend,
+        borderchars = require("wuelnerdotexe.plugin.configs").border.chars,
+        mappings = {
+          i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
+          n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
+        },
         preview = { filesize_limit = false, timeout = 284 },
         vimgrep_arguments = {
           "rg",
@@ -61,7 +65,7 @@ return {
           "--color=never",
         },
         buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or require("wuelnerdotexe.utils").empty_table
+          opts = opts or require("wuelnerdotexe.plugin.utils").empty_table
 
           vim.loop.fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 102400 then return end
@@ -69,10 +73,6 @@ return {
             require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
           end)
         end,
-        mappings = {
-          i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
-          n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
-        },
       },
       extensions = { fzf = { case_mode = "ignore_case" } },
     })

@@ -129,7 +129,7 @@ return {
   },
   {
     "mrjones2014/nvim-ts-rainbow",
-    event = require("wuelnerdotexe.utils").plugins.open_file_event,
+    event = require("wuelnerdotexe.plugin.configs").open_file_event,
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {

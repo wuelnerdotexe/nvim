@@ -3,7 +3,7 @@ return {
   lazy = false,
   config = function()
     require("projections").setup({
-      workspaces = { { "~/Workspace", require("wuelnerdotexe.utils").empty_table } },
+      workspaces = { { "~/Workspace", require("wuelnerdotexe.plugin.utils").empty_table } },
       patterns = { ".git" },
       store_hooks = { pre = function() vim.api.nvim_command("FernDo close") end },
     })

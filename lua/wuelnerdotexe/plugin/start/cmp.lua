@@ -3,7 +3,11 @@ return {
     "hrsh7th/nvim-cmp",
     lazy = true,
     config = function()
-      vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", require("wuelnerdotexe.utils").empty_table)
+      vim.api.nvim_set_option_value(
+        "completeopt",
+        "menu,menuone,noselect",
+        require("wuelnerdotexe.plugin.utils").empty_table
+      )
 
       require("cmp").setup({
         enabled = function()
@@ -11,8 +15,8 @@ return {
             vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
             or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
           )
-            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.utils").empty_table) == ""
-            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.utils").empty_table) == ""
+            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.plugin.utils").empty_table) == ""
+            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.plugin.utils").empty_table) == ""
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),
@@ -39,7 +43,7 @@ return {
             end
 
             vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine"
-              or require("wuelnerdotexe.utils").interface.codicons[vim_item.kind] .. " " .. vim_item.kind
+              or require("wuelnerdotexe.plugin.configs").kind_icons[vim_item.kind] .. " " .. vim_item.kind
 
             return vim_item
           end,
@@ -68,14 +72,14 @@ return {
         window = {
           completion = { scrolloff = 3 },
           documentation = {
-            border = require("wuelnerdotexe.utils").interface.border.style,
+            border = require("wuelnerdotexe.plugin.configs").border.style,
             winhighlight = "FloatBorder:FloatBorder",
           },
         },
       })
 
       require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-      require("cmp").setup.filetype(require("wuelnerdotexe.utils").interface.filetypes, { enabled = false })
+      require("cmp").setup.filetype(require("wuelnerdotexe.plugin.configs").uifiletypes, { enabled = false })
     end,
   },
   { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
@@ -110,7 +114,7 @@ return {
     config = function()
       local ignored_file_types = {}
 
-      for _, filetype in ipairs(require("wuelnerdotexe.utils").interface.filetypes) do
+      for _, filetype in ipairs(require("wuelnerdotexe.plugin.configs").uifiletypes) do
         ignored_file_types[filetype] = true
       end
 

@@ -2,8 +2,8 @@ return {
   "feline-nvim/feline.nvim",
   event = "UIEnter",
   config = function()
-    vim.api.nvim_set_option_value("ruler", false, require("wuelnerdotexe.utils").empty_table)
-    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("ruler", false, require("wuelnerdotexe.plugin.utils").empty_table)
+    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.utils").empty_table)
 
     local components = { active = {}, inactive = {} }
 
@@ -45,7 +45,7 @@ return {
 
     components.active[1][5] = {
       enabled = function()
-        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0
+        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.utils").empty_table) == 0
           and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
       end,
       provider = function() return tostring(require("noice").api.statusline.mode.get()) end,
@@ -64,7 +64,7 @@ return {
       enabled = function()
         return require("feline.providers.lsp").diagnostics_exist()
           or (
-            vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0
+            vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.utils").empty_table) == 0
             and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
           )
       end,
@@ -80,7 +80,9 @@ return {
     }
 
     components.active[1][8] = {
-      enabled = function() return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.utils").empty_table) == 0 end,
+      enabled = function()
+        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.utils").empty_table) == 0
+      end,
       provider = { name = "vi_mode", opts = { padding = "center" } },
       left_sep = " ",
       hl = function()
@@ -162,7 +164,7 @@ return {
     components.active[3][3] = {
       provider = function()
         local ok, sleuth_indicator =
-          pcall(vim.api.nvim_call_function, "SleuthIndicator", require("wuelnerdotexe.utils").empty_table)
+          pcall(vim.api.nvim_call_function, "SleuthIndicator", require("wuelnerdotexe.plugin.utils").empty_table)
 
         if not ok then return "" end
 
@@ -204,7 +206,7 @@ return {
     }
 
     local enfocado_colors =
-      vim.api.nvim_call_function("enfocado#getColorScheme", require("wuelnerdotexe.utils").empty_table)
+      vim.api.nvim_call_function("enfocado#getColorScheme", require("wuelnerdotexe.plugin.utils").empty_table)
 
     require("feline").setup({
       theme = {

@@ -21,7 +21,7 @@ require("lazy").setup({
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
   ui = {
-    border = require("wuelnerdotexe.utils").interface.border.style,
+    border = require("wuelnerdotexe.plugin.configs").border.style,
     browser = "chrome",
     throttle = 42,
     custom_keys = { ["<localleader>l"] = false },

@@ -3,7 +3,7 @@ return {
   event = "InsertEnter",
   config = function()
     require("nvim-autopairs").setup({
-      disable_filetype = require("wuelnerdotexe.utils").interface.filetypes,
+      disable_filetype = require("wuelnerdotexe.plugin.configs").uifiletypes,
       enable_check_bracket_line = false,
       check_ts = true,
       map_cr = false,

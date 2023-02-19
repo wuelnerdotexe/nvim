@@ -1,6 +1,6 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  event = require("wuelnerdotexe.utils").plugins.open_file_event,
+  event = require("wuelnerdotexe.plugin.configs").open_file_event,
   config = function()
     require("indent_blankline").setup({
       use_treesitter = true,

@@ -1,6 +1,6 @@
 return {
   "andymass/vim-matchup",
-  event = require("wuelnerdotexe.utils").plugins.open_file_event,
+  event = require("wuelnerdotexe.plugin.configs").open_file_event,
   init = function()
     vim.api.nvim_set_var("matchup_motion_enabled", 0)
     vim.api.nvim_set_var("matchup_text_obj_enabled", 0)

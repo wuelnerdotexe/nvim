@@ -1,10 +1,10 @@
 return {
   "stevearc/aerial.nvim",
-  event = require("wuelnerdotexe.utils").plugins.open_file_event,
+  event = require("wuelnerdotexe.plugin.configs").open_file_event,
   config = function()
-    vim.api.nvim_set_option_value("foldmethod", "manual", require("wuelnerdotexe.utils").empty_table)
+    vim.api.nvim_set_option_value("foldmethod", "manual", require("wuelnerdotexe.plugin.utils").empty_table)
 
-    local width = require("wuelnerdotexe.utils").interface.get_sidebar_width()
+    local width = require("wuelnerdotexe.plugin.utils").get_sidebar_width()
 
     require("aerial").setup({
       layout = {
@@ -33,7 +33,7 @@ return {
       highlight_mode = "last",
       highlight_closest = false,
       highlight_on_jump = 125,
-      icons = require("wuelnerdotexe.utils").interface.codicons,
+      icons = require("wuelnerdotexe.plugin.configs").kind_icons,
       manage_folds = "auto",
       link_folds_to_tree = true,
       link_tree_to_folds = true,
@@ -48,7 +48,7 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = require("wuelnerdotexe.utils").interface.border.style, relative = "editor" },
+      float = { border = require("wuelnerdotexe.plugin.configs").border.style, relative = "editor" },
       lsp = { diagnostics_trigger_update = false, update_delay = 284 },
       treesitter = { update_delay = 284 },
       markdown = { update_delay = 284 },

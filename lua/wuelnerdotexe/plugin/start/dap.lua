@@ -12,7 +12,7 @@ return {
           layouts = {
             {
               elements = { "scopes", "watches", "stacks", "breakpoints" },
-              size = require("wuelnerdotexe.utils").interface.get_sidebar_width(),
+              size = require("wuelnerdotexe.plugin.utils").get_sidebar_width(),
               position = "left",
             },
             { elements = { "console", "repl" }, size = 0.25, position = "bottom" },
