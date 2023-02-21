@@ -42,11 +42,11 @@ return {
       defaults = {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
-        winblend = require("wuelnerdotexe.plugin.configs").blend,
+        winblend = require("wuelnerdotexe.plugin.config").blend,
         prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = " ",
-        borderchars = require("wuelnerdotexe.plugin.configs").border.chars,
+        borderchars = require("wuelnerdotexe.plugin.util").get_border().chars,
         mappings = {
           i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
           n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
@@ -65,7 +65,7 @@ return {
           "--color=never",
         },
         buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or require("wuelnerdotexe.plugin.utils").empty_table
+          opts = opts or require("wuelnerdotexe.plugin.util").empty_table
 
           vim.loop.fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 102400 then return end

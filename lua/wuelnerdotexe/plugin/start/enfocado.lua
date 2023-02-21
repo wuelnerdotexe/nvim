@@ -3,9 +3,9 @@ return {
   lazy = false,
   priority = 1000,
   init = function()
-    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.utils").empty_table)
-    vim.api.nvim_set_option_value("t_Co", 256, require("wuelnerdotexe.plugin.utils").empty_table)
-    vim.api.nvim_set_option_value("background", "dark", require("wuelnerdotexe.plugin.utils").empty_table)
+    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.util").empty_table)
+    vim.api.nvim_set_option_value("t_Co", 256, require("wuelnerdotexe.plugin.util").empty_table)
+    vim.api.nvim_set_option_value("background", "dark", require("wuelnerdotexe.plugin.util").empty_table)
 
     vim.api.nvim_set_var("enfocado_plugins", {
       "aerial",
@@ -36,23 +36,23 @@ return {
       callback = function()
         vim.api.nvim_set_option_value(
           "winblend",
-          require("wuelnerdotexe.plugin.configs").blend,
-          require("wuelnerdotexe.plugin.utils").empty_table
+          require("wuelnerdotexe.plugin.config").blend,
+          require("wuelnerdotexe.plugin.util").empty_table
         )
 
         vim.api.nvim_set_option_value(
           "pumblend",
-          require("wuelnerdotexe.plugin.configs").blend,
-          require("wuelnerdotexe.plugin.utils").empty_table
+          require("wuelnerdotexe.plugin.config").blend,
+          require("wuelnerdotexe.plugin.util").empty_table
         )
 
-        local fillchars = vim.api.nvim_get_option_value("fillchars", require("wuelnerdotexe.plugin.utils").empty_table)
+        local fillchars = vim.api.nvim_get_option_value("fillchars", require("wuelnerdotexe.plugin.util").empty_table)
 
         vim.api.nvim_set_option_value(
           "fillchars",
           fillchars == "" and "vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: "
             or fillchars .. ",vert: ,horiz: ,verthoriz: ,vertleft: ,horizdown: ,horizup: ,vertright: ",
-          require("wuelnerdotexe.plugin.utils").empty_table
+          require("wuelnerdotexe.plugin.util").empty_table
         )
 
         vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e")

@@ -4,7 +4,7 @@ M.open_file_event = { "BufNewFile", "BufRead", "BufAdd" }
 
 M.blend = 10
 
-M.border = { style = "rounded", chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } }
+M.border = false
 
 M.uifiletypes = {
   "aerial",

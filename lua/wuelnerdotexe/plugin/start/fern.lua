@@ -26,7 +26,7 @@ return {
     vim.api.nvim_set_var("fern#default_exclude", [[^\%(\.git\|\.svn\|\.hg\|\CVS\|\.DS_Store\|\Thumbs.db\)$]])
     vim.api.nvim_set_var("fern#disable_default_mappings", 1)
     vim.api.nvim_set_var("fern#disable_drawer_hover_popup", 1)
-    vim.api.nvim_set_var("fern#drawer_width", require("wuelnerdotexe.plugin.utils").get_sidebar_width())
+    vim.api.nvim_set_var("fern#drawer_width", require("wuelnerdotexe.plugin.util").get_sidebar_width())
     vim.api.nvim_set_var("fern#mark_symbol", "")
   end,
   config = function()

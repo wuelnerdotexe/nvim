@@ -2,25 +2,28 @@ return {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
+    dependencies = "windwp/nvim-autopairs",
     config = function()
-      vim.api.nvim_set_option_value(
-        "completeopt",
-        "menu,menuone,noselect",
-        require("wuelnerdotexe.plugin.utils").empty_table
-      )
-
       require("cmp").setup({
         enabled = function()
           return (
             vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
             or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
           )
-            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.plugin.utils").empty_table) == ""
-            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.plugin.utils").empty_table) == ""
+            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.plugin.util").empty_table) == ""
+            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.plugin.util").empty_table) == ""
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),
-        snippet = { expand = function(args) require("luasnip").lsp_expand(args.body) end },
+        snippet = {
+          expand = function(args)
+            if package.loaded["luasnip"] then
+              require("luasnip").lsp_expand(args.body)
+            else
+              error("snippet engine is not configured.")
+            end
+          end,
+        },
         formatting = {
           fields = { "abbr", "kind" },
           format = function(entry, vim_item)
@@ -43,7 +46,7 @@ return {
             end
 
             vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine"
-              or require("wuelnerdotexe.plugin.configs").kind_icons[vim_item.kind] .. " " .. vim_item.kind
+              or require("wuelnerdotexe.plugin.config").kind_icons[vim_item.kind] .. " " .. vim_item.kind
 
             return vim_item
           end,
@@ -72,14 +75,14 @@ return {
         window = {
           completion = { scrolloff = 3 },
           documentation = {
-            border = require("wuelnerdotexe.plugin.configs").border.style,
+            border = require("wuelnerdotexe.plugin.util").get_border().chars,
             winhighlight = "FloatBorder:FloatBorder",
           },
         },
       })
 
       require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-      require("cmp").setup.filetype(require("wuelnerdotexe.plugin.configs").uifiletypes, { enabled = false })
+      require("cmp").setup.filetype(require("wuelnerdotexe.plugin.config").uifiletypes, { enabled = false })
     end,
   },
   { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
@@ -114,13 +117,13 @@ return {
     config = function()
       local ignored_file_types = {}
 
-      for _, filetype in ipairs(require("wuelnerdotexe.plugin.configs").uifiletypes) do
+      for _, filetype in ipairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
         ignored_file_types[filetype] = true
       end
 
       vim.schedule(function() require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types }) end)
     end,
   },
-  { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" } },
+  { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
   { "jackieaskins/cmp-emmet", build = "npm run release", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
 }

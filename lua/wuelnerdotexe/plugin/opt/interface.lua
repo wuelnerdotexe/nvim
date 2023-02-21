@@ -1,3 +1,5 @@
+local border = require("wuelnerdotexe.plugin.util").get_border()
+
 return {
   {
     "stevearc/dressing.nvim",
@@ -6,7 +8,7 @@ return {
       require("dressing").setup({
         input = {
           insert_only = false,
-          border = require("wuelnerdotexe.plugin.configs").border.style,
+          border = border.chars,
           win_options = { wrap = true },
           override = function(conf)
             conf.col = -1
@@ -19,16 +21,16 @@ return {
           backend = { "nui", "builtin" },
           nui = {
             win_options = {
-              winblend = require("wuelnerdotexe.plugin.configs").blend,
+              winblend = require("wuelnerdotexe.plugin.config").blend,
               cursorline = true,
               winhighlight = "CursorLine:PmenuSel",
             },
-            border = { style = require("wuelnerdotexe.plugin.configs").border.style },
+            border = { style = border.chars },
           },
           builtin = {
-            border = require("wuelnerdotexe.plugin.configs").border.style,
+            border = border.chars,
             win_options = {
-              winblend = require("wuelnerdotexe.plugin.configs").blend,
+              winblend = require("wuelnerdotexe.plugin.config").blend,
               cursorline = true,
               winhighlight = "CursorLine:PmenuSel",
             },
@@ -44,16 +46,16 @@ return {
     event = "UIEnter",
     dependencies = "MunifTanjim/nui.nvim",
     config = function()
-      vim.api.nvim_set_option_value("cmdheight", 0, require("wuelnerdotexe.plugin.utils").empty_table)
-      vim.api.nvim_set_option_value("showcmd", false, require("wuelnerdotexe.plugin.utils").empty_table)
-      vim.api.nvim_set_option_value("showmode", false, require("wuelnerdotexe.plugin.utils").empty_table)
+      vim.api.nvim_set_option_value("cmdheight", 0, require("wuelnerdotexe.plugin.util").empty_table)
+      vim.api.nvim_set_option_value("showcmd", false, require("wuelnerdotexe.plugin.util").empty_table)
+      vim.api.nvim_set_option_value("showmode", false, require("wuelnerdotexe.plugin.util").empty_table)
       vim.api.nvim_set_option_value(
         "shortmess",
-        vim.api.nvim_get_option_value("shortmess", require("wuelnerdotexe.plugin.utils").empty_table) .. "Wc",
-        require("wuelnerdotexe.plugin.utils").empty_table
+        vim.api.nvim_get_option_value("shortmess", require("wuelnerdotexe.plugin.util").empty_table) .. "Wc",
+        require("wuelnerdotexe.plugin.util").empty_table
       )
 
-      local border_style = { border = { style = require("wuelnerdotexe.plugin.configs").border.style } }
+      local borderstyle = { border = { style = border.style } }
 
       require("noice").setup({
         cmdline = { view = "cmdline" },
@@ -66,7 +68,7 @@ return {
             ["cmp.entry.get_documentation"] = true,
           },
         },
-        presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = true },
+        presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = border.enabled },
         throttle = 42,
         views = {
           split = {
@@ -74,10 +76,14 @@ return {
             size = "25%",
             win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
           },
-          popup = border_style,
-          hover = border_style,
-          cmdline_popup = border_style,
-          confirm = border_style,
+          popup = borderstyle,
+          hover = { border = { style = border.chars }, position = { row = 2, col = 2 } },
+          mini = {
+            border = { style = border.style },
+            win_options = { winblend = require("wuelnerdotexe.plugin.config").blend },
+          },
+          cmdline_popup = borderstyle,
+          confirm = borderstyle,
         },
       })
 

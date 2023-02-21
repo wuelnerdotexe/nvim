@@ -60,13 +60,15 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
+
 return {
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
       "b0o/schemastore.nvim",
-      { "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
       { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
         "williamboman/mason-lspconfig.nvim",
@@ -92,10 +94,10 @@ return {
     },
     config = function()
       vim.diagnostic.config({
-        signs = { priority = require("wuelnerdotexe.plugin.configs").signs_priority.diagnostic },
+        signs = { priority = require("wuelnerdotexe.plugin.config").signs_priority.diagnostic },
         virtual_text = false,
         virtual_lines = true,
-        float = { header = { "Diagnostics", "Title" }, border = require("wuelnerdotexe.plugin.configs").border.style },
+        float = { header = { "Diagnostics", "Title" }, border = borderchars },
         update_in_insert = true,
         severity_sort = true,
       })
@@ -103,13 +105,13 @@ return {
       local ref_floating_preview = vim.lsp.util.open_floating_preview
 
       vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-        opts = opts or require("wuelnerdotexe.plugin.utils").empty_table
-        opts.border = require("wuelnerdotexe.plugin.configs").border.style
+        opts = opts or require("wuelnerdotexe.plugin.util").empty_table
+        opts.border = borderchars
 
         return ref_floating_preview(contents, syntax, opts, ...)
       end
 
-      require("lspconfig.ui.windows").default_options.border = require("wuelnerdotexe.plugin.configs").border.style
+      require("lspconfig.ui.windows").default_options.border = borderchars
 
       local flags = { debounce_text_changes = 284 }
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -188,7 +190,7 @@ return {
     },
     config = function()
       require("null-ls").setup({
-        border = require("wuelnerdotexe.plugin.configs").border.style,
+        border = borderchars,
         update_in_insert = true,
         debounce = 284,
         on_attach = on_attach,
@@ -223,10 +225,10 @@ return {
   },
   {
     "kosayoda/nvim-lightbulb",
-    event = require("wuelnerdotexe.plugin.configs").open_file_event,
+    event = require("wuelnerdotexe.plugin.config").open_file_event,
     config = function()
       require("nvim-lightbulb").setup({
-        sign = { priority = require("wuelnerdotexe.plugin.configs").signs_priority.lightbulb },
+        sign = { priority = require("wuelnerdotexe.plugin.config").signs_priority.lightbulb },
         autocmd = { enabled = true },
       })
 
@@ -238,7 +240,7 @@ return {
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = require("wuelnerdotexe.plugin.configs").open_file_event,
+    event = require("wuelnerdotexe.plugin.config").open_file_event,
     config = function()
       require("lsp_lines").setup()
 
