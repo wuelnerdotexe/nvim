@@ -15,7 +15,9 @@ My personal Neovim setup written in Lua.
 - [Installation](#installation)
 - [Keymaps](#keymaps)
   - [General](#general)
-  - [Folders explorer](#folders-explorer)
+  - [Explorer](#explorer)
+    - [Folders Explorer](#folders-explorer)
+    - [Git Explorer](#git-explorer)
   - [Windows](#windows)
   - [Buffers](#buffers)
   - [Tabs](#tabs)
@@ -39,7 +41,7 @@ The main features and plugins provided by this setup are as follows:
 - 🧠 Smooth times based on scientific research.
 - 🫴 Lazy loading of plugins with [lazy.nvim](https://github.com/folke/lazy.nvim).
 - ⚡ Modern Vim's native options by [human.vim](https://github.com/wuelnerdotexe/human.vim).
-- 📂 Robust folders explorer with [fern.vim](https://github.com/lambdalisue/fern.vim).
+- 📂 Robust folders explorer with [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim).
 - 🔭 Powerful fuzzy finder with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 - 🌳 Advanced syntax recognition with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - 💡 Neovim native language server protocol.
@@ -98,34 +100,56 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
 | Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
 | Normal  | `<leader>` + `w` + `f` | Find words in the current directory |
+| Normal  | `<leader>` + `g` + `t` | Toggle the git explorer             |
 | Normal  | `<leader>` + `g` + `f` | Find files from git status          |
 | Normal  | `<leader>` + `r` + `f` | Find resume                         |
 | Normal  | `<leader>` + `s` + `t` | Toggle document symbols             |
 | Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
 | Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal              |
 
-### Folders explorer
+### Explorer
 
-| VI Mode |         Keymap          | Description                                 |
-| :-----: | :---------------------: | ------------------------------------------- |
-| Normal  |           `>`           | Enter directory                             |
-| Normal  |           `<`           | Leave directory                             |
-| Normal  |          `TAB`          | Toggle selection and move to next selection |
-| Normal  |     `SHIFT` + `TAB`     | Toggle selection and move to prev selection |
-| Normal  |           `o`           | Open node                                   |
-| Normal  | Double left mouse click | Expand or collapse node                     |
-| Normal  |         `ENTER`         | Expand or collapse node                     |
-| Normal  |      `CTRL` + `t`       | Open in a new tab                           |
-| Normal  |      `CTRL` + `s`       | Open in a new split                         |
-| Normal  |      `CTRL` + `v`       | Open to the side                            |
-| Normal  |           `n`           | New path                                    |
-| Normal  |        `n` + `f`        | New file                                    |
-| Normal  |        `n` + `d`        | New directory                               |
-| Normal  |           `m`           | Move node                                   |
-| Normal  |           `c`           | Copy node                                   |
-| Normal  |           `d`           | Delete node                                 |
-| Normal  |           `q`           | Exit                                        |
-| Normal  |         `<F5>`          | Refresh the folders explorer                |
+| VI Mode |         Keymap          | Description                  |
+| :-----: | :---------------------: | ---------------------------- |
+| Normal  | Double left mouse click | Expand/open or collapse node |
+| Normal  |         `ENTER`         | Expand/open or collapse node |
+| Normal  |      `CTRL` + `t`       | Open in a new tab            |
+| Normal  |      `CTRL` + `s`       | Open in a new split          |
+| Normal  |      `CTRL` + `v`       | Open to the side             |
+| Normal  |           `a`           | Add node                     |
+| Normal  |           `r`           | Rename node                  |
+| Normal  |           `m`           | Move node                    |
+| Normal  |           `c`           | Copy node                    |
+| Normal  |           `d`           | Delete node                  |
+| Normal  |           `y`           | Copy node to clipboard       |
+| Normal  |           `x`           | Cut node to clipboard        |
+| Normal  |           `p`           | Paste node from clipboard    |
+| Normal  | `<localleader>` + `pt`  | Toggle preview               |
+| Normal  |           `q`           | Exit                         |
+| Normal  |         `<F5>`          | Refresh the explorer         |
+
+#### Folders Explorer
+
+| VI Mode |    Keymap    | Description                      |
+| :-----: | :----------: | -------------------------------- |
+| Normal  |     `>`      | Enter directory                  |
+| Normal  |     `<`      | Leave directory                  |
+| Normal  |     `/`      | Fuzzy finder                     |
+| Normal  | `CTRL` + `f` | Filter nodes                     |
+| Normal  |   `<Esc>`    | Clear filter                     |
+| Normal  |  `[` + `g`   | Go to previous git modified node |
+| Normal  |  `]` + `g`   | Go to next git modified node     |
+
+#### Git Explorer
+
+| VI Mode |  Keymap   | Description      |
+| :-----: | :-------: | ---------------- |
+| Normal  | `g` + `a` | Git add file     |
+| Normal  | `g` + `u` | Git unstage file |
+| Normal  | `g` + `r` | Git revert file  |
+| Normal  | `g` + `A` | Git add all      |
+| Normal  | `g` + `c` | Git commit       |
+| Normal  | `g` + `p` | Git push         |
 
 ### Windows
 
