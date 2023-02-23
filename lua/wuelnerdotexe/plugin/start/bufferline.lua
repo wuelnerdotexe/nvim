@@ -2,21 +2,20 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "UIEnter",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
-      vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.util").empty_table)
+      vim.api.nvim_set_option_value("termguicolors", true, TBL)
 
       require("bufferline").setup({
         options = {
-          max_name_length = 14,
-          max_prefix_length = 14,
-          tab_size = 18,
+          max_name_length = 16,
+          max_prefix_length = 16,
+          tab_size = 20,
           indicator = { icon = "▎", style = "icon" },
           offsets = {
-            { filetype = "aerial", text = "OUTLINE EXPLORER", highlight = "Title", separator = false },
-            { filetype = "fern", text = "FOLDERS EXPLORER", highlight = "Title", separator = false },
+            { filetype = "aerial", text = "OUTLINE", highlight = "Title", separator = false },
+            { filetype = "neo-tree", text = "EXPLORER", highlight = "Title", separator = false },
           },
-          show_buffer_icons = false,
-          show_buffer_default_icon = false,
           show_close_icon = false,
           separator_style = { "▎", "▎" },
         },

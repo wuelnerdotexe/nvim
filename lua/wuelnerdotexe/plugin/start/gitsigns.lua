@@ -14,7 +14,7 @@ return {
       current_line_blame_opts = { delay = 42 },
       sign_priority = require("wuelnerdotexe.plugin.config").signs_priority.git,
       update_debounce = 284,
-      preview_config = { border = require("wuelnerdotexe.plugin.util").get_border().chars },
+      preview_config = { border = require("wuelnerdotexe.plugin.util").get_border().chars, row = 1 },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
           callback = function() require("gitsigns").reset_hunk() end,

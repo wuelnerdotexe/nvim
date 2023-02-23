@@ -22,6 +22,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-tree/nvim-web-devicons",
     "gnikdroy/projections.nvim",
   },
   config = function()
@@ -65,7 +66,7 @@ return {
           "--color=never",
         },
         buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or require("wuelnerdotexe.plugin.util").empty_table
+          opts = opts or TBL
 
           vim.loop.fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 102400 then return end

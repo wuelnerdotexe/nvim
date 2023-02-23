@@ -1,14 +1,14 @@
-local border = require("wuelnerdotexe.plugin.util").get_border()
-
 return {
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     config = function()
+      local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
+
       require("dressing").setup({
         input = {
           insert_only = false,
-          border = border.chars,
+          border = borderchars,
           win_options = { wrap = true },
           override = function(conf)
             conf.col = -1
@@ -25,10 +25,10 @@ return {
               cursorline = true,
               winhighlight = "CursorLine:PmenuSel",
             },
-            border = { style = border.chars },
+            border = { style = borderchars },
           },
           builtin = {
-            border = border.chars,
+            border = borderchars,
             win_options = {
               winblend = require("wuelnerdotexe.plugin.config").blend,
               cursorline = true,
@@ -45,16 +45,14 @@ return {
     cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
     event = "UIEnter",
     dependencies = "MunifTanjim/nui.nvim",
+    deactivate = function() require("noice").disable() end,
     config = function()
-      vim.api.nvim_set_option_value("cmdheight", 0, require("wuelnerdotexe.plugin.util").empty_table)
-      vim.api.nvim_set_option_value("showcmd", false, require("wuelnerdotexe.plugin.util").empty_table)
-      vim.api.nvim_set_option_value("showmode", false, require("wuelnerdotexe.plugin.util").empty_table)
-      vim.api.nvim_set_option_value(
-        "shortmess",
-        vim.api.nvim_get_option_value("shortmess", require("wuelnerdotexe.plugin.util").empty_table) .. "Wc",
-        require("wuelnerdotexe.plugin.util").empty_table
-      )
+      vim.api.nvim_set_option_value("cmdheight", 0, TBL)
+      vim.api.nvim_set_option_value("showcmd", false, TBL)
+      vim.api.nvim_set_option_value("showmode", false, TBL)
+      vim.api.nvim_set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", TBL) .. "Wc", TBL)
 
+      local border = require("wuelnerdotexe.plugin.util").get_border()
       local borderstyle = { border = { style = border.style } }
 
       require("noice").setup({
@@ -79,6 +77,8 @@ return {
           popup = borderstyle,
           hover = { border = { style = border.chars }, position = { row = 2, col = 2 } },
           mini = {
+            timeout = 3000,
+            position = { row = border.enabled and -2 or -1 },
             border = { style = border.style },
             win_options = { winblend = require("wuelnerdotexe.plugin.config").blend },
           },

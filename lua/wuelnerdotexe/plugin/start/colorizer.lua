@@ -2,7 +2,7 @@ return {
   "NvChad/nvim-colorizer.lua",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   config = function()
-    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.util").empty_table)
+    vim.api.nvim_set_option_value("termguicolors", true, TBL)
 
     require("colorizer").setup({
       user_default_options = {

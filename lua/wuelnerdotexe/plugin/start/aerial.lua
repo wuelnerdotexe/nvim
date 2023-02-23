@@ -2,15 +2,15 @@ return {
   "stevearc/aerial.nvim",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   config = function()
-    vim.api.nvim_set_option_value("foldmethod", "manual", require("wuelnerdotexe.plugin.util").empty_table)
+    vim.api.nvim_set_option_value("foldmethod", "manual", TBL)
 
     local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
 
     require("aerial").setup({
       layout = {
-        max_width = sidebar_width,
+        max_width = { sidebar_width, 0.25 },
         width = sidebar_width,
-        min_width = sidebar_width,
+        min_width = { sidebar_width, 0.25 },
         win_opts = { signcolumn = "yes:1", cursorline = true },
         default_direction = "right",
         placement = "edge",

@@ -3,8 +3,8 @@ return {
   event = "UIEnter",
   dependencies = "wuelnerdotexe/vim-enfocado",
   config = function()
-    vim.api.nvim_set_option_value("ruler", false, require("wuelnerdotexe.plugin.util").empty_table)
-    vim.api.nvim_set_option_value("termguicolors", true, require("wuelnerdotexe.plugin.util").empty_table)
+    vim.api.nvim_set_option_value("ruler", false, TBL)
+    vim.api.nvim_set_option_value("termguicolors", true, TBL)
 
     local components = { active = {}, inactive = {} }
 
@@ -46,7 +46,7 @@ return {
 
     components.active[1][5] = {
       enabled = function()
-        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.util").empty_table) == 0
+        return vim.api.nvim_get_option_value("cmdheight", TBL) == 0
           and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
       end,
       provider = function() return tostring(require("noice").api.statusline.mode.get()) end,
@@ -65,7 +65,7 @@ return {
       enabled = function()
         return require("feline.providers.lsp").diagnostics_exist()
           or (
-            vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.util").empty_table) == 0
+            vim.api.nvim_get_option_value("cmdheight", TBL) == 0
             and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
           )
       end,
@@ -81,9 +81,7 @@ return {
     }
 
     components.active[1][8] = {
-      enabled = function()
-        return vim.api.nvim_get_option_value("cmdheight", require("wuelnerdotexe.plugin.util").empty_table) == 0
-      end,
+      enabled = function() return vim.api.nvim_get_option_value("cmdheight", TBL) == 0 end,
       provider = { name = "vi_mode", opts = { padding = "center" } },
       left_sep = " ",
       hl = function()
@@ -164,8 +162,7 @@ return {
 
     components.active[3][3] = {
       provider = function()
-        local ok, sleuth_indicator =
-          pcall(vim.api.nvim_call_function, "SleuthIndicator", require("wuelnerdotexe.plugin.util").empty_table)
+        local ok, sleuth_indicator = pcall(vim.api.nvim_call_function, "SleuthIndicator", TBL)
 
         if not ok then return "" end
 
@@ -206,8 +203,7 @@ return {
       truncate_hide = true,
     }
 
-    local enfocado_colors =
-      vim.api.nvim_call_function("enfocado#getColorScheme", require("wuelnerdotexe.plugin.util").empty_table)
+    local enfocado_colors = vim.api.nvim_call_function("enfocado#getColorScheme", TBL)
 
     require("feline").setup({
       theme = {
@@ -276,7 +272,10 @@ return {
       },
       components = components,
       force_inactive = { filetypes = { "^nerdterm$" }, buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
-      disable = { filetypes = { "^aerial$", "^fern$" }, buftypes = { "^prompt$" } },
+      disable = {
+        buftypes = { "^prompt$" },
+        filetypes = { "^aerial$", "^lazy$", "^lspinfo$", "^mason$", "^neo%-tree$", "^null%-ls%-info$" },
+      },
     })
 
     local winbar_components = { active = {}, inactive = {} }

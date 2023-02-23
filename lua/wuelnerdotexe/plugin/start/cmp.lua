@@ -4,14 +4,16 @@ return {
     lazy = true,
     dependencies = "windwp/nvim-autopairs",
     config = function()
+      vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", TBL)
+
       require("cmp").setup({
         enabled = function()
           return (
             vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
             or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
           )
-            and vim.api.nvim_call_function("reg_recording", require("wuelnerdotexe.plugin.util").empty_table) == ""
-            and vim.api.nvim_call_function("reg_executing", require("wuelnerdotexe.plugin.util").empty_table) == ""
+            and vim.api.nvim_call_function("reg_recording", TBL) == ""
+            and vim.api.nvim_call_function("reg_executing", TBL) == ""
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
         mapping = require("cmp").mapping.preset.insert(),

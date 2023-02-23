@@ -9,7 +9,7 @@ return {
     "<C-RightMouse>",
     "<M-C-RightMouse>",
     { "<C-n>", mode = { "n", "x" } },
-    { "<Bslash><Bslash>", mode = { "n", "x" } },
+    { "<Bslash><Bslash><Bslash>", mode = { "n", "x" } },
   },
   init = function()
     vim.api.nvim_set_var("VM_show_warnings", 0)

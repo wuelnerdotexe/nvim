@@ -1,67 +1,3 @@
-local on_attach = function(client, bufnr)
-  if client.supports_method("textDocument/completion") then
-    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-  end
-
-  if client.supports_method("textDocument/publishDiagnostics") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dp", "", { callback = function() vim.diagnostic.open_float() end })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dl", "", { callback = function() vim.diagnostic.setloclist() end })
-
-    local goto_next_repeatable, goto_prev_repeatable =
-      require("nvim-treesitter.textobjects.repeatable_move").make_repeatable_move_pair(
-        vim.diagnostic.goto_next,
-        vim.diagnostic.goto_prev
-      )
-
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "", { callback = goto_next_repeatable })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "", { callback = goto_prev_repeatable })
-  end
-
-  if client.supports_method("textDocument/hover") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "", { callback = function() vim.lsp.buf.hover() end })
-  end
-
-  if client.supports_method("textDocument/signatureHelp") then
-    vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-k>", "", { callback = function() vim.lsp.buf.signature_help() end })
-  end
-
-  if client.supports_method("textDocument/rename") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sr", "", { callback = function() vim.lsp.buf.rename() end })
-  end
-
-  if client.supports_method("textDocument/references") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rl", "", { callback = function() vim.lsp.buf.references() end })
-  end
-
-  if client.supports_method("textDocument/definition") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "", { callback = function() vim.lsp.buf.definition() end })
-  end
-
-  if client.supports_method("textDocument/implementation") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "", { callback = function() vim.lsp.buf.implementation() end })
-  end
-
-  if client.supports_method("textDocument/codeAction") then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "", { callback = function() vim.lsp.buf.code_action() end })
-  end
-
-  if client.supports_method("textDocument/formatting") then
-    client.server_capabilities.documentFormattingProvider = true
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cf", "", {
-      callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
-    })
-  end
-
-  if client.supports_method("textDocument/rangeFormatting") then
-    client.server_capabilities.documentRangeFormattingProvider = true
-    vim.api.nvim_buf_set_keymap(bufnr, "x", "<leader>cf", "", {
-      callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
-    })
-  end
-end
-
-local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -93,6 +29,8 @@ return {
       },
     },
     config = function()
+      local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
+
       vim.diagnostic.config({
         signs = { priority = require("wuelnerdotexe.plugin.config").signs_priority.diagnostic },
         virtual_text = false,
@@ -105,7 +43,7 @@ return {
       local ref_floating_preview = vim.lsp.util.open_floating_preview
 
       vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-        opts = opts or require("wuelnerdotexe.plugin.util").empty_table
+        opts = opts or TBL
         opts.border = borderchars
 
         return ref_floating_preview(contents, syntax, opts, ...)
@@ -119,6 +57,8 @@ return {
       capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+      local on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end
 
       require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
       require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
@@ -190,10 +130,10 @@ return {
     },
     config = function()
       require("null-ls").setup({
-        border = borderchars,
+        border = require("wuelnerdotexe.plugin.util").get_border().chars,
         update_in_insert = true,
         debounce = 284,
-        on_attach = on_attach,
+        on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end,
         sources = {
           require("null-ls").builtins.diagnostics.markdownlint,
           require("null-ls").builtins.diagnostics.hadolint,

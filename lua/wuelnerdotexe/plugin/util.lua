@@ -1,34 +1,40 @@
-local M = {}
+local args
 local border
 local sidebar_width
 
-M.empty_table = {}
+local M = {}
+
+M.empty_tbl = {}
+
+M.enter_with_args = function()
+  if args ~= nil then return args end
+
+  args = vim.api.nvim_call_function("argc", M.empty_tbl) == 1 and true or false
+
+  return args
+end
 
 M.get_sidebar_width = function()
-  if sidebar_width then
-    return sidebar_width
-  else
-    local columns = vim.api.nvim_get_option_value("columns", M.empty_table)
-    sidebar_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
+  if sidebar_width ~= nil then return sidebar_width end
 
-    return sidebar_width
-  end
+  local columns = vim.api.nvim_get_option_value("columns", M.empty_tbl)
+  sidebar_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
+
+  return sidebar_width
 end
 
 M.get_border = function()
-  if border then
-    return border
-  else
-    if not require("wuelnerdotexe.plugin.config").border then
-      border = { enabled = false, style = "none", chars = { " ", " ", " ", " ", " ", " ", " ", " " } }
+  if border ~= nil then return border end
 
-      return border
-    end
-
-    border = { enabled = true, style = "rounded", chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } }
+  if not require("wuelnerdotexe.plugin.config").border then
+    border = { enabled = false, style = "none", chars = { " ", " ", " ", " ", " ", " ", " ", " " } }
 
     return border
   end
+
+  border = { enabled = true, style = "rounded", chars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } }
+
+  return border
 end
 
 return M
