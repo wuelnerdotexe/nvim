@@ -8,9 +8,9 @@ build: clean
 	docker run --rm -v wuelner-nvim-store:/root/.local/share/nvim wuelner-nvim git clone --filter=blob:none https://github.com/folke/lazy.nvim.git /root/.local/share/nvim/lazy/lazy.nvim
 
 clean::
-	unlink ~/.local/bin/wnvim || true
+	unlink ~/.local/bin/wvim || true
 	docker volume rm wuelner-nvim-config || true
 	docker volume rm wuelner-nvim-store || true
 
 install::
-	ln -s $(shell pwd)/wnvim ~/.local/bin/.
+	ln -s $(shell pwd)/wvim ~/.local/bin/.

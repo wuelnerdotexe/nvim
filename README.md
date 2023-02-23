@@ -294,7 +294,7 @@ In order for the **[Enfocado](https://wuelnerdotexe.github.io/enfocado)'s Human 
 If you would like to test my configuration without overriting yours or simply run neovim with my configuration in a container now is possible.
 You must have docker installed, and your user should be able to run docker without sudo command (withou this you may need to run your the following commands as sudo)
 Run the command `make build` this will prepare everything for you, the first time you run this may take some moment to download the necessary files
-from there you can just execute the file `wnvim` this will mount the current directory and since it runs in a container will not have access to other folders.
+from there you can just execute the file `wvim` this will mount the current directory and since it runs in a container will not have access to other folders.
 Even changes done in the config directory in your machine will not affect the content of the container given that the containers during the build process created a copy of the configuration.
 If you would like to continue using neovim in this way you can run `make install` which will create a symlink to your `~/.local/bin` directory which is expected to be part of your PATH if is not you should add it in your `.bashrc`, `.profile`, or `.zshrc` depending on your configuration
 The way the container is run the contents of the folders `~/.config/nvim` and `~/.local/share/nvim` are persisted in volumes of docker, running the build again will clean these.
