@@ -165,7 +165,7 @@ return {
   },
   {
     "kosayoda/nvim-lightbulb",
-    event = require("wuelnerdotexe.plugin.config").open_file_event,
+    event = "LspAttach",
     config = function()
       require("nvim-lightbulb").setup({
         sign = { priority = require("wuelnerdotexe.plugin.config").signs_priority.lightbulb },
@@ -180,7 +180,7 @@ return {
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = require("wuelnerdotexe.plugin.config").open_file_event,
+    event = "LspAttach",
     config = function()
       require("lsp_lines").setup()
 
