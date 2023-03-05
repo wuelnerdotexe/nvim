@@ -77,7 +77,7 @@ return {
         window = {
           completion = { scrolloff = 3 },
           documentation = {
-            border = require("wuelnerdotexe.plugin.util").get_border().chars,
+            border = require("wuelnerdotexe.plugin.util").get_border().style,
             winhighlight = "FloatBorder:FloatBorder",
           },
         },

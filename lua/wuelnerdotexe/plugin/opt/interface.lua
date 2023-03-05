@@ -3,12 +3,12 @@ return {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     config = function()
-      local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
+      local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
 
       require("dressing").setup({
         input = {
           insert_only = false,
-          border = borderchars,
+          border = borderstyle,
           win_options = { wrap = true },
           override = function(conf)
             conf.col = -1
@@ -25,10 +25,10 @@ return {
               cursorline = true,
               winhighlight = "CursorLine:PmenuSel",
             },
-            border = { style = borderchars },
+            border = { style = borderstyle },
           },
           builtin = {
-            border = borderchars,
+            border = borderstyle,
             win_options = {
               winblend = require("wuelnerdotexe.plugin.config").blend,
               cursorline = true,
@@ -75,7 +75,7 @@ return {
             win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
           },
           popup = borderstyle,
-          hover = { border = { style = border.chars }, position = { row = 2, col = 2 } },
+          hover = { border = { style = border.style }, position = { row = 2, col = 2 } },
           mini = {
             timeout = 3000,
             position = { row = border.enabled and -2 or -1 },

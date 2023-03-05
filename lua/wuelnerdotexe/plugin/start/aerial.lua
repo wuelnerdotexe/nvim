@@ -48,7 +48,7 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = require("wuelnerdotexe.plugin.util").get_border().chars, relative = "editor" },
+      float = { border = require("wuelnerdotexe.plugin.util").get_border().style, relative = "editor" },
       lsp = { diagnostics_trigger_update = false, update_delay = 284 },
       treesitter = { update_delay = 284 },
       markdown = { update_delay = 284 },

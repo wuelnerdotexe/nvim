@@ -29,13 +29,13 @@ return {
       },
     },
     config = function()
-      local borderchars = require("wuelnerdotexe.plugin.util").get_border().chars
+      local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
 
       vim.diagnostic.config({
         signs = { priority = require("wuelnerdotexe.plugin.config").signs_priority.diagnostic },
         virtual_text = false,
         virtual_lines = true,
-        float = { header = { "Diagnostics", "Title" }, border = borderchars },
+        float = { header = { "Diagnostics", "Title" }, border = borderstyle },
         update_in_insert = true,
         severity_sort = true,
       })
@@ -44,12 +44,12 @@ return {
 
       vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
         opts = opts or TBL
-        opts.border = borderchars
+        opts.border = borderstyle
 
         return ref_floating_preview(contents, syntax, opts, ...)
       end
 
-      require("lspconfig.ui.windows").default_options.border = borderchars
+      require("lspconfig.ui.windows").default_options.border = borderstyle
 
       local flags = { debounce_text_changes = 284 }
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -130,7 +130,7 @@ return {
     },
     config = function()
       require("null-ls").setup({
-        border = require("wuelnerdotexe.plugin.util").get_border().chars,
+        border = require("wuelnerdotexe.plugin.util").get_border().style,
         update_in_insert = true,
         debounce = 284,
         on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end,

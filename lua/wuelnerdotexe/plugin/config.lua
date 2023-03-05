@@ -4,7 +4,7 @@ M.open_file_event = { "BufNewFile", "BufRead", "BufAdd" }
 
 M.blend = 10
 
-M.border = false
+M.border = true
 
 M.uifiletypes = {
   "aerial",
