@@ -1,3 +1,5 @@
+TBL = require("wuelnerdotexe.plugin.util").empty_table
+
 local lazypath = vim.api.nvim_call_function("stdpath", { "data" }) .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -6,15 +8,9 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 
-TBL = require("wuelnerdotexe.plugin.util").empty_tbl
 local rtp = vim.api.nvim_get_option_value("rtp", TBL)
 
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, TBL)
-
-vim.api.nvim_set_var("loaded_python3_provider", 0)
-vim.api.nvim_set_var("loaded_node_provider", 0)
-vim.api.nvim_set_var("loaded_ruby_provider", 0)
-vim.api.nvim_set_var("loaded_perl_provider", 0)
 
 require("lazy").setup({
   spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },

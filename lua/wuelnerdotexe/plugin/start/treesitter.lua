@@ -58,9 +58,8 @@ return {
       },
     },
     config = function()
-      local results = {}
-
-      setmetatable(results, { __mode = "kv" })
+      local highlight_disable = {}
+      local enable = { enable = true }
 
       require("nvim-treesitter.configs").setup({
         textobjects = {
@@ -90,7 +89,7 @@ return {
             swap_next = { ["<Tab>"] = "@parameter.inner" },
             swap_previous = { ["<S-Tab>"] = "@parameter.inner" },
           },
-          move = { enable = true },
+          move = enable,
           lsp_interop = { enable = true, peek_definition_code = { ["gD"] = "@*.*" } },
         },
         context_commentstring = { enable = true, enable_autocmd = false },
@@ -100,29 +99,27 @@ return {
         highlight = {
           enable = true,
           disable = function(_, buf)
-            local results_buf = results[buf]
-
-            if results_buf then
-              return results_buf
+            if highlight_disable[buf] then
+              return highlight_disable[buf]
             else
               local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
 
               if stats and stats.size > 102400 then
-                results[buf] = true
+                highlight_disable[buf] = true
 
-                return true
+                return highlight_disable[buf]
               end
             end
           end,
           additional_vim_regex_highlighting = false,
         },
-        indent = { enable = true },
+        indent = enable,
         incremental_selection = {
           enable = true,
           keymaps = { init_selection = "<A-v>", node_incremental = "<C-a>", node_decremental = "<C-x>" },
         },
-        rainbow = { enable = true, extended_mode = false, max_file_lines = 400 },
-        autotag = { enable = true },
+        rainbow = enable,
+        autotag = enable,
         matchup = { enable = true, include_match_words = true },
       })
     end,

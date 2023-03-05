@@ -4,12 +4,12 @@ local sidebar_width
 
 local M = {}
 
-M.empty_tbl = {}
+M.empty_table = {}
 
 M.enter_with_args = function()
   if args ~= nil then return args end
 
-  args = vim.api.nvim_call_function("argc", M.empty_tbl) == 1 and true or false
+  args = vim.api.nvim_call_function("argc", M.empty_table) == 1 and true or false
 
   return args
 end
@@ -17,7 +17,7 @@ end
 M.get_sidebar_width = function()
   if sidebar_width ~= nil then return sidebar_width end
 
-  local columns = vim.api.nvim_get_option_value("columns", M.empty_tbl)
+  local columns = vim.api.nvim_get_option_value("columns", M.empty_table)
   sidebar_width = math.floor((columns / (columns >= 160 and 3 or 2)) / 2)
 
   return sidebar_width
