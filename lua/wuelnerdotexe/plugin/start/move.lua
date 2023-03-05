@@ -1,14 +1,23 @@
 return {
-  "matze/vim-move",
+  "echasnovski/mini.move",
   keys = {
-    { "<A-Left>", "<Plug>MoveCharLeft" },
-    { "<A-Down>", "<Plug>MoveLineDown" },
-    { "<A-Up>", "<Plug>MoveLineUp" },
-    { "<A-Right>", "<Plug>MoveCharRight" },
-    { "<A-Left>", "<Plug>MoveBlockLeft", mode = "v" },
-    { "<A-Down>", "<Plug>MoveBlockDown", mode = "v" },
-    { "<A-Up>", "<Plug>MoveBlockUp", mode = "v" },
-    { "<A-Right>", "<Plug>MoveBlockRight", mode = "v" },
+    { "<A-Left>", mode = { "n", "v" } },
+    { "<A-Down>", mode = { "n", "v" } },
+    { "<A-Up>", mode = { "n", "v" } },
+    { "<A-Right>", mode = { "n", "v" } },
   },
-  init = function() vim.api.nvim_set_var("move_map_keys", 0) end,
+  config = function()
+    require("mini.move").setup({
+      mappings = {
+        left = "<M-Left>",
+        line_left = "<M-Left>",
+        right = "<M-Right>",
+        line_right = "<M-Right>",
+        down = "<M-DOwn>",
+        line_down = "<M-Down>",
+        up = "<M-Up>",
+        line_up = "<M-Up>",
+      },
+    })
+  end,
 }
