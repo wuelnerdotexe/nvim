@@ -46,15 +46,7 @@ return {
         },
         modified = { symbol = "●" },
         git_status = {
-          symbols = {
-            added = "A",
-            deleted = "D",
-            modified = "M",
-            renamed = "R",
-            untracked = "U",
-            ignored = "!",
-            conflict = "C",
-          },
+          symbols = { added = "A", deleted = "D", modified = "M", renamed = "R", untracked = "U", conflict = "C" },
         },
       },
       renderers = {
@@ -140,10 +132,9 @@ return {
           mappings = {
             ["gA"] = "git_add_all",
             ["gu"] = "git_unstage_file",
-            ["ga"] = "git_add_file",
+            ["gs"] = "git_add_file",
             ["gr"] = "git_revert_file",
             ["gc"] = "git_commit",
-            ["gp"] = "git_push",
           },
         },
       },

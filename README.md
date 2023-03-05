@@ -144,12 +144,11 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 | VI Mode |  Keymap   | Description      |
 | :-----: | :-------: | ---------------- |
-| Normal  | `g` + `a` | Git add file     |
+| Normal  | `g` + `s` | Git stage file     |
 | Normal  | `g` + `u` | Git unstage file |
 | Normal  | `g` + `r` | Git revert file  |
 | Normal  | `g` + `A` | Git add all      |
 | Normal  | `g` + `c` | Git commit       |
-| Normal  | `g` + `p` | Git push         |
 
 ### Windows
 
