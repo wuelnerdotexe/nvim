@@ -26,6 +26,7 @@ return {
       "surround",
       "telescope",
       "treesitter",
+      "ts-rainbow2",
       "visual-multi",
       "yanky",
     })
