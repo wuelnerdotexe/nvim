@@ -162,14 +162,19 @@ return {
 
     components.active[3][3] = {
       provider = function()
-        local ok, sleuth_indicator = pcall(vim.api.nvim_call_function, "SleuthIndicator", TBL)
+        local shiftwidth = vim.api.nvim_call_function("shiftwidth", TBL)
+        local tabstop = vim.api.nvim_get_option_value("tabstop", TBL)
 
-        if not ok then return "" end
+        if vim.api.nvim_get_option_value("expandtab", TBL) then
+          return string.upper("Spaces:" .. shiftwidth)
+        elseif shiftwidth == tabstop then
+          return string.upper("Tabs:" .. tabstop)
+        end
 
-        return string.upper(sleuth_indicator)
+        return string.upper("Spaces:" .. shiftwidth .. "," .. "Tabs:" .. tabstop)
       end,
       right_sep = " ",
-      hl = { name = "FelineSleuth" },
+      hl = { name = "FelineIndent" },
       priority = -3,
       truncate_hide = true,
     }
