@@ -1,6 +1,5 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  lazy = true,
   cmd = "Neotree",
   keys = {
     { "<leader>ft", function() vim.api.nvim_command("Neotree . filesystem reveal toggle") end },
