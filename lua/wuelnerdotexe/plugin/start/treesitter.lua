@@ -128,7 +128,7 @@ return {
     end,
   },
   {
-    "mrjones2014/nvim-ts-rainbow",
+    "HiPhish/nvim-ts-rainbow2",
     event = require("wuelnerdotexe.plugin.config").open_file_event,
     dependencies = "nvim-treesitter/nvim-treesitter",
   },

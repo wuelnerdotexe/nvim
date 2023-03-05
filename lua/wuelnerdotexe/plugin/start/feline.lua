@@ -1,5 +1,5 @@
 return {
-  "feline-nvim/feline.nvim",
+  "freddiehaddad/feline.nvim",
   event = "UIEnter",
   dependencies = "wuelnerdotexe/vim-enfocado",
   config = function()
