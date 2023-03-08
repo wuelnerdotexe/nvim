@@ -1,10 +1,12 @@
 local M = {}
 
+M.minimal_setup = false
+
 M.open_file_event = { "BufNewFile", "BufRead", "BufAdd" }
 
 M.blend = 10
 
-M.border = true
+M.border = "rounded"
 
 M.uifiletypes = {
   "aerial",

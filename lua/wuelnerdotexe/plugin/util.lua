@@ -26,8 +26,18 @@ end
 M.get_border = function()
   if border ~= nil then return border end
 
-  if not require("wuelnerdotexe.plugin.config").border then
+  if require("wuelnerdotexe.plugin.config").border == "none" then
     border = { enabled = false, style = "none", chars = { " ", " ", " ", " ", " ", " ", " ", " " } }
+
+    return border
+  elseif require("wuelnerdotexe.plugin.config").border == "single" then
+
+    border = { enabled = true, style = "single", chars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" } }
+
+    return border
+  elseif require("wuelnerdotexe.plugin.config").border == "double" then
+
+    border = { enabled = true, style = "double", chars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" } }
 
     return border
   end

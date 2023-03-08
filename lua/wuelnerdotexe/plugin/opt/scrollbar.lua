@@ -1,7 +1,10 @@
 return {
   "petertriho/nvim-scrollbar",
-  event = "VeryLazy",
+  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  dependencies = "lewis6991/gitsigns.nvim",
   config = function()
+    vim.api.nvim_set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", TBL) .. "I", TBL)
+
     require("scrollbar").setup({
       throttle_ms = 42,
       handle = { highlight = "PmenuSbar" },

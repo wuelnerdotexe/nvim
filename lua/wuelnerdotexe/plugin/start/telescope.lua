@@ -6,6 +6,7 @@ return {
     { "<leader>ff", function() require("telescope.builtin").fd() end },
     { "<leader>of", function() require("telescope.builtin").oldfiles() end },
     { "<leader>mf", function() require("telescope.builtin").marks() end },
+    { "<leader>bf", function() require("telescope.builtin").buffers() end },
     { "<leader>wf", function() require("telescope.builtin").live_grep() end },
     { "<leader>gf", function() require("telescope.builtin").git_status() end },
     {
@@ -46,7 +47,6 @@ return {
         winblend = require("wuelnerdotexe.plugin.config").blend,
         prompt_prefix = "  ",
         selection_caret = "  ",
-        multi_icon = " ",
         borderchars = require("wuelnerdotexe.plugin.util").get_border().chars,
         mappings = {
           i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
@@ -66,7 +66,7 @@ return {
           "--color=never",
         },
         buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or TBL
+          opts = opts or {}
 
           vim.loop.fs_stat(filepath, function(_, stat)
             if not stat or stat.size > 102400 then return end

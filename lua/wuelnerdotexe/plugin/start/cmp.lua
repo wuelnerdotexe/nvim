@@ -114,6 +114,7 @@ return {
   {
     "tzachar/cmp-tabnine",
     build = "./install.sh",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     event = "InsertEnter",
     dependencies = "hrsh7th/nvim-cmp",
     config = function()
@@ -126,6 +127,18 @@ return {
       vim.schedule(function() require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types }) end)
     end,
   },
+  { "hrsh7th/cmp-nvim-lsp", event = "LspAttach", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
   { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
   { "jackieaskins/cmp-emmet", build = "npm run release", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
+  {
+    "rcarriga/cmp-dap",
+    ft = { "dap-repl", "dapui_watches", "dapui_hover" },
+    dependencies = "hrsh7th/nvim-cmp",
+    config = function()
+      require("cmp").setup.filetype(
+        { "dap-repl", "dapui_watches", "dapui_hover" },
+        { sources = require("cmp").config.sources({ { name = "dap", keyword_lenght = 1 } }) }
+      )
+    end,
+  },
 }

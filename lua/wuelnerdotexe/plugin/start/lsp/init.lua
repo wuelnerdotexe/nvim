@@ -1,11 +1,31 @@
+vim.api.nvim_set_option_value("signcolumn", "yes:1", TBL)
+
+local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
+
+vim.diagnostic.config({
+  signs = { priority = require("wuelnerdotexe.plugin.config").signs_priority.diagnostic },
+  virtual_text = false,
+  virtual_lines = true,
+  float = { header = { "Diagnostics", "Title" }, border = borderstyle },
+  update_in_insert = true,
+  severity_sort = true,
+})
+
+local ref_floating_preview = vim.lsp.util.open_floating_preview
+
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = borderstyle
+
+  return ref_floating_preview(contents, syntax, opts, ...)
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
       "b0o/schemastore.nvim",
-      { "hrsh7th/cmp-nvim-lsp", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
-      { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
         "williamboman/mason-lspconfig.nvim",
         dependencies = "williamboman/mason.nvim",
@@ -19,7 +39,6 @@ return {
               "eslint",
               "html",
               "jsonls",
-              "stylelint_lsp",
               "tailwindcss",
               "tsserver",
               "yamlls",
@@ -29,59 +48,42 @@ return {
       },
     },
     config = function()
-      local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
-
-      vim.diagnostic.config({
-        signs = { priority = require("wuelnerdotexe.plugin.config").signs_priority.diagnostic },
-        virtual_text = false,
-        virtual_lines = true,
-        float = { header = { "Diagnostics", "Title" }, border = borderstyle },
-        update_in_insert = true,
-        severity_sort = true,
-      })
-
-      local ref_floating_preview = vim.lsp.util.open_floating_preview
-
-      vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-        opts = opts or TBL
-        opts.border = borderstyle
-
-        return ref_floating_preview(contents, syntax, opts, ...)
-      end
-
       require("lspconfig.ui.windows").default_options.border = borderstyle
 
-      local flags = { debounce_text_changes = 284 }
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-      capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
       local on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end
+      local capabilities = { textDocument = { foldingRange = { dynamicRegistration = false, lineFoldingOnly = true } } }
+      local flags = { debounce_text_changes = 284 }
 
-      require("lspconfig").stylelint_lsp.setup({ on_attach = on_attach, flags = flags })
-      require("lspconfig").eslint.setup({ on_attach = on_attach, flags = flags, settings = { format = false } })
+      local ok_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
-      require("lspconfig").html.setup({
+      if ok_cmp_nvim_lsp then vim.tbl_deep_extend("keep", capabilities, cmp_nvim_lsp.default_capabilities()) end
+
+      require("lspconfig").eslint.setup({
         on_attach = on_attach,
         flags = flags,
         capabilities = capabilities,
+        settings = { format = false },
+      })
+
+      require("lspconfig").html.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = flags,
         init_options = { provideFormatter = false },
       })
 
       require("lspconfig").jsonls.setup({
         on_attach = on_attach,
-        flags = flags,
         capabilities = capabilities,
+        flags = flags,
         init_options = { provideFormatter = false },
         settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
       })
 
       require("lspconfig").yamlls.setup({
         on_attach = on_attach,
-        flags = flags,
         capabilities = capabilities,
+        flags = flags,
         settings = { yaml = { schemas = require("schemastore").json.schemas() } },
       })
 
@@ -89,12 +91,12 @@ return {
 
       require("lspconfig").cssls.setup({
         on_attach = on_attach,
-        flags = flags,
         capabilities = capabilities,
+        flags = flags,
         settings = { css = validate, less = validate, scss = validate },
       })
 
-      local basic_setup = { on_attach = on_attach, flags = flags, capabilities = capabilities }
+      local basic_setup = { on_attach = on_attach, capabilities = capabilities, flags = flags }
 
       require("lspconfig").bashls.setup(basic_setup)
       require("lspconfig").dockerls.setup(basic_setup)
@@ -109,7 +111,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",
-      { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
       {
         "jay-babu/mason-null-ls.nvim",
         dependencies = "williamboman/mason.nvim",
@@ -130,7 +131,7 @@ return {
     },
     config = function()
       require("null-ls").setup({
-        border = require("wuelnerdotexe.plugin.util").get_border().style,
+        border = borderstyle,
         update_in_insert = true,
         debounce = 284,
         on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end,

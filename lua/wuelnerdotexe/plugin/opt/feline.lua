@@ -3,6 +3,7 @@ return {
   event = "UIEnter",
   dependencies = "wuelnerdotexe/vim-enfocado",
   config = function()
+    vim.api.nvim_set_option_value("laststatus", 3, TBL)
     vim.api.nvim_set_option_value("ruler", false, TBL)
     vim.api.nvim_set_option_value("termguicolors", true, TBL)
 
@@ -146,6 +147,7 @@ return {
 
     components.active[3][1] = {
       provider = "file_type",
+      left_sep = " ",
       right_sep = " ",
       hl = { name = "FelineFiletype" },
       priority = -4,

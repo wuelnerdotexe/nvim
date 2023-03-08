@@ -21,17 +21,6 @@ return {
       end,
     },
     {
-      "rcarriga/cmp-dap",
-      dependencies = "hrsh7th/nvim-cmp",
-      config = function()
-        require("cmp").setup.filetype({
-          "dap-repl",
-          "dapui_watches",
-          "dapui_hover",
-        }, { sources = require("cmp").config.sources({ { name = "dap", keyword_lenght = 1 } }) })
-      end,
-    },
-    {
       "jay-babu/mason-nvim-dap.nvim",
       dependencies = "williamboman/mason.nvim",
       config = function() require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } }) end,

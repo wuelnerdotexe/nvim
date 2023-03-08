@@ -1,7 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
-  dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = "nvim-treesitter/nvim-treesitter" },
   config = function()
     require("gitsigns").setup({
       signs = {
@@ -52,17 +51,11 @@ return {
           callback = function() require("gitsigns").diffthis("~") end,
         })
 
-        local next_hunk_repeatable, prev_hunk_repeatable =
-          require("nvim-treesitter.textobjects.repeatable_move").make_repeatable_move_pair(
-            require("gitsigns").next_hunk,
-            require("gitsigns").prev_hunk
-          )
-
         vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", {
           callback = function()
             if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "]h" end
 
-            vim.schedule(function() next_hunk_repeatable() end)
+            vim.schedule(function() require("gitsigns").next_hunk() end)
 
             return "<Ignore>"
           end,
@@ -74,7 +67,7 @@ return {
           callback = function()
             if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "[h" end
 
-            vim.schedule(function() prev_hunk_repeatable() end)
+            vim.schedule(function() require("gitsigns").prev_hunk() end)
 
             return "<Ignore>"
           end,
@@ -83,5 +76,7 @@ return {
         })
       end,
     })
+
+    vim.api.nvim_set_option_value("signcolumn", "yes:1", TBL)
   end,
 }

@@ -11,7 +11,7 @@ return {
         max_width = { sidebar_width, 0.25 },
         width = sidebar_width,
         min_width = { sidebar_width, 0.25 },
-        win_opts = { signcolumn = "yes:1", cursorline = true },
+        win_opts = { cursorline = true },
         default_direction = "right",
         placement = "edge",
       },

@@ -216,7 +216,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 |           VI Mode           |     Keymap     | Description               |
 | :-------------------------: | :------------: | ------------------------- |
-|           Normal            | `g` + `c`+ `c` | Comment the current line  |
+|           Normal            | `g` + `c` + `c` | Comment the current line  |
 | Visual and operator pending |   `g` + `c`    | Comment current selection |
 
 ### Moving text

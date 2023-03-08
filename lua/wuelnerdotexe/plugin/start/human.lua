@@ -17,7 +17,8 @@ return {
     })
   end,
   config = function()
-    vim.api.nvim_set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", TBL) .. "I", TBL)
+    vim.api.nvim_set_option_value("laststatus", 2, TBL)
+    vim.api.nvim_set_option_value("showtabline", 1, TBL)
     vim.api.nvim_set_option_value("spell", false, TBL)
     vim.api.nvim_set_option_value("wrap", false, TBL)
     vim.api.nvim_set_option_value("relativenumber", false, TBL)

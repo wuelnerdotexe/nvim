@@ -7,14 +7,13 @@ return function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dp", "", { callback = function() vim.diagnostic.open_float() end })
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dl", "", { callback = function() vim.diagnostic.setloclist() end })
 
-    local goto_next_repeatable, goto_prev_repeatable =
-      require("nvim-treesitter.textobjects.repeatable_move").make_repeatable_move_pair(
-        vim.diagnostic.goto_next,
-        vim.diagnostic.goto_prev
-      )
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "", {
+      callback = function() vim.diagnostic.goto_next() end,
+    })
 
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "", { callback = goto_next_repeatable })
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "", { callback = goto_prev_repeatable })
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "", {
+      callback = function() vim.diagnostic.goto_prev() end,
+    })
   end
 
   if client.supports_method("textDocument/hover") then

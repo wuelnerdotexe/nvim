@@ -4,6 +4,7 @@ return {
     event = "UIEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
+      vim.api.nvim_set_option_value("showtabline", 2, TBL)
       vim.api.nvim_set_option_value("termguicolors", true, TBL)
 
       require("bufferline").setup({
