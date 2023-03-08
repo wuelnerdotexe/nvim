@@ -85,9 +85,9 @@ return {
       require("lspconfig").tailwindcss.setup(basic_server_setup)
       require("lspconfig").tsserver.setup(basic_server_setup)
 
-      require("lspconfig").eslint.setup(
-        vim.tbl_deep_extend("keep", { settings = { format = false } }, basic_server_setup)
-      )
+      require("lspconfig").eslint.setup(vim.tbl_deep_extend("keep", {
+        settings = { format = false },
+      }, basic_server_setup))
     end,
   },
   {
