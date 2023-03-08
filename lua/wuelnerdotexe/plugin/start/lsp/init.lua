@@ -50,59 +50,44 @@ return {
     config = function()
       require("lspconfig.ui.windows").default_options.border = borderstyle
 
-      local on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end
-      local capabilities = { textDocument = { foldingRange = { dynamicRegistration = false, lineFoldingOnly = true } } }
-      local flags = { debounce_text_changes = 284 }
+      local basic_server_setup = {
+        flags = { debounce_text_changes = 284 },
+        on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.attach")(client, bufnr) end,
+      }
 
       local ok_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
-      if ok_cmp_nvim_lsp then vim.tbl_deep_extend("keep", capabilities, cmp_nvim_lsp.default_capabilities()) end
+      if ok_cmp_nvim_lsp then basic_server_setup.capabilities = cmp_nvim_lsp.default_capabilities() end
 
-      require("lspconfig").eslint.setup({
-        on_attach = on_attach,
-        flags = flags,
-        capabilities = capabilities,
-        settings = { format = false },
-      })
-
-      require("lspconfig").html.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = flags,
-        init_options = { provideFormatter = false },
-      })
-
-      require("lspconfig").jsonls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = flags,
+      require("lspconfig").jsonls.setup(vim.tbl_deep_extend("keep", {
         init_options = { provideFormatter = false },
         settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
-      })
+      }, basic_server_setup))
 
-      require("lspconfig").yamlls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = flags,
+      require("lspconfig").yamlls.setup(vim.tbl_deep_extend("keep", {
         settings = { yaml = { schemas = require("schemastore").json.schemas() } },
-      })
+      }, basic_server_setup))
+
+      require("lspconfig").bashls.setup(basic_server_setup)
+      require("lspconfig").dockerls.setup(basic_server_setup)
+      require("lspconfig").docker_compose_language_service.setup(basic_server_setup)
+
+      require("lspconfig").html.setup(vim.tbl_deep_extend("keep", {
+        init_options = { provideFormatter = false },
+      }, basic_server_setup))
 
       local validate = { validate = false }
 
-      require("lspconfig").cssls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = flags,
+      require("lspconfig").cssls.setup(vim.tbl_deep_extend("keep", {
         settings = { css = validate, less = validate, scss = validate },
-      })
+      }, basic_server_setup))
 
-      local basic_setup = { on_attach = on_attach, capabilities = capabilities, flags = flags }
+      require("lspconfig").tailwindcss.setup(basic_server_setup)
+      require("lspconfig").tsserver.setup(basic_server_setup)
 
-      require("lspconfig").bashls.setup(basic_setup)
-      require("lspconfig").dockerls.setup(basic_setup)
-      require("lspconfig").docker_compose_language_service.setup(basic_setup)
-      require("lspconfig").tsserver.setup(basic_setup)
-      require("lspconfig").tailwindcss.setup(basic_setup)
+      require("lspconfig").eslint.setup(
+        vim.tbl_deep_extend("keep", { settings = { format = false } }, basic_server_setup)
+      )
     end,
   },
   {

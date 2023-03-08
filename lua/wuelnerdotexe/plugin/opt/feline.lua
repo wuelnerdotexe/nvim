@@ -1,5 +1,6 @@
 return {
   "freddiehaddad/feline.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = "UIEnter",
   dependencies = "wuelnerdotexe/vim-enfocado",
   config = function()

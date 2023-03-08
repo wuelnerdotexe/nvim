@@ -1,5 +1,6 @@
 return {
   "RRethy/vim-illuminate",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   config = function()
     require("illuminate").configure({

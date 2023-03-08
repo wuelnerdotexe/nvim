@@ -1,6 +1,7 @@
 return {
   {
     "gen740/SmoothCursor.nvim",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     event = "VeryLazy",
     config = function()
       require("smoothcursor").setup({
@@ -22,6 +23,7 @@ return {
   },
   {
     "tamton-aquib/duck.nvim",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     keys = {
       { "<leader>dh", function() require("duck").hatch() end },
       { "<leader>dc", function() require("duck").cook() end },
@@ -29,6 +31,7 @@ return {
   },
   {
     "echasnovski/mini.animate",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     event = "VeryLazy",
     config = function()
       local timing_linear = require("mini.animate").gen_timing.linear({ duration = 67, unit = "total" })

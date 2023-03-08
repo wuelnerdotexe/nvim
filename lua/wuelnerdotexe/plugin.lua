@@ -12,14 +12,8 @@ local rtp = vim.api.nvim_get_option_value("rtp", TBL)
 
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, TBL)
 
-local imports = { { import = "wuelnerdotexe.plugin.start" } }
-
-if not require("wuelnerdotexe.plugin.config").minimal_setup then
-  table.insert(imports, { import = "wuelnerdotexe.plugin.opt" })
-end
-
 require("lazy").setup({
-  spec = imports,
+  spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },

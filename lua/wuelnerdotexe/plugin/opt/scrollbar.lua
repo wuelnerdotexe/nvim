@@ -1,5 +1,6 @@
 return {
   "petertriho/nvim-scrollbar",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   dependencies = "lewis6991/gitsigns.nvim",
   config = function()

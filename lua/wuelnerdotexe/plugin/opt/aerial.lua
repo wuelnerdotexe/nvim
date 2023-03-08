@@ -1,5 +1,6 @@
 return {
   "stevearc/aerial.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   config = function()
     vim.api.nvim_set_option_value("foldmethod", "manual", TBL)

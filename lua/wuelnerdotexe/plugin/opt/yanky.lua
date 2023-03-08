@@ -2,6 +2,7 @@ local mode = { "n", "x" }
 
 return {
   "gbprod/yanky.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   keys = {
     { "y", "<Plug>(YankyYank)", mode = mode },
     { "p", "<Plug>(YankyPutAfter)", mode = mode },

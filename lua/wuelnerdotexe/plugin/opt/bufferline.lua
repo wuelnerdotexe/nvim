@@ -1,6 +1,7 @@
 return {
   {
     "akinsho/bufferline.nvim",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     event = "UIEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
@@ -33,6 +34,7 @@ return {
   },
   {
     "roobert/bufferline-cycle-windowless.nvim",
+    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     dependencies = "akinsho/bufferline.nvim",
     keys = {
       { "gb", function() vim.api.nvim_command("BufferLineCycleWindowlessNext") end },

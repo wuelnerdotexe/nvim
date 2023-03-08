@@ -1,5 +1,6 @@
 return {
   "stevearc/dressing.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = "VeryLazy",
   config = function()
     local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style

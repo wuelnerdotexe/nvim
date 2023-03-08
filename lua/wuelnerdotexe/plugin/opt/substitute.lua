@@ -1,5 +1,6 @@
 return {
   "gbprod/substitute.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   keys = {
     { "s", function() require("substitute").operator() end },
     { "ss", function() require("substitute").line() end },
