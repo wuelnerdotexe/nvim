@@ -46,7 +46,7 @@ return {
         },
         modified = { symbol = "●" },
         git_status = {
-          symbols = { added = "A", deleted = "D", modified = "M", renamed = "R", untracked = "U", conflict = "C" },
+          symbols = { added = "A", deleted = "D", modified = "M", renamed = "R", untracked = "?", ignored = "!" },
         },
       },
       renderers = {
@@ -123,7 +123,7 @@ return {
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,
-          never_show = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
+          never_show = require("wuelnerdotexe.plugin.config").exclude_explorer_files,
         },
         follow_current_file = true,
       },

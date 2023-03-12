@@ -3,19 +3,20 @@ return {
   cmd = "Telescope",
   keys = {
     { "<leader>pf", function() vim.api.nvim_command("Telescope projections") end },
-    { "<leader>ff", function() require("telescope.builtin").fd() end },
+    { "<leader>ff", function() require("telescope.builtin").find_files() end },
     { "<leader>of", function() require("telescope.builtin").oldfiles() end },
     { "<leader>mf", function() require("telescope.builtin").marks() end },
     { "<leader>bf", function() require("telescope.builtin").buffers() end },
     { "<leader>wf", function() require("telescope.builtin").live_grep() end },
+    { "<leader>wf", function() require("telescope.builtin").grep_string() end, mode = "x" },
     { "<leader>gf", function() require("telescope.builtin").git_status() end },
     {
       "<leader>sf",
-      function() require("telescope.builtin").fd({ prompt_title = "Neovim Setup", cwd = "$HOME/.config/nvim/" }) end,
+      function() require("telescope.builtin").git_files({ prompt_title = "Find Setup files", cwd = "$HOME/.config/nvim/" }) end,
     },
     {
       "<leader>df",
-      function() require("telescope.builtin").fd({ prompt_title = "dotfiles", cwd = "$HOME/dotfiles/" }) end,
+      function() require("telescope.builtin").git_files({ prompt_title = "Find Dotfiles", cwd = "$HOME/dotfiles/" }) end,
     },
     { "<leader>rf", function() require("telescope.builtin").resume() end },
     { "z=", function() require("telescope.builtin").spell_suggest() end },
@@ -27,17 +28,34 @@ return {
     "gnikdroy/projections.nvim",
   },
   config = function()
+    vim.api.nvim_set_option_value("termguicolors", true, TBL)
+
+    local exclude_globs = "{"
+
+    for i, glob in ipairs(require("wuelnerdotexe.plugin.config").exclude_search_files) do
+      exclude_globs = i == 1 and exclude_globs .. glob or exclude_globs .. "," .. glob
+    end
+
+    exclude_globs = exclude_globs .. "}"
+
     require("telescope").setup({
       pickers = {
-        fd = {
-          find_command = {
-            "fd",
-            "-I",
-            "-H",
-            "-E",
-            "{.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,node_modules,bower_components,*.code-search}",
-            "-t",
-            "f",
+        builtin = { include_extensions = true, use_default_opts = true },
+        planets = { show_pluto = true, show_moon = true },
+        buffers = { ignore_current_buffer = true, sort_mru = true },
+        colorscheme = { enable_preview = true },
+        keymaps = { show_plug = false },
+        find_files = { find_command = { "fd", "-I", "-H", "-E", exclude_globs, "-t", "f", "--color", "never" } },
+        git_files = { show_untracked = true },
+        git_status = {
+          git_icons = {
+            added = "A",
+            deleted = "D",
+            changed = "M",
+            renamed = "R",
+            copied = "C",
+            untracked = "?",
+            unmerged = "U",
           },
         },
       },
@@ -47,16 +65,35 @@ return {
         winblend = require("wuelnerdotexe.plugin.config").blend,
         prompt_prefix = "  ",
         selection_caret = "  ",
+        multi_icon = "  ",
         borderchars = require("wuelnerdotexe.plugin.util").get_border().chars,
-        mappings = {
-          i = { ["<C-y>"] = "select_default", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
-          n = { ["q"] = "close", ["g?"] = "which_key", ["<C-x>"] = false, ["<C-s>"] = "select_horizontal" },
+        default_mappings = {
+          i = {
+            ["<C-y>"] = require("telescope.actions").select_default,
+            ["<M-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+            ["<Esc>"] = require("telescope.actions").close,
+            ["<C-e>"] = require("telescope.actions").close,
+            ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+            ["<CR>"] = require("telescope.actions").select_default,
+            ["<Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_worse,
+            ["<S-Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_better,
+            ["<Down>"] = require("telescope.actions").move_selection_next,
+            ["<Up>"] = require("telescope.actions").move_selection_previous,
+            ["<C-n>"] = require("telescope.actions").move_selection_next,
+            ["<C-p>"] = require("telescope.actions").move_selection_previous,
+            ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-s>"] = require("telescope.actions").select_horizontal,
+            ["<C-v>"] = require("telescope.actions").select_vertical,
+            ["<C-t>"] = require("telescope.actions").select_tab,
+            ["<C-j>"] = require("telescope.actions").nop,
+          },
         },
-        preview = { filesize_limit = false, timeout = 284 },
+        preview = { timeout = 284 },
         vimgrep_arguments = {
           "rg",
           "--hidden",
-          "--glob=!{.git,.svn,.hg,CSV,.DS_Store,Thumbs.db,node_modules,bower_components,*.code-search}",
+          "--glob=!" .. exclude_globs,
           "--ignore-case",
           "--with-filename",
           "--line-number",
@@ -65,15 +102,6 @@ return {
           "--trim",
           "--color=never",
         },
-        buffer_previewer_maker = function(filepath, bufnr, opts)
-          opts = opts or {}
-
-          vim.loop.fs_stat(filepath, function(_, stat)
-            if not stat or stat.size > 102400 then return end
-
-            require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
-          end)
-        end,
       },
       extensions = { fzf = { case_mode = "ignore_case" } },
     })
