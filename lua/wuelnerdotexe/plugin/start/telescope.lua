@@ -12,7 +12,7 @@ return {
     { "<leader>gf", function() require("telescope.builtin").git_status() end },
     {
       "<leader>sf",
-      function() require("telescope.builtin").git_files({ prompt_title = "Find Setup files", cwd = "$HOME/.config/nvim/" }) end,
+      function() require("telescope.builtin").git_files({ prompt_title = "Find Setup Files", cwd = "$HOME/.config/nvim/" }) end,
     },
     {
       "<leader>df",
@@ -69,14 +69,16 @@ return {
         borderchars = require("wuelnerdotexe.plugin.util").get_border().chars,
         default_mappings = {
           i = {
-            ["<C-y>"] = require("telescope.actions").select_default,
             ["<M-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+            ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
             ["<Esc>"] = require("telescope.actions").close,
             ["<C-e>"] = require("telescope.actions").close,
-            ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+            ["<C-y>"] = require("telescope.actions").select_default,
             ["<CR>"] = require("telescope.actions").select_default,
-            ["<Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_worse,
-            ["<S-Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_better,
+            ["<Tab>"] = require("telescope.actions").toggle_selection
+              + require("telescope.actions").move_selection_worse,
+            ["<S-Tab>"] = require("telescope.actions").toggle_selection
+              + require("telescope.actions").move_selection_better,
             ["<Down>"] = require("telescope.actions").move_selection_next,
             ["<Up>"] = require("telescope.actions").move_selection_previous,
             ["<C-n>"] = require("telescope.actions").move_selection_next,
