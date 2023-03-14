@@ -92,20 +92,21 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### General
 
-| VI Mode |         Keymap         | Description                         |
-| :-----: | :--------------------: | ----------------------------------- |
-| Normal  | `<leader>` + `f` + `t` | Toggle the folders explorer         |
-| Normal  | `<leader>` + `f` + `f` | Find files in the current directory |
-| Normal  | `<leader>` + `p` + `f` | Find the workspace projects         |
-| Normal  | `<leader>` + `o` + `f` | Find recently opened files          |
-| Normal  | `<leader>` + `m` + `f` | Find Vim files marks                |
-| Normal  | `<leader>` + `w` + `f` | Find words in the current directory |
-| Normal  | `<leader>` + `g` + `t` | Toggle the git explorer             |
-| Normal  | `<leader>` + `g` + `f` | Find files from git status          |
-| Normal  | `<leader>` + `r` + `f` | Find resume                         |
-| Normal  | `<leader>` + `s` + `t` | Toggle document symbols             |
-| Normal  | `<leader>` + `t` + `o` | Open the terminal in a new buffer   |
-| Normal  | `<leader>` + `t` + `t` | Toggle bottom terminal              |
+|      VI Mode      |         Keymap         | Description                           |
+| :---------------: | :--------------------: | ------------------------------------- |
+|      Normal       | `<leader>` + `f` + `t` | Toggle the folders explorer           |
+|      Normal       | `<leader>` + `f` + `f` | Find files in the current directory   |
+|      Normal       | `<leader>` + `p` + `f` | Find the workspace projects           |
+|      Normal       | `<leader>` + `o` + `f` | Find recently opened files            |
+|      Normal       | `<leader>` + `m` + `f` | Find Vim files marks                  |
+| Normal and visual | `<leader>` + `w` + `f` | Find word in the current directory    |
+| Normal and visual | `<leader>` + `w` + `r` | Replace word in the current directory |
+|      Normal       | `<leader>` + `g` + `t` | Toggle the git explorer               |
+|      Normal       | `<leader>` + `g` + `f` | Find files from git status            |
+|      Normal       | `<leader>` + `r` + `f` | Find resume                           |
+|      Normal       | `<leader>` + `s` + `t` | Toggle document symbols               |
+|      Normal       | `<leader>` + `t` + `o` | Open the terminal in a new buffer     |
+|      Normal       | `<leader>` + `t` + `t` | Toggle bottom terminal                |
 
 ### Explorer
 
@@ -144,7 +145,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 | VI Mode |  Keymap   | Description      |
 | :-----: | :-------: | ---------------- |
-| Normal  | `g` + `s` | Git stage file     |
+| Normal  | `g` + `s` | Git stage file   |
 | Normal  | `g` + `u` | Git unstage file |
 | Normal  | `g` + `r` | Git revert file  |
 | Normal  | `g` + `A` | Git add all      |
@@ -214,10 +215,10 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Commenting
 
-|           VI Mode           |     Keymap     | Description               |
-| :-------------------------: | :------------: | ------------------------- |
+|           VI Mode           |     Keymap      | Description               |
+| :-------------------------: | :-------------: | ------------------------- |
 |           Normal            | `g` + `c` + `c` | Comment the current line  |
-| Visual and operator pending |   `g` + `c`    | Comment current selection |
+| Visual and operator pending |    `g` + `c`    | Comment current selection |
 
 ### Moving text
 

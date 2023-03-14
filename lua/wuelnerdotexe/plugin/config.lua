@@ -35,6 +35,7 @@ return {
     "noice",
     "null-ls-info",
     "qf",
+    "spectre_panel",
     "TelescopePrompt",
   },
   kind_icons = {
