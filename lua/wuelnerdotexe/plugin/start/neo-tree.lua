@@ -13,7 +13,7 @@ return {
     if require("wuelnerdotexe.plugin.util").enter_with_args then
       local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
 
-      if stat and stat.type == "directory" then require("neo-tree") end
+      if stat and stat.type == "directory" then require("lazy").load({ plugins = { "neo-tree.nvim" } }) end
     end
   end,
   config = function()
