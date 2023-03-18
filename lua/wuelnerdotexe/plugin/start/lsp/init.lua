@@ -83,7 +83,33 @@ return {
       }, basic_server_setup))
 
       require("lspconfig").tailwindcss.setup(basic_server_setup)
-      require("lspconfig").tsserver.setup(basic_server_setup)
+
+      require("lspconfig").tsserver.setup(vim.tbl_deep_extend("keep", {
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+        },
+      }, basic_server_setup))
 
       require("lspconfig").eslint.setup(vim.tbl_deep_extend("keep", {
         settings = { format = false },
@@ -171,6 +197,24 @@ return {
       require("lsp_lines").setup()
 
       vim.api.nvim_set_keymap("n", "<leader>lt", "", { callback = function() require("lsp_lines").toggle() end })
+    end,
+  },
+  {
+    "lvimuser/lsp-inlayhints.nvim",
+    lazy = true,
+    init = function()
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(ev)
+          if not (ev.data and ev.data.client_id) then return end
+
+          require("lsp-inlayhints").on_attach(vim.lsp.get_client_by_id(ev.data.client_id), ev.buf)
+        end,
+      })
+    end,
+    config = function()
+      require("lsp-inlayhints").setup()
+
+      vim.api.nvim_set_keymap("n", "<leader>ht", "", { callback = function() require("lsp-inlayhints").toggle() end })
     end,
   },
 }
