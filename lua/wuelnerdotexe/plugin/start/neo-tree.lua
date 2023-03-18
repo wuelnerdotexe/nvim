@@ -10,7 +10,7 @@ return {
   init = function()
     vim.api.nvim_set_var("neo_tree_remove_legacy_commands", 1)
 
-    if require("wuelnerdotexe.plugin.util").enter_with_args then
+    if require("wuelnerdotexe.plugin.util").enter_with_args() then
       local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
 
       if stat and stat.type == "directory" then require("lazy").load({ plugins = { "neo-tree.nvim" } }) end
@@ -22,6 +22,7 @@ return {
 
     require("neo-tree").setup({
       sources = { "filesystem", "git_status" },
+      add_blank_line_at_top = true,
       enable_diagnostics = false,
       hide_root_node = true,
       popup_border_style = border.enabled and border.style or border.chars,

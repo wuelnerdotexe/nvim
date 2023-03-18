@@ -23,9 +23,9 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "gnikdroy/projections.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
     vim.api.nvim_set_option_value("termguicolors", true, TBL)
