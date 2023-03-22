@@ -16,5 +16,7 @@ return {
       filetypes = { "*" },
       buftypes = { "*", "!nofile", "!prompt", "!terminal" },
     })
+
+    vim.defer_fn(function() require("colorizer").attach_to_buffer(0) end, 0)
   end,
 }

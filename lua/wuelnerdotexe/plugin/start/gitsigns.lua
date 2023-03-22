@@ -1,6 +1,21 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  lazy = true,
+  init = function()
+    vim.api.nvim_create_autocmd(require("wuelnerdotexe.plugin.config").open_file_event, {
+      callback = function()
+        vim.api.nvim_call_function("system", {
+          "git -C " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " rev-parse",
+        })
+
+        if vim.api.nvim_get_vvar("shell_error") == 0 then
+          vim.schedule(function() require("lazy").load({ plugins = { "gitsigns.nvim" } }) end)
+
+          return true
+        end
+      end,
+    })
+  end,
   config = function()
     require("gitsigns").setup({
       signs = {
