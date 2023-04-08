@@ -3,17 +3,20 @@ return {
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   lazy = true,
   init = function()
+    vim.ui.input = function(...)
+      require("lazy").load({ plugins = { "dressing.nvim" } })
+
+      return vim.ui.input(...)
+    end
+
     vim.ui.select = function(...)
       require("lazy").load({ plugins = { "dressing.nvim" } })
 
       return vim.ui.select(...)
     end
 
-    vim.ui.input = function(...)
-      require("lazy").load({ plugins = { "dressing.nvim" } })
-
-      return vim.ui.input(...)
-    end
+    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
+    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
   config = function()
     local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style

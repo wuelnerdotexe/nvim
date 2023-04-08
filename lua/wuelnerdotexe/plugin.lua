@@ -1,16 +1,15 @@
 TBL = require("wuelnerdotexe.plugin.util").empty_table
 
-local lazypath = vim.api.nvim_call_function("stdpath", { "data" }) .. "/lazy/lazy.nvim"
+local rtp = vim.api.nvim_get_option_value("rtp", TBL)
+local lazy = vim.api.nvim_call_function("stdpath", { "data" }) .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.loop.fs_stat(lazy) then
   vim.api.nvim_call_function("system", {
-    { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath },
+    { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazy },
   })
 end
 
-local rtp = vim.api.nvim_get_option_value("rtp", TBL)
-
-vim.api.nvim_set_option_value("rtp", rtp == "" and lazypath or lazypath .. "," .. rtp, TBL)
+vim.api.nvim_set_option_value("rtp", rtp == "" and lazy or lazy .. "," .. rtp, TBL)
 
 require("lazy").setup({
   spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },

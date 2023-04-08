@@ -3,11 +3,12 @@ return {
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = "UIEnter",
   dependencies = "wuelnerdotexe/vim-enfocado",
+  init = function()
+    require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
+    require("wuelnerdotexe.plugin.util").set_option("laststatus", 3)
+    require("wuelnerdotexe.plugin.util").set_option("ruler", false)
+  end,
   config = function()
-    vim.api.nvim_set_option_value("laststatus", 3, TBL)
-    vim.api.nvim_set_option_value("ruler", false, TBL)
-    vim.api.nvim_set_option_value("termguicolors", true, TBL)
-
     local components = { active = {}, inactive = {} }
 
     table.insert(components.active, {})
@@ -269,7 +270,7 @@ return {
 
           local parts = {}
 
-          for _, symbol in ipairs(symbols) do
+          for _, symbol in pairs(symbols) do
             table.insert(parts, "%#Aerial" .. symbol.kind .. "Icon#" .. symbol.icon .. " %*" .. symbol.name)
           end
 

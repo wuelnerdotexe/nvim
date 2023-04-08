@@ -10,6 +10,15 @@ return {
         fancy = {
           enable = true,
           head = { cursor = nil, texthl = nil, linehl = nil },
+          body = {
+            { cursor = "", texthl = "Dimmed" },
+            { cursor = "", texthl = "Dimmed" },
+            { cursor = "●", texthl = "Dimmed" },
+            { cursor = "●", texthl = "Dimmed" },
+            { cursor = "•", texthl = "Dimmed" },
+            { cursor = ".", texthl = "Dimmed" },
+            { cursor = ".", texthl = "Dimmed" },
+          },
           tail = { cursor = nil, texthl = nil, linehl = nil },
         },
         speed = 42,

@@ -3,9 +3,8 @@ return {
     "hrsh7th/nvim-cmp",
     lazy = true,
     dependencies = "windwp/nvim-autopairs",
+    init = function() require("wuelnerdotexe.plugin.util").set_option("completeopt", "menu,menuone,noselect") end,
     config = function()
-      vim.api.nvim_set_option_value("completeopt", "menu,menuone,noselect", TBL)
-
       require("cmp").setup({
         enabled = function()
           return (
@@ -16,7 +15,10 @@ return {
             and vim.api.nvim_call_function("reg_executing", TBL) == ""
         end,
         performance = { debounce = 42, throttle = 42, fetching_timeout = 284 },
-        mapping = require("cmp").mapping.preset.insert(),
+        mapping = require("cmp").mapping.preset.insert({
+          ["<C-Space>"] = { i = require("cmp").mapping.complete() },
+          ["<CR>"] = { i = require("cmp").mapping.confirm({ select = false }) },
+        }),
         snippet = {
           expand = function(args)
             if package.loaded["luasnip"] then
@@ -120,7 +122,7 @@ return {
     config = function()
       local ignored_file_types = {}
 
-      for _, filetype in ipairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
+      for _, filetype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
         ignored_file_types[filetype] = true
       end
 

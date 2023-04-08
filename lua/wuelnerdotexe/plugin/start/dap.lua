@@ -43,7 +43,7 @@ return {
       },
     }
 
-    for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
+    for _, language in pairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
       require("dap").configurations[language] = {
         {
           name = "Launch Node against current file",

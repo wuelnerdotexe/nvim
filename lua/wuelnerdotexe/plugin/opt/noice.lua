@@ -5,12 +5,19 @@ return {
   event = "UIEnter",
   dependencies = "MunifTanjim/nui.nvim",
   deactivate = function() require("noice").disable() end,
-  config = function()
-    vim.api.nvim_set_option_value("cmdheight", 0, TBL)
-    vim.api.nvim_set_option_value("showcmd", false, TBL)
-    vim.api.nvim_set_option_value("showmode", false, TBL)
-    vim.api.nvim_set_option_value("shortmess", vim.api.nvim_get_option_value("shortmess", TBL) .. "IWc", TBL)
+  init = function()
+    require("wuelnerdotexe.plugin.util").set_option(
+      "shortmess",
+      vim.api.nvim_get_option_value("shortmess", TBL) .. "IWc"
+    )
 
+    require("wuelnerdotexe.plugin.util").set_option("cmdheight", 0)
+    require("wuelnerdotexe.plugin.util").set_option("showcmd", false)
+    require("wuelnerdotexe.plugin.util").set_option("showmode", false)
+    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
+    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
+  end,
+  config = function()
     local border = require("wuelnerdotexe.plugin.util").get_border()
     local borderstyle = { border = { style = border.style } }
 

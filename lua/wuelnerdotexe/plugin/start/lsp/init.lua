@@ -1,4 +1,4 @@
-vim.api.nvim_set_option_value("signcolumn", "yes:1", TBL)
+require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
 
 local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
 
@@ -47,6 +47,7 @@ return {
         end,
       },
     },
+    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("lspconfig.ui.windows").default_options.border = borderstyle
 
@@ -86,26 +87,28 @@ return {
 
       require("lspconfig").tsserver.setup(vim.tbl_deep_extend("keep", {
         settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
           javascript = {
             inlayHints = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableNameHintsWhenTypeMatchesName = true,
+            },
+          },
+          typescript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableNameHintsWhenTypeMatchesName = true,
             },
           },
         },
@@ -140,6 +143,7 @@ return {
         end,
       },
     },
+    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("null-ls").setup({
         border = borderstyle,
@@ -178,6 +182,7 @@ return {
   {
     "kosayoda/nvim-lightbulb",
     event = "LspAttach",
+    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("nvim-lightbulb").setup({
         sign = { priority = require("wuelnerdotexe.plugin.config").signs_priority.lightbulb },

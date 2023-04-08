@@ -2,18 +2,23 @@ return {
   "stevearc/aerial.nvim",
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = require("wuelnerdotexe.plugin.config").open_file_event,
+  init = function()
+    require("wuelnerdotexe.plugin.util").set_option("foldmethod", "manual")
+    require("wuelnerdotexe.plugin.util").set_option("foldlevelstart", 99)
+    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
+    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
+  end,
   config = function()
-    vim.api.nvim_set_option_value("foldmethod", "manual", TBL)
-
     local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
+    local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
 
     require("aerial").setup({
+      backends = { "lsp", "treesitter", "markdown", "man" },
       layout = {
         max_width = { sidebar_width, 0.25 },
         width = sidebar_width,
         min_width = { sidebar_width, 0.25 },
         win_opts = { cursorline = true },
-        default_direction = "right",
         placement = "edge",
       },
       attach_mode = "global",
@@ -23,9 +28,7 @@ return {
         ["<C-k>"] = false,
         ["o"] = false,
         ["O"] = false,
-        ["l"] = false,
         ["L"] = false,
-        ["h"] = false,
         ["H"] = false,
       },
       disable_max_lines = 1000,
@@ -49,7 +52,12 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = require("wuelnerdotexe.plugin.util").get_border().style, relative = "editor" },
+      float = { border = borderstyle, relative = "editor" },
+      nav = {
+        border = borderstyle,
+        win_opts = { cursorline = true, winblend = require("wuelnerdotexe.plugin.config").blend },
+        keymaps = { ["<C-c>"] = false, ["<Esc>"] = "actions.close" },
+      },
       lsp = { diagnostics_trigger_update = false, update_delay = 284 },
       treesitter = { update_delay = 284 },
       markdown = { update_delay = 284 },

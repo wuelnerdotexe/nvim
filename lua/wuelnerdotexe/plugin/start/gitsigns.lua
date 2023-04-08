@@ -15,6 +15,8 @@ return {
         end
       end,
     })
+
+    require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
   end,
   config = function()
     require("gitsigns").setup({
@@ -91,7 +93,5 @@ return {
         })
       end,
     })
-
-    vim.api.nvim_set_option_value("signcolumn", "yes:1", TBL)
   end,
 }

@@ -4,10 +4,11 @@ return {
     enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     event = "UIEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
+    init = function()
+      require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
+      require("wuelnerdotexe.plugin.util").set_option("showtabline", 2)
+    end,
     config = function()
-      vim.api.nvim_set_option_value("showtabline", 2, TBL)
-      vim.api.nvim_set_option_value("termguicolors", true, TBL)
-
       require("bufferline").setup({
         options = {
           max_name_length = 16,

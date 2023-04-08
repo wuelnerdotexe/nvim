@@ -27,12 +27,15 @@ return {
     "gnikdroy/projections.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
+  init = function()
+    require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
+    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
+    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
+  end,
   config = function()
-    vim.api.nvim_set_option_value("termguicolors", true, TBL)
-
     local exclude_globs = "{"
 
-    for i, glob in ipairs(require("wuelnerdotexe.plugin.config").exclude_search_files) do
+    for i, glob in pairs(require("wuelnerdotexe.plugin.config").exclude_search_files) do
       exclude_globs = i == 1 and exclude_globs .. glob or exclude_globs .. "," .. glob
     end
 

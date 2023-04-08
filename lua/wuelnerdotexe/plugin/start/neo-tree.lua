@@ -81,6 +81,7 @@ return {
         },
       },
       window = {
+        position = "right",
         width = require("wuelnerdotexe.plugin.util").get_sidebar_width(),
         auto_expand_width = true,
         insert_as = "sibling",

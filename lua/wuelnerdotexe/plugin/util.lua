@@ -6,6 +6,24 @@ local M = {}
 
 M.empty_table = {}
 
+M.plugin_options = {}
+
+M.set_option = function(option, value)
+  local current_value = vim.api.nvim_get_option_value(option, M.empty_table)
+
+  if not M.plugin_options[option] then
+    M.plugin_options[option] = current_value
+  elseif M.plugin_options[option] ~= current_value then
+    M.plugin_options[option] = current_value
+  end
+
+  if M.plugin_options[option] ~= value then
+    vim.api.nvim_set_option_value(option, value, M.empty_table)
+
+    M.plugin_options[option] = value
+  end
+end
+
 M.enter_with_args = function()
   if args ~= nil then return args end
 
