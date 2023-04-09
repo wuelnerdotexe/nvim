@@ -4,13 +4,13 @@ return {
   lazy = true,
   init = function()
     vim.ui.input = function(...)
-      require("lazy").load({ plugins = { "dressing.nvim" } })
+      if not package.loaded["dressing.nvim"] then require("lazy").load({ plugins = { "dressing.nvim" } }) end
 
       return vim.ui.input(...)
     end
 
     vim.ui.select = function(...)
-      require("lazy").load({ plugins = { "dressing.nvim" } })
+      if not package.loaded["dressing.nvim"] then require("lazy").load({ plugins = { "dressing.nvim" } }) end
 
       return vim.ui.select(...)
     end
