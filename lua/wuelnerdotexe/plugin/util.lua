@@ -11,9 +11,7 @@ M.plugin_options = {}
 M.set_option = function(option, value)
   local current_value = vim.api.nvim_get_option_value(option, M.empty_table)
 
-  if M.plugin_options[option] ~= current_value then
-    M.plugin_options[option] = current_value
-  end
+  if M.plugin_options[option] ~= current_value then M.plugin_options[option] = current_value end
 
   if M.plugin_options[option] ~= value then
     M.plugin_options[option] = value
