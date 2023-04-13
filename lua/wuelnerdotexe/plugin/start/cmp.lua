@@ -117,8 +117,13 @@ return {
     "tzachar/cmp-tabnine",
     build = "./install.sh",
     enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-    event = "InsertEnter",
+    lazy = true,
     dependencies = "hrsh7th/nvim-cmp",
+    init = function()
+      vim.api.nvim_create_autocmd("BufRead", {
+        callback = function() require("cmp_tabnine"):prefetch(vim.api.nvim_call_function("expand", { "%:p" })) end,
+      })
+    end,
     config = function()
       local ignored_file_types = {}
 
