@@ -131,7 +131,7 @@ return {
         ignored_file_types[filetype] = true
       end
 
-      vim.schedule(function() require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types }) end)
+      require("cmp_tabnine.config").setup({ ignored_file_types = ignored_file_types })
     end,
   },
   { "hrsh7th/cmp-nvim-lsp", event = "LspAttach", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
