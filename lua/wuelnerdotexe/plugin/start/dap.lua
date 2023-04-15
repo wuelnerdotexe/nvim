@@ -43,7 +43,7 @@ return {
       },
     }
 
-    for _, language in pairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
+    for _, language in pairs({ "javascript", "typescript" }) do
       require("dap").configurations[language] = {
         {
           name = "Launch Node against current file",
@@ -56,11 +56,32 @@ return {
           console = "integratedTerminal",
         },
         {
+          name = "Launch Node against pick process",
+          type = "node2",
+          request = "attach",
+          processId = require("dap.utils").pick_process,
+          console = "integratedTerminal",
+        },
+        {
           name = "Launch Firefox against localhost",
           request = "launch",
           type = "firefox",
           reAttach = true,
-          url = "http://localhost:8080",
+          url = "http://localhost:3000",
+          webRoot = "${workspaceFolder}",
+          console = "integratedTerminal",
+        },
+      }
+    end
+
+    for _, language in pairs({ "javascriptreact", "typescriptreact" }) do
+      require("dap").configurations[language] = {
+        {
+          name = "Launch Firefox against localhost",
+          request = "launch",
+          type = "firefox",
+          reAttach = true,
+          url = "http://localhost:3000",
           webRoot = "${workspaceFolder}",
           console = "integratedTerminal",
         },
@@ -92,52 +113,42 @@ return {
       { "DapBreakpointRejected", { linehl = "", text = "", texthl = "", numhl = "" } }
     )
 
-    require("dap").listeners.after.event_initialized["dapui_config"] = function()
+    require("dap").listeners.after.event_initialized.dapui_config = function()
+      require("dapui").open()
+
+      vim.api.nvim_set_keymap("n", "<F6>", "", { callback = function() require("dap").pause() end })
+      vim.api.nvim_set_keymap("n", "<F10>", "", { callback = function() require("dap").step_over() end })
+      vim.api.nvim_set_keymap("n", "<F11>", "", { callback = function() require("dap").step_into() end })
+      vim.api.nvim_set_keymap("n", "<F17>", "", { callback = function() require("dap").terminate() end })
       vim.api.nvim_set_keymap("n", "<F41>", "", { callback = function() require("dap").run_last() end })
+      vim.api.nvim_set_keymap("n", "<F23>", "", { callback = function() require("dap").step_out() end })
       vim.api.nvim_set_keymap("n", "<F35>", "", {
         callback = function() require("dap").step_into({ ask_for_targets = true }) end,
       })
-
-      vim.api.nvim_set_keymap("n", "<F23>", "", { callback = function() require("dap").step_out() end })
-      vim.api.nvim_set_keymap("n", "<F11>", "", { callback = function() require("dap").step_into() end })
-      vim.api.nvim_set_keymap("n", "<F10>", "", { callback = function() require("dap").step_over() end })
-      vim.api.nvim_set_keymap("n", "<F6>", "", { callback = function() require("dap").pause() end })
-
-      vim.api.nvim_set_keymap("n", "<F17>", "", {
-        callback = function()
-          require("dap").terminate()
-          require("dapui").close()
-          require("dap").repl.close()
-        end,
-      })
-
-      require("dapui").open()
     end
 
-    require("dap").listeners.before.event_exited["dapui_config"] = function()
+    require("dap").listeners.before.event_exited.dapui_config = function()
+      require("dapui").close()
+
       vim.api.nvim_del_keymap("n", "<F6>")
       vim.api.nvim_del_keymap("n", "<F10>")
       vim.api.nvim_del_keymap("n", "<F11>")
       vim.api.nvim_del_keymap("n", "<F17>") -- S-F5
+      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
       vim.api.nvim_del_keymap("n", "<F23>") -- S-F11
       vim.api.nvim_del_keymap("n", "<F35>") -- C-F11
-      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
-
-      require("dapui").close()
-      require("dap").repl.close()
     end
 
-    require("dap").listeners.before.event_terminated["dapui_config"] = function()
+    require("dap").listeners.before.event_terminated.dapui_config = function()
+      require("dapui").close()
+
       vim.api.nvim_del_keymap("n", "<F6>")
       vim.api.nvim_del_keymap("n", "<F10>")
       vim.api.nvim_del_keymap("n", "<F11>")
       vim.api.nvim_del_keymap("n", "<F17>") -- S-F5
+      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
       vim.api.nvim_del_keymap("n", "<F23>") -- S-F11
       vim.api.nvim_del_keymap("n", "<F35>") -- C-F11
-      vim.api.nvim_del_keymap("n", "<F41>") -- S-C-F5
-
-      require("dapui").close()
-      require("dap").repl.close()
     end
   end,
 }
