@@ -1,6 +1,6 @@
 return {
   "folke/noice.nvim",
-  enabled = vim.version().minor >= 9 and not require("wuelnerdotexe.plugin.config").minimal_setup,
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
   event = "UIEnter",
   dependencies = "MunifTanjim/nui.nvim",

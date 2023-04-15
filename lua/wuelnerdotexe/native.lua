@@ -19,8 +19,6 @@ vim.api.nvim_set_var("loaded_syntax_completion", 1)
 vim.api.nvim_set_var("loaded_tar", 1)
 vim.api.nvim_set_var("loaded_tarPlugin", 1)
 vim.api.nvim_set_var("loaded_tutor_mode_plugin", 1)
-vim.api.nvim_set_var("loaded_vimball", 1)
-vim.api.nvim_set_var("loaded_vimballPlugin", 1)
 vim.api.nvim_set_var("loaded_zip", 1)
 vim.api.nvim_set_var("loaded_zipPlugin", 1)
 
