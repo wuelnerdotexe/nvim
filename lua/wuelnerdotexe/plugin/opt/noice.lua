@@ -11,9 +11,10 @@ return {
       vim.api.nvim_get_option_value("shortmess", TBL) .. "IWc"
     )
 
-    require("wuelnerdotexe.plugin.util").set_option("cmdheight", 0)
-    require("wuelnerdotexe.plugin.util").set_option("showcmd", false)
     require("wuelnerdotexe.plugin.util").set_option("showmode", false)
+    require("wuelnerdotexe.plugin.util").set_option("cmdheight", 0)
+    require("wuelnerdotexe.plugin.util").set_option("showcmd", true)
+    require("wuelnerdotexe.plugin.util").set_option("showcmdloc", "statusline")
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,

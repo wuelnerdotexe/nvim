@@ -114,6 +114,19 @@ return {
       truncate_hide = true,
     }
 
+    components.active[1][11] = {
+      enabled = function()
+        return vim.api.nvim_get_option_value("showcmd", TBL) == true
+          and vim.api.nvim_get_option_value("showcmdloc", TBL) == "statusline"
+      end,
+      provider = "%S",
+      left_sep = " ",
+      right_sep = " ",
+      hl = { name = "FelineCMD", fg = "gray" },
+      priority = -9,
+      truncate_hide = true,
+    }
+
     components.active[2][1] = {
       provider = "git_branch",
       icon = " ",
