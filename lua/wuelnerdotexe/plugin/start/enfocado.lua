@@ -30,6 +30,11 @@ return {
       "visual-multi",
       "yanky",
     })
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      pattern = "enfocado",
+      callback = function() vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e") end,
+    })
   end,
   config = function() vim.api.nvim_command("colorscheme enfocado") end,
 }
