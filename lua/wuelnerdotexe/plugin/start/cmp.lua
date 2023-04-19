@@ -42,15 +42,19 @@ return {
                   vim.api.nvim_command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
                 end
 
-                vim_item.kind = "󱏿 Color"
+                vim_item.kind = " Color"
                 vim_item.kind_hl_group = group
 
                 return vim_item
               end
+            elseif entry.source.name == "cmp_tabnine" then
+              vim_item.kind = " Tabnine"
+              vim_item.kind_hl_group = "CmpItemKindTabnine"
+
+              return vim_item
             end
 
-            vim_item.kind = entry.source.name == "cmp_tabnine" and " Tabnine"
-              or require("wuelnerdotexe.plugin.config").kind_icons[vim_item.kind] .. " " .. vim_item.kind
+            vim_item.kind = require("wuelnerdotexe.plugin.config").kind_icons[vim_item.kind] .. " " .. vim_item.kind
 
             return vim_item
           end,
