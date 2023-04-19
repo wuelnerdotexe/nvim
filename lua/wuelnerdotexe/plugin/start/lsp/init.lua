@@ -47,7 +47,6 @@ return {
         end,
       },
     },
-    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("lspconfig.ui.windows").default_options.border = borderstyle
 
@@ -143,7 +142,6 @@ return {
         end,
       },
     },
-    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("null-ls").setup({
         border = borderstyle,
@@ -182,7 +180,6 @@ return {
   {
     "kosayoda/nvim-lightbulb",
     event = "LspAttach",
-    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
       require("nvim-lightbulb").setup({
         sign = { priority = require("wuelnerdotexe.plugin.config").signs_priority.lightbulb },
