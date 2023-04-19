@@ -30,7 +30,10 @@ return {
       use_default_mappings = false,
       source_selector = {
         winbar = true,
-        tab_labels = { filesystem = " 󰉓 Folders ", git_status = "  Git Control " },
+        sources = {
+          { source = "filesystem", display_name = " 󰉓 Folders " },
+          { source = "git_status", display_name = "  Git Control " },
+        },
         content_layout = "center",
         separator = "",
         separator_active = { left = "▎", right = "" },
