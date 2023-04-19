@@ -23,7 +23,7 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    event = { "BufReadPre", "SessionLoadPost" },
     dependencies = {
       "b0o/schemastore.nvim",
       {
@@ -47,6 +47,13 @@ return {
         end,
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function()
+          vim.schedule(function() vim.api.nvim_command("silent! do FileType") end)
+        end,
+      })
+    end,
     config = function()
       require("lspconfig.ui.windows").default_options.border = borderstyle
 
@@ -120,7 +127,7 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    event = { "BufReadPre", "SessionLoadPost" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",

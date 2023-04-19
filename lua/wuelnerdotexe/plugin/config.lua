@@ -1,6 +1,6 @@
 return {
   minimal_setup = false,
-  open_file_event = { "BufNewFile", "BufRead", "BufAdd" },
+  open_file_event = { "BufNewFile", "BufRead", "BufAdd", "SessionLoadPost" },
   exclude_explorer_files = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
   exclude_search_files = {
     ".git",
