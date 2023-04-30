@@ -17,22 +17,5 @@ require("lazy").setup({
   dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
   ui = { border = require("wuelnerdotexe.plugin.util").get_border().style, browser = "chrome", throttle = 42 },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "nvim",
-        "man",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "rplugin",
-        "spellfile",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
-  },
+  performance = { rtp = { disabled_plugins = { "gzip", "nvim", "man", "tarPlugin", "tohtml", "tutor", "zipPlugin" } } },
 })

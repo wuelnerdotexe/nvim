@@ -8,6 +8,10 @@ return {
   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
   deactivate = function() vim.api.nvim_command("Neotree close") end,
   init = function()
+    vim.api.nvim_set_var("loaded_netrw", 1)
+    vim.api.nvim_set_var("loaded_netrwPlugin", 1)
+    vim.api.nvim_set_var("loaded_netrwSettings", 1)
+    vim.api.nvim_set_var("loaded_netrwFileHandlers", 1)
     vim.api.nvim_set_var("neo_tree_remove_legacy_commands", 1)
 
     if require("wuelnerdotexe.plugin.util").enter_with_args() then
