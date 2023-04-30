@@ -102,7 +102,7 @@ return {
               includeInlayFunctionParameterTypeHints = true,
               includeInlayPropertyDeclarationTypeHints = true,
               includeInlayVariableTypeHints = true,
-              includeInlayVariableNameHintsWhenTypeMatchesName = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
             },
           },
           typescript = {
@@ -114,7 +114,7 @@ return {
               includeInlayFunctionParameterTypeHints = true,
               includeInlayPropertyDeclarationTypeHints = true,
               includeInlayVariableTypeHints = true,
-              includeInlayVariableNameHintsWhenTypeMatchesName = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
             },
           },
         },
@@ -214,9 +214,9 @@ return {
     init = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
-          if not (ev.data and ev.data.client_id) then return end
-
-          require("lsp-inlayhints").on_attach(vim.lsp.get_client_by_id(ev.data.client_id), ev.buf)
+          if ev.data and ev.data.client_id then
+            require("lsp-inlayhints").on_attach(vim.lsp.get_client_by_id(ev.data.client_id), ev.buf)
+          end
         end,
       })
     end,

@@ -5,7 +5,7 @@ return {
     vim.api.nvim_create_autocmd(require("wuelnerdotexe.plugin.config").open_file_event, {
       callback = function()
         vim.api.nvim_call_function("system", {
-          "git -C " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " rev-parse",
+          "git -C" .. " " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " " .. "rev-parse",
         })
 
         if vim.api.nvim_get_vvar("shell_error") == 0 then
@@ -37,7 +37,12 @@ return {
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hr", "", {
-          callback = function() require("gitsigns").reset_hunk() end,
+          callback = function()
+            require("gitsigns").reset_hunk({
+              vim.api.nvim_call_function("line", { "." }),
+              vim.api.nvim_call_function("line", { "v" }),
+            })
+          end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hs", "", {
@@ -45,7 +50,12 @@ return {
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hs", "", {
-          callback = function() require("gitsigns").stage_hunk() end,
+          callback = function()
+            require("gitsigns").stage_hunk({
+              vim.api.nvim_call_function("line", { "." }),
+              vim.api.nvim_call_function("line", { "v" }),
+            })
+          end,
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hp", "", {
@@ -93,5 +103,7 @@ return {
         })
       end,
     })
+
+    if package.loaded["scrollbar"] then require("scrollbar.handlers.gitsigns").setup() end
   end,
 }

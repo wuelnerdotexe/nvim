@@ -1,7 +1,7 @@
 return {
   "petertriho/nvim-scrollbar",
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  event = "VeryLazy",
   config = function()
     require("scrollbar").setup({
       throttle_ms = 42,
@@ -20,7 +20,6 @@ return {
         "noice",
         "TelescopePrompt",
       },
-      handlers = { gitsigns = true },
     })
   end,
 }

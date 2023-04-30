@@ -2,7 +2,6 @@ return {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    dependencies = "windwp/nvim-autopairs",
     init = function() require("wuelnerdotexe.plugin.util").set_option("completeopt", "menu,menuone,noselect") end,
     config = function()
       require("cmp").setup({
@@ -89,7 +88,6 @@ return {
         },
       })
 
-      require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
       require("cmp").setup.filetype(require("wuelnerdotexe.plugin.config").uifiletypes, { enabled = false })
     end,
   },
