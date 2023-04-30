@@ -1,5 +1,6 @@
 return {
   "kylechui/nvim-surround",
+  dependencies = "nvim-treesitter/nvim-treesitter",
   keys = {
     { "ys" },
     { "yS" },

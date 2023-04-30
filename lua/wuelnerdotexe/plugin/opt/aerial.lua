@@ -8,6 +8,7 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
+  dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
     local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style

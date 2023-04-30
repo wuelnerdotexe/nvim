@@ -1,6 +1,7 @@
 return {
   "Darazaki/indent-o-matic",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
+  dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     local disable_filetypes = {}
     local max_lines = { max_lines = 0 }

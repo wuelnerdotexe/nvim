@@ -2,6 +2,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
+    dependencies = "nvim-treesitter/nvim-treesitter",
     init = function() require("wuelnerdotexe.plugin.util").set_option("completeopt", "menu,menuone,noselect") end,
     config = function()
       require("cmp").setup({

@@ -1,6 +1,7 @@
 return {
   "andymass/vim-matchup",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
+  dependencies = "nvim-treesitter/nvim-treesitter",
   init = function()
     vim.api.nvim_set_var("matchup_motion_enabled", 0)
     vim.api.nvim_set_var("matchup_text_obj_enabled", 0)
