@@ -50,9 +50,9 @@ return {
     components.active[1][5] = {
       enabled = function()
         return vim.api.nvim_get_option_value("cmdheight", TBL) == 0
-          and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
+          and (package.loaded["noice"] and require("noice").api.status.mode.has())
       end,
-      provider = function() return tostring(require("noice").api.statusline.mode.get()) end,
+      provider = function() return tostring(require("noice").api.status.mode.get()) end,
       left_sep = { str = " ", hl = { bg = "base" } },
       hl = function()
         return {
@@ -69,7 +69,7 @@ return {
         return require("feline.providers.lsp").diagnostics_exist()
           or (
             vim.api.nvim_get_option_value("cmdheight", TBL) == 0
-            and (package.loaded["noice"] and require("noice").api.statusline.mode.has())
+            and (package.loaded["noice"] and require("noice").api.status.mode.has())
           )
       end,
       provider = " ",
