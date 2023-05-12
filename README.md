@@ -106,7 +106,6 @@ The keymaps created by this config are very well thought out to be intuitive, me
 |      Normal       | `<leader>` + `r` + `f` | Find resume                           |
 |      Normal       | `<leader>` + `s` + `t` | Toggle document symbols               |
 |      Normal       | `<leader>` + `t` + `o` | Open the terminal in a new buffer     |
-|      Normal       | `<leader>` + `t` + `t` | Toggle bottom terminal                |
 
 ### Explorer
 

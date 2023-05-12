@@ -31,18 +31,30 @@ return {
       vim.api.nvim_set_keymap("n", "<S-Home>", "", {
         callback = function() vim.api.nvim_command("BufferLineMovePrev") end,
       })
+
+      vim.api.nvim_set_keymap("n", "gb", "", {
+        callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
+      })
+
+      vim.api.nvim_set_keymap("n", "<S-PageDown>", "", {
+        callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
+      })
+
+      vim.api.nvim_set_keymap("i", "<S-PageDown>", "", {
+        callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
+      })
+
+      vim.api.nvim_set_keymap("n", "gB", "", {
+        callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
+      })
+
+      vim.api.nvim_set_keymap("n", "<S-PageUp>", "", {
+        callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
+      })
+
+      vim.api.nvim_set_keymap("i", "<S-PageUp>", "", {
+        callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
+      })
     end,
-  },
-  {
-    "roobert/bufferline-cycle-windowless.nvim",
-    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-    dependencies = "akinsho/bufferline.nvim",
-    keys = {
-      { "gb", function() vim.api.nvim_command("BufferLineCycleWindowlessNext") end },
-      { "<S-PageDown>", function() vim.api.nvim_command("BufferLineCycleWindowlessNext") end, mode = { "n", "i" } },
-      { "gB", function() vim.api.nvim_command("BufferLineCycleWindowlessPrev") end },
-      { "<S-PageUp>", function() vim.api.nvim_command("BufferLineCycleWindowlessPrev") end, mode = { "n", "i" } },
-    },
-    config = function() require("bufferline-cycle-windowless").setup({ default_enabled = true }) end,
   },
 }
