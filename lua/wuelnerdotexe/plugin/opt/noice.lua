@@ -19,8 +19,8 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
   config = function()
-    local border = require("wuelnerdotexe.plugin.util").get_border()
-    local borderstyle = { border = { style = border.style } }
+    local border = { style = require("wuelnerdotexe.plugin.config").border and "rounded" or "none" }
+    local borderstyle = { border = border }
 
     require("noice").setup({
       cmdline = { view = "cmdline" },
@@ -33,7 +33,11 @@ return {
           ["cmp.entry.get_documentation"] = true,
         },
       },
-      presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = border.enabled },
+      presets = {
+        bottom_search = true,
+        long_message_to_split = true,
+        lsp_doc_border = require("wuelnerdotexe.plugin.config").border,
+      },
       throttle = 42,
       views = {
         split = {
@@ -42,11 +46,11 @@ return {
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
         popup = borderstyle,
-        hover = { border = { style = border.style }, position = { row = 2, col = 2 } },
+        hover = { border = border, position = { row = 2, col = 2 } },
         mini = {
           timeout = 3000,
-          position = { row = border.enabled and -2 or -1 },
-          border = { style = border.style },
+          position = { row = require("wuelnerdotexe.plugin.config").border and -2 or -1 },
+          border = border,
           win_options = { winblend = require("wuelnerdotexe.plugin.config").blend },
         },
         cmdline_popup = borderstyle,

@@ -1,8 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
+  lazy = true,
   cmd = "Telescope",
   keys = {
-    { "<leader>pf", function() vim.api.nvim_command("Telescope projections") end },
     { "<leader>ff", function() require("telescope.builtin").find_files() end },
     { "<leader>of", function() require("telescope.builtin").oldfiles() end },
     { "<leader>mf", function() require("telescope.builtin").marks() end },
@@ -17,6 +17,14 @@ return {
     {
       "<leader>df",
       function() require("telescope.builtin").git_files({ prompt_title = "Find Dotfiles", cwd = "$HOME/dotfiles/" }) end,
+    },
+    {
+      "<leader>pf",
+      function()
+        require("telescope").load_extension("projections")
+
+        vim.api.nvim_command("Telescope projections")
+      end,
     },
     { "<leader>rf", function() require("telescope.builtin").resume() end },
     { "z=", function() require("telescope.builtin").spell_suggest() end },
@@ -69,7 +77,9 @@ return {
         prompt_prefix = "  ",
         selection_caret = "  ",
         multi_icon = "  ",
-        borderchars = require("wuelnerdotexe.plugin.util").get_border().chars,
+        borderchars = require("wuelnerdotexe.plugin.config").border
+            and { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+          or { " ", " ", " ", " ", " ", " ", " ", " " },
         default_mappings = {
           i = {
             ["<M-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
@@ -112,7 +122,6 @@ return {
     })
 
     require("telescope").load_extension("fzf")
-    require("telescope").load_extension("projections")
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",

@@ -19,12 +19,12 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
   config = function()
-    local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
+    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none"
 
     require("dressing").setup({
       input = {
         insert_only = false,
-        border = borderstyle,
+        border = border,
         win_options = { wrap = true },
         override = function(conf)
           conf.col = -1
@@ -34,17 +34,17 @@ return {
         end,
       },
       select = {
-        backend = { "nui", "builtin" },
+        backend = { "telescope", "nui", "builtin" },
         nui = {
           win_options = {
             winblend = require("wuelnerdotexe.plugin.config").blend,
             cursorline = true,
             winhighlight = "CursorLine:PmenuSel",
           },
-          border = { style = borderstyle },
+          border = { style = border },
         },
         builtin = {
-          border = borderstyle,
+          border = border,
           win_options = {
             winblend = require("wuelnerdotexe.plugin.config").blend,
             cursorline = true,

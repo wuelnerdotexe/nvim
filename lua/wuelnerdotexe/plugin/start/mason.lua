@@ -1,5 +1,7 @@
 return {
   "williamboman/mason.nvim",
   lazy = true,
-  config = function() require("mason").setup({ ui = { border = require("wuelnerdotexe.plugin.util").get_border().style } }) end,
+  config = function()
+    require("mason").setup({ ui = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none" } })
+  end,
 }

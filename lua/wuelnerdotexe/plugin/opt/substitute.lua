@@ -11,5 +11,18 @@ return {
     { "X", function() require("substitute.exchange").visual() end, mode = "x" },
   },
   dependencies = "gbprod/yanky.nvim",
-  config = function() require("substitute").setup({ on_substitute = require("yanky.integration").substitute() }) end,
+  init = function()
+    require("wuelnerdotexe.plugin.util").set_option("clipboard", "unnamedplus")
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function() vim.api.nvim_command("highlight! link SubstituteSubstituted TextYanked") end,
+    })
+  end,
+  config = function()
+    require("substitute").setup({
+      on_substitute = require("yanky.integration").substitute(),
+      yank_substituted_text = true,
+      highlight_substituted_text = { timer = 150 },
+    })
+  end,
 }

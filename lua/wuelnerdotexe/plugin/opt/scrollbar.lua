@@ -1,7 +1,8 @@
 return {
   "petertriho/nvim-scrollbar",
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  event = "VeryLazy",
+  lazy = true,
+  event = "UIEnter",
   config = function()
     require("scrollbar").setup({
       throttle_ms = 42,
@@ -12,13 +13,20 @@ return {
         Info = { highlight = "DiagnosticInfo" },
         Hint = { highlight = "DiagnosticHint" },
       },
-      excluded_buftypes = { "prompt" },
-      excluded_filetypes = {
-        "dapui_hover",
-        "DressingInput",
-        "DressingSelect",
-        "noice",
-        "TelescopePrompt",
+      excluded_buftypes = { "loclist", "prompt", "quickfix", "terminal" },
+      excluded_filetypes = require("wuelnerdotexe.plugin.config").uifiletypes,
+      autocmd = {
+        render = {
+          "UIEnter",
+          "BufWinEnter",
+          "TabEnter",
+          "TermEnter",
+          "WinEnter",
+          "CmdwinLeave",
+          "TextChanged",
+          "VimResized",
+          "WinScrolled",
+        },
       },
     })
   end,

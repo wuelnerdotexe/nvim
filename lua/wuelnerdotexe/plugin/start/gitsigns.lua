@@ -2,14 +2,16 @@ return {
   "lewis6991/gitsigns.nvim",
   lazy = true,
   init = function()
-    vim.api.nvim_create_autocmd(require("wuelnerdotexe.plugin.config").open_file_event, {
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
       callback = function()
+        if package.loaded["gitsigns"] then return true end
+
         vim.api.nvim_call_function("system", {
           "git -C" .. " " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " " .. "rev-parse",
         })
 
         if vim.api.nvim_get_vvar("shell_error") == 0 then
-          vim.schedule(function() require("lazy").load({ plugins = { "gitsigns.nvim" } }) end)
+          require("lazy").load({ plugins = { "gitsigns.nvim" } })
 
           return true
         end
@@ -28,9 +30,9 @@ return {
         changedelete = { hl = "GitSignsChange", text = "│" },
       },
       current_line_blame_opts = { delay = 42 },
-      sign_priority = require("wuelnerdotexe.plugin.config").signs_priority.git,
+      sign_priority = 1,
       update_debounce = 284,
-      preview_config = { border = require("wuelnerdotexe.plugin.util").get_border().style, row = 1 },
+      preview_config = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none", row = 1 },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
           callback = function() require("gitsigns").reset_hunk() end,
@@ -78,32 +80,20 @@ return {
           callback = function() require("gitsigns").diffthis("~") end,
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", {
-          callback = function()
-            if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "]h" end
-
-            vim.schedule(function() require("gitsigns").next_hunk() end)
-
-            return "<Ignore>"
-          end,
-          expr = true,
-          replace_keycodes = true,
-        })
-
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "", {
-          callback = function()
-            if vim.api.nvim_get_option_value("diff", { win = 0 }) then return "[h" end
-
-            vim.schedule(function() require("gitsigns").prev_hunk() end)
-
-            return "<Ignore>"
-          end,
-          expr = true,
-          replace_keycodes = true,
-        })
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", { callback = function() require("gitsigns").next_hunk() end })
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "", { callback = function() require("gitsigns").prev_hunk() end })
       end,
     })
 
-    if package.loaded["scrollbar"] then require("scrollbar.handlers.gitsigns").setup() end
+    if vim.api.nvim_get_vvar("vim_did_enter") == 0 then
+      vim.api.nvim_create_autocmd("UIEnter", {
+        once = true,
+        callback = function()
+          if package.loaded["scrollbar"] then require("scrollbar.handlers.gitsigns").setup() end
+        end,
+      })
+    elseif package.loaded["scrollbar"] then
+      require("scrollbar.handlers.gitsigns").setup()
+    end
   end,
 }

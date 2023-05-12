@@ -1,6 +1,6 @@
 return {
   minimal_setup = false,
-  open_file_event = { "BufNewFile", "BufRead", "BufAdd", "SessionLoadPost" },
+  open_file_event = { "BufNewFile", "BufReadPre", "BufAdd" },
   exclude_explorer_files = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
   exclude_search_files = {
     ".git",
@@ -14,7 +14,7 @@ return {
     "*.code-search",
   },
   blend = 10,
-  border = "rounded",
+  border = false,
   uifiletypes = {
     "aerial",
     "checkhealth",
@@ -74,5 +74,4 @@ return {
     Value = "",
     Variable = "",
   },
-  signs_priority = { smoothcursor = 11, diagnostic = 9, lightbulb = 8, git = 7 },
 }

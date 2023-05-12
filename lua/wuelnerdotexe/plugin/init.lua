@@ -11,11 +11,20 @@ end
 
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazy or lazy .. "," .. rtp, TBL)
 
+vim.api.nvim_set_var("mapleader", [[\]])
+vim.api.nvim_set_var("maplocalleader", [[_]])
+
 require("lazy").setup({
   spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },
   defaults = { lazy = true, version = false },
-  dev = { path = "~/Workspace", patterns = { "wuelnerdotexe" }, fallback = true },
+  dev = { path = "~/Developer/vim-plugins", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
-  ui = { border = require("wuelnerdotexe.plugin.util").get_border().style, browser = "chrome", throttle = 42 },
-  performance = { rtp = { disabled_plugins = { "gzip", "nvim", "man", "tarPlugin", "tohtml", "tutor", "zipPlugin" } } },
+  ui = {
+    border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+    browser = "chrome",
+    throttle = 42,
+  },
+  performance = {
+    rtp = { disabled_plugins = { "gzip", "nvim", "man", "matchit", "tarPlugin", "tohtml", "tutor", "zipPlugin" } },
+  },
 })

@@ -1,5 +1,6 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  lazy = true,
   cmd = "Neotree",
   keys = {
     { "<leader>ft", function() vim.api.nvim_command("Neotree . filesystem reveal toggle") end },
@@ -21,7 +22,6 @@ return {
     end
   end,
   config = function()
-    local border = require("wuelnerdotexe.plugin.util").get_border()
     local show_path = { show_path = "relative" }
 
     require("neo-tree").setup({
@@ -29,7 +29,9 @@ return {
       add_blank_line_at_top = true,
       enable_diagnostics = false,
       hide_root_node = true,
-      popup_border_style = border.enabled and border.style or border.chars,
+      popup_border_style = require("wuelnerdotexe.plugin.config").border
+          and { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+        or { " ", " ", " ", " ", " ", " ", " ", " " },
       resize_timer_interval = 42,
       use_default_mappings = false,
       source_selector = {

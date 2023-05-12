@@ -11,7 +11,6 @@ return {
   dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
-    local borderstyle = require("wuelnerdotexe.plugin.util").get_border().style
 
     require("aerial").setup({
       backends = { "lsp", "treesitter", "markdown", "man" },
@@ -53,9 +52,9 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = borderstyle, relative = "editor" },
+      float = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none", relative = "editor" },
       nav = {
-        border = borderstyle,
+        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
         win_opts = { cursorline = true, winblend = require("wuelnerdotexe.plugin.config").blend },
         keymaps = { ["<C-c>"] = false, ["<Esc>"] = "actions.close" },
       },

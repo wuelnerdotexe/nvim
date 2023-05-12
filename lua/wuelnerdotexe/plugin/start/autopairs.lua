@@ -3,6 +3,7 @@ local mode = { "i", "c" }
 return {
   {
     "altermo/npairs-integrate-upair",
+    lazy = true,
     keys = {
       { "{", mode = mode },
       { "[", mode = mode },
@@ -23,29 +24,25 @@ return {
       { "altermo/ultimate-autopair.nvim", dependencies = "nvim-treesitter/nvim-treesitter" },
     },
     init = function()
-      vim.api.nvim_create_autocmd("InsertEnter", {
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "IntPairsComp",
         callback = function()
-          local ok, cmp = pcall(require, "cmp")
-
-          if ok then
-            if not package.loaded["npairs-int-upair"] then
-              require("lazy").load({ plugins = { "npairs-integrate-upair" } })
-            end
-
-            cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+          if not package.loaded["npairs-int-upair"] then
+            require("lazy").load({ plugins = { "npairs-integrate-upair" } })
           end
+
+          require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
           return true
         end,
-        once = true,
       })
     end,
     config = function()
       local ignored_file_types = {}
       local disable = { disable = true }
 
-      for _, filetype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
-        ignored_file_types[filetype] = disable
+      for _, uifiletype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
+        ignored_file_types[uifiletype] = disable
       end
 
       require("npairs-int-upair").setup({

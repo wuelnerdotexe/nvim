@@ -289,7 +289,7 @@ return {
 
           local breadcrumbs = table.concat(parts, " > ")
 
-          return breadcrumbs == "" and "" or breadcrumbs
+          return breadcrumbs == "" and "..." or breadcrumbs
         end,
       },
       components = components,
@@ -305,6 +305,14 @@ return {
     table.insert(winbar_components.active, {})
 
     winbar_components.active[1][1] = {
+      enabled = function() return vim.api.nvim_get_option_value("showtabline", TBL) == 0 end,
+      provider = { name = "file_info", opts = { file_readonly_icon = " ", type = "unique" } },
+      left_sep = " ",
+      right_sep = { str = " >", hl = { fg = "fg" } },
+      hl = { name = "FelineWinbar", fg = "fg" },
+    }
+
+    winbar_components.active[1][2] = {
       provider = "aerial_breadcrumbs",
       left_sep = " ",
       right_sep = " ",
@@ -314,6 +322,14 @@ return {
     table.insert(winbar_components.inactive, {})
 
     winbar_components.inactive[1][1] = {
+      enabled = function() return vim.api.nvim_get_option_value("showtabline", TBL) == 0 end,
+      provider = { name = "file_info", opts = { file_readonly_icon = " ", type = "unique" } },
+      left_sep = " ",
+      right_sep = { str = " >", hl = { fg = "gray" } },
+      hl = { name = "FelineInactiveWinbar", fg = "gray" },
+    }
+
+    winbar_components.inactive[1][2] = {
       provider = "aerial_breadcrumbs",
       left_sep = " ",
       right_sep = " ",

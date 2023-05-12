@@ -2,69 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    lazy = false,
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          vim.api.nvim_create_autocmd("User", {
-            pattern = "VeryLazy",
-            callback = function()
-              local keymap_callback_repeat_last_move = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move() end,
-              }
-
-              vim.api.nvim_set_keymap("n", ";", "", keymap_callback_repeat_last_move)
-              vim.api.nvim_set_keymap("x", ";", "", keymap_callback_repeat_last_move)
-              vim.api.nvim_set_keymap("o", ";", "", keymap_callback_repeat_last_move)
-
-              local keymap_callback_repeat_last_move_opposite = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite() end,
-              }
-
-              vim.api.nvim_set_keymap("n", ",", "", keymap_callback_repeat_last_move_opposite)
-              vim.api.nvim_set_keymap("x", ",", "", keymap_callback_repeat_last_move_opposite)
-              vim.api.nvim_set_keymap("o", ",", "", keymap_callback_repeat_last_move_opposite)
-
-              local keymap_callback_builtin_f = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_f() end,
-              }
-
-              vim.api.nvim_set_keymap("n", "f", "", keymap_callback_builtin_f)
-              vim.api.nvim_set_keymap("x", "f", "", keymap_callback_builtin_f)
-              vim.api.nvim_set_keymap("o", "f", "", keymap_callback_builtin_f)
-
-              local keymap_callback_builtin_F = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_F() end,
-              }
-
-              vim.api.nvim_set_keymap("n", "F", "", keymap_callback_builtin_F)
-              vim.api.nvim_set_keymap("x", "F", "", keymap_callback_builtin_F)
-              vim.api.nvim_set_keymap("o", "F", "", keymap_callback_builtin_F)
-
-              local keymap_callback_builtin_t = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_t() end,
-              }
-
-              vim.api.nvim_set_keymap("n", "t", "", keymap_callback_builtin_t)
-              vim.api.nvim_set_keymap("x", "t", "", keymap_callback_builtin_t)
-              vim.api.nvim_set_keymap("o", "t", "", keymap_callback_builtin_t)
-
-              local keymap_callback_builtin_T = {
-                callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_T() end,
-              }
-
-              vim.api.nvim_set_keymap("n", "T", "", keymap_callback_builtin_T)
-              vim.api.nvim_set_keymap("x", "T", "", keymap_callback_builtin_T)
-              vim.api.nvim_set_keymap("o", "T", "", keymap_callback_builtin_T)
-
-              return true
-            end,
-            once = true,
-          })
-        end,
-      },
-    },
+    event = require("wuelnerdotexe.plugin.config").open_file_event,
     config = function()
       local highlight_disable = {}
       local enable = { enable = true }
@@ -128,8 +66,61 @@ return {
         },
         rainbow = enable,
         autotag = enable,
-        matchup = { enable = true, include_match_words = true },
       })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = require("wuelnerdotexe.plugin.config").open_file_event,
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      local keymap_callback_repeat_last_move = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move() end,
+      }
+
+      vim.api.nvim_set_keymap("n", ";", "", keymap_callback_repeat_last_move)
+      vim.api.nvim_set_keymap("x", ";", "", keymap_callback_repeat_last_move)
+      vim.api.nvim_set_keymap("o", ";", "", keymap_callback_repeat_last_move)
+
+      local keymap_callback_repeat_last_move_opposite = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite() end,
+      }
+
+      vim.api.nvim_set_keymap("n", ",", "", keymap_callback_repeat_last_move_opposite)
+      vim.api.nvim_set_keymap("x", ",", "", keymap_callback_repeat_last_move_opposite)
+      vim.api.nvim_set_keymap("o", ",", "", keymap_callback_repeat_last_move_opposite)
+
+      local keymap_callback_builtin_f = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_f() end,
+      }
+
+      vim.api.nvim_set_keymap("n", "f", "", keymap_callback_builtin_f)
+      vim.api.nvim_set_keymap("x", "f", "", keymap_callback_builtin_f)
+      vim.api.nvim_set_keymap("o", "f", "", keymap_callback_builtin_f)
+
+      local keymap_callback_builtin_F = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_F() end,
+      }
+
+      vim.api.nvim_set_keymap("n", "F", "", keymap_callback_builtin_F)
+      vim.api.nvim_set_keymap("x", "F", "", keymap_callback_builtin_F)
+      vim.api.nvim_set_keymap("o", "F", "", keymap_callback_builtin_F)
+
+      local keymap_callback_builtin_t = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_t() end,
+      }
+
+      vim.api.nvim_set_keymap("n", "t", "", keymap_callback_builtin_t)
+      vim.api.nvim_set_keymap("x", "t", "", keymap_callback_builtin_t)
+      vim.api.nvim_set_keymap("o", "t", "", keymap_callback_builtin_t)
+
+      local keymap_callback_builtin_T = {
+        callback = function() require("nvim-treesitter.textobjects.repeatable_move").builtin_T() end,
+      }
+
+      vim.api.nvim_set_keymap("n", "T", "", keymap_callback_builtin_T)
+      vim.api.nvim_set_keymap("x", "T", "", keymap_callback_builtin_T)
+      vim.api.nvim_set_keymap("o", "T", "", keymap_callback_builtin_T)
     end,
   },
   {
@@ -139,7 +130,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
-    event = "InsertEnter",
+    event = require("wuelnerdotexe.plugin.config").open_file_event,
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {

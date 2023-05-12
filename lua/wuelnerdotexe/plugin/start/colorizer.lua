@@ -12,10 +12,8 @@ return {
         tailwind = "both",
         sass = { enable = true, parsers = { css = true } },
       },
-      filetypes = { "*" },
-      buftypes = { "*", "!nofile", "!prompt", "!terminal" },
+      buftypes = { "*" },
+      filetypes = { "*", "!aerial", "!checkhealth", "!neo-tree", "!lazy", "!lspinfo", "!mason", "!null-ls-info" },
     })
-
-    vim.defer_fn(function() require("colorizer").attach_to_buffer(0) end, 0)
   end,
 }

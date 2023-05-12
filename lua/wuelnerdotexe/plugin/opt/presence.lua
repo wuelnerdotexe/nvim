@@ -1,7 +1,7 @@
 return {
   "andweeb/presence.nvim",
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  event = "BufEnter",
   config = function()
     require("presence"):setup({
       neovim_image_text = "El editor de código más cool del mundo mundial",

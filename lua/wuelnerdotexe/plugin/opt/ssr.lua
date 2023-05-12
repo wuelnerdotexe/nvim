@@ -1,12 +1,11 @@
 return {
   "cshuaimin/ssr.nvim",
+  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   keys = { { "<leader>sr", function() require("ssr").open() end, mode = { "n", "x" } } },
   dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
-    local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
-
     require("ssr").setup({
-      border = require("wuelnerdotexe.plugin.util").get_border().style,
+      border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
       keymaps = { replace_all = "<localleader>rr" },
     })
   end,
