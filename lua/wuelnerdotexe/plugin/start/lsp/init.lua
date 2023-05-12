@@ -102,7 +102,10 @@ return {
 
       vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
 
-      vim.api.nvim_set_keymap("n", "<leader>lt", "", { callback = function() require("lsp_lines").toggle() end })
+      vim.api.nvim_set_keymap("n", "<leader>lt", "", {
+        callback = function() require("lsp_lines").toggle() end,
+        desc = "Language server: [t]oggle [l]ines diagnostic"
+      })
     end,
   },
 }

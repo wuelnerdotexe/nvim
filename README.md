@@ -25,7 +25,7 @@ My personal Neovim setup written in Lua.
   - [Selection](#selection)
   - [Commenting](#commenting)
   - [Moving text](#moving-text)
-  - [Git signs](#git-signs)
+  - [Git](#git)
   - [Language servers](#language-servers)
   - [Debugging](#debugging)
 - [Recommendations](#recommendations)
@@ -92,20 +92,22 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### General
 
-|      VI Mode      |         Keymap         | Description                           |
-| :---------------: | :--------------------: | ------------------------------------- |
-|      Normal       | `<leader>` + `f` + `t` | Toggle the folders explorer           |
-|      Normal       | `<leader>` + `f` + `f` | Find files in the current directory   |
-|      Normal       | `<leader>` + `p` + `f` | Find the workspace projects           |
-|      Normal       | `<leader>` + `o` + `f` | Find recently opened files            |
-|      Normal       | `<leader>` + `m` + `f` | Find Vim files marks                  |
-| Normal and visual | `<leader>` + `w` + `f` | Find word in the current directory    |
-| Normal and visual | `<leader>` + `w` + `r` | Replace word in the current directory |
-|      Normal       | `<leader>` + `g` + `t` | Toggle the git explorer               |
-|      Normal       | `<leader>` + `g` + `f` | Find files from git status            |
-|      Normal       | `<leader>` + `r` + `f` | Find resume                           |
-|      Normal       | `<leader>` + `s` + `t` | Toggle document symbols               |
-|      Normal       | `<leader>` + `t` + `o` | Open the terminal in a new buffer     |
+|      VI Mode      |         Keymap         | Description                                            |
+| :---------------: | :--------------------: | ------------------------------------------------------ |
+|      Normal       | `<leader>` + `f` + `t` | Toggle the folders explorer                            |
+|      Normal       | `<leader>` + `f` + `f` | Find files in the current directory                    |
+|      Normal       | `<leader>` + `p` + `f` | Find the workspace projects                            |
+|      Normal       | `<leader>` + `o` + `f` | Find recently opened files                             |
+|      Normal       | `<leader>` + `m` + `f` | Find Vim files marks                                   |
+| Normal and visual | `<leader>` + `w` + `f` | Find word in the current directory                     |
+| Normal and visual | `<leader>` + `w` + `r` | Replace word in the current directory                  |
+| Normal and visual | `<leader>` + `s` + `r` | Structural search and replace in the current directory |
+|      Normal       | `<leader>` + `g` + `t` | Toggle the git explorer                                |
+|      Normal       | `<leader>` + `g` + `f` | Find files from git status                             |
+|      Normal       | `<leader>` + `b` + `f` | Find opened buffers                                    |
+|      Normal       | `<leader>` + `r` + `f` | Find resume                                            |
+|      Normal       | `<leader>` + `s` + `t` | Toggle document symbols                                |
+|      Normal       | `<leader>` + `t` + `o` | Open the terminal in a new buffer                      |
 
 ### Explorer
 
@@ -162,7 +164,6 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal and visual |    `Alt` + `j`     | Resize the window on the down            |
 | Normal and visual |    `Alt` + `k`     | Resize the window on the up              |
 | Normal and visual |    `Alt` + `l`     | Resize the window on the right           |
-| Normal and visual | `CTRL` + `w` + `m` | Toggle maximizer window                  |
 | Normal and visual | `CTRL` + `w` + `o` | Close all windows except the current one |
 | Normal and visual | `CTRL` + `w` + `t` | Open the current file in a new tab       |
 | Normal and visual | `CTRL` + `w` + `s` | Split horizontally the current file      |
@@ -170,25 +171,23 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Buffers
 
-| VI Mode |        Keymap         | Description                              |
-| :-----: | :-------------------: | ---------------------------------------- |
-| Normal  |       `g` + `B`       | Go to previous buffer                    |
-| Insert  |  `SHIFT` + `PAGE UP`  | Go to previous buffer                    |
-| Normal  |       `g` + `b`       | Go to next buffer                        |
-| Insert  | `SHIFT` + `PAGE DOWN` | Go to next buffer                        |
-| Normal  |   `SHIFT` + `Home`    | Move buffer left                         |
-| Normal  |    `SHIFT` + `End`    | Move buffer right                        |
-| Normal  |       `1` + `b`       | Close all buffers except the current one |
+| VI Mode |        Keymap         | Description           |
+| :-----: | :-------------------: | --------------------- |
+| Normal  |       `g` + `B`       | Go to previous buffer |
+| Insert  |  `SHIFT` + `PAGE UP`  | Go to previous buffer |
+| Normal  |       `g` + `b`       | Go to next buffer     |
+| Insert  | `SHIFT` + `PAGE DOWN` | Go to next buffer     |
+| Normal  |   `SHIFT` + `Home`    | Move buffer left      |
+| Normal  |    `SHIFT` + `End`    | Move buffer right     |
 
 ### Tabs
 
-| VI Mode |        Keymap        | Description                           |
-| :-----: | :------------------: | ------------------------------------- |
-| Normal  |      `g` + `T`       | Go to the previous tab                |
-| Insert  |  `CTRL` + `PAGE UP`  | Go to the previous tab                |
-| Normal  |      `g` + `t`       | Go to the next tab                    |
-| Insert  | `CTRL` + `PAGE DOWN` | Go to the next tab                    |
-| Normal  |      `1` + `t`       | Close all tabs except the current one |
+| VI Mode |        Keymap        | Description            |
+| :-----: | :------------------: | ---------------------- |
+| Normal  |      `g` + `T`       | Go to the previous tab |
+| Insert  |  `CTRL` + `PAGE UP`  | Go to the previous tab |
+| Normal  |      `g` + `t`       | Go to the next tab     |
+| Insert  | `CTRL` + `PAGE DOWN` | Go to the next tab     |
 
 ### Snippets
 
@@ -228,7 +227,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal and visual |  `Alt` + `Up`   | Move line up    |
 | Normal and visual | `Alt` + `Right` | Move char right |
 
-### Git signs
+### Git
 
 |      VI Mode      |         Keymap         | Description                                                 |
 | :---------------: | :--------------------: | ----------------------------------------------------------- |

@@ -1,7 +1,14 @@
 return {
   "cshuaimin/ssr.nvim",
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  keys = { { "<leader>sr", function() require("ssr").open() end, mode = { "n", "x" } } },
+  keys = {
+    {
+      "<leader>sr",
+      function() require("ssr").open() end,
+      desc = "General: [s]tructural search and [r]eplace in the current directory",
+      mode = { "n", "x" },
+    },
+  },
   dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     require("ssr").setup({

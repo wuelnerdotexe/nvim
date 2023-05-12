@@ -64,6 +64,9 @@ return {
       man = { update_delay = 284 },
     })
 
-    vim.api.nvim_set_keymap("n", "<leader>st", "", { callback = function() require("aerial").toggle() end })
+    vim.api.nvim_set_keymap("n", "<leader>st", "", {
+      callback = function() require("aerial").toggle() end,
+      desc = "General: [t]oggle document [s]ymbols",
+    })
   end,
 }

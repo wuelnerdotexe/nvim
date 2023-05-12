@@ -3,20 +3,42 @@ return {
   lazy = true,
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", function() require("telescope.builtin").find_files() end },
-    { "<leader>of", function() require("telescope.builtin").oldfiles() end },
-    { "<leader>mf", function() require("telescope.builtin").marks() end },
-    { "<leader>bf", function() require("telescope.builtin").buffers() end },
-    { "<leader>wf", function() require("telescope.builtin").live_grep() end },
-    { "<leader>wf", function() require("telescope.builtin").grep_string() end, mode = "x" },
-    { "<leader>gf", function() require("telescope.builtin").git_status() end },
+    { "z=", function() require("telescope.builtin").spell_suggest() end },
     {
-      "<leader>sf",
-      function() require("telescope.builtin").git_files({ prompt_title = "Find Setup Files", cwd = "$HOME/.config/nvim/" }) end,
+      "<leader>ff",
+      function() require("telescope.builtin").find_files() end,
+      desc = "General: [f]ind [f]iles in the current directory",
     },
     {
-      "<leader>df",
-      function() require("telescope.builtin").git_files({ prompt_title = "Find Dotfiles", cwd = "$HOME/dotfiles/" }) end,
+      "<leader>of",
+      function() require("telescope.builtin").oldfiles() end,
+      desc = "General: [f]ind recently [o]pened files",
+    },
+    {
+      "<leader>mf",
+      function() require("telescope.builtin").marks() end,
+      desc = "General: [f]ind Vim files [m]arks"
+    },
+    {
+      "<leader>bf",
+      function() require("telescope.builtin").buffers() end,
+      desc = "General: [f]ind opened [b]uffers",
+    },
+    {
+      "<leader>wf",
+      function() require("telescope.builtin").live_grep() end,
+      desc = "General: [f]ind [w]ord in the current directory",
+    },
+    {
+      "<leader>wf",
+      function() require("telescope.builtin").grep_string() end,
+      desc = "General: [f]ind [w]ord in the current directory",
+      mode = "x",
+    },
+    {
+      "<leader>gf",
+      function() require("telescope.builtin").git_status() end,
+      desc = "General: [f]ind files from [g]it status",
     },
     {
       "<leader>pf",
@@ -25,9 +47,9 @@ return {
 
         vim.api.nvim_command("Telescope projections")
       end,
+      desc = "General: [f]ind the workspace [p]rojects",
     },
-    { "<leader>rf", function() require("telescope.builtin").resume() end },
-    { "z=", function() require("telescope.builtin").spell_suggest() end },
+    { "<leader>rf", function() require("telescope.builtin").resume() end, desc = "General: [f]ind [r]esume" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

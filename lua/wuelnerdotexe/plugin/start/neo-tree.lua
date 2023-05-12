@@ -3,8 +3,16 @@ return {
   lazy = true,
   cmd = "Neotree",
   keys = {
-    { "<leader>ft", function() vim.api.nvim_command("Neotree . filesystem reveal toggle") end },
-    { "<leader>gt", function() vim.api.nvim_command("Neotree . git_status reveal toggle") end },
+    {
+      "<leader>ft",
+      function() vim.api.nvim_command("Neotree . filesystem reveal toggle") end,
+      desc = "General: [t]oggle the [f]olders explorer",
+    },
+    {
+      "<leader>gt",
+      function() vim.api.nvim_command("Neotree . git_status reveal toggle") end,
+      desc = "General: [t]oggle the [g]it control explorer",
+    },
   },
   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
   deactivate = function() vim.api.nvim_command("Neotree close") end,

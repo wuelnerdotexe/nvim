@@ -1,8 +1,17 @@
 return {
   "nvim-pack/nvim-spectre",
   keys = {
-    { "<leader>wr", "<Cmd>lua require('spectre').open()<CR>" },
-    { "<leader>wr", "<Esc><Cmd>lua require('spectre').open_visual()<CR>", mode = "x" },
+    {
+      "<leader>wr",
+      "<Cmd>lua require('spectre').open()<CR>",
+      desc = "General: [r]eplace [w]ord in the current directory",
+    },
+    {
+      "<leader>wr",
+      "<Esc><Cmd>lua require('spectre').open_visual()<CR>",
+      desc = "General: [r]eplace [w]ord in the current directory",
+      mode = "x",
+    },
   },
   cmd = "Spectre",
   dependencies = "nvim-lua/plenary.nvim",

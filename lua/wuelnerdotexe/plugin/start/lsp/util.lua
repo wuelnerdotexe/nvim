@@ -22,20 +22,24 @@ return {
       return ref_floating_preview(contents, syntax, opts, ...)
     end
 
+    vim.api.nvim_set_keymap("n", "<leader>dp", "", {
+      callback = function() vim.diagnostic.open_float() end,
+      desc = "Language server: [p]review of the current [d]iagnostic",
+    })
+
+    vim.api.nvim_set_keymap("n", "<leader>dl", "", {
+      callback = function() vim.diagnostic.setloclist() end,
+      desc = "Language server: show [l]ist of [d]iagnostics",
+    })
+
     vim.api.nvim_set_keymap("n", "]d", "", { callback = function() vim.diagnostic.goto_next() end })
     vim.api.nvim_set_keymap("n", "[d", "", { callback = function() vim.diagnostic.goto_prev() end })
-    vim.api.nvim_set_keymap("n", "<leader>dp", "", { callback = function() vim.diagnostic.open_float() end })
-    vim.api.nvim_set_keymap("n", "<leader>dl", "", { callback = function() vim.diagnostic.setloclist() end })
 
     lsp_diagnostics_configured = true
   end,
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/completion") then
       vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-    end
-
-    if client.supports_method("textDocument/rename") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sr", "", { callback = function() vim.lsp.buf.rename() end })
     end
 
     if client.supports_method("textDocument/hover") then
@@ -46,10 +50,6 @@ return {
       vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-k>", "", { callback = function() vim.lsp.buf.signature_help() end })
     end
 
-    if client.supports_method("textDocument/references") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rl", "", { callback = function() vim.lsp.buf.references() end })
-    end
-
     if client.supports_method("textDocument/definition") then
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "", { callback = function() vim.lsp.buf.definition() end })
     end
@@ -58,19 +58,38 @@ return {
       vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "", { callback = function() vim.lsp.buf.implementation() end })
     end
 
+    if client.supports_method("textDocument/references") then
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rl", "", {
+        callback = function() vim.lsp.buf.references() end,
+        desc = "Language server: show [l]ist of [r]eferences",
+      })
+    end
+
+    if client.supports_method("textDocument/rename") then
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sr", "", {
+        callback = function() vim.lsp.buf.rename() end,
+        desc = "Language server: [r]ename the current [s]ymbol",
+      })
+    end
+
     if client.supports_method("textDocument/codeAction") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "", { callback = function() vim.lsp.buf.code_action() end })
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "", {
+        callback = function() vim.lsp.buf.code_action() end,
+        desc = "Language server: show current [c]ode [a]ctions",
+      })
     end
 
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cf", "", {
         callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
+        desc = "Language server: [f]ormat the [c]ode",
       })
     end
 
     if client.supports_method("textDocument/rangeFormatting") then
       vim.api.nvim_buf_set_keymap(bufnr, "x", "<leader>cf", "", {
         callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
+        desc = "Language server: [f]ormat the [c]ode",
       })
     end
   end,

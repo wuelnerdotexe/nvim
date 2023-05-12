@@ -16,7 +16,10 @@ return {
 
         vim.api.nvim_set_keymap("n", "<C-w>t", "", { callback = function() vim.api.nvim_command("tabedit %") end })
         vim.api.nvim_set_keymap("n", "<C-w><C-l>", "", { callback = function() vim.api.nvim_command("nohlsearch") end })
-        vim.api.nvim_set_keymap("n", "<leader>to", "", { callback = function() vim.api.nvim_command("terminal") end })
+        vim.api.nvim_set_keymap("n", "<leader>to", "", {
+          callback = function() vim.api.nvim_command("terminal") end,
+          desc = "General: [o]pen the [t]erminal in a new buffer",
+        })
       end,
     })
   end,
