@@ -17,7 +17,7 @@ return {
     {
       "<leader>mf",
       function() require("telescope.builtin").marks() end,
-      desc = "General: [f]ind Vim files [m]arks"
+      desc = "General: [f]ind Vim files [m]arks",
     },
     {
       "<leader>bf",

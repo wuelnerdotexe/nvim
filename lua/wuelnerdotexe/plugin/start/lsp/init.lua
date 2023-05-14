@@ -104,7 +104,7 @@ return {
 
       vim.api.nvim_set_keymap("n", "<leader>lt", "", {
         callback = function() require("lsp_lines").toggle() end,
-        desc = "Language server: [t]oggle [l]ines diagnostic"
+        desc = "Language server: [t]oggle [l]ines diagnostic",
       })
     end,
   },
