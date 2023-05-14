@@ -78,7 +78,7 @@ return {
           { name = "buffer", option = { indexing_interval = 284 }, keyword_length = 3, priority = 1 },
         }),
         confirmation = { default_behavior = require("cmp.types").cmp.ConfirmBehavior.Replace },
-        experimental = { ghost_text = { hl_group = "Dimmed"} },
+        experimental = { ghost_text = { hl_group = "Dimmed" } },
         window = {
           completion = { scrolloff = 3 },
           documentation = {
@@ -97,12 +97,12 @@ return {
       require("cmp").setup.filetype(require("wuelnerdotexe.plugin.config").uifiletypes, { enabled = false })
     end,
   },
-  { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-path", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
   {
     "hrsh7th/cmp-cmdline",
     event = "CmdlineEnter",
-    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer" },
     config = function()
       require("cmp").setup.cmdline({ "/", "?" }, {
         mapping = require("cmp").mapping.preset.cmdline(),
@@ -128,7 +128,7 @@ return {
     dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" },
     init = function()
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("load_cmp_nvim_lsp", TBL),
+        group = vim.api.nvim_create_augroup("load_cmp_nvim_lsp", { clear = false }),
         callback = function(ev)
           if package.loaded["cmp_nvim_lsp"] then return true end
 
@@ -136,7 +136,7 @@ return {
             buffer = ev.buf,
             group = "load_cmp_nvim_lsp",
             callback = function()
-              vim.api.nvim_del_augroup_by_name("load_cmp_nvim_lsp")
+              vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
 
               require("lazy").load({ plugins = { "cmp-nvim-lsp" } })
             end,
@@ -153,7 +153,7 @@ return {
     dependencies = "hrsh7th/nvim-cmp",
     init = function()
       vim.api.nvim_create_autocmd("BufReadPre", {
-        pattern = "*.css,*sass,*.html,*.js,*.jsx,*.ts,*.tsx",
+        pattern = "*.css,*.sass,*.html,*.js,*.jsx,*.ts,*.tsx",
         callback = function(ev) require("cmp_tabnine"):prefetch(ev.file) end,
       })
     end,
@@ -174,7 +174,7 @@ return {
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "html,xml,typescriptreact,javascriptreact,css,sass,scss,less",
-        group = vim.api.nvim_create_augroup("load_cmp_emmet", TBL),
+        group = vim.api.nvim_create_augroup("load_cmp_emmet", { clear = false }),
         callback = function(ev)
           if package.loaded["cmp-emmet"] then return true end
 
@@ -182,7 +182,7 @@ return {
             buffer = ev.buf,
             group = "load_cmp_emmet",
             callback = function()
-              vim.api.nvim_del_augroup_by_name("load_cmp_emmet")
+              vim.api.nvim_clear_autocmds({ group = "load_cmp_emmet" })
 
               require("lazy").load({ plugins = { "cmp-emmet" } })
             end,
@@ -198,7 +198,7 @@ return {
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "dap-repl,dapui_watches,dapui_hover",
-        group = vim.api.nvim_create_augroup("load_cmp_dap", TBL),
+        group = vim.api.nvim_create_augroup("load_cmp_dap", { clear = false }),
         callback = function(ev)
           if package.loaded["cmp_dap"] then return true end
 
@@ -206,7 +206,7 @@ return {
             buffer = ev.buf,
             group = "load_cmp_dap",
             callback = function()
-              vim.api.nvim_del_augroup_by_name("load_cmp_dap")
+              vim.api.nvim_clear_autocmds({ group = "load_cmp_dap" })
 
               require("lazy").load({ plugins = { "cmp-dap" } })
             end,

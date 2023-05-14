@@ -17,7 +17,16 @@ return {
     })
 
     vim.api.nvim_create_autocmd("VimLeavePre", {
-      callback = function() require("projections.session").store(vim.loop.cwd()) end,
+      callback = function()
+        if
+          not vim.tbl_contains({
+            "gitcommit",
+            "gitrebase",
+          }, vim.api.nvim_get_option_value("filetype", { buf = event.buf }))
+        then
+          require("projections.session").store(vim.loop.cwd())
+        end
+      end,
     })
   end,
   config = function()

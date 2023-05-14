@@ -46,7 +46,10 @@ return {
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
         popup = borderstyle,
-        hover = { border = border, position = { row = 2, col = 2 } },
+        hover = {
+          border = border,
+          position = { row = require("wuelnerdotexe.plugin.config").border and 2 or 1, col = 2 },
+        },
         mini = {
           timeout = 3000,
           position = { row = require("wuelnerdotexe.plugin.config").border and -2 or -1 },

@@ -22,7 +22,7 @@ return {
     require("substitute").setup({
       on_substitute = require("yanky.integration").substitute(),
       yank_substituted_text = true,
-      highlight_substituted_text = { timer = 150 },
+      highlight_substituted_text = { timer = 125 },
     })
   end,
 }

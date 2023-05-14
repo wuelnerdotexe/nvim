@@ -62,7 +62,7 @@ return {
         indent = enable,
         incremental_selection = {
           enable = true,
-          keymaps = { init_selection = "<A-v>", node_incremental = "<C-a>", node_decremental = "<C-x>" },
+          keymaps = { init_selection = "<M-v>", node_incremental = "<C-a>", node_decremental = "<C-x>" },
         },
         rainbow = enable,
         autotag = enable,

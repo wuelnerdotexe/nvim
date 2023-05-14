@@ -31,7 +31,6 @@ return {
     "lazy",
     "lspinfo",
     "mason",
-    "nerdterm",
     "noice",
     "null-ls-info",
     "qf",

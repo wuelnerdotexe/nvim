@@ -1,10 +1,10 @@
 return {
   "echasnovski/mini.move",
   keys = {
-    { "<A-Left>", mode = { "n", "v" } },
-    { "<A-Down>", mode = { "n", "v" } },
-    { "<A-Up>", mode = { "n", "v" } },
-    { "<A-Right>", mode = { "n", "v" } },
+    { "<M-Left>", mode = { "n", "v" } },
+    { "<M-Down>", mode = { "n", "v" } },
+    { "<M-Up>", mode = { "n", "v" } },
+    { "<M-Right>", mode = { "n", "v" } },
   },
   config = function()
     require("mini.move").setup({

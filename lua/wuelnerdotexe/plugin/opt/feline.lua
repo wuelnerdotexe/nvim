@@ -293,7 +293,7 @@ return {
         end,
       },
       components = components,
-      force_inactive = { filetypes = { "^nerdterm$" }, buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
+      force_inactive = { buftypes = { "^help$", "^loclist$", "^nofile$", "^quickfix$" } },
       disable = {
         buftypes = { "^prompt$" },
         filetypes = { "^aerial$", "^lazy$", "^lspinfo$", "^mason$", "^neo%-tree$", "^null%-ls%-info$" },

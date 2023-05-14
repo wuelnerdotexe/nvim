@@ -32,7 +32,11 @@ return {
       current_line_blame_opts = { delay = 42 },
       sign_priority = 1,
       update_debounce = 284,
-      preview_config = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none", row = 1 },
+      preview_config = {
+        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+        row = 1,
+        col = 0,
+      },
       on_attach = function(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
           callback = function() require("gitsigns").reset_hunk() end,
@@ -66,7 +70,7 @@ return {
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hp", "", {
           callback = function() require("gitsigns").preview_hunk() end,
-          desc = "Git: [p]review the current [h]unk"
+          desc = "Git: [p]review the current [h]unk",
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bp", "", {
@@ -76,7 +80,7 @@ return {
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bt", "", {
           callback = function() require("gitsigns").toggle_current_line_blame() end,
-          desc = "Git: [t]oggle the current line [b]lame"
+          desc = "Git: [t]oggle the current line [b]lame",
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dt", "", {
@@ -86,7 +90,7 @@ return {
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "", {
           callback = function() require("gitsigns").diffthis("~") end,
-          desc = "Git: split [g]it [d]iffs"
+          desc = "Git: split [g]it [d]iffs",
         })
 
         vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "", { callback = function() require("gitsigns").next_hunk() end })
