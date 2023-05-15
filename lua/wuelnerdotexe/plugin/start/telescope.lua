@@ -54,7 +54,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
-    "gnikdroy/projections.nvim",
+    "nvim-treesitter/nvim-treesitter",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   init = function()
@@ -150,6 +150,14 @@ return {
       callback = function(ev)
         vim.api.nvim_set_option_value("number", true, { buf = ev.buf })
         vim.api.nvim_set_option_value("wrap", true, { buf = ev.buf })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("WinLeave", {
+      callback = function(ev)
+        if vim.api.nvim_get_option_value("filetype", { buf = ev.buf }) == "TelescopePrompt" then
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
+        end
       end,
     })
   end,
