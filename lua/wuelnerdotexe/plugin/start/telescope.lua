@@ -40,15 +40,6 @@ return {
       function() require("telescope.builtin").git_status() end,
       desc = "General: [f]ind files from [g]it status",
     },
-    {
-      "<leader>pf",
-      function()
-        require("telescope").load_extension("projections")
-
-        vim.api.nvim_command("Telescope projections")
-      end,
-      desc = "General: [f]ind the workspace [p]rojects",
-    },
     { "<leader>rf", function() require("telescope.builtin").resume() end, desc = "General: [f]ind [r]esume" },
   },
   dependencies = {
