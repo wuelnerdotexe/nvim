@@ -31,27 +31,54 @@ return {
         end
 
         require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
-        return true
       end,
+      once = true,
     })
   end,
   config = function()
-    local ignored_file_types = {}
     local disable = { disable = true }
-
-    for _, uifiletype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
-      ignored_file_types[uifiletype] = disable
-    end
 
     require("npairs-int-upair").setup({
       bs = "u",
       npairs_conf = {
-        disable_filetype = require("wuelnerdotexe.plugin.config").uifiletypes,
+        disable_filetype = {
+          "aerial",
+          "checkhealth",
+          "dapui_breakpoints",
+          "dapui_console",
+          "dapui_scopes",
+          "dapui_stacks",
+          "DressingSelect",
+          "help",
+          "lazy",
+          "lspinfo",
+          "man",
+          "mason",
+          "null-ls-info",
+          "qf",
+        },
         check_ts = true,
         fast_wrap = { highlight = "Question", highlight_grey = "Dimmed" },
       },
-      upair_conf = { internal_pairs = { ft = ignored_file_types } },
+      upair_conf = {
+        internal_pairs = {
+          ft = {
+            [""] = disable,
+            ["aerial"] = disable,
+            ["checkhealth"] = disable,
+            ["dapui_breakpoints"] = disable,
+            ["dapui_console"] = disable,
+            ["dapui_scopes"] = disable,
+            ["dapui_stacks"] = disable,
+            ["DressingSelect"] = disable,
+            ["lazy"] = disable,
+            ["lspinfo"] = disable,
+            ["mason"] = disable,
+            ["null-ls-info"] = disable,
+            ["qf"] = disable,
+          },
+        },
+      },
     })
   end,
 }

@@ -1,4 +1,4 @@
-vim.loader.enable()
+if vim.loader then vim.loader.enable() end
 
 vim.api.nvim_set_var("loaded_2html_plugin", 1)
 vim.api.nvim_set_var("loaded_gzip", 1)

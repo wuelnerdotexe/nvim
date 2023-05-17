@@ -3,6 +3,7 @@ return {
   enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   init = function()
+    require("wuelnerdotexe.plugin.util").set_option("foldenable", true)
     require("wuelnerdotexe.plugin.util").set_option("foldmethod", "manual")
     require("wuelnerdotexe.plugin.util").set_option("foldlevelstart", 99)
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)

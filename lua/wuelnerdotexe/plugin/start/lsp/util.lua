@@ -8,6 +8,7 @@ return {
 
     vim.diagnostic.config({
       signs = { priority = 6 },
+      virtual_text = { prefix = "▎" },
       float = { header = { "Diagnostics", "Title" }, border = border },
       update_in_insert = true,
       severity_sort = true,

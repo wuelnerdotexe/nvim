@@ -25,7 +25,6 @@ return {
     )
 
     vim.api.nvim_create_autocmd("VimEnter", {
-      once = true,
       callback = function()
         if require("wuelnerdotexe.plugin.util").enter_with_args() then return end
 
@@ -35,6 +34,7 @@ return {
           vim.schedule(function() require("projections.session").restore(cwd) end)
         end
       end,
+      once = true,
     })
 
     vim.api.nvim_create_autocmd("VimLeavePre", {
@@ -56,6 +56,7 @@ return {
       patterns = { ".git", "package.json" },
       store_hooks = {
         pre = function()
+          if package.loaded["aerial"] then vim.api.nvim_command("AerialCloseAll") end
           if package.loaded["neo-tree"] then vim.api.nvim_command("Neotree close") end
         end,
       },

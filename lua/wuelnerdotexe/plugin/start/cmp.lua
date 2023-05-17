@@ -90,7 +90,7 @@ return {
 
       require("cmp").event:on("menu_opened", function()
         if vim.api.nvim_get_mode().mode:sub(1, 1) ~= "c" then
-          vim.api.nvim_exec_autocmds("User", { pattern = "IntPairsComp" })
+          vim.api.nvim_exec_autocmds("User", { pattern = "IntPairsComp", modeline = false })
         end
       end)
 
@@ -130,15 +130,15 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("load_cmp_nvim_lsp", { clear = false }),
         callback = function(ev)
-          if package.loaded["cmp_nvim_lsp"] then return true end
+          if package.loaded["cmp_nvim_lsp"] then vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" }) end
 
           vim.api.nvim_create_autocmd("InsertEnter", {
             buffer = ev.buf,
             group = "load_cmp_nvim_lsp",
             callback = function()
-              vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
-
               require("lazy").load({ plugins = { "cmp-nvim-lsp" } })
+
+              vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
             end,
           })
         end,
@@ -150,6 +150,7 @@ return {
     build = "./install.sh",
     enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
     lazy = true,
+    event = "InsertEnter",
     dependencies = "hrsh7th/nvim-cmp",
     init = function()
       vim.api.nvim_create_autocmd("BufReadPre", {
@@ -170,50 +171,13 @@ return {
   {
     "jackieaskins/cmp-emmet",
     build = "npm run release",
+    event = [[InsertEnter *.css,*.sass,*.scss,*.less,*.xml,*.html,*.jsx,*.tsx]],
     dependencies = "hrsh7th/nvim-cmp",
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "html,xml,typescriptreact,javascriptreact,css,sass,scss,less",
-        group = vim.api.nvim_create_augroup("load_cmp_emmet", { clear = false }),
-        callback = function(ev)
-          if package.loaded["cmp-emmet"] then return true end
-
-          vim.api.nvim_create_autocmd("InsertEnter", {
-            buffer = ev.buf,
-            group = "load_cmp_emmet",
-            callback = function()
-              vim.api.nvim_clear_autocmds({ group = "load_cmp_emmet" })
-
-              require("lazy").load({ plugins = { "cmp-emmet" } })
-            end,
-          })
-        end,
-      })
-    end,
   },
   {
     "rcarriga/cmp-dap",
-    lazy = true,
+    event = [[InsertEnter *dap-repl*,DAP\ Watches,DAP\ Hover]],
     dependencies = "hrsh7th/nvim-cmp",
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "dap-repl,dapui_watches,dapui_hover",
-        group = vim.api.nvim_create_augroup("load_cmp_dap", { clear = false }),
-        callback = function(ev)
-          if package.loaded["cmp_dap"] then return true end
-
-          vim.api.nvim_create_autocmd("InsertEnter", {
-            buffer = ev.buf,
-            group = "load_cmp_dap",
-            callback = function()
-              vim.api.nvim_clear_autocmds({ group = "load_cmp_dap" })
-
-              require("lazy").load({ plugins = { "cmp-dap" } })
-            end,
-          })
-        end,
-      })
-    end,
     config = function()
       require("cmp").setup.filetype(
         { "dap-repl", "dapui_watches", "dapui_hover" },

@@ -1,6 +1,6 @@
 return {
   minimal_setup = false,
-  open_file_event = { "BufNewFile", "BufReadPre", "BufAdd" },
+  open_file_event = { "BufAdd", "BufReadPre", "BufNewFile" },
   exclude_explorer_files = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
   exclude_search_files = {
     ".git",
@@ -18,6 +18,8 @@ return {
   uifiletypes = {
     "aerial",
     "checkhealth",
+    "cmp_docs",
+    "cmp_menu",
     "dap-repl",
     "dapui_breakpoints",
     "dapui_console",
@@ -27,10 +29,12 @@ return {
     "dapui_watches",
     "DressingInput",
     "DressingSelect",
-    "neo-tree",
+    "help",
     "lazy",
     "lspinfo",
+    "man",
     "mason",
+    "neo-tree",
     "noice",
     "null-ls-info",
     "qf",

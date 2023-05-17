@@ -18,6 +18,7 @@ return {
     { "<S-Tab>", function() require("luasnip").jump(-1) end, mode = "s" },
   },
   dependencies = {
+    "nvim-treesitter/nvim-treesitter",
     {
       "rafamadriz/friendly-snippets",
       config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
@@ -30,11 +31,25 @@ return {
           tabkey = "",
           backwards_tabkey = "",
           ignore_beginning = false,
-          exclude = require("wuelnerdotexe.plugin.config").uifiletypes,
+          exclude = {
+            "aerial",
+            "checkhealth",
+            "dapui_breakpoints",
+            "dapui_console",
+            "dapui_scopes",
+            "dapui_stacks",
+            "DressingSelect",
+            "help",
+            "lazy",
+            "lspinfo",
+            "man",
+            "mason",
+            "null-ls-info",
+            "qf",
+          },
         })
       end,
     },
-    "nvim-treesitter/nvim-treesitter",
   },
   config = function()
     require("luasnip").setup({

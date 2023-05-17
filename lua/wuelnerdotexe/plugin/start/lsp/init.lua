@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufNewFile", "BufReadPost", "BufAdd" },
+    event = { "BufAdd", "BufReadPost", "BufNewFile" },
     dependencies = {
       "b0o/schemastore.nvim",
       {
@@ -48,7 +48,7 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufNewFile", "BufRead", "BufAdd" },
+    event = { "BufAdd", "BufRead", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       {

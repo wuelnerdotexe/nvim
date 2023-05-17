@@ -13,8 +13,8 @@ return {
         Info = { highlight = "DiagnosticInfo" },
         Hint = { highlight = "DiagnosticHint" },
       },
-      excluded_buftypes = { "loclist", "prompt", "quickfix", "terminal" },
-      excluded_filetypes = require("wuelnerdotexe.plugin.config").uifiletypes,
+      excluded_buftypes = { "prompt" },
+      excluded_filetypes = { "DressingInput", "TelescopePrompt" },
       autocmd = {
         render = {
           "UIEnter",

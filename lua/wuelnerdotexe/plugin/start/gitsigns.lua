@@ -2,9 +2,12 @@ return {
   "lewis6991/gitsigns.nvim",
   lazy = true,
   init = function()
+    require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
+
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
+      group = vim.api.nvim_create_augroup("load_gitsigns", { clear = false }),
       callback = function()
-        if package.loaded["gitsigns"] then return true end
+        if package.loaded["gitsigns"] then vim.api.nvim_clear_autocmds({ group = "load_gitsigns" }) end
 
         vim.api.nvim_call_function("system", {
           "git -C" .. " " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " " .. "rev-parse",
@@ -13,12 +16,10 @@ return {
         if vim.api.nvim_get_vvar("shell_error") == 0 then
           require("lazy").load({ plugins = { "gitsigns.nvim" } })
 
-          return true
+          vim.api.nvim_clear_autocmds({ group = "load_gitsigns" })
         end
       end,
     })
-
-    require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
   end,
   config = function()
     require("gitsigns").setup({
@@ -100,10 +101,10 @@ return {
 
     if vim.api.nvim_get_vvar("vim_did_enter") == 0 then
       vim.api.nvim_create_autocmd("UIEnter", {
-        once = true,
         callback = function()
           if package.loaded["scrollbar"] then require("scrollbar.handlers.gitsigns").setup() end
         end,
+        once = true,
       })
     elseif package.loaded["scrollbar"] then
       require("scrollbar.handlers.gitsigns").setup()

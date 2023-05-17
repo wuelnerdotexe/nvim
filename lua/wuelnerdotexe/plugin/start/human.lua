@@ -8,7 +8,6 @@ return {
     })
 
     vim.api.nvim_create_autocmd("UIEnter", {
-      once = true,
       callback = function()
         for option, value in pairs(require("wuelnerdotexe.plugin.util").plugin_options) do
           require("wuelnerdotexe.plugin.util").set_option(option, value)
@@ -21,6 +20,7 @@ return {
           desc = "General: [o]pen the [t]erminal in a new buffer",
         })
       end,
+      once = true,
     })
   end,
 }

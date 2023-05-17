@@ -101,10 +101,7 @@ return {
             ["<C-e>"] = require("telescope.actions").close,
             ["<C-y>"] = require("telescope.actions").select_default,
             ["<CR>"] = require("telescope.actions").select_default,
-            ["<Tab>"] = require("telescope.actions").toggle_selection
-              + require("telescope.actions").move_selection_worse,
-            ["<S-Tab>"] = require("telescope.actions").toggle_selection
-              + require("telescope.actions").move_selection_better,
+            ["<Tab>"] = require("telescope.actions").toggle_selection,
             ["<Down>"] = require("telescope.actions").move_selection_next,
             ["<Up>"] = require("telescope.actions").move_selection_previous,
             ["<C-n>"] = require("telescope.actions").move_selection_next,
