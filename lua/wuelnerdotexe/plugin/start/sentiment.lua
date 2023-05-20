@@ -2,11 +2,11 @@ return {
   "utilyre/sentiment.nvim",
   event = require("wuelnerdotexe.plugin.config").open_file_event,
   init = function()
-    vim.api.nvim_set_var("loaded_matchparen", 1)
-
     require("wuelnerdotexe.plugin.util").set_option("showmatch", true)
     require("wuelnerdotexe.plugin.util").set_option("matchtime", 4)
     require("wuelnerdotexe.plugin.util").set_option("matchpairs", "(:),{:},[:],<:>")
+
+    vim.api.nvim_set_var("loaded_matchparen", 1)
   end,
   config = function()
     require("sentiment").setup({

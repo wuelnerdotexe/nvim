@@ -4,7 +4,7 @@ return {
   priority = 10000,
   config = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
-      callback = function() vim.api.nvim_command("highlight! link Whitespace DiagnosticError") end,
+      callback = function() vim.api.nvim_set_hl(0, "Whitespace", { link = "DiagnosticError" }) end,
     })
 
     vim.api.nvim_create_autocmd("UIEnter", {

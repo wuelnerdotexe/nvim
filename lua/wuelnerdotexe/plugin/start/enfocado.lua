@@ -31,7 +31,7 @@ return {
 
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "enfocado",
-      callback = function() vim.api.nvim_command("highlight NormalNC guibg=#1e1e1e") end,
+      callback = function() vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1e1e1e" }) end,
     })
   end,
   config = function() vim.api.nvim_command("colorscheme enfocado") end,

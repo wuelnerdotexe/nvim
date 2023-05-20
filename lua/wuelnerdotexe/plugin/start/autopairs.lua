@@ -36,8 +36,6 @@ return {
     })
   end,
   config = function()
-    local disable = { disable = true }
-
     require("npairs-int-upair").setup({
       bs = "u",
       npairs_conf = {
@@ -61,21 +59,24 @@ return {
         fast_wrap = { highlight = "Question", highlight_grey = "Dimmed" },
       },
       upair_conf = {
-        internal_pairs = {
-          ft = {
-            [""] = disable,
-            ["aerial"] = disable,
-            ["checkhealth"] = disable,
-            ["dapui_breakpoints"] = disable,
-            ["dapui_console"] = disable,
-            ["dapui_scopes"] = disable,
-            ["dapui_stacks"] = disable,
-            ["DressingSelect"] = disable,
-            ["lazy"] = disable,
-            ["lspinfo"] = disable,
-            ["mason"] = disable,
-            ["null-ls-info"] = disable,
-            ["qf"] = disable,
+        extensions = {
+          filetype = {
+            nft = {
+              "aerial",
+              "checkhealth",
+              "dapui_breakpoints",
+              "dapui_console",
+              "dapui_scopes",
+              "dapui_stacks",
+              "DressingSelect",
+              "help",
+              "lazy",
+              "lspinfo",
+              "man",
+              "mason",
+              "null-ls-info",
+              "qf",
+            },
           },
         },
       },

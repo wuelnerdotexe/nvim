@@ -36,19 +36,18 @@ return {
 
               if r and g and b then
                 local color = string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
-                local group = "Tw_" .. color
 
-                if vim.api.nvim_call_function("hlID", { group }) < 1 then
-                  vim.api.nvim_command("highlight" .. " " .. group .. " " .. "guifg=#" .. color)
+                if vim.api.nvim_call_function("hlID", { "CmpItemKindColor_" .. color }) < 1 then
+                  vim.api.nvim_set_hl(0, "CmpItemKindColor_" .. color, { fg = "#" .. color })
                 end
 
-                vim_item.kind = " Color"
-                vim_item.kind_hl_group = group
+                vim_item.kind = "" .. " " .. "Color"
+                vim_item.kind_hl_group = "CmpItemKindColor_" .. color
 
                 return vim_item
               end
             elseif entry.source.name == "cmp_tabnine" then
-              vim_item.kind = " Tabnine"
+              vim_item.kind = "" .. " " .. "Tabnine"
 
               return vim_item
             end

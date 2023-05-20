@@ -1,6 +1,6 @@
 return {
   "Darazaki/indent-o-matic",
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  event = { "BufAdd", "BufReadPost", "BufNewFile" },
   dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     local disable_filetypes = {}
