@@ -61,7 +61,7 @@ The main features and plugins provided by this setup are as follows:
 
 > My Neovim setup, **unlike many others**, has and follows a **well-defined philosophy**, governed by **coherence** and **minimalism**. You won't find any unnecessary plugins or redundant plugins here, and **every little aspect** is tweaked to keep everything consistent as a whole; for example, all the icons used are the standard ones and all floating windows have a rounded edge. As it should be...
 
-**DISCLAIMER:** Due to this you will see that I make many commits perfecting aspects that seem insignificant, I apologize for my sick perfectionism.
+**DISCLAIMER:** due to this you will see that I make many commits perfecting aspects that seem insignificant, I apologize for my sick perfectionism.
 
 ## Requirements
 
@@ -281,7 +281,7 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | Normal  |     `CTRL` + `<F11>`      | Debug step into targets                 |
 | Normal  |     `SHIFT` + `<F11>`     | Debug step out                          |
 
-**NOTE:** Only custom keymaps unique to this configuration are documented here. There are many more keymaps available by default in each installed plugin, in addition to the hundreds that come with Vim by default.
+**NOTE:** only custom keymaps unique to this configuration are documented here. There are many more keymaps available by default in each installed plugin, in addition to the hundreds that come with Vim by default.
 
 ## Recommendations
 
