@@ -24,11 +24,11 @@ return {
         },
       })
 
-      vim.api.nvim_set_keymap("n", "<S-End>", "", {
+      vim.api.nvim_set_keymap("", "<S-End>", "", {
         callback = function() vim.api.nvim_command("BufferLineMoveNext") end,
       })
 
-      vim.api.nvim_set_keymap("n", "<S-Home>", "", {
+      vim.api.nvim_set_keymap("", "<S-Home>", "", {
         callback = function() vim.api.nvim_command("BufferLineMovePrev") end,
       })
 
@@ -36,11 +36,7 @@ return {
         callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
       })
 
-      vim.api.nvim_set_keymap("n", "<S-PageDown>", "", {
-        callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
-      })
-
-      vim.api.nvim_set_keymap("i", "<S-PageDown>", "", {
+      vim.api.nvim_set_keymap("", "<S-PageDown>", "", {
         callback = function() vim.api.nvim_command("BufferLineCycleNext") end,
       })
 
@@ -48,11 +44,7 @@ return {
         callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
       })
 
-      vim.api.nvim_set_keymap("n", "<S-PageUp>", "", {
-        callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
-      })
-
-      vim.api.nvim_set_keymap("i", "<S-PageUp>", "", {
+      vim.api.nvim_set_keymap("", "<S-PageUp>", "", {
         callback = function() vim.api.nvim_command("BufferLineCyclePrev") end,
       })
     end,

@@ -61,28 +61,36 @@ return {
       },
     })
 
-    local keymap_callback_scroll_forward = {
+    vim.api.nvim_set_keymap("", "<C-f>", "", {
       callback = function()
         if not require("noice.lsp").scroll(1) then return "<C-f>" end
       end,
       expr = true,
       replace_keycodes = true,
-    }
+    })
 
-    vim.api.nvim_set_keymap("n", "<C-f>", "", keymap_callback_scroll_forward)
-    vim.api.nvim_set_keymap("i", "<C-f>", "", keymap_callback_scroll_forward)
-    vim.api.nvim_set_keymap("s", "<C-f>", "", keymap_callback_scroll_forward)
+    vim.api.nvim_set_keymap("s", "<C-f>", "", {
+      callback = function()
+        if not require("noice.lsp").scroll(1) then return "<C-f>" end
+      end,
+      expr = true,
+      replace_keycodes = true,
+    })
 
-    local keymap_callback_scroll_backward = {
+    vim.api.nvim_set_keymap("", "<C-b>", "", {
       callback = function()
         if not require("noice.lsp").scroll(-1) then return "<C-b>" end
       end,
       expr = true,
       replace_keycodes = true,
-    }
+    })
 
-    vim.api.nvim_set_keymap("n", "<C-b>", "", keymap_callback_scroll_backward)
-    vim.api.nvim_set_keymap("i", "<C-b>", "", keymap_callback_scroll_backward)
-    vim.api.nvim_set_keymap("s", "<C-b>", "", keymap_callback_scroll_backward)
+    vim.api.nvim_set_keymap("s", "<C-b>", "", {
+      callback = function()
+        if not require("noice.lsp").scroll(-1) then return "<C-b>" end
+      end,
+      expr = true,
+      replace_keycodes = true,
+    })
   end,
 }
