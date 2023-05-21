@@ -39,12 +39,12 @@ return {
         col = 0,
       },
       on_attach = function(bufnr)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hr", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>hr", "", {
           callback = function() require("gitsigns").reset_hunk() end,
           desc = "Git: [r]eset the current [h]unk",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hr", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "v", "<localleader>hr", "", {
           callback = function()
             require("gitsigns").reset_hunk({
               vim.api.nvim_call_function("line", { "." }),
@@ -54,12 +54,12 @@ return {
           desc = "Git: [r]eset the current [h]unk",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hs", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>hs", "", {
           callback = function() require("gitsigns").stage_hunk() end,
           desc = "Git: [s]tage the current [h]unk",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>hs", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "v", "<localleader>hs", "", {
           callback = function()
             require("gitsigns").stage_hunk({
               vim.api.nvim_call_function("line", { "." }),
@@ -69,27 +69,27 @@ return {
           desc = "Git: [s]tage the current [h]unk",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>hp", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>hp", "", {
           callback = function() require("gitsigns").preview_hunk() end,
           desc = "Git: [p]review the current [h]unk",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bp", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>bp", "", {
           callback = function() require("gitsigns").blame_line({ full = true }) end,
           desc = "Git: [p]review the current line [b]lame",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>bt", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>bt", "", {
           callback = function() require("gitsigns").toggle_current_line_blame() end,
           desc = "Git: [t]oggle the current line [b]lame",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dt", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>dt", "", {
           callback = function() require("gitsigns").toggle_deleted() end,
           desc = "Git: [t]oggle show [d]eleted lines",
         })
 
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "", {
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>gd", "", {
           callback = function() require("gitsigns").diffthis("~") end,
           desc = "Git: split [g]it [d]iffs",
         })

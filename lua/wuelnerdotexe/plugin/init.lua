@@ -12,7 +12,7 @@ end
 vim.api.nvim_set_option_value("rtp", rtp == "" and lazy or lazy .. "," .. rtp, TBL)
 
 vim.api.nvim_set_var("mapleader", [[\]])
-vim.api.nvim_set_var("maplocalleader", [[_]])
+vim.api.nvim_set_var("maplocalleader", [[|]])
 
 require("lazy").setup({
   spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },

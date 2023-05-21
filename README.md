@@ -88,7 +88,7 @@ git clone https://github.com/wuelnerdotexe/nvim ~/.config/nvim --depth 1
 
 The keymaps created by this config are very well thought out to be intuitive, meaningful, and most of all, to stick to the essence of Vim without conflicting with it. Keymaps are normally assigned two letters, which signify an action, for example: `d` + `p` = `d`iagnostic `p`review. Keep in mind that the functionality will always come first and then the action. This is the standard created and used by this configuration for unique consistency.
 
-**IMPORTANT:** The `\` backslash remains as the global `<leader>` leadermap.
+**IMPORTANT:** the `\` (backslash) remains as the `<leader>` key, and the `|` (pipe) remains as the `<localleader>` key.
 
 ### General
 
@@ -233,39 +233,39 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Git
 
-|      VI Mode      |         Keymap         | Description                                                 |
-| :---------------: | :--------------------: | ----------------------------------------------------------- |
-|      Normal       | `<leader>` + `g` + `d` | Split git diffs                                             |
-|      Normal       | `<leader>` + `d` + `t` | Toggle show deleted lines                                   |
-|      Normal       | `<leader>` + `b` + `t` | Toggle the current line blame                               |
-|      Normal       |       `[` + `h`        | Go to the previous hunk (can be repetable with `,` and `;`) |
-|      Normal       |       `]` + `h`        | Go to the next hunk (can be repetable with `,` and `;`)     |
-|      Normal       | `<leader>` + `h` + `p` | Preview the current hunk                                    |
-|      Normal       | `<leader>` + `b` + `p` | Preview the current line blame                              |
-| Normal and Visual | `<leader>` + `h` + `s` | Stage the current hunk                                      |
-|      Normal       | `<leader>` + `h` + `r` | Reset the current hunk                                      |
+|      VI Mode      |           Keymap            | Description                                                 |
+| :---------------: | :-------------------------: | ----------------------------------------------------------- |
+|      Normal       | `<localleader>` + `g` + `d` | Split git diffs                                             |
+|      Normal       | `<localleader>` + `d` + `t` | Toggle show deleted lines                                   |
+|      Normal       | `<localleader>` + `b` + `t` | Toggle the current line blame                               |
+|      Normal       |          `[` + `h`          | Go to the previous hunk (can be repetable with `,` and `;`) |
+|      Normal       |          `]` + `h`          | Go to the next hunk (can be repetable with `,` and `;`)     |
+|      Normal       | `<localleader>` + `h` + `p` | Preview the current hunk                                    |
+|      Normal       | `<localleader>` + `b` + `p` | Preview the current line blame                              |
+| Normal and Visual | `<localleader>` + `h` + `s` | Stage the current hunk                                      |
+|      Normal       | `<localleader>` + `h` + `r` | Reset the current hunk                                      |
 
 ### Language servers
 
-|      VI Mode      |         Keymap         | Description                                                   |
-| :---------------: | :--------------------: | ------------------------------------------------------------- |
-|      Normal       | `<leader>` + `l` + `t` | Toggle lines diagnostics                                      |
-|      Normal       | `<leader>` + `h` + `t` | Toggle inlay hints                                            |
-|      Normal       | `<leader>` + `d` + `p` | Preview of the current diagnostic                             |
-|      Normal       | `<leader>` + `d` + `l` | Show list of diagnostics                                      |
-|      Normal       |       `[` + `d`        | Go to previous diagnostic (can be repetable with `,` and `;`) |
-|      Normal       |       `]` + `d`        | Go to next diagnostic (can be repetable with `,` and `;`)     |
-|      Insert       |      `CTRL` + `b`      | Scroll up in the documentation                                |
-|      Insert       |      `CTRL` + `f`      | Scroll down in the documentation                              |
-|      Normal       |          `K`           | Show hover documentation                                      |
-|      Insert       |      `CTRL` + `k`      | Show signature help                                           |
-|      Normal       | `<leader>` + `s` + `r` | Rename the current symbol                                     |
-|      Normal       | `<leader>` + `r` + `l` | Show list of references                                       |
-|      Normal       |       `g` + `d`        | Go to definition                                              |
-|      Normal       |       `g` + `D`        | Peek definition                                               |
-|      Normal       |       `g` + `i`        | Go to implementation                                          |
-|      Normal       | `<leader>` + `c` + `a` | Show current code actions                                     |
-| Normal and Visual | `<leader>` + `c` + `f` | Format the code                                               |
+|      VI Mode      |           Keymap            | Description                                                   |
+| :---------------: | :-------------------------: | ------------------------------------------------------------- |
+|      Normal       |   `<leader>` + `l` + `t`    | Toggle lines diagnostics                                      |
+|      Normal       |   `<leader>` + `h` + `t`    | Toggle inlay hints                                            |
+|      Normal       |   `<leader>` + `d` + `p`    | Preview of the current diagnostic                             |
+|      Normal       |   `<leader>` + `d` + `l`    | Show list of diagnostics                                      |
+|      Normal       |          `[` + `d`          | Go to previous diagnostic (can be repetable with `,` and `;`) |
+|      Normal       |          `]` + `d`          | Go to next diagnostic (can be repetable with `,` and `;`)     |
+|      Insert       |        `CTRL` + `b`         | Scroll up in the documentation                                |
+|      Insert       |        `CTRL` + `f`         | Scroll down in the documentation                              |
+|      Normal       |             `K`             | Show hover documentation                                      |
+|      Insert       |        `CTRL` + `k`         | Show signature help                                           |
+|      Normal       | `<localleader>` + `s` + `r` | Rename the current symbol                                     |
+|      Normal       | `<localleader>` + `r` + `l` | Show list of references                                       |
+|      Normal       |          `g` + `d`          | Go to definition                                              |
+|      Normal       |          `g` + `D`          | Peek definition                                               |
+|      Normal       |          `g` + `i`          | Go to implementation                                          |
+|      Normal       | `<localleader>` + `c` + `a` | Show current code actions                                     |
+| Normal and Visual | `<localleader>` + `c` + `f` | Format the code                                               |
 
 ### Debugging
 

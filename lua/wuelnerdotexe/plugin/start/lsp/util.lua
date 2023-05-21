@@ -60,35 +60,35 @@ return {
     end
 
     if client.supports_method("textDocument/references") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rl", "", {
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>rl", "", {
         callback = function() vim.lsp.buf.references() end,
         desc = "Language server: show [l]ist of [r]eferences",
       })
     end
 
     if client.supports_method("textDocument/rename") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sr", "", {
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>sr", "", {
         callback = function() vim.lsp.buf.rename() end,
         desc = "Language server: [r]ename the current [s]ymbol",
       })
     end
 
     if client.supports_method("textDocument/codeAction") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "", {
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>ca", "", {
         callback = function() vim.lsp.buf.code_action() end,
         desc = "Language server: show current [c]ode [a]ctions",
       })
     end
 
     if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cf", "", {
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>cf", "", {
         callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
         desc = "Language server: [f]ormat the [c]ode",
       })
     end
 
     if client.supports_method("textDocument/rangeFormatting") then
-      vim.api.nvim_buf_set_keymap(bufnr, "x", "<leader>cf", "", {
+      vim.api.nvim_buf_set_keymap(bufnr, "x", "<localleader>cf", "", {
         callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
         desc = "Language server: [f]ormat the [c]ode",
       })
