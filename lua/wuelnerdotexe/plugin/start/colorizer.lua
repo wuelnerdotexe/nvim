@@ -5,7 +5,6 @@ return {
     "BufReadPre *.css,*.sass,*.html,*.js,*.jsx,*.tsx",
     "BufNewFile *.css,*.sass,*.html,*.js,*.jsx,*.tsx",
   },
-  -- event = "FileType css,sass,html,javascript,javascriptreact,typescriptreact",
   init = function() require("wuelnerdotexe.plugin.util").set_option("termguicolors", true) end,
   config = function()
     local css_tailwind_setup = { css_fn = true, tailwind = true }
