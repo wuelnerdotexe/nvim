@@ -2,6 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   lazy = true,
   init = function()
+    require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
     require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
 
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
@@ -34,7 +35,7 @@ return {
       sign_priority = 1,
       update_debounce = 284,
       preview_config = {
-        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
         row = 1,
         col = 0,
       },
