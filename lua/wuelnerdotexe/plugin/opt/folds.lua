@@ -30,7 +30,7 @@ return {
     },
     dependencies = "anuvyklack/keymap-amend.nvim",
     config = function()
-      require("fold-preview").setup({ border = require("wuelnerdotexe.plugin.config").border == "rounded" or "none" })
+      require("fold-preview").setup({ border = require("wuelnerdotexe.plugin.config").border == "rounded" or "shadow" })
     end,
   },
 }

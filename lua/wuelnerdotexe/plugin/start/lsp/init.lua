@@ -20,7 +20,7 @@ return {
 
       require("lspconfig.ui.windows").default_options.border = require("wuelnerdotexe.plugin.config").border
           and "rounded"
-        or "none"
+        or "shadow"
 
       local basic_server_setup = {
         flags = { debounce_text_changes = 284 },
@@ -66,7 +66,7 @@ return {
       require("wuelnerdotexe.plugin.start.lsp.util").setup_lsp_diagnostics()
 
       require("null-ls").setup({
-        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
         debounce = 284,
         diagnostic_config = { severity_sort = true },
         on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.util").on_attach(client, bufnr) end,

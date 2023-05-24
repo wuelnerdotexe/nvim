@@ -19,8 +19,8 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
   config = function()
-    local border = { style = require("wuelnerdotexe.plugin.config").border and "rounded" or "none" }
-    local borderstyle = { border = border }
+    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow"
+    local borderstyle = { style = border }
 
     require("noice").setup({
       cmdline = { view = "cmdline" },
@@ -45,19 +45,21 @@ return {
           size = "25%",
           win_options = { signcolumn = "no", number = false, relativenumber = false, list = false, wrap = false },
         },
-        popup = borderstyle,
+        popup = { border = borderstyle },
         hover = {
-          border = border,
+          border = borderstyle,
           position = { row = require("wuelnerdotexe.plugin.config").border and 2 or 1, col = 2 },
         },
         mini = {
           timeout = 3000,
           position = { row = require("wuelnerdotexe.plugin.config").border and -2 or -1 },
-          border = border,
+          border = borderstyle,
           win_options = { winblend = require("wuelnerdotexe.plugin.config").blend },
         },
-        cmdline_popup = borderstyle,
-        confirm = borderstyle,
+        cmdline_popup = { border = borderstyle },
+        confirm = {
+          border = { style = border, padding = { 0, require("wuelnerdotexe.plugin.config").border and 1 or 0 } },
+        },
       },
     })
 

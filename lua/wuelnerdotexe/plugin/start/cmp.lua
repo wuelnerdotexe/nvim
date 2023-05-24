@@ -81,7 +81,7 @@ return {
         window = {
           completion = { scrolloff = 3 },
           documentation = {
-            border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+            border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
             winhighlight = "FloatBorder:FloatBorder",
           },
         },

@@ -4,7 +4,7 @@ return {
   setup_lsp_diagnostics = function()
     if lsp_diagnostics_configured then return end
 
-    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none"
+    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow"
 
     vim.diagnostic.config({
       signs = { priority = 6 },

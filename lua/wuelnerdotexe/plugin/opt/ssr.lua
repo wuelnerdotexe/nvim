@@ -12,7 +12,7 @@ return {
   dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     require("ssr").setup({
-      border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+      border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
       keymaps = { replace_all = "<localleader>rr" },
     })
   end,

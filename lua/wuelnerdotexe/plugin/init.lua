@@ -20,7 +20,7 @@ require("lazy").setup({
   dev = { path = "~/Developer/vim-plugins", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
   ui = {
-    border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+    border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
     browser = "chrome",
     throttle = 42,
   },

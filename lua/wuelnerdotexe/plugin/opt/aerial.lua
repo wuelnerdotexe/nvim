@@ -53,9 +53,9 @@ return {
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
-      float = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none", relative = "editor" },
+      float = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow", relative = "editor" },
       nav = {
-        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "none",
+        border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
         win_opts = { cursorline = true, winblend = require("wuelnerdotexe.plugin.config").blend },
         keymaps = { ["<C-c>"] = false, ["<Esc>"] = "actions.close" },
       },
