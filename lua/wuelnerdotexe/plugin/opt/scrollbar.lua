@@ -14,7 +14,7 @@ return {
         Hint = { highlight = "DiagnosticHint" },
       },
       excluded_buftypes = { "prompt" },
-      excluded_filetypes = { "DressingInput", "TelescopePrompt" },
+      excluded_filetypes = { "cmp_docs", "cmp_menu", "DressingInput", "noice", "TelescopePrompt" },
       autocmd = {
         render = {
           "UIEnter",
