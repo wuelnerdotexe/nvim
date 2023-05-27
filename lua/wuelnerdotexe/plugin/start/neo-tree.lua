@@ -23,11 +23,11 @@ return {
     vim.api.nvim_set_var("loaded_netrwFileHandlers", 1)
     vim.api.nvim_set_var("neo_tree_remove_legacy_commands", 1)
 
-    if require("wuelnerdotexe.plugin.util").enter_with_args() then
-      local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
+    if not require("wuelnerdotexe.plugin.util").enter_with_args() then return end
 
-      if stat and stat.type == "directory" then require("lazy").load({ plugins = { "neo-tree.nvim" } }) end
-    end
+    local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
+
+    if stat and stat.type == "directory" then require("lazy").load({ plugins = { "neo-tree.nvim" } }) end
   end,
   config = function()
     local show_path = { show_path = "relative" }

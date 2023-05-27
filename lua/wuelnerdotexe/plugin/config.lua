@@ -35,6 +35,7 @@ return {
     "man",
     "mason",
     "neo-tree",
+    "netrw",
     "noice",
     "null-ls-info",
     "qf",

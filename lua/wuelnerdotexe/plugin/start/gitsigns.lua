@@ -8,17 +8,21 @@ return {
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
       group = vim.api.nvim_create_augroup("load_gitsigns", { clear = false }),
       callback = function()
-        if package.loaded["gitsigns"] then vim.api.nvim_clear_autocmds({ group = "load_gitsigns" }) end
+        if package.loaded["gitsigns"] then
+          vim.api.nvim_clear_autocmds({ group = "load_gitsigns" })
+
+          return true
+        end
 
         vim.api.nvim_call_function("system", {
           "git -C" .. " " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " " .. "rev-parse",
         })
 
-        if vim.api.nvim_get_vvar("shell_error") == 0 then
-          require("lazy").load({ plugins = { "gitsigns.nvim" } })
+        if vim.api.nvim_get_vvar("shell_error") ~= 0 then return end
 
-          vim.api.nvim_clear_autocmds({ group = "load_gitsigns" })
-        end
+        require("lazy").load({ plugins = { "gitsigns.nvim" } })
+
+        vim.api.nvim_clear_autocmds({ group = "load_gitsigns" })
       end,
     })
   end,

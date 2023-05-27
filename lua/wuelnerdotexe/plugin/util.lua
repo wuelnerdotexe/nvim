@@ -8,15 +8,13 @@ M.empty_table = {}
 M.plugin_options = {}
 
 M.set_option = function(option, value)
-  local current_value = vim.api.nvim_get_option_value(option, M.empty_table)
+  M.plugin_options[option] = vim.api.nvim_get_option_value(option, M.empty_table)
 
-  if M.plugin_options[option] ~= current_value then M.plugin_options[option] = current_value end
+  if M.plugin_options[option] == value then return end
 
-  if M.plugin_options[option] ~= value then
-    M.plugin_options[option] = value
+  vim.api.nvim_set_option_value(option, value, M.empty_table)
 
-    vim.api.nvim_set_option_value(option, value, M.empty_table)
-  end
+  M.plugin_options[option] = value
 end
 
 M.enter_with_args = function()

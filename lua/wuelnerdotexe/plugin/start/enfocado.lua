@@ -20,6 +20,7 @@ return {
       "lspconfig",
       "mason",
       "neo-tree",
+      "netrw",
       "noice",
       "null-ls",
       "substitute",

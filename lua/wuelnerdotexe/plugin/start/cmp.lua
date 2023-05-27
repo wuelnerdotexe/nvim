@@ -129,7 +129,11 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("load_cmp_nvim_lsp", { clear = false }),
         callback = function(ev)
-          if package.loaded["cmp_nvim_lsp"] then vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" }) end
+          if package.loaded["cmp_nvim_lsp"] then
+            vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
+
+            return true
+          end
 
           vim.api.nvim_create_autocmd("InsertEnter", {
             buffer = ev.buf,

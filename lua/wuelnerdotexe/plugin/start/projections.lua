@@ -7,13 +7,15 @@ return {
       function()
         local telescope_status, telescope = pcall(require, "telescope")
 
-        if telescope_status then
-          if not package.loaded["telescope._extensions.projections"] then telescope.load_extension("projections") end
-
-          telescope.extensions.projections.projections()
-        else
+        if not telescope_status then
           vim.notify("projections: cannot open telescope", vim.log.levels.ERROR)
+
+          return
         end
+
+        if not package.loaded["telescope._extensions.projections"] then telescope.load_extension("projections") end
+
+        telescope.extensions.projections.projections()
       end,
       desc = "General: [f]ind the workspace [p]rojects",
     },
@@ -26,13 +28,14 @@ return {
 
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()
-        if require("wuelnerdotexe.plugin.util").enter_with_args() then return end
-
-        local cwd = vim.loop.cwd()
-
-        if require("projections.session").info(cwd) ~= nil then
-          vim.schedule(function() require("projections.session").restore(cwd) end)
+        if
+          require("wuelnerdotexe.plugin.util").enter_with_args()
+          or require("projections.session").info(vim.loop.cwd()) == nil
+        then
+          return
         end
+
+        vim.schedule(function() require("projections.session").restore(vim.loop.cwd()) end)
       end,
       once = true,
     })
@@ -40,13 +43,16 @@ return {
     vim.api.nvim_create_autocmd("VimLeavePre", {
       callback = function(ev)
         if
-          not vim.tbl_contains({
+          vim.tbl_contains({
+            "git",
             "gitcommit",
             "gitrebase",
           }, vim.api.nvim_get_option_value("filetype", { buf = ev.buf }))
         then
-          require("projections.session").store(vim.loop.cwd())
+          return
         end
+
+        require("projections.session").store(vim.loop.cwd())
       end,
     })
   end,

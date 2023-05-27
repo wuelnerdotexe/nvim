@@ -65,7 +65,6 @@ return {
           keymaps = { init_selection = "<M-v>", node_incremental = "<C-a>", node_decremental = "<C-x>" },
         },
         rainbow = enable,
-        autotag = enable,
       })
     end,
   },
@@ -130,8 +129,15 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
-    event = require("wuelnerdotexe.plugin.config").open_file_event,
+    event = [[InsertEnter *.html,*.js,*.jsx,*.tsx,*.md,*.markdown]],
     dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-ts-autotag").setup({
+        filetypes = { "html", "javascript", "javascriptreact", "typescriptreact", "markdown" },
+      })
+
+      vim.api.nvim_command("doautoall <nomodeline> FileType")
+    end,
   },
   {
     "danymat/neogen",

@@ -143,9 +143,9 @@ return {
 
     vim.api.nvim_create_autocmd("WinLeave", {
       callback = function(ev)
-        if vim.api.nvim_get_option_value("filetype", { buf = ev.buf }) == "TelescopePrompt" then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
-        end
+        if vim.api.nvim_get_option_value("filetype", { buf = ev.buf }) ~= "TelescopePrompt" then return end
+
+        vim.api.nvim_command("stopinsert")
       end,
     })
   end,

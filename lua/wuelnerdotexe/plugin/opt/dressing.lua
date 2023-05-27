@@ -8,13 +8,17 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
 
     vim.ui.input = function(...)
-      if not package.loaded["dressing.nvim"] then require("lazy").load({ plugins = { "dressing.nvim" } }) end
+      if package.loaded["dressing.nvim"] then return vim.ui.input(...) end
+
+      require("lazy").load({ plugins = { "dressing.nvim" } })
 
       return vim.ui.input(...)
     end
 
     vim.ui.select = function(...)
-      if not package.loaded["dressing.nvim"] then require("lazy").load({ plugins = { "dressing.nvim" } }) end
+      if package.loaded["dressing.nvim"] then return vim.ui.select(...) end
+
+      require("lazy").load({ plugins = { "dressing.nvim" } })
 
       return vim.ui.select(...)
     end

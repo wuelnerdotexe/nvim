@@ -4,6 +4,8 @@ return {
   setup_lsp_diagnostics = function()
     if lsp_diagnostics_configured then return end
 
+    lsp_diagnostics_configured = true
+
     local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow"
 
     vim.diagnostic.config({
@@ -35,8 +37,6 @@ return {
 
     vim.api.nvim_set_keymap("n", "]d", "", { callback = function() vim.diagnostic.goto_next() end })
     vim.api.nvim_set_keymap("n", "[d", "", { callback = function() vim.diagnostic.goto_prev() end })
-
-    lsp_diagnostics_configured = true
   end,
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/completion") then
