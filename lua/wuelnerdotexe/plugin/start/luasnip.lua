@@ -44,6 +44,7 @@ return {
             "lspinfo",
             "man",
             "mason",
+            "netrw",
             "null-ls-info",
             "qf",
           },
