@@ -16,12 +16,26 @@ return {
     { "<C-w>k", function() require("smart-splits").swap_buf_up() end, mode = mode },
     { "<C-w>l", function() require("smart-splits").swap_buf_right() end, mode = mode },
   },
+  cmd = {
+    "SmartCursorMoveDown",
+    "SmartCursorMoveLeft",
+    "SmartCursorMoveRight",
+    "SmartCursorMoveUp",
+    "SmartResizeDown",
+    "SmartResizeLeft",
+    "SmartResizeMode",
+    "SmartResizeRight",
+    "SmartResizeUp",
+    "SmartSplitsLog",
+    "SmartSplitsLogLevel",
+  },
   config = function()
     require("smart-splits").setup({
       ignored_filetypes = {
         "dapui_hover",
         "DressingInput",
         "DressingSelect",
+        "fzf",
         "lazy",
         "lspinfo",
         "mason",

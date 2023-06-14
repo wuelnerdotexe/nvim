@@ -1,18 +1,5 @@
-return {
-  minimal_setup = false,
-  open_file_event = { "BufAdd", "BufReadPre", "BufNewFile" },
+local M = {
   exclude_explorer_files = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
-  exclude_search_files = {
-    ".git",
-    ".svn",
-    ".hg",
-    "CSV",
-    ".DS_Store",
-    "thumbs.db",
-    "node_modules",
-    "bower_components",
-    "*.code-search",
-  },
   blend = 10,
   border = false,
   uifiletypes = {
@@ -29,6 +16,7 @@ return {
     "dapui_watches",
     "DressingInput",
     "DressingSelect",
+    "fzf",
     "help",
     "lazy",
     "lspinfo",
@@ -79,3 +67,8 @@ return {
     Variable = "",
   },
 }
+
+M.exclude_search_files =
+  vim.list_extend({ "node_modules", "bower_components", "*.code-search" }, M.exclude_explorer_files)
+
+return M

@@ -1,6 +1,5 @@
 return {
   "gnikdroy/projections.nvim",
-  lazy = true,
   keys = {
     {
       "<leader>pf",
@@ -20,6 +19,7 @@ return {
       desc = "General: [f]ind the workspace [p]rojects",
     },
   },
+  lazy = true,
   init = function()
     require("wuelnerdotexe.plugin.util").set_option(
       "sessionoptions",
@@ -62,8 +62,8 @@ return {
       patterns = { ".git", "package.json" },
       store_hooks = {
         pre = function()
-          if package.loaded["aerial"] then vim.api.nvim_command("AerialCloseAll") end
-          if package.loaded["neo-tree"] then vim.api.nvim_command("Neotree close") end
+          if package.loaded["aerial"] then require("aerial").close_all() end
+          if package.loaded["neo-tree"] then require("neo-tree.command").execute({ action = "close" }) end
         end,
       },
     })

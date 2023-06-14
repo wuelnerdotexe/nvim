@@ -1,6 +1,6 @@
 return {
   "cshuaimin/ssr.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
+  dependencies = "nvim-treesitter/nvim-treesitter",
   keys = {
     {
       "<leader>sr",
@@ -9,7 +9,6 @@ return {
       mode = { "n", "x" },
     },
   },
-  dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     require("ssr").setup({
       border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",

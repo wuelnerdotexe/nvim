@@ -1,57 +1,40 @@
 return {
   "L3MON4D3/LuaSnip",
   build = "make install_jsregexp",
+  dependencies = {
+    { "rafamadriz/friendly-snippets", config = function() require("luasnip.loaders.from_vscode").lazy_load() end },
+  },
   keys = {
     {
       "<Tab>",
-      function() return require("luasnip").expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Plug>(Tabout)" end,
-      expr = true,
+      function()
+        if require("luasnip").expand_or_locally_jumpable() then
+          require("luasnip").expand_or_jump()
+        elseif pcall(require, "tabout") then
+          require("tabout").tabout()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "i", false)
+        end
+      end,
       mode = "i",
     },
     { "<Tab>", function() require("luasnip").jump(1) end, mode = "s" },
     {
       "<S-Tab>",
-      function() return require("luasnip").jumpable(-1) and "<Plug>luasnip-jump-prev" or "<Plug>(TaboutBack)" end,
-      expr = true,
+      function()
+        if require("luasnip").locally_jumpable(-1) then
+          require("luasnip").jump(-1)
+        elseif pcall(require, "tabout") then
+          require("tabout").taboutBack()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, true, true), "i", false)
+        end
+      end,
       mode = "i",
     },
     { "<S-Tab>", function() require("luasnip").jump(-1) end, mode = "s" },
   },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    {
-      "rafamadriz/friendly-snippets",
-      config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
-    },
-    {
-      "abecodes/tabout.nvim",
-      dependencies = "nvim-treesitter/nvim-treesitter",
-      config = function()
-        require("tabout").setup({
-          tabkey = "",
-          backwards_tabkey = "",
-          ignore_beginning = false,
-          exclude = {
-            "aerial",
-            "checkhealth",
-            "dapui_breakpoints",
-            "dapui_console",
-            "dapui_scopes",
-            "dapui_stacks",
-            "DressingSelect",
-            "help",
-            "lazy",
-            "lspinfo",
-            "man",
-            "mason",
-            "netrw",
-            "null-ls-info",
-            "qf",
-          },
-        })
-      end,
-    },
-  },
+  cmd = { "LuaSnipListAvailable", "LuaSnipUnlinkCurrent" },
   config = function()
     require("luasnip").setup({
       history = true,

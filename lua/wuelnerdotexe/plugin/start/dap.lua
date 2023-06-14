@@ -1,18 +1,14 @@
 return {
   "mfussenegger/nvim-dap",
-  keys = {
-    { "<F9>", function() require("dap").toggle_breakpoint() end },
-    { "<F5>", function() require("dap").continue() end },
-  },
   dependencies = {
     {
       "jay-babu/mason-nvim-dap.nvim",
       dependencies = "williamboman/mason.nvim",
+      cmd = { "MasonInstall", "MasonUninstall" },
       config = function() require("mason-nvim-dap").setup({ ensure_installed = { "firefox", "node2" } }) end,
     },
     {
       "rcarriga/nvim-dap-ui",
-      lazy = true,
       config = function()
         require("dapui").setup({
           layouts = {
@@ -26,6 +22,23 @@ return {
         })
       end,
     },
+  },
+  keys = {
+    { "<F9>", function() require("dap").toggle_breakpoint() end },
+    { "<F5>", function() require("dap").continue() end },
+  },
+  cmd = {
+    "DapContinue",
+    "DapLoadLaunchJSON",
+    "DapRestartFrame",
+    "DapSetLogLevel",
+    "DapShowLog",
+    "DapStepInto",
+    "DapStepOut",
+    "DapStepOver",
+    "DapTerminate",
+    "DapToggleBreakpoint",
+    "DapToggleRepl",
   },
   config = function()
     vim.api.nvim_call_function(

@@ -1,6 +1,5 @@
 return {
   "andweeb/presence.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   event = "BufEnter",
   config = function()
     require("presence"):setup({

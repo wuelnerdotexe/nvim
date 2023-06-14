@@ -1,8 +1,6 @@
 return {
   "stevearc/dressing.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   lazy = true,
-  dependencies = "nvim-telescope/telescope.nvim",
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
@@ -39,12 +37,7 @@ return {
         end,
       },
       select = {
-        backend = { "telescope", "nui", "builtin" },
-        telescope = require("telescope.themes").get_dropdown({
-          borderchars = require("wuelnerdotexe.plugin.config").border
-              and { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-            or { " ", " ", " ", " ", " ", " ", " ", " " },
-        }),
+        backend = { "telescope", "fzf", "nui", "builtin" },
         nui = {
           win_options = {
             winblend = require("wuelnerdotexe.plugin.config").blend,

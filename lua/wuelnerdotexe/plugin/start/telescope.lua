@@ -1,7 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  lazy = true,
-  cmd = "Telescope",
+  dependencies = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
   keys = {
     { "z=", function() require("telescope.builtin").spell_suggest() end },
     {
@@ -42,25 +41,15 @@ return {
     },
     { "<leader>rf", function() require("telescope.builtin").resume() end, desc = "General: [f]ind [r]esume" },
   },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "nvim-treesitter/nvim-treesitter",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  },
+  cmd = "Telescope",
+  lazy = true,
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
   config = function()
-    local exclude_globs = "{"
-
-    for i, glob in pairs(require("wuelnerdotexe.plugin.config").exclude_search_files) do
-      exclude_globs = i == 1 and exclude_globs .. glob or exclude_globs .. "," .. glob
-    end
-
-    exclude_globs = exclude_globs .. "}"
+    local exclude_globs = "{" .. table.concat(require("wuelnerdotexe.plugin.config").exclude_search_files, ",") .. "}"
 
     require("telescope").setup({
       pickers = {
@@ -87,12 +76,8 @@ return {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
         winblend = require("wuelnerdotexe.plugin.config").blend,
-        prompt_prefix = "  ",
         selection_caret = "  ",
-        multi_icon = "  ",
-        borderchars = require("wuelnerdotexe.plugin.config").border
-            and { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-          or { " ", " ", " ", " ", " ", " ", " ", " " },
+        multi_icon = " ",
         default_mappings = {
           i = {
             ["<M-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
@@ -101,7 +86,10 @@ return {
             ["<C-e>"] = require("telescope.actions").close,
             ["<C-y>"] = require("telescope.actions").select_default,
             ["<CR>"] = require("telescope.actions").select_default,
-            ["<Tab>"] = require("telescope.actions").toggle_selection,
+            ["<Tab>"] = require("telescope.actions").toggle_selection
+              + require("telescope.actions").move_selection_worse,
+            ["<S-Tab>"] = require("telescope.actions").toggle_selection
+              + require("telescope.actions").move_selection_better,
             ["<Down>"] = require("telescope.actions").move_selection_next,
             ["<Up>"] = require("telescope.actions").move_selection_previous,
             ["<C-n>"] = require("telescope.actions").move_selection_next,

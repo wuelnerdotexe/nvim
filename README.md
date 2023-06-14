@@ -203,17 +203,18 @@ The keymaps created by this config are very well thought out to be intuitive, me
 
 ### Selection
 
-|           VI Mode           |    Keymap    | Description                  |
-| :-------------------------: | :----------: | ---------------------------- |
-|           Normal            | `Alt` + `v`  | Init incremental selection   |
-|           Visual            | `CTRL` + `a` | Increment the node selection |
-|           Visual            | `CTRL` + `x` | Decrement the node selection |
-| Visual and operator pending |  `a` + `f`   | Select arround function      |
-| Visual and operator pending |  `i` + `f`   | Select inner function        |
-| Visual and operator pending |  `a` + `c`   | Select arround condition     |
-| Visual and operator pending |  `i` + `c`   | Select inner condition       |
-| Visual and operator pending |  `a` + `l`   | Select arround loop          |
-| Visual and operator pending |  `i` + `l`   | Select inner loop            |
+|           VI Mode           |      Keymap      | Description                   |
+| :-------------------------: | :--------------: | ----------------------------- |
+|           Normal            |     `Space`      | Init incremental selection    |
+|           Visual            |     `Space`      | Increment the node selection  |
+|           Visual            | `CTRL` + `Space` | Increment the scope selection |
+|           Visual            |   `Backspace`    | Decrement the node selection  |
+| Visual and operator pending |    `a` + `f`     | Select arround function       |
+| Visual and operator pending |    `i` + `f`     | Select inner function         |
+| Visual and operator pending |    `a` + `c`     | Select arround condition      |
+| Visual and operator pending |    `i` + `c`     | Select inner condition        |
+| Visual and operator pending |    `a` + `l`     | Select arround loop           |
+| Visual and operator pending |    `i` + `l`     | Select inner loop             |
 
 ### Commenting
 

@@ -1,12 +1,13 @@
 return {
   "wuelnerdotexe/human.vim",
-  lazy = false,
   priority = 10000,
-  config = function()
+  lazy = false,
+  init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function() vim.api.nvim_set_hl(0, "Whitespace", { link = "DiagnosticError" }) end,
     })
-
+  end,
+  config = function()
     vim.api.nvim_create_autocmd("UIEnter", {
       callback = function()
         for option, value in pairs(require("wuelnerdotexe.plugin.util").plugin_options) do

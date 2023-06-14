@@ -1,11 +1,7 @@
 local args
 local sidebar_width
 
-local M = {}
-
-M.empty_table = {}
-
-M.plugin_options = {}
+local M = { empty_table = { }, plugin_options = { } }
 
 M.set_option = function(option, value)
   M.plugin_options[option] = vim.api.nvim_get_option_value(option, M.empty_table)

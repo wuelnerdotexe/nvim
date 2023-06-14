@@ -1,5 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
+  cmd = "Gitsigns",
   lazy = true,
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
@@ -15,14 +16,14 @@ return {
         end
 
         vim.api.nvim_call_function("system", {
-          "git -C" .. " " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " " .. "rev-parse",
+          "git -C " .. vim.api.nvim_call_function("expand", { "%:p:h" }) .. " rev-parse",
         })
 
         if vim.api.nvim_get_vvar("shell_error") ~= 0 then return end
 
-        require("lazy").load({ plugins = { "gitsigns.nvim" } })
-
         vim.api.nvim_clear_autocmds({ group = "load_gitsigns" })
+
+        require("lazy").load({ plugins = { "gitsigns.nvim" } })
       end,
     })
   end,

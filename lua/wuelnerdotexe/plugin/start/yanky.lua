@@ -2,7 +2,6 @@ local mode = { "n", "x" }
 
 return {
   "gbprod/yanky.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   keys = {
     { "y", "<Plug>(YankyYank)", mode = mode },
     { "p", "<Plug>(YankyPutAfter)", mode = mode },
@@ -10,6 +9,9 @@ return {
     { "<C-Left>", "<Plug>(YankyCycleBackward)" },
     { "<C-Right>", "<Plug>(YankyCycleForward)" },
   },
-  init = function() require("wuelnerdotexe.plugin.util").set_option("clipboard", "unnamedplus") end,
-  config = function() require("yanky").setup({ highlight = { timer = 125 } }) end,
+  cmd = { "YankyClearHistory", "YankyRingHistory" },
+  lazy = true,
+  config = function()
+    require("yanky").setup({ picker = { telescope = { use_default_mappings = false } }, highlight = { timer = 125 } })
+  end,
 }

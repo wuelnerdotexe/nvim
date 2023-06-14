@@ -1,6 +1,7 @@
 return {
   "utilyre/sentiment.nvim",
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  cmd = { "DoMatchParen", "NoMatchParen" },
+  event = "FileType",
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("showmatch", true)
     require("wuelnerdotexe.plugin.util").set_option("matchtime", 4)
@@ -18,7 +19,7 @@ return {
         quickfix = false,
         terminal = false,
       },
-      excluded_filetypes = require("wuelnerdotexe.plugin.config").uifiletypes,
+      excluded_filetypes = vim.list_extend({ "", "list" }, require("wuelnerdotexe.plugin.config").uifiletypes),
       delay = 42,
       limit = 400,
       pairs = { { "(", ")" }, { "{", "}" }, { "[", "]" }, { "<", ">" } },

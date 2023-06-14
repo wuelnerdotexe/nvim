@@ -1,10 +1,7 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  event = {
-    "BufAdd *.css,*.sass,*.html,*.js,*.jsx,*.tsx",
-    "BufReadPre *.css,*.sass,*.html,*.js,*.jsx,*.tsx",
-    "BufNewFile *.css,*.sass,*.html,*.js,*.jsx,*.tsx",
-  },
+  cmd = { "ColorizerAttachToBuffer", "ColorizerDetachFromBuffer", "ColorizerReloadAllBuffers", "ColorizerToggle" },
+  event = "FileType css,sass,html,javascript,javascriptreact,typescriptreact",
   init = function() require("wuelnerdotexe.plugin.util").set_option("termguicolors", true) end,
   config = function()
     local css_tailwind_setup = { css_fn = true, tailwind = true }
@@ -20,5 +17,7 @@ return {
         typescriptreact = css_tailwind_setup,
       },
     })
+
+    vim.defer_fn(function() require("colorizer").attach_to_buffer(0) end, 0)
   end,
 }

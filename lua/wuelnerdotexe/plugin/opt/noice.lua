@@ -1,10 +1,9 @@
 return {
   "folke/noice.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
+  dependencies = "MunifTanjim/nui.nvim",
   cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
-  event = "UIEnter",
-  dependencies = { "MunifTanjim/nui.nvim", "nvim-treesitter/nvim-treesitter" },
   deactivate = function() require("noice").disable() end,
+  event = "UIEnter",
   init = function()
     require("wuelnerdotexe.plugin.util").set_option(
       "shortmess",
@@ -23,7 +22,7 @@ return {
     local borderstyle = { style = border }
 
     require("noice").setup({
-      cmdline = { view = "cmdline" },
+      cmdline = { view = "cmdline", format = { cmdline = { icon = ">" } } },
       popupmenu = { enabled = false },
       lsp = {
         progress = { enabled = false },

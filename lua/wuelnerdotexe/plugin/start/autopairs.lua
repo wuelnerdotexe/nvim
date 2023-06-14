@@ -2,7 +2,7 @@ local mode = { "i", "c" }
 
 return {
   "altermo/npairs-integrate-upair",
-  lazy = true,
+  dependencies = { "windwp/nvim-autopairs", "altermo/ultimate-autopair.nvim" },
   keys = {
     { "{", mode = mode },
     { "[", mode = mode },
@@ -18,10 +18,7 @@ return {
     { "<A-C-e>", mode = "i" },
     { "<Space>", mode = "i" },
   },
-  dependencies = {
-    { "windwp/nvim-autopairs", dependencies = "nvim-treesitter/nvim-treesitter" },
-    { "altermo/ultimate-autopair.nvim", dependencies = "nvim-treesitter/nvim-treesitter" },
-  },
+  lazy = true,
   init = function()
     vim.api.nvim_create_autocmd("User", {
       pattern = "IntPairsComp",

@@ -1,7 +1,7 @@
 return {
   "wuelnerdotexe/vim-enfocado",
-  lazy = false,
   priority = 1000,
+  lazy = false,
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
     require("wuelnerdotexe.plugin.util").set_option("t_Co", 256)
@@ -13,6 +13,7 @@ return {
       "cmp",
       "dap-ui",
       "fold-preview",
+      "fzf",
       "gitsigns",
       "illuminate",
       "indent-blankline",

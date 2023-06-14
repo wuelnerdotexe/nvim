@@ -1,7 +1,13 @@
 return {
   "numToStr/Comment.nvim",
+  dependencies = {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts) opts.context_commentstring = { enable = true, enable_autocmd = false } end,
+    },
+  },
   keys = { { "gc", mode = { "n", "x" } } },
-  dependencies = { "JoosepAlviste/nvim-ts-context-commentstring", dependencies = "nvim-treesitter/nvim-treesitter" },
   config = function()
     require("Comment").setup({
       toggler = { line = "gcc", block = "<Nop>" },

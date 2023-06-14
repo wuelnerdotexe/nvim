@@ -1,8 +1,8 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    cmd = "CmpStatus",
     lazy = true,
-    dependencies = "nvim-treesitter/nvim-treesitter",
     init = function() require("wuelnerdotexe.plugin.util").set_option("completeopt", "menu,menuone,noselect") end,
     config = function()
       require("cmp").setup({
@@ -41,13 +41,13 @@ return {
                   vim.api.nvim_set_hl(0, "CmpItemKindColor_" .. color, { fg = "#" .. color })
                 end
 
-                vim_item.kind = "" .. " " .. "Color"
+                vim_item.kind = " Color"
                 vim_item.kind_hl_group = "CmpItemKindColor_" .. color
 
                 return vim_item
               end
             elseif entry.source.name == "cmp_tabnine" then
-              vim_item.kind = "" .. " " .. "Tabnine"
+              vim_item.kind = " Tabnine"
 
               return vim_item
             end
@@ -96,12 +96,12 @@ return {
       require("cmp").setup.filetype(require("wuelnerdotexe.plugin.config").uifiletypes, { enabled = false })
     end,
   },
-  { "hrsh7th/cmp-path", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-buffer", event = "InsertEnter", dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-path", dependencies = "hrsh7th/nvim-cmp", event = "InsertEnter" },
+  { "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp", event = "InsertEnter" },
   {
     "hrsh7th/cmp-cmdline",
+    dependencies = "hrsh7th/nvim-cmp",
     event = "CmdlineEnter",
-    dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer" },
     config = function()
       require("cmp").setup.cmdline({ "/", "?" }, {
         mapping = require("cmp").mapping.preset.cmdline(),
@@ -120,28 +120,28 @@ return {
       })
     end,
   },
-  { "saadparwaiz1/cmp_luasnip", event = "InsertEnter", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" } },
+  { "saadparwaiz1/cmp_luasnip", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" }, event = "InsertEnter" },
   {
     "hrsh7th/cmp-nvim-lsp",
-    lazy = true,
     dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" },
+    lazy = true,
     init = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("load_cmp_nvim_lsp", { clear = false }),
         callback = function(ev)
           if package.loaded["cmp_nvim_lsp"] then
-            vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
+            vim.api.nvim_clear_autocmds({ group = ev.group })
 
             return true
           end
 
           vim.api.nvim_create_autocmd("InsertEnter", {
             buffer = ev.buf,
-            group = "load_cmp_nvim_lsp",
+            group = ev.group,
             callback = function()
-              require("lazy").load({ plugins = { "cmp-nvim-lsp" } })
+              vim.api.nvim_clear_autocmds({ group = ev.group })
 
-              vim.api.nvim_clear_autocmds({ group = "load_cmp_nvim_lsp" })
+              require("lazy").load({ plugins = { "cmp-nvim-lsp" } })
             end,
           })
         end,
@@ -149,38 +149,9 @@ return {
     end,
   },
   {
-    "tzachar/cmp-tabnine",
-    build = "./install.sh",
-    enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-    lazy = true,
-    event = "InsertEnter",
-    dependencies = "hrsh7th/nvim-cmp",
-    init = function()
-      vim.api.nvim_create_autocmd("BufReadPre", {
-        pattern = "*.css,*.sass,*.html,*.js,*.jsx,*.ts,*.tsx",
-        callback = function(ev) require("cmp_tabnine"):prefetch(ev.file) end,
-      })
-    end,
-    config = function()
-      local ignored_file_types = {}
-
-      for _, uifiletype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
-        ignored_file_types[uifiletype] = true
-      end
-
-      require("cmp_tabnine.config"):setup({ ignored_file_types = ignored_file_types })
-    end,
-  },
-  {
-    "jackieaskins/cmp-emmet",
-    build = "npm run release",
-    event = [[InsertEnter *.css,*.sass,*.scss,*.less,*.xml,*.html,*.jsx,*.tsx]],
-    dependencies = "hrsh7th/nvim-cmp",
-  },
-  {
     "rcarriga/cmp-dap",
-    event = [[InsertEnter *dap-repl*,DAP\ Watches,DAP\ Hover]],
     dependencies = "hrsh7th/nvim-cmp",
+    event = [[InsertEnter *dap-repl*,DAP\ Watches,DAP\ Hover]],
     config = function()
       require("cmp").setup.filetype(
         { "dap-repl", "dapui_watches", "dapui_hover" },

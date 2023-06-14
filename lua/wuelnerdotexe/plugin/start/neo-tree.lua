@@ -1,21 +1,21 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  lazy = true,
-  cmd = "Neotree",
+  dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
   keys = {
     {
       "<leader>ft",
-      function() vim.api.nvim_command("Neotree . filesystem reveal toggle") end,
+      function() require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.loop.cwd() }) end,
       desc = "General: [t]oggle the [f]olders explorer",
     },
     {
       "<leader>gt",
-      function() vim.api.nvim_command("Neotree . git_status reveal toggle") end,
+      function() require("neo-tree.command").execute({ source = "git_status", toggle = true, dir = vim.loop.cwd() }) end,
       desc = "General: [t]oggle the [g]it control explorer",
     },
   },
-  dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
-  deactivate = function() vim.api.nvim_command("Neotree close") end,
+  cmd = "Neotree",
+  deactivate = function() require("neo-tree.command").execute({ action = "close" }) end,
+  lazy = true,
   init = function()
     vim.api.nvim_set_var("loaded_netrw", 1)
     vim.api.nvim_set_var("loaded_netrwPlugin", 1)
@@ -35,8 +35,10 @@ return {
     require("neo-tree").setup({
       sources = { "filesystem", "git_status" },
       add_blank_line_at_top = true,
+      auto_clean_after_session_restore = true,
       enable_diagnostics = false,
       hide_root_node = true,
+      open_files_do_not_replace_types = require("wuelnerdotexe.plugin.config").uifiletypes,
       popup_border_style = require("wuelnerdotexe.plugin.config").border
           and { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
         or { " ", " ", " ", " ", " ", " ", " ", " " },

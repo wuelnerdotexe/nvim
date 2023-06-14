@@ -1,7 +1,21 @@
 return {
   "stevearc/aerial.nvim",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
+  keys = { { "<leader>st", function() require("aerial").toggle() end, desc = "General: [t]oggle document [s]ymbols" } },
+  cmd = {
+    "AerialClose",
+    "AerialCloseAll",
+    "AerialGo",
+    "AerialInfo",
+    "AerialNavClose",
+    "AerialNavOpen",
+    "AerialNavToggle",
+    "AerialNext",
+    "AerialOpen",
+    "AerialOpenAll",
+    "AerialPrev",
+    "AerialToggle",
+  },
+  event = { "BufAdd", "BufReadPre", "BufNewFile" },
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("foldenable", true)
     require("wuelnerdotexe.plugin.util").set_option("foldmethod", "manual")
@@ -9,7 +23,6 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
   end,
-  dependencies = "nvim-treesitter/nvim-treesitter",
   config = function()
     local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
 
@@ -43,13 +56,8 @@ return {
       link_folds_to_tree = true,
       link_tree_to_folds = true,
       on_attach = function(bufnr)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "", {
-          callback = function() vim.api.nvim_command("AerialNext") end,
-        })
-
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", {
-          callback = function() vim.api.nvim_command("AerialPrev") end,
-        })
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "", { callback = function() require("aerial").next() end })
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "", { callback = function() require("aerial").prev() end })
       end,
       show_guides = true,
       guides = { mid_item = "│ ", last_item = "└ ", nested_top = "│ " },
@@ -63,11 +71,6 @@ return {
       treesitter = { update_delay = 284 },
       markdown = { update_delay = 284 },
       man = { update_delay = 284 },
-    })
-
-    vim.api.nvim_set_keymap("n", "<leader>st", "", {
-      callback = function() require("aerial").toggle() end,
-      desc = "General: [t]oggle document [s]ymbols",
     })
   end,
 }

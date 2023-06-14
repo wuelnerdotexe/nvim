@@ -1,12 +1,20 @@
 return {
   "RRethy/vim-illuminate",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
-  event = require("wuelnerdotexe.plugin.config").open_file_event,
-  dependencies = "nvim-treesitter/nvim-treesitter",
+  keys = { "<C-n>", "<A-p>", "<A-i>" },
+  cmd = {
+    "IlluminateDebug",
+    "IlluminatePause",
+    "IlluminatePauseBuf",
+    "IlluminateResume",
+    "IlluminateResumeBuf",
+    "IlluminateToggle",
+    "IlluminateToggleBuf",
+  },
+  event = "FileType",
   config = function()
     require("illuminate").configure({
       delay = 42,
-      filetypes_denylist = require("wuelnerdotexe.plugin.config").uifiletypes,
+      filetypes_denylist = vim.list_extend({ "" }, require("wuelnerdotexe.plugin.config").uifiletypes),
       max_file_lines = 400,
     })
   end,

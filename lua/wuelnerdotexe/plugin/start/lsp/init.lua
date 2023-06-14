@@ -1,12 +1,12 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufAdd", "BufReadPost", "BufNewFile" },
     dependencies = {
       "b0o/schemastore.nvim",
       {
         "williamboman/mason-lspconfig.nvim",
         dependencies = "williamboman/mason.nvim",
+        cmd = { "LspInstall", "LspUninstall" },
         config = function()
           require("mason-lspconfig").setup({
             ensure_installed = { "cssls", "eslint", "html", "jsonls", "tailwindcss", "tsserver", "yamlls" },
@@ -14,10 +14,13 @@ return {
         end,
       },
     },
-    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
-    config = function()
+    cmd = { "LspInfo", "LspLog", "LspRestart", "LspStart", "LspStop" },
+    event = { "BufReadPost", "FileType" },
+    init = function()
+      require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
       require("wuelnerdotexe.plugin.start.lsp.util").setup_lsp_diagnostics()
-
+    end,
+    config = function()
       require("lspconfig.ui.windows").default_options.border = require("wuelnerdotexe.plugin.config").border
           and "rounded"
         or "shadow"
@@ -31,11 +34,11 @@ return {
 
       if cmp_nvim_lsp_status then basic_server_setup.capabilities = cmp_nvim_lsp.default_capabilities() end
 
-      require("lspconfig").jsonls.setup(vim.tbl_deep_extend("error", {
+      require("lspconfig").jsonls.setup(vim.tbl_extend("error", {
         settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
       }, basic_server_setup))
 
-      require("lspconfig").yamlls.setup(vim.tbl_deep_extend("error", {
+      require("lspconfig").yamlls.setup(vim.tbl_extend("error", {
         settings = { yaml = { schemas = require("schemastore").yaml.schemas(), validate = { enable = true } } },
       }, basic_server_setup))
 
@@ -48,12 +51,12 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufAdd", "BufRead", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
         "jay-babu/mason-null-ls.nvim",
         dependencies = "williamboman/mason.nvim",
+        cmd = { "NullLsInstall", "NullLsUninstall" },
         config = function()
           require("mason-null-ls").setup({
             ensure_installed = { "actionlint", "jsonlint", "markdownlint", "prettierd", "yamllint" },
@@ -61,10 +64,13 @@ return {
         end,
       },
     },
-    init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
-    config = function()
+    cmd = { "NullLsInfo", "NullLsLog" },
+    event = { "BufRead", "FileType" },
+    init = function()
+      require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1")
       require("wuelnerdotexe.plugin.start.lsp.util").setup_lsp_diagnostics()
-
+    end,
+    config = function()
       require("null-ls").setup({
         border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
         debounce = 284,
@@ -92,20 +98,6 @@ return {
         "sign_define",
         { "LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" } }
       )
-    end,
-  },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lsp_lines").setup()
-
-      vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
-
-      vim.api.nvim_set_keymap("n", "<leader>lt", "", {
-        callback = function() require("lsp_lines").toggle() end,
-        desc = "Language server: [t]oggle [l]ines diagnostic",
-      })
     end,
   },
 }

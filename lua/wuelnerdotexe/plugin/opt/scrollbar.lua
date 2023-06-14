@@ -1,6 +1,5 @@
 return {
   "petertriho/nvim-scrollbar",
-  enabled = not require("wuelnerdotexe.plugin.config").minimal_setup,
   lazy = true,
   event = "UIEnter",
   config = function()
