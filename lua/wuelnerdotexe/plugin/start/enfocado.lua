@@ -12,7 +12,6 @@ return {
       "bufferline",
       "cmp",
       "dap-ui",
-      "fold-preview",
       "fzf",
       "gitsigns",
       "illuminate",
