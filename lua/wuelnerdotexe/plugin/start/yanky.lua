@@ -1,13 +1,13 @@
-local mode = { "n", "x" }
-
 return {
   "gbprod/yanky.nvim",
   keys = {
-    { "y", "<Plug>(YankyYank)", mode = mode },
-    { "p", "<Plug>(YankyPutAfter)", mode = mode },
-    { "P", "<Plug>(YankyPutBefore)", mode = mode },
-    { "<C-Left>", "<Plug>(YankyCycleBackward)" },
-    { "<C-Right>", "<Plug>(YankyCycleForward)" },
+    { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+    { "p", function() require("yanky").put("p", false) end },
+    { "p", function() require("yanky").put("p", true) end, mode = "x" },
+    { "P", function() require("yanky").put("P", false) end },
+    { "P", function() require("yanky").put("P", true) end, mode = "x" },
+    { "<C-Right>", function() require("yanky").cycle(1) end },
+    { "<C-Left>", function() require("yanky").cycle(-1) end },
   },
   cmd = { "YankyClearHistory", "YankyRingHistory" },
   lazy = true,
