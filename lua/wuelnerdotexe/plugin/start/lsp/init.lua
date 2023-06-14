@@ -88,6 +88,12 @@ return {
     end,
   },
   {
+    "VidocqH/lsp-lens.nvim",
+    cmd = { "LspLensOff", "LspLensOn", "LspLensToggle" },
+    event = "LspAttach",
+    config = function() require("lsp-lens").setup({ ignore_filetype = require("wuelnerdotexe.plugin.config").uifiletypes }) end,
+  },
+  {
     "kosayoda/nvim-lightbulb",
     event = "LspAttach",
     init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,

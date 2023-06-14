@@ -19,6 +19,7 @@ return {
       "indent-blankline",
       "lazy",
       "lspconfig",
+      "lsp-lens",
       "mason",
       "neo-tree",
       "netrw",
