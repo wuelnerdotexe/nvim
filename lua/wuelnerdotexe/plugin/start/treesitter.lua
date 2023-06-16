@@ -32,16 +32,14 @@ return {
       opts.highlight = {
         enable = true,
         disable = function(_, buf)
-          if highlight_disable[buf] then
+          if highlight_disable[buf] then return highlight_disable[buf] end
+
+          local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
+
+          if stats and stats.size > 102400 then
+            highlight_disable[buf] = true
+
             return highlight_disable[buf]
-          else
-            local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
-
-            if stats and stats.size > 102400 then
-              highlight_disable[buf] = true
-
-              return highlight_disable[buf]
-            end
           end
         end,
         additional_vim_regex_highlighting = false,
