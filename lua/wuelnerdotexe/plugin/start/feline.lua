@@ -122,10 +122,8 @@ return {
               truncate_hide = true,
             },
             {
-              enabled = function()
-                return vim.api.nvim_get_option_value("cmdheight", TBL) == 0
-                  and (package.loaded["noice"] and require("noice").api.status.mode.has())
-              end,
+              enabled = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              update = function() return require("noice").api.status.mode.has() end,
               provider = function() return tostring(require("noice").api.status.mode.get()) end,
               left_sep = { str = " ", hl = { bg = "base" } },
               hl = function()
@@ -140,16 +138,17 @@ return {
             {
               enabled = function()
                 return require("feline.providers.lsp").diagnostics_exist()
-                  or (
-                    vim.api.nvim_get_option_value("cmdheight", TBL) == 0
-                    and (package.loaded["noice"] and require("noice").api.status.mode.has())
-                  )
+                  or (package.loaded["noice"] and require("noice").api.status.mode.has())
+              end,
+              update = function()
+                return require("feline.providers.lsp").diagnostics_exist() or require("noice").api.status.mode.has()
               end,
               provider = " ",
               hl = { name = "FelineSidebar", bg = "base", fg = "bg" },
               priority = -5,
             },
             {
+              update = false,
               provider = "▎",
               hl = { name = "FelineIndicator", fg = "accent" },
               priority = 2,
@@ -228,6 +227,7 @@ return {
           },
           {
             {
+              update = { "FileType" },
               provider = "file_type",
               left_sep = " ",
               right_sep = " ",
@@ -271,7 +271,7 @@ return {
         },
         inactive = {
           {
-            { provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 },
+            { update = false, provider = "▎", hl = { name = "FelineIndicatorInactive", fg = "bg" }, priority = 1 },
             {
               provider = { name = "position", opts = { padding = { line = 3, col = 2 } } },
               left_sep = " ",
