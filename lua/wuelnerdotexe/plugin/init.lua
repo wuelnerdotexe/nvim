@@ -17,7 +17,10 @@ vim.api.nvim_set_var("mapleader", [[\]])
 vim.api.nvim_set_var("maplocalleader", [[|]])
 
 require("lazy").setup({
-  spec = { { import = "wuelnerdotexe.plugin.start" }, { import = "wuelnerdotexe.plugin.opt" } },
+  spec = {
+    { import = "wuelnerdotexe.plugin.start" },
+    -- { import = "wuelnerdotexe.plugin.opt" },
+  },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Developer/vim-plugins", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
