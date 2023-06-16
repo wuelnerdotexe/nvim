@@ -29,13 +29,7 @@ return {
   end,
   config = function()
     require("gitsigns").setup({
-      signs = {
-        add = { hl = "GitSignsAdd", text = "│" },
-        change = { hl = "GitSignsChange", text = "│" },
-        delete = { hl = "GitSignsDelete", text = "_" },
-        topdelete = { hl = "GitSignsDelete", text = "‾" },
-        changedelete = { hl = "GitSignsChange", text = "│" },
-      },
+      signs = { add = { text = "│" }, change = { text = "│" } },
       current_line_blame_opts = { delay = 42 },
       sign_priority = 1,
       update_debounce = 284,

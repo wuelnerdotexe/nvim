@@ -4,7 +4,10 @@ return {
   config = function()
     require("muren").setup({
       keys = { toggle_options_focus = "<C-o>", scroll_preview_up = "<C-b>", scroll_preview_down = "<C-f>" },
-      hl = { options = { on = "Success", off = "Error" }, preview = { cwd = { path = "Directory", lnum = "LineNr" } } },
+      hl = {
+        options = { on = "DiagnosticOk", off = "DiagnosticError" },
+        preview = { cwd = { path = "Directory", lnum = "LineNr" } },
+      },
     })
   end,
 }

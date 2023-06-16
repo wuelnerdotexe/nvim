@@ -77,7 +77,7 @@ return {
           { name = "buffer", option = { indexing_interval = 284 }, keyword_length = 3, priority = 1 },
         }),
         confirmation = { default_behavior = require("cmp.types").cmp.ConfirmBehavior.Replace },
-        experimental = { ghost_text = { hl_group = "Dimmed" } },
+        experimental = { ghost_text = { hl_group = "LspCodeLens" } },
         window = {
           completion = { scrolloff = 3 },
           documentation = {

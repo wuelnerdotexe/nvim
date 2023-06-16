@@ -43,22 +43,22 @@ return {
   config = function()
     vim.api.nvim_call_function(
       "sign_define",
-      { "DapBreakpoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+      { "DapBreakpoint", { linehl = "", text = "", texthl = "diffRemoved", numhl = "" } }
     )
 
     vim.api.nvim_call_function(
       "sign_define",
-      { "DapBreakpointCondition", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+      { "DapBreakpointCondition", { linehl = "", text = "", texthl = "diffRemoved", numhl = "" } }
     )
 
     vim.api.nvim_call_function(
       "sign_define",
-      { "DapLogPoint", { linehl = "", text = "", texthl = "GitSignsDelete", numhl = "" } }
+      { "DapLogPoint", { linehl = "", text = "", texthl = "diffRemoved", numhl = "" } }
     )
 
     vim.api.nvim_call_function(
       "sign_define",
-      { "DapStopped", { linehl = "GitSignsChangeLn", text = "", texthl = "GitSignsChange", numhl = "" } }
+      { "DapStopped", { linehl = "GitSignsChangeVirtLn", text = "", texthl = "diffChanged", numhl = "" } }
     )
 
     vim.api.nvim_call_function(

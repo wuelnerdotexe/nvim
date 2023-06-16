@@ -7,8 +7,10 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("t_Co", 256)
     require("wuelnerdotexe.plugin.util").set_option("background", "dark")
 
+    vim.api.nvim_set_var("enfocado_style", "nature")
     vim.api.nvim_set_var("enfocado_plugins", {
       "aerial",
+      "animate",
       "bufferline",
       "cmp",
       "dap-ui",

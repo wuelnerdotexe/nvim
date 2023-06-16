@@ -22,13 +22,13 @@ return {
       result_padding = "│ ",
       line_sep = "╰───────────────────────────────────────────────────────────────────────────────",
       highlight = {
+        border = "LpsSignatureActiveParameter",
+        ui = "LspCodeLens",
         headers = "Title",
-        ui = "Dimmed",
-        filename = "Text",
         filedirectory = "Directory",
-        search = "DiffDelete",
-        border = "Accent",
-        replace = "DiffAdd",
+        filename = "diffFile",
+        search = "diffRemoved",
+        replace = "diffAdded",
       },
       mapping = {
         toggle_line = {

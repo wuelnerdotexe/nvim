@@ -11,7 +11,7 @@ return {
   },
   init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
-      callback = function() vim.api.nvim_command("highlight! link SubstituteSubstituted TextYanked") end,
+      callback = function() vim.api.nvim_set_hl(0, "SubstituteSubstituted", { reverse = true }) end,
     })
   end,
   opts = { yank_substituted_text = true, highlight_substituted_text = { timer = 125 } },

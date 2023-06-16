@@ -1,6 +1,6 @@
 return {
   "freddiehaddad/feline.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", "wuelnerdotexe/vim-enfocado" },
+  dependencies = "nvim-tree/nvim-web-devicons",
   event = "UIEnter",
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
@@ -8,34 +8,51 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("ruler", false)
   end,
   config = function()
-    local enfocado_colors = vim.api.nvim_call_function("enfocado#getColorScheme", TBL)
+    local scheme_colors_loaded = {}
+    local function get_scheme_color(name, attr)
+      local hl = vim.api.nvim_get_hl(0, { name = name, link = false })[attr]
+
+      if hl == nil then return "NONE" end
+
+      if scheme_colors_loaded[hl] then return scheme_colors_loaded[hl] end
+
+      if type(hl) == "string" then
+        scheme_colors_loaded[hl] = hl
+
+        return scheme_colors_loaded[hl]
+      end
+
+      scheme_colors_loaded[hl] = string.format("#%06x", hl)
+
+      return scheme_colors_loaded[hl]
+    end
 
     require("feline").setup({
       theme = {
-        base = enfocado_colors.base[1],
-        bg = enfocado_colors.bg_0[1],
-        fg = enfocado_colors.fg_0[1],
-        accent = enfocado_colors.br_accent_0[1],
-        black = enfocado_colors.bg_1[1],
-        darkred = enfocado_colors.red[1],
-        darkgreen = enfocado_colors.green[1],
-        darkyellow = enfocado_colors.yellow[1],
-        oceanblue = enfocado_colors.blue[1],
-        darkmagenta = enfocado_colors.magenta[1],
-        darkcyan = enfocado_colors.cyan[1],
-        darkorange = enfocado_colors.orange[1],
-        darkviolet = enfocado_colors.violet[1],
-        gray = enfocado_colors.dim_0[1],
-        darkgray = enfocado_colors.bg_2[1],
-        red = enfocado_colors.br_red[1],
-        green = enfocado_colors.br_green[1],
-        yellow = enfocado_colors.br_yellow[1],
-        skyblue = enfocado_colors.br_blue[1],
-        magenta = enfocado_colors.br_magenta[1],
-        cyan = enfocado_colors.br_cyan[1],
-        orange = enfocado_colors.br_orange[1],
-        violet = enfocado_colors.br_violet[1],
-        white = enfocado_colors.fg_1[1],
+        bg = get_scheme_color("Normal", "bg"),
+        fg = get_scheme_color("Normal", "fg"),
+        base = get_scheme_color("FloatShadow", "bg"),
+        accent = get_scheme_color("FloatBorder", "fg"),
+        black = get_scheme_color("CursorLine", "bg"),
+        darkred = get_scheme_color("diffRemoved", "fg"),
+        darkgreen = get_scheme_color("diffAdded", "fg"),
+        darkyellow = get_scheme_color("diffChanged", "fg"),
+        oceanblue = get_scheme_color("SpellCap", "sp"),
+        darkmagenta = get_scheme_color("SpellRare", "sp"),
+        darkcyan = get_scheme_color("SpellLocal", "sp"),
+        darkorange = get_scheme_color("Exception", "fg"),
+        darkviolet = get_scheme_color("Identifier", "fg"),
+        gray = get_scheme_color("Comment", "fg"),
+        darkgray = get_scheme_color("Ignore", "fg"),
+        red = get_scheme_color("DiagnosticError", "fg"),
+        green = get_scheme_color("DiagnosticOk", "fg"),
+        yellow = get_scheme_color("DiagnosticInfo", "fg"),
+        skyblue = get_scheme_color("DiagnosticHint", "fg"),
+        magenta = get_scheme_color("Trace", "fg"),
+        cyan = get_scheme_color("Link", "fg"),
+        orange = get_scheme_color("WarningMsg", "fg"),
+        violet = get_scheme_color("Function", "fg"),
+        white = get_scheme_color("Title", "fg"),
       },
       vi_mode_colors = {
         ["BLOCK"] = "accent",
@@ -55,6 +72,7 @@ return {
         ["VISUAL"] = "accent",
         ["V-REPLACE"] = "accent",
       },
+      highlight_reset_triggers = { "ColorScheme" },
       custom_providers = {
         aerial_symbols = function()
           if not package.loaded["aerial"] or require("aerial").num_symbols() == 0 then return "No symbols" end
@@ -330,6 +348,11 @@ return {
         buftypes = { "^help$", "^loclist$", "^nofile$", "^prompt$", "^quickfix$", "^terminal$" },
         filetypes = { "^netrw$" },
       },
+    })
+
+    vim.api.nvim_create_autocmd("OptionSet", {
+      pattern = "background",
+      callback = function() require("feline").reset_highlights() end,
     })
   end,
 }

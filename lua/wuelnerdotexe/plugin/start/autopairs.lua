@@ -54,7 +54,7 @@ return {
           "qf",
         },
         check_ts = true,
-        fast_wrap = { highlight = "Question", highlight_grey = "Dimmed" },
+        fast_wrap = { highlight = "Question", highlight_grey = "LspCodeLens" },
       },
       upair_conf = {
         extensions = {
