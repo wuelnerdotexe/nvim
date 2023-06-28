@@ -12,12 +12,15 @@ return {
     })
   end,
   config = function()
-    local ignored_file_types = {}
+    local ignored_file_types = { [""] = true }
 
-    for _, uifiletype in pairs(require("wuelnerdotexe.plugin.config").uifiletypes) do
-      ignored_file_types[uifiletype] = true
+    for _, ui_ft in pairs(require("wuelnerdotexe.plugin.util").user_interface_filetypes) do
+      ignored_file_types[ui_ft] = true
     end
 
-    require("cmp_tabnine.config"):setup({ ignored_file_types = ignored_file_types })
+    require("cmp_tabnine.config"):setup({
+      snippet_placeholder = " ⋯ ",
+      ignored_file_types = ignored_file_types,
+    })
   end,
 }

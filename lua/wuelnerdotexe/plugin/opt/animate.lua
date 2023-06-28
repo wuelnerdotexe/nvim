@@ -1,15 +1,14 @@
 return {
   "echasnovski/mini.animate",
   event = "UIEnter",
+  init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("animate") end,
   config = function()
-    local timing = { timing = require("mini.animate").gen_timing.linear({ duration = 67, unit = "total" }) }
-
     require("mini.animate").setup({
-      cursor = { timing = require("mini.animate").gen_timing.linear({ duration = 125, unit = "total" }) },
-      scroll = timing,
-      resize = timing,
-      open = timing,
-      close = timing,
+      cursor = { timing = function(_, n) return 125 / n end },
+      scroll = { timing = function(_, n) return 67 / n end },
+      resize = { timing = function(_, n) return 67 / n end },
+      open = { timing = function(_, n) return 67 / n end },
+      close = { timing = function(_, n) return 67 / n end },
     })
   end,
 }

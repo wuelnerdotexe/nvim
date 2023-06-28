@@ -15,8 +15,10 @@ return {
     },
   },
   cmd = "Spectre",
+  init = function() table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "spectre_panel") end,
   config = function()
     require("spectre").setup({
+      open_cmd = "new",
       live_update = true,
       line_sep_start = "╭───────────────────────────────────────────────────────────────────────────────",
       result_padding = "│ ",

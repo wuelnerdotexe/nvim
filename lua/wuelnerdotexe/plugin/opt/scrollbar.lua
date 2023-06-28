@@ -4,7 +4,7 @@ return {
   event = "UIEnter",
   config = function()
     require("scrollbar").setup({
-      throttle_ms = 42,
+      throttle_ms = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
       handle = { highlight = "PmenuSbar" },
       marks = {
         Error = { highlight = "DiagnosticError" },
@@ -13,7 +13,7 @@ return {
         Hint = { highlight = "DiagnosticHint" },
       },
       excluded_buftypes = { "prompt" },
-      excluded_filetypes = { "cmp_docs", "cmp_menu", "DressingInput", "noice", "TelescopePrompt" },
+      excluded_filetypes = { "cmp_docs", "cmp_menu", "DressingInput", "DressingSelect", "edgy", "noice" },
       autocmd = {
         render = {
           "UIEnter",

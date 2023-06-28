@@ -2,8 +2,11 @@ return {
   "akinsho/bufferline.nvim",
   event = "UIEnter",
   init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("bufferline")
+
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
-    require("wuelnerdotexe.plugin.util").set_option("showtabline", 2)
+
+    vim.opt.listchars:append({ precedes = "…", extends = "…" })
   end,
   config = function()
     require("bufferline").setup({
@@ -12,10 +15,7 @@ return {
         max_prefix_length = 16,
         tab_size = 20,
         indicator = { icon = "▎", style = "icon" },
-        offsets = {
-          { filetype = "aerial", text = "OUTLINE", highlight = "Title", separator = false },
-          { filetype = "neo-tree", text = "EXPLORER", highlight = "Title", separator = false },
-        },
+        offsets = { { filetype = "neo-tree", text = "SIDEBAR", highlight = "Ignore", separator = false } },
         show_close_icon = false,
         separator_style = { "▎", "▎" },
       },

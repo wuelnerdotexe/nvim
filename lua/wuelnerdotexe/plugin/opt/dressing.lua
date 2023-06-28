@@ -2,8 +2,12 @@ return {
   "stevearc/dressing.nvim",
   lazy = true,
   init = function()
-    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
-    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
+    vim.opt.listchars:append({ precedes = "…", extends = "…" })
+
+    vim.list_extend(
+      require("wuelnerdotexe.plugin.util").user_interface_filetypes,
+      { "DressingInput", "DressingSelect" }
+    )
 
     vim.ui.input = function(...)
       if package.loaded["dressing.nvim"] then return vim.ui.input(...) end
@@ -22,38 +26,20 @@ return {
     end
   end,
   config = function()
-    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow"
+    local winblend = vim.api.nvim_get_option_value("winblend", { scope = "global" })
 
     require("dressing").setup({
       input = {
-        insert_only = false,
-        border = border,
-        win_options = { wrap = true },
-        override = function(conf)
-          conf.col = -1
-          conf.row = 0
-
-          return conf
-        end,
+        win_options = {
+          winblend = winblend,
+          list = vim.api.nvim_get_option_value("list", { scope = "global" }),
+          sidescrolloff = vim.api.nvim_get_option_value("sidescrolloff", { scope = "global" }),
+        },
       },
       select = {
         backend = { "telescope", "fzf", "nui", "builtin" },
-        nui = {
-          win_options = {
-            winblend = require("wuelnerdotexe.plugin.config").blend,
-            cursorline = true,
-            winhighlight = "CursorLine:PmenuSel",
-          },
-          border = { style = border },
-        },
-        builtin = {
-          border = border,
-          win_options = {
-            winblend = require("wuelnerdotexe.plugin.config").blend,
-            cursorline = true,
-            winhighlight = "CursorLine:PmenuSel",
-          },
-        },
+        nui = { win_options = { winblend = winblend, cursorline = true, winhighlight = "CursorLine:PmenuSel" } },
+        builtin = { win_options = { winblend = winblend, cursorline = true, winhighlight = "CursorLine:PmenuSel" } },
       },
     })
   end,

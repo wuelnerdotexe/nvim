@@ -8,6 +8,7 @@ return {
     "IndentBlanklineToggle",
   },
   event = "FileType",
+  init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("indent-blankline") end,
   config = function()
     require("indent_blankline").setup({
       use_treesitter = true,
@@ -17,7 +18,7 @@ return {
       char = "▏",
       context_char = "▏",
       buftype_exclude = { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
-      filetype_exclude = vim.list_extend({ "", "list" }, require("wuelnerdotexe.plugin.config").uifiletypes),
+      filetype_exclude = { "", "list", "netrw" },
     })
   end,
 }

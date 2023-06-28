@@ -4,17 +4,15 @@ return {
     {
       "<leader>pf",
       function()
-        local telescope_status, telescope = pcall(require, "telescope")
+        if pcall(require, "telescope") then
+          if not package.loaded["telescope._extensions.projections"] then
+            require("telescope").load_extension("projections")
+          end
 
-        if not telescope_status then
+          require("telescope").extensions.projections.projections()
+        else
           vim.notify("projections: cannot open telescope", vim.log.levels.ERROR)
-
-          return
         end
-
-        if not package.loaded["telescope._extensions.projections"] then telescope.load_extension("projections") end
-
-        telescope.extensions.projections.projections()
       end,
       desc = "General: [f]ind the workspace [p]rojects",
     },
@@ -29,7 +27,7 @@ return {
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()
         if
-          require("wuelnerdotexe.plugin.util").enter_with_args()
+          require("wuelnerdotexe.plugin.util").enter_with_arguments()
           or require("projections.session").info(vim.loop.cwd()) == nil
         then
           return
@@ -62,8 +60,9 @@ return {
       patterns = { ".git", "package.json" },
       store_hooks = {
         pre = function()
-          if package.loaded["aerial"] then require("aerial").close_all() end
           if package.loaded["neo-tree"] then require("neo-tree.command").execute({ action = "close" }) end
+          if package.loaded["spectre"] then require("spectre").close() end
+          if package.loaded["edgy"] then require("edgy").close() end
         end,
       },
     })

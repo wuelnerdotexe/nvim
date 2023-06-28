@@ -52,7 +52,7 @@ The main features and plugins provided by this setup are as follows:
 - 👀 Markdown previewer with [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim).
 - 🐱 Useful and smart status bar with [feline.nvim](https://github.com/feline-nvim/feline.nvim).
 - 👁 Harmonic and consistent theme by [Enfocado](https://wuelnerdotexe.github.io/enfocado).
-- 💅 Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [dressing.nvim](https://github.com/stevearc/dressing.nvim), and [noice.nvim](https://github.com/folke/noice.nvim).
+- 💅 Modern and nice user interface with [bufferline.nvim](https://github.com/akinsho/bufferline.nvim), [edgy.nvim](https://github.com/folke/edgy.nvim), [noice.nvim](https://github.com/folke/noice.nvim), [nvim-notify](https://github.com/rcarriga/nvim-notify), and [dressing.nvim](https://github.com/stevearc/dressing.nvim).
 - 🟩 Tmux integration with [smart-splits.nvim](https://github.com/mrjones2014/smart-splits.nvim).
 - 💫 Smooth UI animations with [mini.animate](https://github.com/echasnovski/mini.animate).
 - 😎 Last but not least, announce your presence on Discord with funny messages (in Spanish) by [presence.nvim](https://github.com/andweeb/presence.nvim).
@@ -238,7 +238,6 @@ The keymaps created by this config are very well thought out to be intuitive, me
 | :---------------: | :-------------------------: | ----------------------------------------------------------- |
 |      Normal       | `<localleader>` + `g` + `d` | Split git diffs                                             |
 |      Normal       | `<localleader>` + `d` + `t` | Toggle show deleted lines                                   |
-|      Normal       | `<localleader>` + `b` + `t` | Toggle the current line blame                               |
 |      Normal       |          `[` + `h`          | Go to the previous hunk (can be repetable with `,` and `;`) |
 |      Normal       |          `]` + `h`          | Go to the next hunk (can be repetable with `,` and `;`)     |
 |      Normal       | `<localleader>` + `h` + `p` | Preview the current hunk                                    |

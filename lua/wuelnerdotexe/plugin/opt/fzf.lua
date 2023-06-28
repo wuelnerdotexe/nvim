@@ -1,10 +1,14 @@
 return {
   "junegunn/fzf",
-  build = function() vim.api.nvim_call_function("fzf#install", TBL) end,
+  build = function() vim.api.nvim_call_function("fzf#install", {}) end,
   keys = { { "<C-p>", function() vim.api.nvim_command([[FZF --border-label=\ Search\ Files\ by\ Name\ ]]) end } },
   cmd = "FZF",
   init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("fzf")
+
     require("wuelnerdotexe.plugin.util").set_option("guicursor", "a:block")
+
+    table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "fzf")
 
     if os.getenv("TMUX") then vim.api.nvim_set_var("fzf_layout", { tmux = "-p90%,60%" }) end
 
@@ -16,9 +20,7 @@ return {
     if vim.api.nvim_call_function("executable", { "fd" }) == 1 then
       vim.api.nvim_call_function("setenv", {
         "FZF_DEFAULT_COMMAND",
-        "fd -I -H -E '{"
-          .. table.concat(require("wuelnerdotexe.plugin.config").exclude_search_files, ",")
-          .. "}' -t f --color never",
+        "fd -I -H -E '{.git,.svn,.hg,CSV,.DS_Store,thumbs.db,node_modules,bower_components,*.code-search}' -t f --color never",
       })
     end
 

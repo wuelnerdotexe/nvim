@@ -10,50 +10,88 @@ return {
     {
       "<leader>gt",
       function() require("neo-tree.command").execute({ source = "git_status", toggle = true, dir = vim.loop.cwd() }) end,
-      desc = "General: [t]oggle the [g]it control explorer",
+      desc = "General: [t]oggle the [g]it status explorer",
+    },
+    {
+      "<leader>st",
+      function() require("neo-tree.command").execute({ source = "document_symbols", toggle = true, dir = vim.loop.cwd() }) end,
+      desc = "General: [t]oggle the [s]ymbols explorer",
     },
   },
   cmd = "Neotree",
   deactivate = function() require("neo-tree.command").execute({ action = "close" }) end,
   lazy = true,
   init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("neo-tree")
+
+    vim.opt.listchars:append({ precedes = "…", extends = "…" })
+
     vim.api.nvim_set_var("loaded_netrw", 1)
     vim.api.nvim_set_var("loaded_netrwPlugin", 1)
     vim.api.nvim_set_var("loaded_netrwSettings", 1)
     vim.api.nvim_set_var("loaded_netrwFileHandlers", 1)
     vim.api.nvim_set_var("neo_tree_remove_legacy_commands", 1)
 
-    if not require("wuelnerdotexe.plugin.util").enter_with_args() then return end
+    table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "neo-tree")
+
+    if not require("wuelnerdotexe.plugin.util").enter_with_arguments() then return end
 
     local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
 
-    if stat and stat.type == "directory" then require("lazy").load({ plugins = { "neo-tree.nvim" } }) end
-  end,
-  config = function()
-    local show_path = { show_path = "relative" }
+    if not stat or stat.type ~= "directory" then return end
 
+    require("lazy").load({ plugins = { "neo-tree.nvim" } })
+  end,
+  config = function(_, opts)
     require("neo-tree").setup({
-      sources = { "filesystem", "git_status" },
-      add_blank_line_at_top = true,
+      sources = { "filesystem", "git_status", "document_symbols" },
       auto_clean_after_session_restore = true,
       enable_diagnostics = false,
       hide_root_node = true,
-      open_files_do_not_replace_types = require("wuelnerdotexe.plugin.config").uifiletypes,
-      popup_border_style = require("wuelnerdotexe.plugin.config").border
-          and { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
-        or { " ", " ", " ", " ", " ", " ", " ", " " },
-      resize_timer_interval = 42,
+      open_files_do_not_replace_types = require("wuelnerdotexe.plugin.util").user_interface_filetypes,
+      popup_border_style = "rounded",
+      resize_timer_interval = 67,
       use_default_mappings = false,
       source_selector = {
-        winbar = true,
+        winbar = not opts.edgy,
         sources = {
-          { source = "filesystem", display_name = " 󰉓 Folders " },
-          { source = "git_status", display_name = "  Git Control " },
+          { source = "filesystem", display_name = " 󰉓 FOLDERS " },
+          { source = "git_status", display_name = "  GIT STATUS " },
+          { source = "document_symbols", display_name = "  SYMBOLS " },
         },
         content_layout = "center",
         separator = "",
         separator_active = { left = "▎", right = "" },
         show_separator_on_edge = true,
+      },
+      event_handlers = {
+        { event = "file_opened", handler = function() require("neo-tree.command").execute({ action = "close" }) end },
+        {
+          event = "file_renamed",
+          handler = function(args)
+            for _, active_tsserver in pairs(vim.lsp.get_active_clients({ name = "tsserver" })) do
+              active_tsserver.request("workspace/executeCommand", {
+                command = "_typescript.applyRenameFile",
+                arguments = {
+                  { sourceUri = vim.uri_from_fname(args.source), targetUri = vim.uri_from_fname(args.destination) },
+                },
+              })
+            end
+          end,
+        },
+        {
+          event = "file_moved",
+          handler = function(args)
+            for _, active_tsserver in pairs(vim.lsp.get_active_clients({ name = "tsserver" })) do
+              active_tsserver.request("workspace/executeCommand", {
+                command = "_typescript.applyRenameFile",
+                arguments = {
+                  { sourceUri = vim.uri_from_fname(args.source), targetUri = vim.uri_from_fname(args.destination) },
+                },
+              })
+            end
+          end,
+        },
       },
       default_component_configs = {
         container = { right_padding = 1 },
@@ -102,7 +140,6 @@ return {
       window = {
         position = "right",
         width = require("wuelnerdotexe.plugin.util").get_sidebar_width(),
-        auto_expand_width = true,
         insert_as = "sibling",
         mappings = {
           ["<CR>"] = "open",
@@ -112,21 +149,20 @@ return {
           ["<C-v>"] = "open_vsplit",
           ["<C-t>"] = "open_tabnew",
           ["<F5>"] = "refresh",
-          ["a"] = { "add", config = show_path },
+          ["a"] = { "add", config = { show_path = "relative" } },
           ["d"] = "delete",
           ["r"] = "rename",
           ["y"] = "copy_to_clipboard",
           ["x"] = "cut_to_clipboard",
           ["p"] = "paste_from_clipboard",
-          ["c"] = { "copy", config = show_path },
-          ["m"] = { "move", config = show_path },
+          ["c"] = { "copy", config = { show_path = "relative" } },
+          ["m"] = { "move", config = { show_path = "relative" } },
           ["q"] = "close_window",
           ["?"] = "show_help",
-          ["g?"] = "show_help",
-          ["gb"] = "next_source",
-          ["<S-PageDown>"] = "next_source",
-          ["gB"] = "prev_source",
-          ["<S-PageUp>"] = "prev_source",
+          ["gb"] = not opts.edgy and "next_source" or "noop",
+          ["<S-PageDown>"] = not opts.edgy and "next_source" or "noop",
+          ["gB"] = not opts.edgy and "prev_source" or "noop",
+          ["<S-PageUp>"] = not opts.edgy and "prev_source" or "noop",
         },
       },
       filesystem = {
@@ -144,7 +180,7 @@ return {
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,
-          never_show = require("wuelnerdotexe.plugin.config").exclude_explorer_files,
+          never_show = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
         },
         follow_current_file = true,
       },
@@ -157,6 +193,55 @@ return {
             ["gr"] = "git_revert_file",
             ["gc"] = "git_commit",
           },
+        },
+      },
+      document_symbols = {
+        follow_cursor = true,
+        client_filters = "all",
+        window = {
+          mappings = {
+            ["<CR>"] = "toggle_node",
+            ["<2-LeftMouse>"] = "toggle_node",
+            ["a"] = "noop",
+            ["d"] = "noop",
+            ["r"] = "noop",
+            ["y"] = "noop",
+            ["x"] = "noop",
+            ["p"] = "noop",
+            ["c"] = "noop",
+            ["m"] = "noop",
+            ["o"] = "jump_to_symbol",
+            ["/"] = "filter",
+            ["<C-f>"] = "filter_on_submit",
+          },
+        },
+        kinds = {
+          File = { icon = "", hl = "@text" },
+          Module = { icon = "", hl = "@text" },
+          Namespace = { icon = "", hl = "@namespace" },
+          Package = { icon = "", hl = "@string" },
+          Class = { icon = "", hl = "@type" },
+          Method = { icon = "", hl = "@method" },
+          Property = { icon = "", hl = "@property" },
+          Field = { icon = "", hl = "@field" },
+          Constructor = { icon = " ", hl = "@constructor" },
+          Enum = { icon = "", hl = "@type" },
+          Interface = { icon = "", hl = "@type" },
+          Function = { icon = "", hl = "@function" },
+          Variable = { icon = "", hl = "@variable" },
+          Constant = { icon = "", hl = "@constant" },
+          String = { icon = "", hl = "@string" },
+          Number = { icon = "", hl = "@number" },
+          Boolean = { icon = "", hl = "@boolean" },
+          Array = { icon = "", hl = "@variable" },
+          Object = { icon = "", hl = "@type" },
+          Key = { icon = "", hl = "@variable" },
+          Null = { icon = "ﳠ", hl = "@boolean" },
+          EnumMember = { icon = "", hl = "@property" },
+          Struct = { icon = "", hl = "@type" },
+          Event = { icon = "", hl = "@variable.builtin" },
+          Operator = { icon = "", hl = "@operator" },
+          TypeParameter = { icon = "", hl = "@type" },
         },
       },
     })

@@ -10,16 +10,17 @@ return {
     { "X", function() require("substitute.exchange").visual() end, mode = "x" },
   },
   init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("substitute")
+
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function() vim.api.nvim_set_hl(0, "SubstituteSubstituted", { reverse = true }) end,
     })
   end,
-  opts = { yank_substituted_text = true, highlight_substituted_text = { timer = 125 } },
-  config = function(_, opts)
-    local yanky_status, yanky_integration = pcall(require, "yanky.integration")
-
-    if yanky_integration_status then opts.on_substitute = yanky_integration.substitute() end
-
-    require("substitute").setup(opts)
+  config = function()
+    require("substitute").setup({
+      on_substitute = pcall(require, "yanky.integration") and require("yanky.integration").substitute() or nil,
+      yank_substituted_text = true,
+      highlight_substituted_text = { timer = 125 },
+    })
   end,
 }

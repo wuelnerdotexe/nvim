@@ -1,6 +1,3 @@
-TBL = require("wuelnerdotexe.plugin.util").empty_table
-
-local runtimepath = vim.api.nvim_get_option_value("runtimepath", TBL)
 local lazypath = vim.api.nvim_call_function("stdpath", { "data" }) .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -9,9 +6,11 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 
-lazypath = os.getenv("LAZY") or lazypath
+vim.opt.runtimepath:prepend(os.getenv("LAZY") or lazypath)
 
-vim.api.nvim_set_option_value("runtimepath", runtimepath == "" and lazypath or lazypath .. "," .. runtimepath, TBL)
+require("wuelnerdotexe.plugin.util").add_colorscheme_integration("lazy")
+
+table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "lazy")
 
 vim.api.nvim_set_var("mapleader", [[\]])
 vim.api.nvim_set_var("maplocalleader", [[|]])
@@ -19,16 +18,12 @@ vim.api.nvim_set_var("maplocalleader", [[|]])
 require("lazy").setup({
   spec = {
     { import = "wuelnerdotexe.plugin.start" },
-    -- { import = "wuelnerdotexe.plugin.opt" },
+    { import = "wuelnerdotexe.plugin.opt" },
   },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Developer/vim-plugins", patterns = { "wuelnerdotexe" }, fallback = true },
   install = { colorscheme = { "enfocado" } },
-  ui = {
-    border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
-    browser = "chrome",
-    throttle = 42,
-  },
+  ui = { border = "rounded", browser = "chrome", throttle = 42 },
   performance = {
     rtp = { disabled_plugins = { "gzip", "nvim", "man", "matchit", "tarPlugin", "tohtml", "tutor", "zipPlugin" } },
   },

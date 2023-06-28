@@ -9,10 +9,5 @@ return {
       mode = { "n", "x" },
     },
   },
-  config = function()
-    require("ssr").setup({
-      border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow",
-      keymaps = { replace_all = "<localleader>rr" },
-    })
-  end,
+  config = function() require("ssr").setup({ border = "rounded", keymaps = { replace_all = "<localleader>rr" } }) end,
 }

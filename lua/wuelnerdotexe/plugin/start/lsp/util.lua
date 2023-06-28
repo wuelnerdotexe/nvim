@@ -6,12 +6,10 @@ return {
 
     lsp_diagnostics_configured = true
 
-    local border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow"
-
     vim.diagnostic.config({
       signs = { priority = 6 },
       virtual_text = { prefix = "▎" },
-      float = { header = { "Diagnostics", "Title" }, border = border },
+      float = { header = { "Diagnostics", "Title" }, border = "rounded" },
       update_in_insert = true,
       severity_sort = true,
     })
@@ -20,7 +18,7 @@ return {
 
     vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
       opts = opts or {}
-      opts.border = border
+      opts.border = "rounded"
 
       return ref_floating_preview(contents, syntax, opts, ...)
     end
@@ -91,6 +89,13 @@ return {
       vim.api.nvim_buf_set_keymap(bufnr, "x", "<localleader>cf", "", {
         callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
         desc = "Language server: [f]ormat the [c]ode",
+      })
+    end
+
+    if client.supports_method("textDocument/inlayHint") then
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>ht", "", {
+        callback = function() vim.lsp.buf.inlay_hint(bufnr, nil) end,
+        desc = "Language server: [t]oggle inlay [h]ints",
       })
     end
   end,

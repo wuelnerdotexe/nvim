@@ -3,7 +3,10 @@ return {
   build = ":MasonUpdate",
   cmd = { "Mason", "MasonInstall", "MasonLog", "MasonUninstall", "MasonUninstallAll", "MasonUpdate" },
   lazy = true,
-  config = function()
-    require("mason").setup({ ui = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow" } })
+  init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("mason")
+
+    table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "mason")
   end,
+  config = function() require("mason").setup({ ui = { border = "rounded" } }) end,
 }

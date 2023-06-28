@@ -9,16 +9,27 @@ return {
     },
     {
       "rcarriga/nvim-dap-ui",
+      init = function()
+        require("wuelnerdotexe.plugin.util").add_colorscheme_integration("dap-ui")
+
+        vim.list_extend(
+          require("wuelnerdotexe.plugin.util").user_interface_filetypes,
+          { "dapui_breakpoints", "dapui_console", "dapui_hover", "dapui_scopes", "dapui_stacks", "dapui_watches" }
+        )
+      end,
       config = function()
         require("dapui").setup({
+          floating = { border = "rounded" },
+          icons = { collapsed = "", current_frame = "", expanded = "" },
           layouts = {
             {
               elements = { "scopes", "watches", "stacks", "breakpoints" },
               size = require("wuelnerdotexe.plugin.util").get_sidebar_width(),
-              position = "left",
+              position = "right",
             },
             { elements = { "console", "repl" }, size = 0.25, position = "bottom" },
           },
+          render = { indent = 2 },
         })
       end,
     },
@@ -40,6 +51,7 @@ return {
     "DapToggleBreakpoint",
     "DapToggleRepl",
   },
+  init = function() table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "dap-repl") end,
   config = function()
     vim.api.nvim_call_function(
       "sign_define",

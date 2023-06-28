@@ -23,24 +23,17 @@ return {
       "TSUpdateSync",
     },
     event = "FileType",
+    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter") end,
     opts = function(_, opts)
-      local highlight_disable = {}
-
       opts.ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" }
       opts.sync_install = true
       opts.auto_install = true
       opts.highlight = {
         enable = true,
         disable = function(_, buf)
-          if highlight_disable[buf] then return highlight_disable[buf] end
-
           local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
 
-          if stats and stats.size > 102400 then
-            highlight_disable[buf] = true
-
-            return highlight_disable[buf]
-          end
+          if stats and stats.size > 102400 then return true end
         end,
         additional_vim_regex_highlighting = false,
       }
@@ -61,12 +54,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts)
-        opts.textobjects = {
-          select = { lookahead = true },
-          lsp_interop = { border = require("wuelnerdotexe.plugin.config").border and "rounded" or "shadow" },
-        }
-      end,
+      opts = function(_, opts) opts.textobjects = { select = { lookahead = true }, lsp_interop = { border = "rounded" } } end,
     },
     keys = {
       {
@@ -126,6 +114,7 @@ return {
     "HiPhish/nvim-ts-rainbow2",
     dependencies = { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.rainbow = { enable = true } end },
     event = "FileType",
+    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("ts-rainbow2") end,
   },
   {
     "windwp/nvim-ts-autotag",
@@ -162,6 +151,36 @@ return {
       })
     end,
     config = function() vim.api.nvim_command("doautoall <nomodeline> FileType") end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = { { "[c", function() require("treesitter-context").go_to_context() end } },
+    cmd = { "TSContextDisable", "TSContextEnable", "TSContextToggle" },
+    event = { "BufReadPost", "FileType" },
+    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter-context") end,
+    config = function()
+      require("treesitter-context").setup({
+        max_lines = 400,
+        min_window_height = vim.api.nvim_get_option_value("winminheight", { scope = "global" }),
+        line_numbers = vim.api.nvim_get_option_value("number", { scope = "global" }),
+        mode = "topline",
+        on_attach = function(buf)
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+
+          if filetype == "" or filetype == "netrw" then return false end
+
+          if
+            vim.tbl_contains(
+              { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
+              vim.api.nvim_get_option_value("buftype", { buf = buf })
+            )
+          then
+            return false
+          end
+        end,
+      })
+    end,
   },
   {
     "danymat/neogen",

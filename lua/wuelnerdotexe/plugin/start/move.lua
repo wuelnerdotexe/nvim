@@ -1,12 +1,10 @@
-local mode = { "n", "v" }
-
 return {
   "echasnovski/mini.move",
   keys = {
-    { "<M-Left>", mode = mode },
-    { "<M-Down>", mode = mode },
-    { "<M-Up>", mode = mode },
-    { "<M-Right>", mode = mode },
+    { "<M-Left>", mode = { "n", "v" } },
+    { "<M-Down>", mode = { "n", "v" } },
+    { "<M-Up>", mode = { "n", "v" } },
+    { "<M-Right>", mode = { "n", "v" } },
   },
   config = function()
     require("mini.move").setup({

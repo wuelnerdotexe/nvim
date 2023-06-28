@@ -11,6 +11,7 @@ return {
   },
   cmd = { "YankyClearHistory", "YankyRingHistory" },
   lazy = true,
+  init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("yanky") end,
   config = function()
     require("yanky").setup({ picker = { telescope = { use_default_mappings = false } }, highlight = { timer = 125 } })
   end,

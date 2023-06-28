@@ -44,13 +44,13 @@ return {
   cmd = "Telescope",
   lazy = true,
   init = function()
+    require("wuelnerdotexe.plugin.util").add_colorscheme_integration("telescope")
+
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
-    require("wuelnerdotexe.plugin.util").set_option("winblend", require("wuelnerdotexe.plugin.config").blend)
-    require("wuelnerdotexe.plugin.util").set_option("pumblend", require("wuelnerdotexe.plugin.config").blend)
+
+    table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "TelescopePrompt")
   end,
   config = function()
-    local exclude_globs = "{" .. table.concat(require("wuelnerdotexe.plugin.config").exclude_search_files, ",") .. "}"
-
     require("telescope").setup({
       pickers = {
         builtin = { include_extensions = true, use_default_opts = true },
@@ -58,7 +58,19 @@ return {
         buffers = { ignore_current_buffer = true, sort_mru = true },
         colorscheme = { enable_preview = true },
         keymaps = { show_plug = false },
-        find_files = { find_command = { "fd", "-I", "-H", "-E", exclude_globs, "-t", "f", "--color", "never" } },
+        find_files = {
+          find_command = {
+            "fd",
+            "-I",
+            "-H",
+            "-E",
+            "{.git,.svn,.hg,CSV,.DS_Store,thumbs.db,node_modules,bower_components,*.code-search}",
+            "-t",
+            "f",
+            "--color",
+            "never",
+          },
+        },
         git_files = { show_untracked = true },
         git_status = {
           git_icons = {
@@ -75,7 +87,7 @@ return {
       defaults = {
         sorting_strategy = "ascending",
         layout_config = { prompt_position = "top" },
-        winblend = require("wuelnerdotexe.plugin.config").blend,
+        winblend = vim.api.nvim_get_option_value("winblend", { scope = "global" }),
         selection_caret = "  ",
         multi_icon = " ",
         default_mappings = {
@@ -102,11 +114,11 @@ return {
             ["<C-j>"] = require("telescope.actions").nop,
           },
         },
-        preview = { timeout = 284 },
+        preview = { timeout = 300 },
         vimgrep_arguments = {
           "rg",
           "--hidden",
-          "--glob=!" .. exclude_globs,
+          "--glob=!{.git,.svn,.hg,CSV,.DS_Store,thumbs.db,node_modules,bower_components,*.code-search}",
           "--ignore-case",
           "--with-filename",
           "--line-number",

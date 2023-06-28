@@ -6,34 +6,10 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
     require("wuelnerdotexe.plugin.util").set_option("t_Co", 256)
     require("wuelnerdotexe.plugin.util").set_option("background", "dark")
+    require("wuelnerdotexe.plugin.util").set_option("winblend", 10)
+    require("wuelnerdotexe.plugin.util").set_option("pumblend", 10)
 
     vim.api.nvim_set_var("enfocado_style", "nature")
-    vim.api.nvim_set_var("enfocado_plugins", {
-      "aerial",
-      "animate",
-      "bufferline",
-      "cmp",
-      "dap-ui",
-      "fzf",
-      "gitsigns",
-      "illuminate",
-      "indent-blankline",
-      "lazy",
-      "lspconfig",
-      "lsp-lens",
-      "mason",
-      "neo-tree",
-      "netrw",
-      "noice",
-      "null-ls",
-      "substitute",
-      "surround",
-      "telescope",
-      "treesitter",
-      "ts-rainbow2",
-      "visual-multi",
-      "yanky",
-    })
 
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "enfocado",
