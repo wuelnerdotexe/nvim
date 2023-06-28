@@ -21,6 +21,7 @@ return {
         ["S"] = true,
         ["v"] = true,
         ["V"] = true,
+        ["\19"] = true,
         ["\22"] = true,
       },
       delay = vim.api.nvim_get_option_value("matchtime", { scope = "global" }) * 100,

@@ -17,7 +17,7 @@ return {
       delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
       filetypes_denylist = vim.list_extend({ "" }, require("wuelnerdotexe.plugin.util").user_interface_filetypes),
       modes_denylist = { "i" },
-      modes_allowlist = { "n", "c", "r", "R", "s", "S", "v", "V", "\22" },
+      modes_allowlist = { "n", "c", "r", "R", "s", "S", "v", "V", "\19", "\22" },
       max_file_lines = 400,
     })
   end,
