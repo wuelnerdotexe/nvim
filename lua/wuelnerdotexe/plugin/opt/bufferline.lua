@@ -8,18 +8,23 @@ return {
 
     vim.opt.listchars:append({ precedes = "…", extends = "…" })
   end,
-  config = function()
-    require("bufferline").setup({
-      options = {
-        max_name_length = 16,
-        max_prefix_length = 16,
-        tab_size = 20,
-        indicator = { icon = "▎", style = "icon" },
-        offsets = { { filetype = "neo-tree", text = "SIDEBAR", highlight = "Ignore", separator = false } },
-        show_close_icon = false,
-        separator_style = { "▎", "▎" },
-      },
-    })
+  opts = function(_, opts)
+    opts.options = opts.options or {}
+
+    opts.options.max_name_length = 16
+
+    opts.options.max_prefix_length = 16
+
+    opts.options.tab_size = 20
+
+    opts.options.indicator = { icon = "▎", style = "icon" }
+
+    opts.options.show_close_icon = false
+
+    opts.options.separator_style = { "▎", "▎" }
+  end,
+  config = function(_, opts)
+    require("bufferline").setup(opts)
 
     vim.api.nvim_set_keymap("", "<S-End>", "", { callback = function() require("bufferline").move(1) end })
     vim.api.nvim_set_keymap("", "<S-Home>", "", { callback = function() require("bufferline").move(-1) end })
