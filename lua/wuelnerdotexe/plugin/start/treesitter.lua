@@ -25,9 +25,12 @@ return {
     event = "FileType",
     init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter") end,
     opts = function(_, opts)
-      opts.ensure_installed = { "bash", "comment", "lua", "markdown", "markdown_inline", "regex", "vim" }
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "comment" })
+
       opts.sync_install = true
+
       opts.auto_install = true
+
       opts.highlight = {
         enable = true,
         disable = function(_, buf)
@@ -37,7 +40,9 @@ return {
         end,
         additional_vim_regex_highlighting = false,
       }
+
       opts.indent = { enable = true }
+
       opts.incremental_selection = {
         enable = true,
         keymaps = {

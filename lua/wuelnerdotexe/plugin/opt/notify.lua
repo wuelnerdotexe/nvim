@@ -13,5 +13,5 @@ return {
 
     vim.api.nvim_create_autocmd("UIEnter", { callback = function() vim.notify = require("notify") end, once = true })
   end,
-  config = function() require("notify").setup({ fps = 60, render = "compact", stages = "slide", timeout = 3000 }) end,
+  config = function() require("notify").setup({ timeout = 3000, stages = "slide", render = "compact", fps = 60 }) end,
 }

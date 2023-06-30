@@ -40,6 +40,11 @@ return {
       update_debounce = updatetime,
       preview_config = { border = "rounded", row = 1, col = 0 },
       on_attach = function(bufnr)
+        vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>hr", "", {
+          callback = function() require("gitsigns").reset_hunk() end,
+          desc = "Git: [r]eset the current [h]unk",
+        })
+
         vim.api.nvim_buf_set_keymap(bufnr, "x", "<localleader>hr", "", {
           callback = function()
             require("gitsigns").reset_hunk({
@@ -85,15 +90,8 @@ return {
       end,
     })
 
-    if vim.api.nvim_get_vvar("vim_did_enter") == 0 then
-      vim.api.nvim_create_autocmd("UIEnter", {
-        callback = function()
-          if package.loaded["scrollbar"] then require("scrollbar.handlers.gitsigns").setup() end
-        end,
-        once = true,
-      })
-    elseif package.loaded["scrollbar"] then
-      require("scrollbar.handlers.gitsigns").setup()
-    end
+    if not pcall(require, "scrollbar.handlers.gitsigns") then return end
+
+    require("scrollbar.handlers.gitsigns").setup()
   end,
 }

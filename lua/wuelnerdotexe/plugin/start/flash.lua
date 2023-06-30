@@ -5,7 +5,9 @@ return {
     {
       "<M-v>",
       function()
-        if pcall(require, "nvim-treesitter") then require("flash").treesitter() end
+        if not pcall(require, "nvim-treesitter") then return end
+
+        require("flash").treesitter()
       end,
       mode = { "n", "x", "o" },
     },

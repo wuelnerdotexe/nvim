@@ -5,14 +5,12 @@ return {
       "<leader>pf",
       function()
         if pcall(require, "telescope") then
-          if not package.loaded["telescope._extensions.projections"] then
-            require("telescope").load_extension("projections")
-          end
-
           require("telescope").extensions.projections.projections()
-        else
-          vim.notify("projections: cannot open telescope", vim.log.levels.ERROR)
+
+          return
         end
+
+        vim.notify("projections: cannot open telescope", vim.log.levels.ERROR)
       end,
       desc = "General: [f]ind the workspace [p]rojects",
     },
