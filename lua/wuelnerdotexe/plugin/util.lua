@@ -41,6 +41,6 @@ M.get_sidebar_width = function()
   return sidebar_width
 end
 
-M.user_interface_filetypes = { "checkhealth", "help", "man", "qf" }
+M.user_interface_filetypes = { "checkhealth", "help", "lazy", "man", "netrw", "qf" }
 
 return M

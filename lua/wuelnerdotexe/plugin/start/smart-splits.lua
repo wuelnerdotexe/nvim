@@ -27,22 +27,16 @@ return {
     "SmartSplitsLog",
     "SmartSplitsLogLevel",
   },
-  config = function()
-    require("smart-splits").setup({
-      ignored_buftypes = { "prompt" },
-      ignored_filetypes = {
-        "dapui_hover",
-        "DressingInput",
-        "DressingSelect",
-        "fzf",
-        "lazy",
-        "lspinfo",
-        "mason",
-        "null-ls-info",
-      },
-      default_amount = 1,
-      cursor_follows_swapped_bufs = true,
-      multiplexer_integration = "tmux",
-    })
+  opts = function(_, opts)
+    opts.ignored_buftypes = { "prompt" }
+
+    opts.ignored_filetypes = vim.list_extend(opts.ignored_filetypes or {}, { "lazy" })
+
+    opts.default_amount = 1
+
+    opts.cursor_follows_swapped_bufs = true
+
+    opts.multiplexer_integration = "tmux"
   end,
+  config = function(_, opts) require("smart-splits").setup(opts) end,
 }

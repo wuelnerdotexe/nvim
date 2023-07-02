@@ -8,21 +8,16 @@ return {
 
     vim.opt.listchars:append({ precedes = "…", extends = "…" })
   end,
-  opts = function(_, opts)
-    opts.options = opts.options or {}
-
-    opts.options.max_name_length = 16
-
-    opts.options.max_prefix_length = 16
-
-    opts.options.tab_size = 20
-
-    opts.options.indicator = { icon = "▎", style = "icon" }
-
-    opts.options.show_close_icon = false
-
-    opts.options.separator_style = { "▎", "▎" }
-  end,
+  opts = {
+    options = {
+      max_name_length = 16,
+      max_prefix_length = 16,
+      tab_size = 20,
+      indicator = { icon = "▎", style = "icon" },
+      show_close_icon = false,
+      separator_style = { "▎", "▎" },
+    },
+  },
   config = function(_, opts)
     require("bufferline").setup(opts)
 

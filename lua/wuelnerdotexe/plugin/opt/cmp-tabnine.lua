@@ -1,7 +1,26 @@
 return {
   "tzachar/cmp-tabnine",
   build = "./install.sh",
-  dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" },
+  dependencies = {
+    "hrsh7th/nvim-cmp",
+    dependencies = "L3MON4D3/LuaSnip",
+    opts = function()
+      require("wuelnerdotexe.plugin.start.cmp.util").completion_icons =
+        vim.tbl_extend("error", require("wuelnerdotexe.plugin.start.cmp.util").completion_icons, { Tabnine = " " })
+
+      local ref_format = require("wuelnerdotexe.plugin.start.cmp.util").formatting.format
+
+      require("wuelnerdotexe.plugin.start.cmp.util").formatting.format = function(entry, vim_item)
+        if entry.source.name == "cmp_tabnine" then
+          vim_item.kind = require("wuelnerdotexe.plugin.start.cmp.util").completion_icons["Tabnine"] .. "Tabnine"
+
+          return vim_item
+        end
+
+        return ref_format(entry, vim_item)
+      end
+    end,
+  },
   cmd = { "CmpTabnineHub", "CmpTabnineHubUrl", "CmpTabninePrefetch" },
   lazy = true,
   event = "InsertEnter",

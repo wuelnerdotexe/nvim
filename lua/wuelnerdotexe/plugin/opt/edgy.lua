@@ -1,7 +1,7 @@
 return {
   {
     "folke/edgy.nvim",
-    event = "FileType help,qf",
+    ft = { "help", "qf" },
     init = function()
       require("wuelnerdotexe.plugin.util").add_colorscheme_integration("edgy")
 
@@ -42,7 +42,6 @@ return {
         },
       })
     end,
-    config = function(_, opts) require("edgy").setup(opts) end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -75,5 +74,10 @@ return {
         require("bufferline.offset").edgy = true
       end
     end,
+  },
+  {
+    "petertriho/nvim-scrollbar",
+    optional = true,
+    opts = function(_, opts) opts.excluded_filetypes = vim.list_extend(opts.excluded_filetypes or {}, { "edgy" }) end,
   },
 }

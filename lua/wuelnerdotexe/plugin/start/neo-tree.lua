@@ -43,7 +43,7 @@ return {
 
       require("lazy").load({ plugins = { "neo-tree.nvim" } })
     end,
-    config = function(_, opts)
+    config = function()
       require("neo-tree").setup({
         sources = { "filesystem", "git_status", "document_symbols" },
         auto_clean_after_session_restore = true,
@@ -262,7 +262,7 @@ return {
   {
     "folke/edgy.nvim",
     optional = true,
-    event = "FileType neo-tree",
+    ft = "neo-tree",
     opts = function(_, opts)
       opts.right = vim.list_extend(opts.right or {}, {
         {

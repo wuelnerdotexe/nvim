@@ -13,7 +13,7 @@ return {
         line_left = "<M-Left>",
         right = "<M-Right>",
         line_right = "<M-Right>",
-        down = "<M-DOwn>",
+        down = "<M-Down>",
         line_down = "<M-Down>",
         up = "<M-Up>",
         line_up = "<M-Up>",

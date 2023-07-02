@@ -4,7 +4,7 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts) opts.context_commentstring = { enable = true, enable_autocmd = false } end,
+      opts = { context_commentstring = { enable = true, enable_autocmd = false } },
     },
   },
   keys = { { "gc", mode = { "n", "x" } } },

@@ -1,7 +1,7 @@
 return {
   "jackieaskins/cmp-emmet",
   build = "npm run release",
-  dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" },
+  dependencies = { "hrsh7th/nvim-cmp", dependencies = "L3MON4D3/LuaSnip" },
   lazy = true,
   init = function()
     vim.api.nvim_create_autocmd("FileType", {

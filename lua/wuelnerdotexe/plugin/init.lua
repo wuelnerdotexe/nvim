@@ -10,8 +10,6 @@ vim.opt.runtimepath:prepend(os.getenv("LAZY") or lazypath)
 
 require("wuelnerdotexe.plugin.util").add_colorscheme_integration("lazy")
 
-table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "lazy")
-
 vim.api.nvim_set_var("mapleader", [[\]])
 vim.api.nvim_set_var("maplocalleader", [[|]])
 

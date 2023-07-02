@@ -59,7 +59,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts) opts.textobjects = { select = { lookahead = true }, lsp_interop = { border = "rounded" } } end,
+      opts = { textobjects = { select = { lookahead = true }, lsp_interop = { border = "rounded" } } },
     },
     keys = {
       {
@@ -117,7 +117,7 @@ return {
   },
   {
     "HiPhish/nvim-ts-rainbow2",
-    dependencies = { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.rainbow = { enable = true } end },
+    dependencies = { "nvim-treesitter/nvim-treesitter", opts = { rainbow = { enable = true } } },
     event = "FileType",
     init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("ts-rainbow2") end,
   },
@@ -125,12 +125,12 @@ return {
     "windwp/nvim-ts-autotag",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts)
-        opts.autotag = {
+      opts = {
+        autotag = {
           enable = true,
           filetypes = { "html", "javascript", "javascriptreact", "typescriptreact", "markdown" },
-        }
-      end,
+        },
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {

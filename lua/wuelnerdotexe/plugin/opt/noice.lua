@@ -97,7 +97,7 @@ return {
   {
     "folke/edgy.nvim",
     optional = true,
-    event = "FileType noice",
+    ft = "noice",
     opts = function(_, opts)
       opts.bottom = vim.list_extend(opts.bottom or {}, {
         {
@@ -108,5 +108,10 @@ return {
         },
       })
     end,
+  },
+  {
+    "petertriho/nvim-scrollbar",
+    optional = true,
+    opts = function(_, opts) opts.excluded_filetypes = vim.list_extend(opts.excluded_filetypes or {}, { "noice" }) end,
   },
 }

@@ -123,7 +123,7 @@ return {
   {
     "folke/edgy.nvim",
     optional = true,
-    event = "FileType spectre_panel",
+    ft = "spectre_panel",
     opts = function(_, opts)
       opts.bottom = vim.list_extend(opts.bottom or {}, {
         { ft = "spectre_panel", title = "Spectre", size = { height = 0.5 } },
