@@ -28,7 +28,7 @@ return {
           }),
           snippet = {
             expand = function(args)
-              if package.loaded["luasnip"] then
+              if pcall(require, "luasnip") then
                 require("luasnip").lsp_expand(args.body)
               else
                 error("snippet engine is not configured.")
@@ -71,9 +71,9 @@ return {
       optional = true,
       ft = "cmp_docs",
       opts = function(_, opts)
-        opts.filetypes = vim.tbl_deep_extend("error", opts.filetypes or {}, {
-          cmp_docs = { css_fn = true, sass = { enable = true }, always_update = true },
-        })
+        opts.filetypes = opts.filetypes or {}
+
+        opts.filetypes.cmp_docs = { css_fn = true, sass = { enable = true }, always_update = true }
       end,
     },
     {

@@ -5,8 +5,7 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = "L3MON4D3/LuaSnip",
     opts = function()
-      require("wuelnerdotexe.plugin.start.cmp.util").completion_icons =
-        vim.tbl_extend("error", require("wuelnerdotexe.plugin.start.cmp.util").completion_icons, { Tabnine = " " })
+      require("wuelnerdotexe.plugin.start.cmp.util").completion_icons["Tabnine"] = " "
 
       local ref_format = require("wuelnerdotexe.plugin.start.cmp.util").formatting.format
 
