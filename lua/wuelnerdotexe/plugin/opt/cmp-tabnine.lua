@@ -5,13 +5,13 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = "L3MON4D3/LuaSnip",
     opts = function()
-      require("wuelnerdotexe.plugin.start.cmp.util").completion_icons["Tabnine"] = " "
+      require("wuelnerdotexe.plugin.start.cmp.util").completion_icons.Tabnine = " "
 
       local ref_format = require("wuelnerdotexe.plugin.start.cmp.util").formatting.format
 
       require("wuelnerdotexe.plugin.start.cmp.util").formatting.format = function(entry, vim_item)
         if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = require("wuelnerdotexe.plugin.start.cmp.util").completion_icons["Tabnine"] .. "Tabnine"
+          vim_item.kind = require("wuelnerdotexe.plugin.start.cmp.util").completion_icons.Tabnine .. "Tabnine"
 
           return vim_item
         end
