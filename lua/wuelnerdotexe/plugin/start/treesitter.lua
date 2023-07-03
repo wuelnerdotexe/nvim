@@ -116,10 +116,10 @@ return {
     },
   },
   {
-    "HiPhish/nvim-ts-rainbow2",
-    dependencies = { "nvim-treesitter/nvim-treesitter", opts = { rainbow = { enable = true } } },
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    dependencies = "nvim-treesitter/nvim-treesitter",
     event = "FileType",
-    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("ts-rainbow2") end,
+    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("rainbow-delimiters") end,
   },
   {
     "windwp/nvim-ts-autotag",
