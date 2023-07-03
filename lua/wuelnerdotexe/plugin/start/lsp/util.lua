@@ -94,7 +94,7 @@ return {
 
     if client.supports_method("textDocument/inlayHint") then
       vim.api.nvim_buf_set_keymap(bufnr, "n", "<localleader>ht", "", {
-        callback = function() vim.lsp.buf.inlay_hint(bufnr, nil) end,
+        callback = function() vim.lsp.inlay_hint(bufnr, nil) end,
         desc = "Language server: [t]oggle inlay [h]ints",
       })
     end
