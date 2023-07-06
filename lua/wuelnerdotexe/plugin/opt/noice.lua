@@ -22,12 +22,14 @@ return {
         cmdline = { view = "cmdline", format = { cmdline = { icon = ">" } } },
         popupmenu = { enabled = false },
         lsp = {
-          progress = { enabled = false },
+          progress = { enabled = false, throttle = 42 },
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true,
           },
+          hover = { silent = true },
+          signature = { auto_open = { throttle = vim.api.nvim_get_option_value("updatetime", { scope = "global" }) } },
         },
         presets = { bottom_search = true, long_message_to_split = true, lsp_doc_border = true },
         throttle = 42,
