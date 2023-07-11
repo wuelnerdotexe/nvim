@@ -70,11 +70,7 @@ return {
       "NvChad/nvim-colorizer.lua",
       optional = true,
       ft = "cmp_docs",
-      opts = function(_, opts)
-        opts.filetypes = opts.filetypes or {}
-
-        opts.filetypes.cmp_docs = { css_fn = true, sass = { enable = true }, always_update = true }
-      end,
+      opts = { filetypes = { cmp_docs = { css_fn = true, sass = { enable = true }, always_update = true } } },
     },
     {
       "petertriho/nvim-scrollbar",
