@@ -42,6 +42,7 @@ return {
         },
       })
     end,
+    config = function(_, opts) require("edgy").setup(opts) end,
   },
   {
     "akinsho/bufferline.nvim",
