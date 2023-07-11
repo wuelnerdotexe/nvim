@@ -39,8 +39,8 @@ return {
           matching = { disallow_partial_fuzzy_matching = false },
           sorting = {
             comparators = {
-              require("cmp.config.compare").exact,
               require("cmp.config.compare").score,
+              require("cmp.config.compare").exact,
               require("cmp.config.compare").length,
               require("cmp.config.compare").sort_text,
             },
