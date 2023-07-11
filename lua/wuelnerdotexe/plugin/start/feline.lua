@@ -230,13 +230,12 @@ return {
             {
               provider = function()
                 local shiftwidth = vim.api.nvim_call_function("shiftwidth", {})
+
+                if vim.api.nvim_get_option_value("expandtab", {}) then return string.upper("Spaces:" .. shiftwidth) end
+
                 local tabstop = vim.api.nvim_get_option_value("tabstop", {})
 
-                if vim.api.nvim_get_option_value("expandtab", {}) then
-                  return string.upper("Spaces:" .. shiftwidth)
-                elseif shiftwidth == tabstop then
-                  return string.upper("Tabs:" .. tabstop)
-                end
+                if shiftwidth == tabstop then return string.upper("Tabs:" .. tabstop) end
 
                 return string.upper("Spaces:" .. shiftwidth .. "," .. "Tabs:" .. tabstop)
               end,
