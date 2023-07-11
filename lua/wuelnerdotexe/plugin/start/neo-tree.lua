@@ -54,7 +54,7 @@ return {
         resize_timer_interval = 67,
         use_default_mappings = false,
         source_selector = {
-          winbar = require("lazy.core.config").plugins["edgy.nvim"] == nil,
+          winbar = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil,
           sources = {
             { source = "filesystem", display_name = " 󰉓 FOLDERS " },
             { source = "git_status", display_name = "  GIT STATUS " },
@@ -160,10 +160,10 @@ return {
             ["m"] = { "move", config = { show_path = "relative" } },
             ["q"] = "close_window",
             ["?"] = "show_help",
-            ["gb"] = require("lazy.core.config").plugins["edgy.nvim"] == nil and "next_source" or "noop",
-            ["<S-PageDown>"] = require("lazy.core.config").plugins["edgy.nvim"] == nil and "next_source" or "noop",
-            ["gB"] = require("lazy.core.config").plugins["edgy.nvim"] == nil and "prev_source" or "noop",
-            ["<S-PageUp>"] = require("lazy.core.config").plugins["edgy.nvim"] == nil and "prev_source" or "noop",
+            ["gb"] = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil and "next_source" or "noop",
+            ["<S-PageDown>"] = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil and "next_source" or "noop",
+            ["gB"] = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil and "prev_source" or "noop",
+            ["<S-PageUp>"] = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil and "prev_source" or "noop",
           },
         },
         filesystem = {

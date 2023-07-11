@@ -113,7 +113,7 @@ return {
         }
       end
 
-      if require("lazy.core.config").plugins["nvim-dap-ui"] == nil then return end
+      if require("lazy.core.config").spec.plugins["nvim-dap-ui"] == nil then return end
 
       require("dap").listeners.after.event_initialized.dapui_config = function()
         require("dapui").open()

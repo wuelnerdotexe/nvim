@@ -9,7 +9,7 @@ return {
 
     table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "notify")
 
-    if require("lazy.core.config").plugins["noice.nvim"] == nil then return end
+    if require("lazy.core.config").spec.plugins["noice.nvim"] == nil then return end
 
     vim.api.nvim_create_autocmd("UIEnter", { callback = function() vim.notify = require("notify") end, once = true })
   end,
