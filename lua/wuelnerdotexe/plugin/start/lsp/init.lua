@@ -256,12 +256,15 @@ return {
     event = "LspAttach",
     init = function() require("wuelnerdotexe.plugin.util").set_option("signcolumn", "yes:1") end,
     config = function()
-      require("nvim-lightbulb").setup({ autocmd = { enabled = true }, sign = { priority = 2 } })
-
-      vim.api.nvim_call_function(
-        "sign_define",
-        { "LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" } }
-      )
+      require("nvim-lightbulb").setup({
+        priority = 2,
+        sign = { text = "" },
+        virtual_text = { text = "" },
+        float = { text = "" },
+        status_text = { text = "" },
+        autocmd = { enabled = true, updatetime = vim.api.nvim_get_option_value("updatetime", { scope = "global" }) },
+        ignore = { ft = require("wuelnerdotexe.plugin.util").user_interface_filetypes },
+      })
     end,
   },
   {
