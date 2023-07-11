@@ -31,7 +31,7 @@ return {
 
         local basic_config = {
           flags = { debounce_text_changes = vim.api.nvim_get_option_value("updatetime", { scope = "global" }) },
-          on_attach = function(client, bufnr) require("wuelnerdotexe.plugin.start.lsp.util").on_attach(client, bufnr) end,
+          on_attach = function(...) require("wuelnerdotexe.plugin.start.lsp.util").on_attach(...) end,
           capabilities = pcall(require, "cmp_nvim_lsp") and require("cmp_nvim_lsp").default_capabilities()
             or vim.lsp.protocol.make_client_capabilities(),
         }

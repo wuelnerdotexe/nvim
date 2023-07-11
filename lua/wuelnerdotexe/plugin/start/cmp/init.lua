@@ -35,14 +35,17 @@ return {
               end
             end,
           },
-          formatting = require("wuelnerdotexe.plugin.start.cmp.util").formatting,
+          formatting = {
+            fields = require("wuelnerdotexe.plugin.start.cmp.util").formatting.fields,
+            format = function(...) return require("wuelnerdotexe.plugin.start.cmp.util").formatting.format(...) end,
+          },
           matching = { disallow_partial_fuzzy_matching = false },
           sorting = {
             comparators = {
-              require("cmp.config.compare").score,
-              require("cmp.config.compare").exact,
-              require("cmp.config.compare").length,
-              require("cmp.config.compare").sort_text,
+              function(...) return require("cmp.config.compare").exact(...) end,
+              function(...) return require("cmp.config.compare").score(...) end,
+              function(...) return require("cmp.config.compare").length(...) end,
+              function(...) return require("cmp.config.compare").sort_text(...) end,
             },
           },
           sources = {
