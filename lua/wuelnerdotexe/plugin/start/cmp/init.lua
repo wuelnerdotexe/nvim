@@ -14,18 +14,15 @@ return {
       config = function()
         require("cmp").setup({
           enabled = function()
-            return (
-              vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
-              or (package.loaded["dap"] and require("cmp_dap").is_dap_buffer())
-            )
+            local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+
+            return (not vim.tbl_contains({ "help", "loclist", "nofile", "quickfix", "terminal" }, buftype))
+              and (buftype ~= "prompt" or (package.loaded["cmp_dap"] and require("cmp_dap").is_dap_buffer()))
               and vim.api.nvim_call_function("reg_recording", {}) == ""
               and vim.api.nvim_call_function("reg_executing", {}) == ""
           end,
           performance = { debounce = 42, throttle = 42, fetching_timeout = 300 },
-          mapping = require("cmp").mapping.preset.insert({
-            ["<C-Space>"] = require("cmp").mapping.complete(),
-            ["<CR>"] = require("cmp").mapping.confirm({ select = false }),
-          }),
+          mapping = require("cmp").mapping.preset.insert(),
           snippet = {
             expand = function(args)
               if pcall(require, "luasnip") then
@@ -48,13 +45,15 @@ return {
               function(...) return require("cmp.config.compare").sort_text(...) end,
             },
           },
-          sources = {
-            { group_index = 1, name = "path" },
-            { group_index = 2, name = "luasnip", priority = 3 },
-            { group_index = 2, name = "nvim_lsp", priority = 2 },
-            { group_index = 2, name = "cmp_tabnine", priority = 1 },
-            { group_index = 3, name = "buffer", option = { keyword_length = 1, indexing_interval = 171 } },
-          },
+          sources = require("cmp").config.sources({
+            { name = "path" },
+          }, {
+            { priority = 8, name = "luasnip" },
+            { priority = 6, name = "nvim_lsp" },
+            { priority = 4, name = "cmp_tabnine" },
+          }, {
+            { name = "buffer", option = { keyword_length = 1, indexing_interval = 171 } },
+          }),
           confirmation = { default_behavior = require("cmp.types").cmp.ConfirmBehavior.Replace },
           experimental = { ghost_text = { hl_group = "LspCodeLens" } },
           window = {
@@ -97,11 +96,15 @@ return {
 
       require("cmp").setup.cmdline(":", {
         mapping = require("cmp").mapping.preset.cmdline(),
-        sources = { { group_index = 1, name = "path" }, { group_index = 2, name = "cmdline" } },
+        sources = require("cmp").config.sources({ { name = "path" } }, { { name = "cmdline" } }),
       })
     end,
   },
-  { "saadparwaiz1/cmp_luasnip", dependencies = { "hrsh7th/nvim-cmp", "L3MON4D3/LuaSnip" }, event = "InsertEnter" },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    dependencies = { "L3MON4D3/LuaSnip", { "hrsh7th/nvim-cmp", dependencies = "L3MON4D3/LuaSnip" } },
+    event = "InsertEnter",
+  },
   {
     "hrsh7th/cmp-nvim-lsp",
     dependencies = { "hrsh7th/nvim-cmp", dependencies = "L3MON4D3/LuaSnip" },
