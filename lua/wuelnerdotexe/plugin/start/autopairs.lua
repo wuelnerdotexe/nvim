@@ -7,6 +7,7 @@ return {
       { "<A-e>", mode = "i" },
       { "<A-E>", mode = "i" },
       { "<A-]>", mode = "i" },
+      { "<A-)>", mode = "i" },
       { "<CR>", mode = "i" },
       { "<BS>", mode = { "i", "c" } },
       { "<Space>", mode = { "i", "c" } },
