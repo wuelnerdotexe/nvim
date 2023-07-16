@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
     keys = {
       {
@@ -31,7 +32,6 @@ return {
       vim.api.nvim_set_var("loaded_netrwPlugin", 1)
       vim.api.nvim_set_var("loaded_netrwSettings", 1)
       vim.api.nvim_set_var("loaded_netrwFileHandlers", 1)
-      vim.api.nvim_set_var("neo_tree_remove_legacy_commands", 1)
 
       table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "neo-tree")
 
@@ -183,7 +183,7 @@ return {
             hide_gitignored = false,
             never_show = { ".git", ".svn", ".hg", "CSV", ".DS_Store", "thumbs.db" },
           },
-          follow_current_file = true,
+          follow_current_file = { enabled = true },
         },
         git_status = {
           window = {
