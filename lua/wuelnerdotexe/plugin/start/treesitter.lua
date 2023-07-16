@@ -65,32 +65,32 @@ return {
       {
         "af",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@function.outer") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       {
         "if",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@function.inner") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       {
         "ac",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@conditional.outer") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       {
         "ic",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@conditional.inner") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       {
         "al",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@loop.outer") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       {
         "il",
         function() require("nvim-treesitter.textobjects.select").select_textobject("@loop.inner") end,
-        mode = "x",
+        mode = { "x", "o" },
       },
       { "<Tab>", function() require("nvim-treesitter.textobjects.swap").swap_next("@parameter.inner") end },
       { "<S-Tab>", function() require("nvim-treesitter.textobjects.swap").swap_previous("@parameter.inner") end },
