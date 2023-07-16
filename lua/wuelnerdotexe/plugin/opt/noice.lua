@@ -101,6 +101,10 @@ return {
     optional = true,
     ft = "noice",
     opts = function(_, opts)
+      opts.animate = vim.tbl_deep_extend("error", opts.animate or {}, {
+        spinner = require("noice.util.spinners").spinners.dots,
+      })
+
       opts.bottom = vim.list_extend(opts.bottom or {}, {
         {
           ft = "noice",

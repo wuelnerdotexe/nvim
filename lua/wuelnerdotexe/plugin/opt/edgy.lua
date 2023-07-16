@@ -20,13 +20,12 @@ return {
         right = { size = sidebar_width },
       }
 
-      opts.animate = {
+      opts.animate = vim.tbl_deep_extend("error", opts.animate or {}, {
         fps = 60,
         cps = 150,
         on_begin = function() vim.api.nvim_set_var("minianimate_disable", true) end,
         on_end = function() vim.api.nvim_set_var("minianimate_disable", false) end,
-        spinner = { frames = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" }, interval = 67 },
-      }
+      })
 
       opts.exit_when_last = true
 
