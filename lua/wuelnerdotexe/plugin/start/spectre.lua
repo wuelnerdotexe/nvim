@@ -25,7 +25,7 @@ return {
         result_padding = "│ ",
         line_sep = "╰───────────────────────────────────────────────────────────────────────────────",
         highlight = {
-          border = "LpsSignatureActiveParameter",
+          border = "LspSignatureActiveParameter",
           ui = "LspCodeLens",
           headers = "Title",
           filedirectory = "Directory",
@@ -125,7 +125,7 @@ return {
     optional = true,
     ft = "spectre_panel",
     opts = function(_, opts)
-      opts.bottom = vim.list_extend(opts.bottom or {}, {
+      opts.top = vim.list_extend(opts.top or {}, {
         { ft = "spectre_panel", title = "Spectre", size = { height = 0.5 } },
       })
     end,

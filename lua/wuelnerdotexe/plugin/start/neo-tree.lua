@@ -45,7 +45,7 @@ return {
     end,
     config = function()
       require("neo-tree").setup({
-        sources = { "filesystem", "git_status", "document_symbols" },
+        sources = { "git_status", "filesystem", "document_symbols" },
         auto_clean_after_session_restore = true,
         enable_diagnostics = false,
         hide_root_node = true,
@@ -56,8 +56,8 @@ return {
         source_selector = {
           winbar = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil,
           sources = {
-            { source = "filesystem", display_name = " 󰉓 FOLDERS " },
             { source = "git_status", display_name = "  GIT STATUS " },
+            { source = "filesystem", display_name = " 󰉓 FOLDERS " },
             { source = "document_symbols", display_name = "  SYMBOLS " },
           },
           content_layout = "center",
@@ -264,29 +264,41 @@ return {
     optional = true,
     ft = "neo-tree",
     opts = function(_, opts)
+      local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
+
       opts.right = vim.list_extend(opts.right or {}, {
         {
           ft = "neo-tree",
-          filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "filesystem" end,
-          open = function() require("neo-tree.command").execute({ source = "filesystem", dir = vim.loop.cwd() }) end,
-          title = "FOLDERS",
-          size = { height = 0.33 },
+          filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "git_status" end,
+          open = function()
+            require("neo-tree.command").execute({ source = "git_status", position = "left", dir = vim.loop.cwd() })
+          end,
+          title = "GIT STATUS",
+          size = { width = sidebar_width },
           pinned = true,
         },
         {
           ft = "neo-tree",
-          filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "git_status" end,
-          open = function() require("neo-tree.command").execute({ source = "git_status", dir = vim.loop.cwd() }) end,
-          title = "GIT STATUS",
-          size = { height = 0.33 },
+          filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "filesystem" end,
+          open = function()
+            require("neo-tree.command").execute({ source = "filesystem", position = "top", dir = vim.loop.cwd() })
+          end,
+          title = "FOLDERS",
+          size = { width = sidebar_width },
           pinned = true,
         },
         {
           ft = "neo-tree",
           filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "document_symbols" end,
-          open = function() require("neo-tree.command").execute({ source = "document_symbols", dir = vim.loop.cwd() }) end,
+          open = function()
+            require("neo-tree.command").execute({
+              source = "document_symbols",
+              position = "bottom",
+              dir = vim.loop.cwd(),
+            })
+          end,
           title = "SYMBOLS",
-          size = { height = 0.33 },
+          size = { width = sidebar_width },
           pinned = true,
         },
       })
