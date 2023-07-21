@@ -25,9 +25,9 @@ return {
         result_padding = "│ ",
         line_sep = "╰───────────────────────────────────────────────────────────────────────────────",
         highlight = {
-          border = "LspSignatureActiveParameter",
+          headers = "Ignore",
           ui = "LspCodeLens",
-          headers = "Title",
+          border = "LspSignatureActiveParameter",
           filedirectory = "Directory",
           filename = "diffFile",
           search = "diffRemoved",
