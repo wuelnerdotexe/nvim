@@ -37,14 +37,6 @@ return {
     vim.api.nvim_set_keymap("n", "[d", "", { callback = function() vim.diagnostic.goto_prev() end })
   end,
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/completion") then
-      vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-    end
-
-    if client.supports_method("textDocument/hover") then
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "", { callback = function() vim.lsp.buf.hover() end })
-    end
-
     if client.supports_method("textDocument/signatureHelp") then
       vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-k>", "", { callback = function() vim.lsp.buf.signature_help() end })
     end
