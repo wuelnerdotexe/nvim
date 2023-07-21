@@ -2,7 +2,6 @@ return {
   {
     "folke/noice.nvim",
     dependencies = "MunifTanjim/nui.nvim",
-    cond = vim.api.nvim_call_function("exists", { "g:neovide" }) ~= 1,
     deactivate = function() require("noice").disable() end,
     event = "UIEnter",
     init = function()
