@@ -116,7 +116,7 @@ return {
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "spectre_panel",
-        callback = function(ev) vim.api.nvim_set_option_value("number", false, { buf = ev.buf }) end,
+        callback = function() vim.api.nvim_set_option_value("number", false, { win = 0 }) end,
       })
     end,
   },

@@ -135,9 +135,9 @@ return {
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "TelescopePreviewerLoaded",
-      callback = function(ev)
-        vim.api.nvim_set_option_value("number", true, { buf = ev.buf })
-        vim.api.nvim_set_option_value("wrap", true, { buf = ev.buf })
+      callback = function()
+        vim.api.nvim_set_option_value("number", true, { win = 0 })
+        vim.api.nvim_set_option_value("wrap", true, { win = 0 })
       end,
     })
 
