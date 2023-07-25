@@ -116,6 +116,36 @@ return {
     },
   },
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = { { "[c", function() require("treesitter-context").go_to_context() end } },
+    cmd = { "TSContextDisable", "TSContextEnable", "TSContextToggle" },
+    event = { "BufReadPost", "FileType" },
+    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter-context") end,
+    config = function()
+      require("treesitter-context").setup({
+        max_lines = 400,
+        min_window_height = vim.api.nvim_get_option_value("winminheight", { scope = "global" }),
+        line_numbers = vim.api.nvim_get_option_value("number", { scope = "global" }),
+        mode = "topline",
+        on_attach = function(buf)
+          local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+
+          if filetype == "" or filetype == "netrw" then return false end
+
+          if
+            vim.tbl_contains(
+              { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
+              vim.api.nvim_get_option_value("buftype", { buf = buf })
+            )
+          then
+            return false
+          end
+        end,
+      })
+    end,
+  },
+  {
     "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
     dependencies = "nvim-treesitter/nvim-treesitter",
     event = "FileType",
@@ -158,31 +188,31 @@ return {
     config = function() vim.api.nvim_command("doautoall <nomodeline> FileType") end,
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
+    "abecodes/tabout.nvim",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    keys = { { "[c", function() require("treesitter-context").go_to_context() end } },
-    cmd = { "TSContextDisable", "TSContextEnable", "TSContextToggle" },
-    event = { "BufReadPost", "FileType" },
-    init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter-context") end,
+    cmd = { "Tabout", "TaboutBack", "TaboutToggle" },
+    lazy = true,
     config = function()
-      require("treesitter-context").setup({
-        max_lines = 400,
-        min_window_height = vim.api.nvim_get_option_value("winminheight", { scope = "global" }),
-        line_numbers = vim.api.nvim_get_option_value("number", { scope = "global" }),
-        mode = "topline",
-        on_attach = function(buf)
-          local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
-
-          if filetype == "" or filetype == "netrw" then return false end
-
-          if
-            vim.tbl_contains(
-              { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
-              vim.api.nvim_get_option_value("buftype", { buf = buf })
-            )
-          then
-            return false
-          end
+      require("tabout").setup({ tabkey = "", backwards_tabkey = "", ignore_beginning = false, exclude = { "netrw" } })
+    end,
+  },
+  {
+    "Wansmer/treesj",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = { { "J", function() require("treesj").toggle() end } },
+    cmd = { "TSJJoin", "TSJSplit", "TSJToggle" },
+    config = function() require("treesj").setup({ use_default_keymaps = false }) end,
+  },
+  {
+    "llllvvuu/nvim-js-actions",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "javascript,javascriptreact,typescript,typescriptreact",
+        callback = function(ev)
+          vim.api.nvim_buf_set_keymap(ev.buf, "n", "<localleader>fc", "", {
+            callback = function() require("nvim-js-actions.js-arrow-fn").toggle() end,
+          })
         end,
       })
     end,
@@ -192,5 +222,18 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "L3MON4D3/LuaSnip" },
     cmd = "Neogen",
     config = function() require("neogen").setup({ snippet_engine = "luasnip" }) end,
+  },
+  {
+    "cshuaimin/ssr.nvim",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = {
+      {
+        "<leader>sr",
+        function() require("ssr").open() end,
+        desc = "General: [s]tructural search and [r]eplace in the current directory",
+        mode = { "n", "x" },
+      },
+    },
+    config = function() require("ssr").setup({ border = "rounded", keymaps = { replace_all = "<localleader>rr" } }) end,
   },
 }
