@@ -6,9 +6,7 @@ return {
       require("Comment").setup({
         toggler = { line = "gcc", block = "<Nop>" },
         opleader = { line = "gc", block = "<Nop>" },
-        pre_hook = require("lazy.core.config").spec.plugins["nvim-ts-context-commentstring"] and function(ctx)
-          return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()(ctx)
-        end or nil,
+        pre_hook = function(ctx) return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()(ctx) end,
       })
     end,
   },
