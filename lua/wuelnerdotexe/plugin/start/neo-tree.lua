@@ -70,7 +70,7 @@ return {
           {
             event = "file_renamed",
             handler = function(args)
-              for _, active_tsserver in pairs(vim.lsp.get_active_clients({ name = "tsserver" })) do
+              for _, active_tsserver in pairs(vim.lsp.get_clients({ name = "tsserver" })) do
                 active_tsserver.request("workspace/executeCommand", {
                   command = "_typescript.applyRenameFile",
                   arguments = {
@@ -83,7 +83,7 @@ return {
           {
             event = "file_moved",
             handler = function(args)
-              for _, active_tsserver in pairs(vim.lsp.get_active_clients({ name = "tsserver" })) do
+              for _, active_tsserver in pairs(vim.lsp.get_clients({ name = "tsserver" })) do
                 active_tsserver.request("workspace/executeCommand", {
                   command = "_typescript.applyRenameFile",
                   arguments = {
