@@ -11,13 +11,11 @@ return {
       table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "edgy")
     end,
     opts = function(_, opts)
-      local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
-
       opts.options = {
-        left = { size = sidebar_width },
+        left = { size = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
         bottom = { size = 0.25 },
+        right = { size = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
         top = { size = 0.25 },
-        right = { size = sidebar_width },
       }
 
       opts.animate = vim.tbl_deep_extend("error", opts.animate or {}, {

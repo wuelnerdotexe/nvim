@@ -264,8 +264,6 @@ return {
     optional = true,
     ft = "neo-tree",
     opts = function(_, opts)
-      local sidebar_width = require("wuelnerdotexe.plugin.util").get_sidebar_width()
-
       opts.right = vim.list_extend(opts.right or {}, {
         {
           ft = "neo-tree",
@@ -274,7 +272,7 @@ return {
             require("neo-tree.command").execute({ source = "git_status", position = "left", dir = vim.loop.cwd() })
           end,
           title = "GIT STATUS",
-          size = { width = sidebar_width },
+          size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
           pinned = true,
         },
         {
@@ -284,7 +282,7 @@ return {
             require("neo-tree.command").execute({ source = "filesystem", position = "top", dir = vim.loop.cwd() })
           end,
           title = "FOLDERS",
-          size = { width = sidebar_width },
+          size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
           pinned = true,
         },
         {
@@ -298,7 +296,7 @@ return {
             })
           end,
           title = "SYMBOLS",
-          size = { width = sidebar_width },
+          size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
           pinned = true,
         },
       })
