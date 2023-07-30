@@ -6,17 +6,17 @@ return {
     keys = {
       {
         "<leader>ft",
-        function() require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.loop.cwd() }) end,
+        function() require("neo-tree.command").execute({ source = "filesystem", toggle = true, dir = vim.uv.cwd() }) end,
         desc = "General: [t]oggle the [f]olders explorer",
       },
       {
         "<leader>gt",
-        function() require("neo-tree.command").execute({ source = "git_status", toggle = true, dir = vim.loop.cwd() }) end,
+        function() require("neo-tree.command").execute({ source = "git_status", toggle = true, dir = vim.uv.cwd() }) end,
         desc = "General: [t]oggle the [g]it status explorer",
       },
       {
         "<leader>st",
-        function() require("neo-tree.command").execute({ source = "document_symbols", toggle = true, dir = vim.loop.cwd() }) end,
+        function() require("neo-tree.command").execute({ source = "document_symbols", toggle = true, dir = vim.uv.cwd() }) end,
         desc = "General: [t]oggle the [s]ymbols explorer",
       },
     },
@@ -37,7 +37,7 @@ return {
 
       if not require("wuelnerdotexe.plugin.util").enter_with_arguments() then return end
 
-      local stat = vim.loop.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
+      local stat = vim.uv.fs_stat(vim.api.nvim_call_function("argv", { 0 }))
 
       if not stat or stat.type ~= "directory" then return end
 
@@ -269,7 +269,7 @@ return {
           ft = "neo-tree",
           filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "git_status" end,
           open = function()
-            require("neo-tree.command").execute({ source = "git_status", position = "left", dir = vim.loop.cwd() })
+            require("neo-tree.command").execute({ source = "git_status", position = "left", dir = vim.uv.cwd() })
           end,
           title = "GIT STATUS",
           size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
@@ -279,7 +279,7 @@ return {
           ft = "neo-tree",
           filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "filesystem" end,
           open = function()
-            require("neo-tree.command").execute({ source = "filesystem", position = "top", dir = vim.loop.cwd() })
+            require("neo-tree.command").execute({ source = "filesystem", position = "top", dir = vim.uv.cwd() })
           end,
           title = "FOLDERS",
           size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },
@@ -289,11 +289,7 @@ return {
           ft = "neo-tree",
           filter = function(buf) return vim.api.nvim_buf_get_var(buf, "neo_tree_source") == "document_symbols" end,
           open = function()
-            require("neo-tree.command").execute({
-              source = "document_symbols",
-              position = "bottom",
-              dir = vim.loop.cwd(),
-            })
+            require("neo-tree.command").execute({ source = "document_symbols", position = "bottom", dir = vim.uv.cwd() })
           end,
           title = "SYMBOLS",
           size = { width = function() return require("wuelnerdotexe.plugin.util").get_sidebar_width() end },

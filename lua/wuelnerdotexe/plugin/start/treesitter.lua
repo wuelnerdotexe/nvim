@@ -34,7 +34,7 @@ return {
       opts.highlight = {
         enable = true,
         disable = function(_, buf)
-          local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(buf))
+          local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(buf))
 
           if stats and stats.size > 102400 then return true end
         end,

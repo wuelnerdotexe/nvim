@@ -75,7 +75,7 @@ return {
             type = "node2",
             request = "launch",
             program = "${file}",
-            cwd = vim.loop.cwd(),
+            cwd = vim.uv.cwd(),
             sourceMaps = true,
             protocol = "inspector",
             console = "integratedTerminal",

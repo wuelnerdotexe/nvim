@@ -27,12 +27,12 @@ return {
       callback = function()
         if
           require("wuelnerdotexe.plugin.util").enter_with_arguments()
-          or require("projections.session").info(vim.loop.cwd()) == nil
+          or require("projections.session").info(vim.uv.cwd()) == nil
         then
           return
         end
 
-        vim.schedule(function() require("projections.session").restore(vim.loop.cwd()) end)
+        vim.schedule(function() require("projections.session").restore(vim.uv.cwd()) end)
       end,
       once = true,
     })
@@ -49,7 +49,7 @@ return {
           return
         end
 
-        require("projections.session").store(vim.loop.cwd())
+        require("projections.session").store(vim.uv.cwd())
       end,
     })
   end,
