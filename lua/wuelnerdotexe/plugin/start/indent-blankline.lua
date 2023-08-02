@@ -16,6 +16,8 @@ return {
         show_current_context = false,
         show_current_context_start = true,
         show_trailing_blankline_indent = false,
+        show_foldtext = false,
+        char_priority = 11,
         char = "▏",
         context_char = "▏",
         buftype_exclude = { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
@@ -50,7 +52,7 @@ return {
       })
 
       require("mini.indentscope").setup({
-        draw = { delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }) },
+        draw = { delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }), priotity = 12 },
         symbol = "▏",
       })
     end,
