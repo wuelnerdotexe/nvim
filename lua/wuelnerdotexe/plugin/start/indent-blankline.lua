@@ -13,7 +13,7 @@ return {
     config = function()
       require("indent_blankline").setup({
         use_treesitter = true,
-        show_current_context = require("lazy.core.config").spec.plugins["mini.indentscope"] == nil,
+        show_current_context = false,
         show_current_context_start = true,
         show_trailing_blankline_indent = false,
         char = "▏",

@@ -3,17 +3,14 @@ return {
     {
       "neovim/nvim-lspconfig",
       dependencies = {
-        "b0o/schemastore.nvim",
-        {
-          "williamboman/mason-lspconfig.nvim",
-          dependencies = "williamboman/mason.nvim",
-          cmd = { "LspInstall", "LspUninstall" },
-          config = function()
-            require("mason-lspconfig").setup({
-              ensure_installed = { "cssls", "eslint", "html", "jsonls", "tailwindcss", "tsserver", "yamlls" },
-            })
-          end,
-        },
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = "williamboman/mason.nvim",
+        cmd = { "LspInstall", "LspUninstall" },
+        config = function()
+          require("mason-lspconfig").setup({
+            ensure_installed = { "cssls", "eslint", "html", "jsonls", "tailwindcss", "tsserver", "yamlls" },
+          })
+        end,
       },
       cmd = { "LspInfo", "LspLog", "LspRestart", "LspStart", "LspStop" },
       event = { "BufReadPost", "FileType" },
@@ -39,11 +36,17 @@ return {
         basic_config.capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 
         require("lspconfig").jsonls.setup(vim.tbl_deep_extend("error", {
-          settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
+          on_new_config = function(new_config)
+            vim.list_extend(new_config.settings.json.schemas or {}, require("schemastore").json.schemas())
+          end,
+          settings = { json = { validate = { enable = true } } },
         }, basic_config))
 
         require("lspconfig").yamlls.setup(vim.tbl_deep_extend("error", {
-          settings = { yaml = { schemas = require("schemastore").yaml.schemas(), validate = { enable = true } } },
+          on_new_config = function(new_config)
+            vim.list_extend(new_config.settings.yaml.schemas or {}, require("schemastore").yaml.schemas())
+          end,
+          settings = { yaml = { validate = true, schemaStore = { enable = false, url = "" } } },
         }, basic_config))
 
         require("lspconfig").html.setup(vim.tbl_deep_extend("error", {}, basic_config))
@@ -82,6 +85,7 @@ return {
         require("lspconfig").eslint.setup(vim.tbl_deep_extend("error", {}, basic_config))
       end,
     },
+    { "b0o/schemastore.nvim", lazy = true },
     {
       "mrjones2014/smart-splits.nvim",
       optional = true,

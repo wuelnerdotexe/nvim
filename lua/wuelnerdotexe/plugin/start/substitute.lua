@@ -18,7 +18,8 @@ return {
   end,
   config = function()
     require("substitute").setup({
-      on_substitute = pcall(require, "yanky.integration") and require("yanky.integration").substitute() or nil,
+      on_substitute = require("lazy.core.config").spec.plugins["yanky.nvim"] == nil and nil
+        or function(...) return require("yanky.integration").substitute()(...) end,
       yank_substituted_text = true,
       highlight_substituted_text = { timer = 125 },
     })
