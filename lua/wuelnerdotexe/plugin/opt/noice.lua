@@ -88,6 +88,18 @@ return {
     end,
   },
   {
+    "rcarriga/nvim-notify",
+    lazy = true,
+    init = function()
+      require("wuelnerdotexe.plugin.util").add_colorscheme_integration("notify")
+
+      require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
+
+      table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "notify")
+    end,
+    config = function() require("notify").setup({ timeout = 3000, stages = "slide", render = "compact", fps = 60 }) end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function(_, opts)

@@ -1,14 +1,6 @@
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
-  keys = {
-    { "zR", function() require("ufo").openAllFolds() end },
-    { "zM", function() require("ufo").closeAllFolds() end },
-    { "zr", function() require("ufo").openFoldsExceptKinds() end },
-    { "zm", function() require("ufo").closeFoldsWith() end },
-    { "zp", function() require("ufo").peekFoldedLinesUnderCursor() end },
-  },
-  cmd = { "UfoEnable", "UfoDisable", "UfoInspect", "UfoAttach", "UfoDetach", "UfoEnableFold", "UfoDisableFold" },
   event = "BufEnter",
   init = function()
     require("wuelnerdotexe.plugin.util").add_colorscheme_integration("ufo")
@@ -55,5 +47,16 @@ return {
         },
       },
     })
+
+    vim.api.nvim_set_keymap("n", "zR", "", { callback = function() require("ufo").openAllFolds() end })
+    vim.api.nvim_set_keymap("x", "zR", "", { callback = function() require("ufo").openAllFolds() end })
+    vim.api.nvim_set_keymap("n", "zM", "", { callback = function() require("ufo").closeAllFolds() end })
+    vim.api.nvim_set_keymap("x", "zM", "", { callback = function() require("ufo").closeAllFolds() end })
+    vim.api.nvim_set_keymap("n", "zr", "", { callback = function() require("ufo").openFoldsExceptKinds() end })
+    vim.api.nvim_set_keymap("x", "zr", "", { callback = function() require("ufo").openFoldsExceptKinds() end })
+    vim.api.nvim_set_keymap("n", "zm", "", { callback = function() require("ufo").closeFoldsWith() end })
+    vim.api.nvim_set_keymap("x", "zm", "", { callback = function() require("ufo").closeFoldsWith() end })
+    vim.api.nvim_set_keymap("n", "zp", "", { callback = function() require("ufo").peekFoldedLinesUnderCursor() end })
+    vim.api.nvim_set_keymap("x", "zp", "", { callback = function() require("ufo").peekFoldedLinesUnderCursor() end })
   end,
 }

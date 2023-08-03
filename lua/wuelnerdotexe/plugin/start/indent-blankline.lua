@@ -52,7 +52,7 @@ return {
       })
 
       require("mini.indentscope").setup({
-        draw = { delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }), priotity = 12 },
+        draw = { delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }), priority = 12 },
         symbol = "▏",
       })
     end,
