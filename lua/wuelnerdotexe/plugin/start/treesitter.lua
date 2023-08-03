@@ -25,7 +25,7 @@ return {
     event = "FileType",
     init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("treesitter") end,
     opts = function(_, opts)
-      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "comment" })
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "comment", "jsdoc" })
 
       opts.sync_install = true
 
