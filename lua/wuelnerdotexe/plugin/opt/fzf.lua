@@ -15,7 +15,7 @@ return {
 
       vim.api.nvim_call_function("setenv", {
         "FZF_DEFAULT_OPTS",
-        "-i --cycle --reverse --info=right --scrollbar=' ' --pointer=' ' --marker=' '",
+        "-i --cycle --reverse --info=inline-right --scrollbar=' ' --pointer=' ' --marker=' '",
       })
 
       if vim.api.nvim_call_function("executable", { "fd" }) == 1 then
