@@ -27,6 +27,15 @@ return {
     "SmartSplitsLog",
     "SmartSplitsLogLevel",
   },
+  init = function()
+    vim.api.nvim_create_autocmd("UIEnter", {
+      callback = function()
+        vim.api.nvim_set_keymap("n", "<C-w><C-l>", "", { callback = function() vim.api.nvim_command("nohlsearch") end })
+        vim.api.nvim_set_keymap("x", "<C-w><C-l>", "", { callback = function() vim.api.nvim_command("nohlsearch") end })
+      end,
+      once = true,
+    })
+  end,
   opts = function(_, opts)
     opts.ignored_buftypes = { "prompt" }
 

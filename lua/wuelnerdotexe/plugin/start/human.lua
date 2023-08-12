@@ -2,11 +2,7 @@ return {
   "wuelnerdotexe/human.vim",
   priority = 10000,
   lazy = false,
-  config = function()
-    for option, value in pairs(require("wuelnerdotexe.plugin.util").plugin_options) do
-      require("wuelnerdotexe.plugin.util").set_option(option, value)
-    end
-
+  init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function() vim.api.nvim_set_hl(0, "Whitespace", { link = "DiagnosticError" }) end,
     })
@@ -15,8 +11,6 @@ return {
       callback = function()
         vim.api.nvim_set_keymap("n", "<C-w>t", "", { callback = function() vim.api.nvim_command("tabedit %") end })
         vim.api.nvim_set_keymap("x", "<C-w>t", "", { callback = function() vim.api.nvim_command("tabedit %") end })
-        vim.api.nvim_set_keymap("n", "<C-w><C-l>", "", { callback = function() vim.api.nvim_command("nohlsearch") end })
-        vim.api.nvim_set_keymap("x", "<C-w><C-l>", "", { callback = function() vim.api.nvim_command("nohlsearch") end })
         vim.api.nvim_set_keymap("n", "<leader>to", "", {
           callback = function() vim.api.nvim_command("terminal") end,
           desc = "General: [o]pen the [t]erminal in a new buffer",
@@ -24,5 +18,10 @@ return {
       end,
       once = true,
     })
+  end,
+  config = function()
+    for option, value in pairs(require("wuelnerdotexe.plugin.util").plugin_options) do
+      require("wuelnerdotexe.plugin.util").set_option(option, value)
+    end
   end,
 }
