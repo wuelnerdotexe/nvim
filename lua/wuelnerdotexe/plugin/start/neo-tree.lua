@@ -1,7 +1,6 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
     dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
     keys = {
       {
@@ -119,7 +118,11 @@ return {
                 { "name", zindex = 10 },
                 { "symlink_target", zindex = 10, highlight = "NeoTreeSymbolicLinkTarget" },
                 { "clipboard", zindex = 10 },
-                { "git_status", zindex = 20, align = "right", hide_when_expanded = true },
+                { "git_status", zindex = 10, align = "right", hide_when_expanded = true },
+                { "file_size", zindex = 10, align = "right" },
+                { "type", zindex = 10, align = "right" },
+                { "last_modified", zindex = 10, align = "right" },
+                { "created", zindex = 10, align = "right" },
               },
             },
           },
@@ -133,7 +136,11 @@ return {
                 { "symlink_target", zindex = 10, highlight = "NeoTreeSymbolicLinkTarget" },
                 { "clipboard", zindex = 10 },
                 { "modified", zindex = 20, align = "right" },
-                { "git_status", zindex = 20, align = "right" },
+                { "git_status", zindex = 10, align = "right" },
+                { "file_size", zindex = 10, align = "right" },
+                { "type", zindex = 10, align = "right" },
+                { "last_modified", zindex = 10, align = "right" },
+                { "created", zindex = 10, align = "right" },
               },
             },
           },
@@ -176,6 +183,7 @@ return {
               [">"] = "set_root",
               ["[g"] = "prev_git_modified",
               ["]g"] = "next_git_modified",
+              ["K"] = "show_file_details",
             },
           },
           filtered_items = {
@@ -193,6 +201,7 @@ return {
               ["gs"] = "git_add_file",
               ["gr"] = "git_revert_file",
               ["gc"] = "git_commit",
+              ["K"] = "show_file_details",
             },
           },
         },
