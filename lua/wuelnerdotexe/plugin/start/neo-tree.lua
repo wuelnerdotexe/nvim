@@ -106,6 +106,8 @@ return {
           git_status = {
             symbols = { added = "A", deleted = "D", modified = "M", renamed = "R", untracked = "?", ignored = "!" },
           },
+          created = { enabled = true },
+          symlink_target = { enabled = true },
         },
         renderers = {
           directory = {
