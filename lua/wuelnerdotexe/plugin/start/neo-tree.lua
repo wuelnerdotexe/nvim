@@ -32,7 +32,7 @@ return {
       vim.api.nvim_set_var("loaded_netrwSettings", 1)
       vim.api.nvim_set_var("loaded_netrwFileHandlers", 1)
 
-      table.insert(require("wuelnerdotexe.plugin.util").user_interface_filetypes, "neo-tree")
+      vim.list_extend(require("wuelnerdotexe.plugin.util").user_interface_filetypes, { "neo-tree", "neo-tree-popup" })
 
       if not require("wuelnerdotexe.plugin.util").enter_with_arguments() then return end
 
