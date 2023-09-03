@@ -25,7 +25,7 @@ return {
       end,
       config = function()
         require("nvim-autopairs").setup({
-          map_bs = false,
+          -- map_bs = false,
           disable_filetype = require("wuelnerdotexe.plugin.util").user_interface_filetypes,
           check_ts = true,
           fast_wrap = { highlight = "Question", highlight_grey = "LspCodeLens" },
@@ -46,6 +46,7 @@ return {
   },
   {
     "altermo/ultimate-autopair.nvim",
+    enabled = false,
     keys = {
       { "<A-)>", mode = { "i", "c" } },
       { "<BS>", mode = { "i", "c" } },
