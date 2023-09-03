@@ -8,8 +8,8 @@ My personal Neovim setup written in Lua.
 </div>
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot_(optional).png">
-  <small>Setup with <a href="https://github.com/wuelnerdotexe/nvim/blob/8c6872f430dd31e15f155afe4a812d840dfcd4cd/lua/wuelnerdotexe/plugin/init.lua#L19"><code>opt</code></a> plugins imported.</small>
+  <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot_(enhanced).png">
+  <small>Setup with <a href="https://github.com/wuelnerdotexe/nvim/blob/8c6872f430dd31e15f155afe4a812d840dfcd4cd/lua/wuelnerdotexe/plugin/init.lua#L19"><code>opt</code></a> plugins imported (enhanced).</small>
 </div>
 
 ## Table of Contents
