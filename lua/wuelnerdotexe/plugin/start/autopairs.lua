@@ -46,7 +46,6 @@ return {
   },
   {
     "altermo/ultimate-autopair.nvim",
-    branch = "v0.6.0",
     keys = {
       { "<A-)>", mode = { "i", "c" } },
       { "<BS>", mode = { "i", "c" } },
