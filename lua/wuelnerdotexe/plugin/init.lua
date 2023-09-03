@@ -16,7 +16,7 @@ vim.api.nvim_set_var("maplocalleader", [[|]])
 require("lazy").setup({
   spec = {
     { import = "wuelnerdotexe.plugin.start" },
-    { import = "wuelnerdotexe.plugin.opt" },
+    -- { import = "wuelnerdotexe.plugin.opt" },
   },
   defaults = { lazy = true, version = false },
   dev = { path = "~/Developer/vim-plugins", patterns = { "wuelnerdotexe" }, fallback = true },
