@@ -3,8 +3,13 @@
 My personal Neovim setup written in Lua.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot.png">
-  Powered by <strong><a href="https://wuelnerdotexe.github.io/enfocado/">Enfocado</a></strong>.
+  <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot_(default).png">
+  <small>Setup without <a href="https://wuelnerdotexe.github.io/enfocado/"><code>opt</code></a> plugins imported (default).</small>
+</div>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/wuelnerdotexe/nvim/main/assets/screenshot_(optional).png">
+  <small>Setup with <a href="https://wuelnerdotexe.github.io/enfocado/"><code>opt</code></a> plugins imported.</small>
 </div>
 
 ## Table of Contents
