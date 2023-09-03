@@ -55,7 +55,7 @@ return {
         source_selector = {
           winbar = require("lazy.core.config").spec.plugins["edgy.nvim"] == nil,
           sources = {
-            { source = "git_status", display_name = "  GIT STATUS " },
+            { source = "git_status", display_name = "  GIT STATUS " },
             { source = "filesystem", display_name = " 󰉓 FOLDERS " },
             { source = "document_symbols", display_name = "  SYMBOLS " },
           },
