@@ -1,27 +1,18 @@
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
-    cmd = {
-      "IndentBlanklineDisable",
-      "IndentBlanklineEnable",
-      "IndentBlanklineRefresh",
-      "IndentBlanklineRefreshScroll",
-      "IndentBlanklineToggle",
-    },
+    cmd = { "IBLDisable", "IBLEnable", "IBLToggle", "IBLDisableScope", "IBLEnableScope", "IBLToggleScope" },
     event = "FileType",
     init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("indent-blankline") end,
     config = function()
-      require("indent_blankline").setup({
-        use_treesitter = true,
-        show_current_context = false,
-        show_current_context_start = true,
-        show_trailing_blankline_indent = false,
-        show_foldtext = false,
-        char_priority = 11,
-        char = "▏",
-        context_char = "▏",
-        buftype_exclude = { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
-        filetype_exclude = { "list", "netrw", "" },
+      require("ibl").setup({
+        debounce = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
+        indent = { char = "▏", priority = 11 },
+        scope = { enabled = false },
+        exclude = {
+          filetypes = { "list", "netrw", "" },
+          buftypes = { "help", "loclist", "nofile", "prompt", "quickfix", "terminal" },
+        },
       })
     end,
   },
