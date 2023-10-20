@@ -7,7 +7,7 @@ return {
     config = function()
       require("ibl").setup({
         debounce = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
-        indent = { char = "▏", priority = 11 },
+        indent = { char = "▏", smart_indent_cap = false, priority = 11 },
         scope = { enabled = false },
         exclude = {
           filetypes = { "list", "netrw", "" },
