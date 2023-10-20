@@ -8,53 +8,33 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("ruler", false)
   end,
   config = function()
-    local scheme_colors_loaded = {}
-
-    local function get_scheme_color(name, attr)
-      local hl = vim.api.nvim_get_hl(0, { name = name, link = false })[attr]
-
-      if hl == nil then return "NONE" end
-
-      if scheme_colors_loaded[hl] then return scheme_colors_loaded[hl] end
-
-      if type(hl) == "string" then
-        scheme_colors_loaded[hl] = hl
-
-        return scheme_colors_loaded[hl]
-      end
-
-      scheme_colors_loaded[hl] = string.format("#%06x", hl)
-
-      return scheme_colors_loaded[hl]
-    end
-
     require("feline").setup({
       theme = {
-        bg = get_scheme_color("Normal", "bg"),
-        fg = get_scheme_color("Normal", "fg"),
-        base = get_scheme_color("FloatShadow", "bg"),
-        black = get_scheme_color("CursorLine", "bg"),
-        darkred = get_scheme_color("diffRemoved", "fg"),
-        darkgreen = get_scheme_color("diffAdded", "fg"),
-        darkyellow = get_scheme_color("diffChanged", "fg"),
-        oceanblue = get_scheme_color("SpellCap", "sp"),
-        darkmagenta = get_scheme_color("SpellRare", "sp"),
-        darkcyan = get_scheme_color("SpellLocal", "sp"),
-        darkorange = get_scheme_color("Exception", "fg"),
-        darkviolet = get_scheme_color("Identifier", "fg"),
-        gray = get_scheme_color("Comment", "fg"),
-        darkaccent = get_scheme_color("Identifier", "fg"),
-        darkgray = get_scheme_color("Ignore", "fg"),
-        red = get_scheme_color("DiagnosticError", "fg"),
-        green = get_scheme_color("DiagnosticOk", "fg"),
-        yellow = get_scheme_color("DiagnosticInfo", "fg"),
-        skyblue = get_scheme_color("DiagnosticHint", "fg"),
-        magenta = get_scheme_color("Trace", "fg"),
-        cyan = get_scheme_color("Link", "fg"),
-        orange = get_scheme_color("WarningMsg", "fg"),
-        violet = get_scheme_color("Function", "fg"),
-        white = get_scheme_color("Title", "fg"),
-        accent = get_scheme_color("FloatBorder", "fg"),
+        bg = require("wuelnerdotexe.plugin.util").get_scheme_color("Normal", "bg"),
+        fg = require("wuelnerdotexe.plugin.util").get_scheme_color("Normal", "fg"),
+        base = require("wuelnerdotexe.plugin.util").get_scheme_color("FloatShadow", "bg"),
+        black = require("wuelnerdotexe.plugin.util").get_scheme_color("CursorLine", "bg"),
+        darkred = require("wuelnerdotexe.plugin.util").get_scheme_color("diffRemoved", "fg"),
+        darkgreen = require("wuelnerdotexe.plugin.util").get_scheme_color("diffAdded", "fg"),
+        darkyellow = require("wuelnerdotexe.plugin.util").get_scheme_color("diffChanged", "fg"),
+        oceanblue = require("wuelnerdotexe.plugin.util").get_scheme_color("SpellCap", "sp"),
+        darkmagenta = require("wuelnerdotexe.plugin.util").get_scheme_color("SpellRare", "sp"),
+        darkcyan = require("wuelnerdotexe.plugin.util").get_scheme_color("SpellLocal", "sp"),
+        darkorange = require("wuelnerdotexe.plugin.util").get_scheme_color("Exception", "fg"),
+        darkviolet = require("wuelnerdotexe.plugin.util").get_scheme_color("Identifier", "fg"),
+        gray = require("wuelnerdotexe.plugin.util").get_scheme_color("Comment", "fg"),
+        darkaccent = require("wuelnerdotexe.plugin.util").get_scheme_color("Identifier", "fg"),
+        darkgray = require("wuelnerdotexe.plugin.util").get_scheme_color("Ignore", "fg"),
+        red = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticError", "fg"),
+        green = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticOk", "fg"),
+        yellow = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticInfo", "fg"),
+        skyblue = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticHint", "fg"),
+        magenta = require("wuelnerdotexe.plugin.util").get_scheme_color("Trace", "fg"),
+        cyan = require("wuelnerdotexe.plugin.util").get_scheme_color("Link", "fg"),
+        orange = require("wuelnerdotexe.plugin.util").get_scheme_color("WarningMsg", "fg"),
+        violet = require("wuelnerdotexe.plugin.util").get_scheme_color("Function", "fg"),
+        white = require("wuelnerdotexe.plugin.util").get_scheme_color("Title", "fg"),
+        accent = require("wuelnerdotexe.plugin.util").get_scheme_color("FloatBorder", "fg"),
       },
       vi_mode_colors = {
         ["BLOCK"] = "accent",
