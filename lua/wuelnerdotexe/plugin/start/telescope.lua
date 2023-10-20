@@ -92,26 +92,36 @@ return {
         multi_icon = " ",
         default_mappings = {
           i = {
-            ["<M-q>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
-            ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
-            ["<Esc>"] = require("telescope.actions").close,
-            ["<C-e>"] = require("telescope.actions").close,
-            ["<C-y>"] = require("telescope.actions").select_default,
-            ["<CR>"] = require("telescope.actions").select_default,
-            ["<Tab>"] = require("telescope.actions").toggle_selection
-              + require("telescope.actions").move_selection_worse,
-            ["<S-Tab>"] = require("telescope.actions").toggle_selection
-              + require("telescope.actions").move_selection_better,
-            ["<Down>"] = require("telescope.actions").move_selection_next,
-            ["<Up>"] = require("telescope.actions").move_selection_previous,
-            ["<C-n>"] = require("telescope.actions").move_selection_next,
-            ["<C-p>"] = require("telescope.actions").move_selection_previous,
-            ["<C-b>"] = require("telescope.actions").preview_scrolling_up,
-            ["<C-f>"] = require("telescope.actions").preview_scrolling_down,
-            ["<C-s>"] = require("telescope.actions").select_horizontal,
-            ["<C-v>"] = require("telescope.actions").select_vertical,
-            ["<C-t>"] = require("telescope.actions").select_tab,
-            ["<C-j>"] = require("telescope.actions").nop,
+            ["<M-q>"] = function(...)
+              require("telescope.actions").send_selected_to_qflist(...)
+              require("telescope.actions").open_qflist(...)
+            end,
+            ["<C-q>"] = function(...)
+              require("telescope.actions").send_to_qflist(...)
+              require("telescope.actions").open_qflist(...)
+            end,
+            ["<Esc>"] = function(...) require("telescope.actions").close(...) end,
+            ["<C-e>"] = function(...) require("telescope.actions").close(...) end,
+            ["<C-y>"] = function(...) require("telescope.actions").select_default(...) end,
+            ["<CR>"] = function(...) require("telescope.actions").select_default(...) end,
+            ["<Tab>"] = function(...)
+              require("telescope.actions").toggle_selection(...)
+              require("telescope.actions").move_selection_next(...)
+            end,
+            ["<S-Tab>"] = function(...)
+              require("telescope.actions").toggle_selection(...)
+              require("telescope.actions").move_selection_previous(...)
+            end,
+            ["<Down>"] = function(...) require("telescope.actions").move_selection_next(...) end,
+            ["<Up>"] = function(...) require("telescope.actions").move_selection_previous(...) end,
+            ["<C-n>"] = function(...) require("telescope.actions").move_selection_next(...) end,
+            ["<C-p>"] = function(...) require("telescope.actions").move_selection_previous(...) end,
+            ["<C-b>"] = function(...) require("telescope.actions").preview_scrolling_up(...) end,
+            ["<C-f>"] = function(...) require("telescope.actions").preview_scrolling_down(...) end,
+            ["<C-s>"] = function(...) require("telescope.actions").select_horizontal(...) end,
+            ["<C-v>"] = function(...) require("telescope.actions").select_vertical(...) end,
+            ["<C-t>"] = function(...) require("telescope.actions").select_tab(...) end,
+            ["<C-j>"] = function(...) require("telescope.actions").nop(...) end,
           },
         },
         preview = { timeout = 300 },
