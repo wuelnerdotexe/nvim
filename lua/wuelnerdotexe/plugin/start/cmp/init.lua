@@ -45,17 +45,17 @@ return {
               function(...) return require("cmp.config.compare").sort_text(...) end,
             },
           },
-          sources = require("cmp").config.sources({
-            { name = "path" },
-          }, {
-            { priority = 8, name = "luasnip" },
-            { priority = 6, name = "nvim_lsp" },
-            { priority = 4, name = "cmp_tabnine" },
-          }, {
-            { name = "buffer", option = { keyword_length = 1, indexing_interval = 171 } },
-          }),
+          sources = require("cmp").config.sources(
+            { { name = "path" } },
+            { { priority = 6, name = "luasnip" }, { priority = 4, name = "nvim_lsp" } },
+            { { name = "buffer", option = { keyword_length = 1, indexing_interval = 171 } } }
+          ),
           confirmation = { default_behavior = require("cmp.types").cmp.ConfirmBehavior.Replace },
-          experimental = { ghost_text = { hl_group = "LspCodeLens" } },
+          experimental = {
+            ghost_text = require("lazy.core.config").spec.plugins["tabnine-nvim"] == nil and {
+              hl_group = "LspCodeLens",
+            } or false,
+          },
           window = {
             completion = { scrolloff = vim.api.nvim_get_option_value("scrolloff", { scope = "global" }) },
             documentation = { winhighlight = "FloatBorder:FloatBorder" },

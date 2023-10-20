@@ -211,10 +211,31 @@ return {
             },
           },
           {
+            { provider = " ", priority = -4, truncate_hide = true },
+            {
+              enabled = function() return package.loaded["tabnine"] end,
+              update = function() return require("tabnine.status").status() end,
+              provider = "⌬ ",
+              right_sep = " ",
+              hl = function()
+                local tabnine_status = require("tabnine.status").status()
+
+                if string.match(tabnine_status, "disabled") then
+                  return { name = "FelineTabnineDisabled", fg = "darkgray" }
+                end
+
+                if string.match(tabnine_status, "loading") then
+                  return { name = "FelineTabnineLoading", fg = "gray" }
+                end
+
+                return { name = "FelineTabnine", fg = "violet" }
+              end,
+              priority = -4,
+              truncate_hide = true,
+            },
             {
               update = { "FileType" },
               provider = "file_type",
-              left_sep = " ",
               right_sep = " ",
               hl = { name = "FelineFiletype" },
               priority = -4,
