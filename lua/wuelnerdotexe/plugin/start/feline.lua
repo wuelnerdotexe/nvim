@@ -4,7 +4,7 @@ return {
   event = "UIEnter",
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
-    require("wuelnerdotexe.plugin.util").set_option("laststatus", 3)
+    require("wuelnerdotexe.plugin.util").set_option("laststatus", 0)
     require("wuelnerdotexe.plugin.util").set_option("ruler", false)
   end,
   config = function()
@@ -282,6 +282,8 @@ return {
         filetypes = { "^netrw$" },
       },
     })
+
+    vim.api.nvim_set_option_value("laststatus", 3, {})
 
     vim.api.nvim_create_autocmd("OptionSet", {
       pattern = "background",

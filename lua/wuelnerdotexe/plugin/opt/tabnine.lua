@@ -1,7 +1,10 @@
 return {
   "codota/tabnine-nvim",
-  build = vim.uv.os_uname().sysname == "Windows_NT" and [[pwsh.exe -file .\dl_binaries.ps1]] or "./dl_binaries.sh",
-  cmd = { "TabnineChat", "TabnineDisable", "TabnineEnable", "TabnineStatus", "TabnineToggle" },
+  build = {
+    vim.uv.os_uname().sysname == "Windows_NT" and [[pwsh.exe -file .\dl_binaries.ps1]] or "./dl_binaries.sh",
+    ":TabnineHub",
+  },
+  cmd = { "TabnineChat", "TabnineDisable", "TabnineEnable", "TabnineHub", "TabnineStatus", "TabnineToggle" },
   event = { "BufEnter", "FileType" },
   config = function()
     local get_scheme_color = require("wuelnerdotexe.plugin.util").get_scheme_color

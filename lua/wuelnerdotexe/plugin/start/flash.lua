@@ -2,15 +2,7 @@ return {
   "folke/flash.nvim",
   keys = {
     { "<M-s>", function() require("flash").jump() end, mode = { "n", "x", "o" } },
-    {
-      "<M-v>",
-      function()
-        if not pcall(require, "nvim-treesitter") then return end
-
-        require("flash").treesitter()
-      end,
-      mode = { "n", "x", "o" },
-    },
+    { "<M-v>", function() require("flash").treesitter() end, mode = { "n", "x", "o" } },
     { "/", mode = { "n", "x", "o" } },
     { "?", mode = { "n", "x", "o" } },
   },

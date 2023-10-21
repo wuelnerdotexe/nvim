@@ -17,7 +17,7 @@ local arguments
 M.enter_with_arguments = function()
   if arguments ~= nil then return arguments end
 
-  arguments = vim.api.nvim_call_function("argc", {}) == 1 and true or false
+  arguments = vim.api.nvim_call_function("argc", { -1 }) == 1 and true or false
 
   return arguments
 end

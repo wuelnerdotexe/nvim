@@ -21,7 +21,9 @@ return {
       on_substitute = require("lazy.core.config").spec.plugins["yanky.nvim"] == nil and nil
         or function(...) return require("yanky.integration").substitute()(...) end,
       yank_substituted_text = true,
+      preserve_cursor_position = true,
       highlight_substituted_text = { timer = 125 },
+      exchange = { preserve_cursor_position = true },
     })
   end,
 }

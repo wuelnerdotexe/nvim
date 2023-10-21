@@ -137,6 +137,25 @@ return {
           "--trim",
           "--color=never",
         },
+        get_selection_window = function()
+          if pcall(require, "edgy") then
+            require("edgy").goto_main()
+
+            return 0
+          end
+
+          local wins = vim.api.nvim_list_wins()
+
+          table.insert(wins, 1, vim.api.nvim_get_current_win())
+
+          for _, win in pairs(wins) do
+            if vim.api.nvim_get_option_value("buftype", { buf = vim.api.nvim_win_get_buf(win) }) == "" then
+              return win
+            end
+          end
+
+          return 0
+        end,
       },
       extensions = { fzf = { case_mode = "ignore_case" } },
     })

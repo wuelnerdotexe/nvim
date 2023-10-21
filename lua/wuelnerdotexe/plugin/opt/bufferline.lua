@@ -4,6 +4,7 @@ return {
   init = function()
     require("wuelnerdotexe.plugin.util").add_colorscheme_integration("bufferline")
 
+    require("wuelnerdotexe.plugin.util").set_option("showtabline", 0)
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
 
     vim.opt.listchars:append({ precedes = "…", extends = "…" })
