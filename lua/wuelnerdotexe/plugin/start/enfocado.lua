@@ -4,7 +4,6 @@ return {
   lazy = false,
   init = function()
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
-    require("wuelnerdotexe.plugin.util").set_option("t_Co", 256)
     require("wuelnerdotexe.plugin.util").set_option("background", "dark")
     require("wuelnerdotexe.plugin.util").set_option("winblend", 10)
     require("wuelnerdotexe.plugin.util").set_option("pumblend", 10)
