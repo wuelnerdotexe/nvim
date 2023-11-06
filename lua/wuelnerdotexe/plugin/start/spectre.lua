@@ -110,7 +110,13 @@ return {
             args = { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--trim" },
           },
         },
-        default = { find = { options = { "ignore-case", "hidden" } }, replace = { options = { "ignore-case" } } },
+        default = {
+          find = { options = { "ignore-case", "hidden" } },
+          replace = {
+            cmd = vim.api.nvim_call_function("executable", { "cargo" }) == 1 and "oxi" or "sed",
+            options = { "ignore-case" },
+          },
+        },
         is_insert_mode = true,
       })
 
