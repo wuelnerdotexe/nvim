@@ -1,4 +1,4 @@
-return {
+local M = {
   "gbprod/yanky.nvim",
   keys = {
     { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
@@ -12,7 +12,14 @@ return {
   cmd = { "YankyClearHistory", "YankyRingHistory" },
   lazy = true,
   init = function() require("wuelnerdotexe.plugin.util").add_colorscheme_integration("yanky") end,
-  config = function()
-    require("yanky").setup({ picker = { telescope = { use_default_mappings = false } }, highlight = { timer = 125 } })
-  end,
+  opts = { picker = { telescope = { use_default_mappings = false } }, highlight = { timer = 125 } },
+  config = function(_, opts) require("yanky").setup(opts) end,
 }
+
+if vim.uv.os_uname().sysname ~= "Windows_NT" then
+  M.dependencies = "kkharji/sqlite.lua"
+  M.opts.ring =
+    { storage = "sqlite", storage_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/databases/yanky.db" }
+end
+
+return M
