@@ -1,7 +1,7 @@
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
-  event = "BufEnter",
+  event = "BufWinEnter",
   init = function()
     require("wuelnerdotexe.plugin.util").add_colorscheme_integration("ufo")
 
