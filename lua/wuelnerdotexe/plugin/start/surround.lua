@@ -5,6 +5,7 @@ return {
     { "yS" },
     { "ds" },
     { "cs" },
+    { "cS" },
     { "gS", mode = "x" },
     { "S", mode = "x" },
     { "<C-g>s", mode = "i" },
