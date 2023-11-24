@@ -7,18 +7,31 @@ return {
     require("wuelnerdotexe.plugin.util").set_option("showtabline", 0)
     require("wuelnerdotexe.plugin.util").set_option("termguicolors", true)
 
+    if not os.getenv("TMUX") then require("wuelnerdotexe.plugin.util").set_option("mousemoveevent", true) end
+
     vim.opt.listchars:append({ precedes = "…", extends = "…" })
   end,
-  opts = {
-    options = {
-      max_name_length = 16,
-      max_prefix_length = 16,
-      tab_size = 20,
-      indicator = { icon = "▎", style = "icon" },
-      show_close_icon = false,
-      separator_style = { "▎", "▎" },
-    },
-  },
+  opts = function(_, opts)
+    opts.options = opts.options or {}
+
+    opts.options.max_name_length = 16
+
+    opts.options.max_prefix_length = 16
+
+    opts.options.tab_size = 20
+
+    opts.options.indicator = { icon = "▎", style = "icon" }
+
+    opts.options.show_close_icon = false
+
+    opts.options.separator_style = { "▎", "▎" }
+
+    opts.options.hover = {
+      enabled = not os.getenv("TMUX"),
+      delay = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
+      reveal = { "close" },
+    }
+  end,
   config = function(_, opts)
     require("bufferline").setup(opts)
 
