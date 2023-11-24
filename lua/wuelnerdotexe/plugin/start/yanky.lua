@@ -1,5 +1,6 @@
 local M = {
   "gbprod/yanky.nvim",
+  enabled = not os.getenv("WAYLAND_DISPLAY"),
   keys = {
     { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
     { "p", function() require("yanky").put("p", false) end },
