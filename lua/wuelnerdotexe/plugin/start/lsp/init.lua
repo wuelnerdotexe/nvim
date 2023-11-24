@@ -272,6 +272,26 @@ return {
     end,
   },
   {
+    "soulis-1256/hoverhints.nvim",
+    cond = not os.getenv("TMUX"),
+    event = "LspAttach",
+    init = function() require("wuelnerdotexe.plugin.util").set_option("mousemoveevent", true) end,
+    config = function()
+      require("hoverhints").setup({
+        scrollbar_offset = 1,
+        render_delay = vim.api.nvim_get_option_value("timeoutlen", { scope = "global" }),
+        detect_mouse_timer = vim.api.nvim_get_option_value("updatetime", { scope = "global" }),
+        border = "rounded",
+        title_pos = "center",
+        error_color = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticFloatingError", "fg"),
+        warning_color = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticWarnError", "fg"),
+        info_color = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticInfoError", "fg"),
+        hint_color = require("wuelnerdotexe.plugin.util").get_scheme_color("DiagnosticHintError", "fg"),
+        generic_color = require("wuelnerdotexe.plugin.util").get_scheme_color("Accent", "fg"),
+      })
+    end,
+  },
+  {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     keys = {
       {
