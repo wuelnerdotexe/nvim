@@ -27,7 +27,6 @@ RUN apk --no-cache add \
     cargo \
     fd  \
     ripgrep \
-    sqlite \
     sqlite-dev
 
 WORKDIR /code
