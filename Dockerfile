@@ -23,10 +23,11 @@ RUN cd neovim && git checkout ${VERSION} && make CMAKE_BUILD_TYPE=RelWithDebInfo
 
 # To support this setup
 RUN apk --no-cache add \
+    npm \
+    cargo \
     fd  \
     ripgrep \
-    git \
-    nodejs \
-    npm
+    sqlite \
+    sqlite-dev
 
 WORKDIR /code
