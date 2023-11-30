@@ -76,6 +76,8 @@ The main features and plugins provided by this setup are as follows:
 - [Node](https://nodejs.org/) and [NPM](https://www.npmjs.com/package/npm) - to install language servers and debug adapters with [mason.nvim](https://github.com/williamboman/mason.nvim).
 - [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - to search patterns with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
 - [fd](https://github.com/sharkdp/fd) - to find files with [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
+- [cargo](https://github.com/rust-lang/cargo) - to replace the enemy with [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) (optional).
+- [sqlite](https://www.sqlite.org/index.html) - to storage yank history with [yanky.nvim](https://github.com/gbprod/yanky.nvim) (optional).
 
 ## Installation
 
